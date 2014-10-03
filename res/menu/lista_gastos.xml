@@ -3,6 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.jagusan.apatxas.ListaGastosActivity" >
 
+   
+    <item android:id="@+id/action_anadir"
+          android:icon="@drawable/ic_action_new_event"
+          android:title="@string/action_anadir"
+          app:showAsAction="ifRoom"  />
+    
+    
+    <item android:id="@+id/action_buscar"
+          android:icon="@drawable/ic_action_search"
+          android:title="@string/action_buscar"
+          app:showAsAction="ifRoom"  />
+    
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
