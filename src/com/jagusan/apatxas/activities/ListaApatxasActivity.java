@@ -17,16 +17,16 @@ import com.jagusan.apatxas.adapters.ListaGastosArrayAdapter;
 import com.jagusan.apatxas.sqlite.modelView.GastoListado;
 
 
-public class ListaGastosActivity extends ActionBarActivity {
+public class ListaApatxasActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_lista_gastos);
+		setContentView(R.layout.activity_lista_apatxas);
 
 		List<GastoListado> gastos = recuperarGastos();
 		ListView listaGastosListView = (ListView) findViewById(R.id.lista_gastos);
-		ListaGastosArrayAdapter adapter = new ListaGastosArrayAdapter(this, R.layout.lista_gastos_row, gastos);
+		ListaGastosArrayAdapter adapter = new ListaGastosArrayAdapter(this, R.layout.lista_apatxas_row, gastos);
 		listaGastosListView.setAdapter(adapter);
 
 		// OnVerDetalleProductoClickListener listener = new
