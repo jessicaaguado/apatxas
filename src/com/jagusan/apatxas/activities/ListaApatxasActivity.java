@@ -1,7 +1,5 @@
 package com.jagusan.apatxas.activities;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import android.content.Intent;
@@ -14,7 +12,8 @@ import android.widget.ListView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosArrayAdapter;
-import com.jagusan.apatxas.sqlite.modelView.GastoListado;
+import com.jagusan.apatxas.sqlite.daos.ApatxaDAO;
+import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 
 
 public class ListaApatxasActivity extends ActionBarActivity {
@@ -24,7 +23,7 @@ public class ListaApatxasActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_apatxas);
 
-		List<GastoListado> gastos = recuperarGastos();
+		List<ApatxaListado> gastos = recuperarGastos();
 		ListView listaGastosListView = (ListView) findViewById(R.id.lista_gastos);
 		ListaGastosArrayAdapter adapter = new ListaGastosArrayAdapter(this, R.layout.lista_apatxas_row, gastos);
 		listaGastosListView.setAdapter(adapter);
@@ -34,27 +33,33 @@ public class ListaApatxasActivity extends ActionBarActivity {
 		// productosListView.setOnItemClickListener(listener);
 	}
 
-	private List<GastoListado> recuperarGastos() {
-		List<GastoListado> gastos = new ArrayList<GastoListado>();
-		GastoListado gasto1 = new GastoListado();
-		gasto1.setNombre("Comida en la sociedad de Ibon");
-		gasto1.setFecha(new Date(2014, 9, 6));
-		gasto1.setGastoTotal(new Double("500"));
-		gasto1.setPagado(new Double("350"));
-		gastos.add(gasto1);
-		GastoListado gasto2 = new GastoListado();
-		gasto2.setNombre("Despedida de Juanjo");
-		gasto2.setFecha(new Date(2014, 9, 1));
-		gasto2.setGastoTotal(new Double("300"));
-		gasto2.setPagado(new Double("350"));
-		gastos.add(gasto2);
-		GastoListado gasto3 = new GastoListado();
-		gasto3.setNombre("Regalo Mari Trini");
-		gasto3.setFecha(new Date(2014, 8, 6));
-		gasto3.setGastoTotal(new Double("100"));
-		gasto3.setPagado(new Double("100"));
-		gastos.add(gasto3);
-		return gastos;
+	private List<ApatxaListado> recuperarGastos() {
+		ApatxaDAO apatxaDAO = new ApatxaDAO(this);
+		apatxaDAO.open();
+		
+		apatxaDAO.nuevoApatxa("prueba 1", 3, 4.1);
+
+	    List<ApatxaListado> apatxas = apatxaDAO.getTodosApatxas();
+//		List<ApatxaListado> gastos = new ArrayList<ApatxaListado>();
+//		ApatxaListado gasto1 = new ApatxaListado();
+//		gasto1.setNombre("Comida en la sociedad de Ibon");
+//		gasto1.setFecha(new Date(2014, 9, 6));
+//		gasto1.setGastoTotal(new Double("500"));
+//		gasto1.setPagado(new Double("350"));
+//		gastos.add(gasto1);
+//		ApatxaListado gasto2 = new ApatxaListado();
+//		gasto2.setNombre("Despedida de Juanjo");
+//		gasto2.setFecha(new Date(2014, 9, 1));
+//		gasto2.setGastoTotal(new Double("300"));
+//		gasto2.setPagado(new Double("350"));
+//		gastos.add(gasto2);
+//		ApatxaListado gasto3 = new ApatxaListado();
+//		gasto3.setNombre("Regalo Mari Trini");
+//		gasto3.setFecha(new Date(2014, 8, 6));
+//		gasto3.setGastoTotal(new Double("100"));
+//		gasto3.setPagado(new Double("100"));
+//		gastos.add(gasto3);
+		return apatxas;
 	}
 
 	@Override
