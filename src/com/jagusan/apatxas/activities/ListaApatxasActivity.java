@@ -18,12 +18,18 @@ import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 
 public class ListaApatxasActivity extends ActionBarActivity {
 
+	private ApatxaDAO apatxaDAO;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_apatxas);
+		
+		apatxaDAO = new ApatxaDAO(this);
+		apatxaDAO.open();
+		
 
-		List<ApatxaListado> gastos = recuperarGastos();
+		List<ApatxaListado> gastos = recuperarApatxas();
 		ListView listaGastosListView = (ListView) findViewById(R.id.lista_gastos);
 		ListaGastosArrayAdapter adapter = new ListaGastosArrayAdapter(this, R.layout.lista_apatxas_row, gastos);
 		listaGastosListView.setAdapter(adapter);
@@ -33,34 +39,6 @@ public class ListaApatxasActivity extends ActionBarActivity {
 		// productosListView.setOnItemClickListener(listener);
 	}
 
-	private List<ApatxaListado> recuperarGastos() {
-		ApatxaDAO apatxaDAO = new ApatxaDAO(this);
-		apatxaDAO.open();
-		
-		apatxaDAO.nuevoApatxa("prueba 1", 3, 4.1);
-
-	    List<ApatxaListado> apatxas = apatxaDAO.getTodosApatxas();
-//		List<ApatxaListado> gastos = new ArrayList<ApatxaListado>();
-//		ApatxaListado gasto1 = new ApatxaListado();
-//		gasto1.setNombre("Comida en la sociedad de Ibon");
-//		gasto1.setFecha(new Date(2014, 9, 6));
-//		gasto1.setGastoTotal(new Double("500"));
-//		gasto1.setPagado(new Double("350"));
-//		gastos.add(gasto1);
-//		ApatxaListado gasto2 = new ApatxaListado();
-//		gasto2.setNombre("Despedida de Juanjo");
-//		gasto2.setFecha(new Date(2014, 9, 1));
-//		gasto2.setGastoTotal(new Double("300"));
-//		gasto2.setPagado(new Double("350"));
-//		gastos.add(gasto2);
-//		ApatxaListado gasto3 = new ApatxaListado();
-//		gasto3.setNombre("Regalo Mari Trini");
-//		gasto3.setFecha(new Date(2014, 8, 6));
-//		gasto3.setGastoTotal(new Double("100"));
-//		gasto3.setPagado(new Double("100"));
-//		gastos.add(gasto3);
-		return apatxas;
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,5 +70,9 @@ public class ListaApatxasActivity extends ActionBarActivity {
 	private void irAnadirApatxa() {
 		Intent intent = new Intent(this,InformacionApatxaActivity.class);		
 		startActivity(intent);		
+	}
+	
+	private List<ApatxaListado> recuperarApatxas() {
+		return apatxaDAO.getTodosApatxas();		
 	}
 }

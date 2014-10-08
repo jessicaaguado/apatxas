@@ -21,6 +21,7 @@ public class ApatxaDAO {
 	private DatabaseHelper dbHelper;
 
 	private static final String[] COLUMNAS_APATXA_LISTADO = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, TablaApatxa.COLUMNA_BOTE_INICIAL };
+	private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA + " DESC";
 
 	public ApatxaDAO(Context context) {
 		dbHelper = new DatabaseHelper(context);
@@ -34,7 +35,7 @@ public class ApatxaDAO {
 		dbHelper.close();
 	}
 
-	public void nuevoApatxa(String nombre, Integer fecha, Double boteInicial) {
+	public void nuevoApatxa(String nombre, Long fecha, Double boteInicial) {
 		ContentValues values = new ContentValues();
 		values.put(TablaApatxa.COLUMNA_NOMBRE, nombre);
 		values.put(TablaApatxa.COLUMNA_FECHA, fecha);
@@ -52,7 +53,7 @@ public class ApatxaDAO {
 
 	public List<ApatxaListado> getTodosApatxas() {
 		List<ApatxaListado> apatxas = new ArrayList<ApatxaListado>();
-		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA_LISTADO, null, null, null, null, null);
+		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA_LISTADO, null, null, null, null, ORDEN_APATXAS_DEFECTO);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -70,8 +71,10 @@ public class ApatxaDAO {
 		int i = 0;
 		apatxaListado.setId(cursor.getLong(i++));
 		apatxaListado.setNombre(cursor.getString(i++));
-		apatxaListado.setFecha(new Date(cursor.getLong(i++)));
-		Log.d("APATXAS", "DAO: Convertido "+apatxaListado.toString());
+		Long fecha = cursor.getLong(i++);
+		if (fecha != null){			
+			apatxaListado.setFecha(new Date(fecha));
+		}		
 		return apatxaListado;
 	}
 }

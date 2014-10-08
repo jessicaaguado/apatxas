@@ -39,8 +39,7 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 			convertView = inflater.inflate(rowLayoutId, parent, false);
 		}
 
-		ApatxaListado apatxa = apatxas.get(position);
-		Log.d("APATXAS"," ADAPTER: apatxa recuperada"+apatxa);
+		ApatxaListado apatxa = apatxas.get(position);		
 		TextView nombreGastoTextView = (TextView) convertView.findViewById(R.id.nombre);
 		nombreGastoTextView.setText(apatxa.getNombre());
 		TextView fechaGastoTextView = (TextView) convertView.findViewById(R.id.fecha);
