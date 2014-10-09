@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosArrayAdapter;
+import com.jagusan.apatxas.listeners.OnVerDetalleApatxaClickListener;
 import com.jagusan.apatxas.sqlite.daos.ApatxaDAO;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 
@@ -34,9 +35,8 @@ public class ListaApatxasActivity extends ActionBarActivity {
 		ListaGastosArrayAdapter adapter = new ListaGastosArrayAdapter(this, R.layout.lista_apatxas_row, gastos);
 		listaGastosListView.setAdapter(adapter);
 
-		// OnVerDetalleProductoClickListener listener = new
-		// OnVerDetalleProductoClickListener();
-		// productosListView.setOnItemClickListener(listener);
+		OnVerDetalleApatxaClickListener listener = new OnVerDetalleApatxaClickListener();
+		listaGastosListView.setOnItemClickListener(listener);
 	}
 
 
@@ -73,6 +73,6 @@ public class ListaApatxasActivity extends ActionBarActivity {
 	}
 	
 	private List<ApatxaListado> recuperarApatxas() {
-		return apatxaDAO.getTodosApatxas();		
+		return apatxaDAO.getTodosApatxasListado();		
 	}
 }
