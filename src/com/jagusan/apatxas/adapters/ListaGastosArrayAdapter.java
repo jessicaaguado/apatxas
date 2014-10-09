@@ -1,11 +1,12 @@
 package com.jagusan.apatxas.adapters;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,13 +40,27 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 			convertView = inflater.inflate(rowLayoutId, parent, false);
 		}
 
-		ApatxaListado apatxa = apatxas.get(position);		
-		TextView nombreGastoTextView = (TextView) convertView.findViewById(R.id.nombre);
-		nombreGastoTextView.setText(apatxa.getNombre());
-		TextView fechaGastoTextView = (TextView) convertView.findViewById(R.id.fecha);
-		fechaGastoTextView.setText(apatxa.getFecha().toString());
-		TextView estadoGastoTextView = (TextView) convertView.findViewById(R.id.estado);
+		ApatxaListado apatxa = apatxas.get(position);	
 		
+		//nombre
+		TextView nombreApatxaTextView = (TextView) convertView.findViewById(R.id.nombre);
+		nombreApatxaTextView.setText(apatxa.getNombre());
+		//fecha
+		TextView fechaApatxaTextView = (TextView) convertView.findViewById(R.id.fecha);
+		Date fecha = apatxa.getFecha();
+		if (fecha != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			fechaApatxaTextView.setText(sdf.format(fecha));	
+		}
+		//estado
+		TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);		
+		String descripcionEstadoApatxa = obtenerDescripcionEstadoApatxa(apatxa);
+		estadoApatxaTextView.setText(descripcionEstadoApatxa);
+
+		return convertView;
+	}
+
+	private String obtenerDescripcionEstadoApatxa(ApatxaListado apatxa) {
 		Double estadoGasto = apatxa.getGastoTotal() - apatxa.getPagado();
 		Resources res = context.getResources();
 		String descripcionEstadoGasto = res.getString(R.string.estado_gasto_pagado);		
@@ -54,10 +69,7 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 		} else if (estadoGasto > 0) {
 			descripcionEstadoGasto = String.format(res.getString(R.string.estado_gasto_falta_pagar),estadoGasto);
 		}
-
-		estadoGastoTextView.setText(descripcionEstadoGasto);
-
-		return convertView;
+		return descripcionEstadoGasto;
 	}
 
 }
