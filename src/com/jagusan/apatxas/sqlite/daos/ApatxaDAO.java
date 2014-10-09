@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.daos.fromCursorToModelView.FromCursorToApatxaDetalle;
+import com.jagusan.apatxas.sqlite.daos.fromCursorToModelView.FromCursorToApatxaListado;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
@@ -84,7 +85,7 @@ public class ApatxaDAO {
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			ApatxaListado apatxaListado = cursorToApatxaListado(cursor);
+			ApatxaListado apatxaListado = FromCursorToApatxaListado.convertir(cursor);
 			apatxas.add(apatxaListado);
 			cursor.moveToNext();
 		}		
@@ -92,17 +93,7 @@ public class ApatxaDAO {
 		return apatxas;
 	}
 
-	private ApatxaListado cursorToApatxaListado(Cursor cursor) {
-		ApatxaListado apatxaListado = new ApatxaListado();
-		int i = 0;
-		apatxaListado.setId(cursor.getLong(i++));
-		apatxaListado.setNombre(cursor.getString(i++));
-		Long fecha = cursor.getLong(i++);
-		if (fecha != null){			
-			apatxaListado.setFecha(new Date(fecha));
-		}		
-		return apatxaListado;
-	}
+
 	
 	
 }
