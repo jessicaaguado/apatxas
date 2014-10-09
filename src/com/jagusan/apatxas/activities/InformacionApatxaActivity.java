@@ -11,39 +11,47 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.sqlite.daos.ApatxaDAO;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
+import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public class InformacionApatxaActivity extends ActionBarActivity {
-	
+
 	private ApatxaDAO apatxaDAO;
 	private Long idApatxaActualizar;
+
+	private EditText nombreApatxaEditText;
+	private EditText fechaApatxaEditText;
+	private EditText boteInicialEditText;
 	
-	private EditText tituloApatxaTextView;
-	private EditText fechaApatxaTextView;
-	private EditText boteInicialTextView;
-		
+	private TextView gastoTotalApatxaTextView;
+	private TextView estadoApatxaTextView;
+	private TextView boteApatxaTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_informacion_apatxa);
 		idApatxaActualizar = (long) -1.0;
+
+		nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
+		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
+		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
 		
-		tituloApatxaTextView = (EditText) findViewById(R.id.tituloApatxa);
-		fechaApatxaTextView = (EditText) findViewById(R.id.fechaApatxa);
-		boteInicialTextView = (EditText) findViewById(R.id.boteInicialApatxa);
-		
+		gastoTotalApatxaTextView = (TextView) findViewById(R.id.gastoTotalApatxa);
+		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxa);
+		boteApatxaTextView = (TextView) findViewById(R.id.boteApatxa);
+
 		idApatxaActualizar = getIntent().getLongExtra("id", -1);
 		if (esActualizarApatxa()) {
 			cargarInformacionApatxa(idApatxaActualizar);
 		}
-		
+
 	}
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,67 +71,75 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void guardarApatxa(View buttonView) {
 		apatxaDAO = new ApatxaDAO(this);
 		apatxaDAO.open();
 
-		String titulo = tituloApatxaTextView.getText().toString();
-		
+		String titulo = nombreApatxaEditText.getText().toString();
+
 		Long fecha = null;
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat( "dd/MM/yyyy" );
-		    fecha = sdf.parse(fechaApatxaTextView.getText().toString()).getTime();	
-		} catch (Exception e){
-			//sin fecha
-		}		
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			fecha = sdf.parse(fechaApatxaEditText.getText().toString()).getTime();
+		} catch (Exception e) {
+			// sin fecha
+		}
 
 		Double boteInicial = 0.0;
 		try {
-			boteInicial = Double.parseDouble(boteInicialTextView.getText().toString()); 
-		} catch (Exception e){
-			//mantenemos bote inicial a 0
+			boteInicial = Double.parseDouble(boteInicialEditText.getText().toString());
+		} catch (Exception e) {
+			// mantenemos bote inicial a 0
 		}
-		
+
 		if (esActualizarApatxa()) {
 			apatxaDAO.actualizarApatxa(idApatxaActualizar, titulo, fecha, boteInicial);
-		} else {			
+		} else {
 			apatxaDAO.nuevoApatxa(titulo, fecha, boteInicial);
 		}
-		
+
 		apatxaDAO.close();
-		
+
 		irListadoApatxasPrincipal();
-		
+
 	}
-	
+
 	private void cargarInformacionApatxa(Long idApatxa) {
 		apatxaDAO = new ApatxaDAO(this);
 		apatxaDAO.open();
-		
+
 		ApatxaDetalle apatxaDetalle = apatxaDAO.getApatxaDetalle(idApatxa);
-		Log.d("APATXAS", "recuperado con id "+apatxaDetalle.toString());
-		tituloApatxaTextView.setText(apatxaDetalle.getNombre());
-		
+		Log.d("APATXAS", "recuperado con id " + apatxaDetalle.toString());
+		// titulo
+		nombreApatxaEditText.setText(apatxaDetalle.getNombre());
+		// fecha
 		Date fecha = apatxaDetalle.getFecha();
-		if (fecha != null){
+		if (fecha != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			fechaApatxaTextView.setText(sdf.format(fecha));
+			fechaApatxaEditText.setText(sdf.format(fecha));
 		}
-		boteInicialTextView.setText(apatxaDetalle.getBoteInicial().toString());
+		// bote inicial
+		boteInicialEditText.setText(apatxaDetalle.getBoteInicial().toString());
+		// gasto total
+		gastoTotalApatxaTextView.setText(apatxaDetalle.getGastoTotal().toString());
+		// estado actual
+		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(getResources(), apatxaDetalle.getGastoTotal(), apatxaDetalle.getPagado());
+		estadoApatxaTextView.setText(estadoApatxa);
+		// bote final
 		
+
 		apatxaDAO.close();
-		
+
 	}
-	
+
 	private void irListadoApatxasPrincipal() {
-		Intent intent = new Intent(this,ListaApatxasActivity.class);		
-		startActivity(intent);		
+		Intent intent = new Intent(this, ListaApatxasActivity.class);
+		startActivity(intent);
 	}
-	
-	private Boolean esActualizarApatxa(){
+
+	private Boolean esActualizarApatxa() {
 		return idApatxaActualizar != -1;
 	}
-	
-}
 
+}

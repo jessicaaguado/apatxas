@@ -6,7 +6,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
+import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 
@@ -54,22 +54,10 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 		}
 		//estado
 		TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);		
-		String descripcionEstadoApatxa = obtenerDescripcionEstadoApatxa(apatxa);
+		String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getGastoTotal(), apatxa.getPagado());
 		estadoApatxaTextView.setText(descripcionEstadoApatxa);
 
 		return convertView;
 	}
-
-	private String obtenerDescripcionEstadoApatxa(ApatxaListado apatxa) {
-		Double estadoGasto = apatxa.getGastoTotal() - apatxa.getPagado();
-		Resources res = context.getResources();
-		String descripcionEstadoGasto = res.getString(R.string.estado_gasto_pagado);		
-		if (estadoGasto < 0) {
-			descripcionEstadoGasto = String.format(res.getString(R.string.estado_gasto_sobra),estadoGasto*-1);
-		} else if (estadoGasto > 0) {
-			descripcionEstadoGasto = String.format(res.getString(R.string.estado_gasto_falta_pagar),estadoGasto);
-		}
-		return descripcionEstadoGasto;
-	}
-
+	
 }
