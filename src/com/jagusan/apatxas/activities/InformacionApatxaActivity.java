@@ -124,14 +124,16 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		// gasto total
 		gastoTotalApatxaTextView.setText(apatxaDetalle.getGastoTotal().toString());
 		// estado actual
-		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(getResources(), apatxaDetalle.getGastoTotal(), apatxaDetalle.getPagado());
+		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxaDetalle.getGastoTotal(), apatxaDetalle.getPagado(), apatxaDetalle.getBoteInicial());
 		estadoApatxaTextView.setText(estadoApatxa);
 		// bote final
-		
+		Double boteApatxa = apatxaDetalle.getBote();
+		boteApatxaTextView.setText(boteApatxa.toString());
 
 		apatxaDAO.close();
 
 	}
+	
 
 	private void irListadoApatxasPrincipal() {
 		Intent intent = new Intent(this, ListaApatxasActivity.class);

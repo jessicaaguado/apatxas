@@ -89,7 +89,7 @@
             android:id="@+id/boteInicialApatxa"
             android:layout_width="198dp"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
+            android:inputType="numberSigned"
             android:paddingLeft="90dp"
             android:text="0" />
     </FrameLayout>

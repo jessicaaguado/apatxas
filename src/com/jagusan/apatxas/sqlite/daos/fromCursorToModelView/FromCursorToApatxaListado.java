@@ -17,6 +17,7 @@ public class FromCursorToApatxaListado {
 		if (fecha != null){			
 			apatxaListado.setFecha(new Date(fecha));
 		}		
+		apatxaListado.setBoteInicial(cursor.getDouble(i++));
 		return apatxaListado;
 	}
 

@@ -58,4 +58,9 @@ public class ApatxaDetalle {
 	public void setBoteInicial(Double boteInicial) {
 		this.boteInicial = boteInicial;
 	}
+
+	public Double getBote() {
+		Double gastoLiquidado = boteInicial + pagado;
+		return (gastoTotal - gastoLiquidado) < 0 ? (gastoLiquidado - gastoTotal) : 0.0;		
+	}
 }

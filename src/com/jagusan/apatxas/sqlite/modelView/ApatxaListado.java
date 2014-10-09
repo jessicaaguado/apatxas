@@ -9,6 +9,7 @@ public class ApatxaListado {
 	private Date fecha;
 	private Double gastoTotal = 0.0;
 	private Double pagado = 0.0;
+	private Double boteInicial = 0.0;
 
 	public String getNombre() {
 		return nombre;
@@ -58,6 +59,14 @@ public class ApatxaListado {
 		apatxaListadoString = apatxaListadoString + "\nFECHA: "+this.getFecha();
 		apatxaListadoString = apatxaListadoString + "\n-------------------";
 		return apatxaListadoString;
+	}
+
+	public Double getBoteInicial() {
+		return boteInicial;
+	}
+
+	public void setBoteInicial(Double boteInicial) {
+		this.boteInicial = boteInicial;
 	}
 
 }

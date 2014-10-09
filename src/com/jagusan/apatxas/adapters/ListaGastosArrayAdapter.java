@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
+Log.d("APATXAS", "lista "+position);
 		if (convertView == null) {
 			// inflate the layout
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
@@ -54,7 +55,7 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 		}
 		//estado
 		TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);		
-		String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getGastoTotal(), apatxa.getPagado());
+		String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getGastoTotal(), apatxa.getPagado(), apatxa.getBoteInicial());
 		estadoApatxaTextView.setText(descripcionEstadoApatxa);
 
 		return convertView;
