@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -30,6 +31,8 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 	private TextView gastoTotalApatxaTextView;
 	private TextView estadoApatxaTextView;
 	private TextView boteApatxaTextView;
+	
+	private Button botonPersonasApatxa;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		gastoTotalApatxaTextView = (TextView) findViewById(R.id.gastoTotalApatxa);
 		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxa);
 		boteApatxaTextView = (TextView) findViewById(R.id.boteApatxa);
+		
+		botonPersonasApatxa = (Button) findViewById(R.id.botonPersonasApatxa);
 
 		idApatxaActualizar = getIntent().getLongExtra("id", -1);
 		if (esActualizarApatxa()) {
@@ -124,6 +129,10 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		// bote final
 		Double boteApatxa = apatxaDetalle.getBote();
 		boteApatxaTextView.setText(boteApatxa.toString());
+		// numero de personas		
+		Integer numeroPersonasApatxa = apatxaDetalle.getNumeroPersonas();
+		String textoBotonNumeroPersonas = getResources().getQuantityString(R.plurals.numero_personas_apatxa, numeroPersonasApatxa, numeroPersonasApatxa);		
+		botonPersonasApatxa.setText(textoBotonNumeroPersonas);
 	}
 
 	private void irListadoApatxasPrincipal() {

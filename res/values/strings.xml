@@ -13,6 +13,11 @@
     <string name="estado_gasto_falta_pagar">Falta por pagar %1$f€</string>
     <string name="estado_gasto_sobra">Sobran %1$f€</string>
     
+    <plurals name="numero_personas_apatxa">        
+        <item quantity="one">1 persona</item>
+        <item quantity="other">%d personas</item>
+    </plurals>
+    
     <string name="title_activity_informacion_apatxa">InformacionApatxaActivity</string>
 
 </resources>

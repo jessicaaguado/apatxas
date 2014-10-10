@@ -24,9 +24,9 @@ public class ApatxaDAO {
 													  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO };
 
 	private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA + " DESC";
-
-	public ApatxaDAO(SQLiteDatabase dataBase) {
-		this.database = dataBase;
+	
+	public void setDatabase(SQLiteDatabase database) {
+		this.database = database;
 	}
 
 	public void nuevoApatxa(String nombre, Long fecha, Double boteInicial) {

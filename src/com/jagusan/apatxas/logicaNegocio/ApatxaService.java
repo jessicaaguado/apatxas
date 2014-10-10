@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.daos.ApatxaDAO;
+import com.jagusan.apatxas.sqlite.daos.ApatxaPersonasDAO;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
@@ -18,20 +19,24 @@ public class ApatxaService {
 	private SQLiteDatabase database;
 	
 	private ApatxaDAO apatxaDAO;
+	private ApatxaPersonasDAO apatxaPersonasDAO;
 	
 	public ApatxaService (Context context) {
-		dbHelper = new DatabaseHelper(context);				
+		dbHelper = new DatabaseHelper(context);	
+		apatxaDAO = new ApatxaDAO();
+		apatxaPersonasDAO = new ApatxaPersonasDAO();
 	}
 	
 	public void open() throws SQLException {
 		Log.d("APATXAS", "LN: Abrir trans");
 		database = dbHelper.getWritableDatabase();
-		apatxaDAO = new ApatxaDAO(database);
+		apatxaDAO.setDatabase(database);
+		apatxaPersonasDAO.setDatabase(database);
 	}
 
 	public void close() {
 		Log.d("APATXAS", "LN: Cerrar trans");
-		dbHelper.close();
+		dbHelper.close();		
 	}
 	
 	public void crearApatxa(String nombre, Long fecha, Double boteInicial){
@@ -55,6 +60,8 @@ public class ApatxaService {
 	public ApatxaDetalle getApatxaDetalle(Long id){
 		open();
 		ApatxaDetalle apatxa = apatxaDAO.getApatxa(id);
+		Integer numeroPersonasApatxa = apatxaPersonasDAO.numeroPersonasApatxa(id);
+		apatxa.setNumeroPersonas(numeroPersonasApatxa);
 		close();
 		return apatxa;
 	}

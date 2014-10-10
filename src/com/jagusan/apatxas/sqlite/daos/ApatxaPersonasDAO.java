@@ -1,10 +1,7 @@
 package com.jagusan.apatxas.sqlite.daos;
 
-import android.content.Context;
 import android.database.DatabaseUtils;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
@@ -19,23 +16,11 @@ public class ApatxaPersonasDAO {
 													  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO };
 	
 
-	public ApatxaPersonasDAO(Context context) {
-		dbHelper = new DatabaseHelper(context);
-	}
-
-	public void open() throws SQLException {
-		Log.d("APATXAS", "DAO: Open");
-		database = dbHelper.getWritableDatabase();
-	}
-
-	public void close() {
-		Log.d("APATXAS", "DAO: Close");
-		dbHelper.close();
+	public void setDatabase(SQLiteDatabase database) {
+		this.database = database;
 	}
 	
-	public Integer numeroPersonasApatxa(Long idApatxa){
-		Integer numeroPersonas = 0;
-		DatabaseUtils.queryNumEntries(database, TablaApatxaPersonas.NOMBRE_TABLA, TablaApatxaPersonas.COLUMNA_ID_APATXA + " = "+idApatxa);
-		return numeroPersonas;
+	public Integer numeroPersonasApatxa(Long idApatxa){		
+		return (int) DatabaseUtils.queryNumEntries(database, TablaApatxaPersonas.NOMBRE_TABLA, TablaApatxaPersonas.COLUMNA_ID_APATXA + " = "+idApatxa);		
 	}
 }
