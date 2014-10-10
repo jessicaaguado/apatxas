@@ -1,13 +1,12 @@
-package com.jagusan.apatxas.sqlite.daos.fromCursorToModelView;
+package com.jagusan.apatxas.sqlite.daos.cursorReader;
 
 import android.database.Cursor;
 
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 
-public class FromCursorToApatxaListado {
+public class ExtraerInformacionApatxaDeCursor {
 
-	public static ApatxaListado convertir(Cursor cursor) {
-		ApatxaListado apatxaListado = new ApatxaListado();
+	public static ApatxaListado extraer(Cursor cursor, ApatxaListado apatxaListado) {		
 		TablaApatxaCursor tablaApatxaCursor = new TablaApatxaCursor(cursor);
 		apatxaListado.setId(tablaApatxaCursor.getId());
 		apatxaListado.setNombre(tablaApatxaCursor.getNombre());

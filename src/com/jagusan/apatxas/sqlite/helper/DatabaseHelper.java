@@ -37,6 +37,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(TablaApatxa.DROP_TABLE);
         onCreate(db);
 	}
+
+	@Override
+	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		Log.d("APATXAS", "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);
+		db.execSQL(TablaApatxaPersonas.DROP_TABLE);
+		db.execSQL(TablaGasto.DROP_TABLE);
+		db.execSQL(TablaPersona.DROP_TABLE);
+		db.execSQL(TablaApatxa.DROP_TABLE);
+        onCreate(db);
+	}
+	
+	
 	
 
 }

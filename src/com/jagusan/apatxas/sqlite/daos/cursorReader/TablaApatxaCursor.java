@@ -1,4 +1,4 @@
-package com.jagusan.apatxas.sqlite.daos.fromCursorToModelView;
+package com.jagusan.apatxas.sqlite.daos.cursorReader;
 
 import java.util.Date;
 

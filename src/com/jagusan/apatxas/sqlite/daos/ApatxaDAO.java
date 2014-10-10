@@ -10,8 +10,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.jagusan.apatxas.sqlite.daos.fromCursorToModelView.FromCursorToApatxaDetalle;
-import com.jagusan.apatxas.sqlite.daos.fromCursorToModelView.FromCursorToApatxaListado;
+import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionApatxaDeCursor;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
@@ -22,10 +21,9 @@ public class ApatxaDAO {
 	private SQLiteDatabase database;
 	private DatabaseHelper dbHelper;
 
-	private static final String[] COLUMNAS_APATXA_LISTADO = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, 
-															  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO };
-	private static final String[] COLUMNAS_APATXA_DETALLE = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, 
-															  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO  };
+	private static final String[] COLUMNAS_APATXA = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, 
+													  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO };
+
 	private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA + " DESC";
 
 	public ApatxaDAO(Context context) {
@@ -72,10 +70,11 @@ public class ApatxaDAO {
 	
 	public ApatxaDetalle getApatxaDetalle(Long id){
 		ApatxaDetalle apatxaDetalle = null;
-		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA_DETALLE, TablaApatxa.COLUMNA_ID + "= "+id, null, null, null, ORDEN_APATXAS_DEFECTO);
+		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, TablaApatxa.COLUMNA_ID + "= "+id, null, null, null, ORDEN_APATXAS_DEFECTO);
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			apatxaDetalle = FromCursorToApatxaDetalle.convertir(cursor);			
+			apatxaDetalle = new ApatxaDetalle();
+			apatxaDetalle = (ApatxaDetalle) ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxaDetalle);			
 			cursor.moveToNext();
 		}
 		cursor.close();
@@ -84,11 +83,12 @@ public class ApatxaDAO {
 
 	public List<ApatxaListado> getTodosApatxasListado() {
 		List<ApatxaListado> apatxas = new ArrayList<ApatxaListado>();
-		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA_LISTADO, null, null, null, null, ORDEN_APATXAS_DEFECTO);
-Log.d("APATXAS"," CURSOR ..... "+cursor);
+		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, null, null, null, null, ORDEN_APATXAS_DEFECTO);
+
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			ApatxaListado apatxaListado = FromCursorToApatxaListado.convertir(cursor);
+			ApatxaListado apatxaListado = new ApatxaListado(); 
+			apatxaListado = ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxaListado);
 			apatxas.add(apatxaListado);
 			cursor.moveToNext();
 		}		
