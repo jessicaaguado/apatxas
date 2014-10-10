@@ -1,7 +1,5 @@
 package com.jagusan.apatxas.sqlite.daos.fromCursorToModelView;
 
-import java.util.Date;
-
 import android.database.Cursor;
 
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
@@ -10,14 +8,21 @@ public class FromCursorToApatxaDetalle {
 
 	public static ApatxaDetalle convertir(Cursor cursor) {
 		ApatxaDetalle apatxaDetalle = new ApatxaDetalle();
-		int i = 0;
-		apatxaDetalle.setId(cursor.getLong(i++));
-		apatxaDetalle.setNombre(cursor.getString(i++));
-		Long fecha = cursor.getLong(i++);
-		if (fecha != null) {
-			apatxaDetalle.setFecha(new Date(fecha));
-		}
-		apatxaDetalle.setBoteInicial(cursor.getDouble(i++));
+		TablaApatxaCursor tablaApatxaCursor = new TablaApatxaCursor(cursor);
+		apatxaDetalle.setId(tablaApatxaCursor.getId());
+		apatxaDetalle.setNombre(tablaApatxaCursor.getNombre());
+		apatxaDetalle.setFecha(tablaApatxaCursor.getFecha());	
+		Double boteInicial = tablaApatxaCursor.getBoteInicial();
+		apatxaDetalle.setBoteInicial(boteInicial);
+		Double gastoTotal = tablaApatxaCursor.getGastoTotal();
+		apatxaDetalle.setGastoTotal(gastoTotal);
+		Double gastoPagado = tablaApatxaCursor.getGastoPagado();
+		apatxaDetalle.setGastoTotal(gastoPagado);
+		//bote
+		Double gastoLiquidado = boteInicial + gastoPagado;
+		Double bote = (gastoTotal - gastoLiquidado) < 0 ? (gastoLiquidado - gastoTotal) : 0.0;
+		apatxaDetalle.setBote(bote);
+		
 		return apatxaDetalle;
 	}
 

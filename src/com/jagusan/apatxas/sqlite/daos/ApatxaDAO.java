@@ -1,6 +1,5 @@
 package com.jagusan.apatxas.sqlite.daos;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +22,10 @@ public class ApatxaDAO {
 	private SQLiteDatabase database;
 	private DatabaseHelper dbHelper;
 
-	private static final String[] COLUMNAS_APATXA_LISTADO = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, TablaApatxa.COLUMNA_BOTE_INICIAL };
-	private static final String[] COLUMNAS_APATXA_DETALLE = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, TablaApatxa.COLUMNA_BOTE_INICIAL };
+	private static final String[] COLUMNAS_APATXA_LISTADO = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, 
+															  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO };
+	private static final String[] COLUMNAS_APATXA_DETALLE = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, 
+															  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO  };
 	private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA + " DESC";
 
 	public ApatxaDAO(Context context) {
@@ -32,10 +33,12 @@ public class ApatxaDAO {
 	}
 
 	public void open() throws SQLException {
+		Log.d("APATXAS", "DAO: Open");
 		database = dbHelper.getWritableDatabase();
 	}
 
 	public void close() {
+		Log.d("APATXAS", "DAO: Close");
 		dbHelper.close();
 	}
 
@@ -82,7 +85,7 @@ public class ApatxaDAO {
 	public List<ApatxaListado> getTodosApatxasListado() {
 		List<ApatxaListado> apatxas = new ArrayList<ApatxaListado>();
 		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA_LISTADO, null, null, null, null, ORDEN_APATXAS_DEFECTO);
-
+Log.d("APATXAS"," CURSOR ..... "+cursor);
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			ApatxaListado apatxaListado = FromCursorToApatxaListado.convertir(cursor);
