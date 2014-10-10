@@ -19,25 +19,14 @@ import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
 public class ApatxaDAO {
 
 	private SQLiteDatabase database;
-	private DatabaseHelper dbHelper;
 
 	private static final String[] COLUMNAS_APATXA = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, 
 													  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO };
 
 	private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA + " DESC";
 
-	public ApatxaDAO(Context context) {
-		dbHelper = new DatabaseHelper(context);
-	}
-
-	public void open() throws SQLException {
-		Log.d("APATXAS", "DAO: Open");
-		database = dbHelper.getWritableDatabase();
-	}
-
-	public void close() {
-		Log.d("APATXAS", "DAO: Close");
-		dbHelper.close();
+	public ApatxaDAO(SQLiteDatabase dataBase) {
+		this.database = dataBase;
 	}
 
 	public void nuevoApatxa(String nombre, Long fecha, Double boteInicial) {
@@ -68,28 +57,28 @@ public class ApatxaDAO {
 
 	}
 	
-	public ApatxaDetalle getApatxaDetalle(Long id){
-		ApatxaDetalle apatxaDetalle = null;
+	public ApatxaDetalle getApatxa(Long id){
+		ApatxaDetalle apatxa = null;
 		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, TablaApatxa.COLUMNA_ID + "= "+id, null, null, null, ORDEN_APATXAS_DEFECTO);
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			apatxaDetalle = new ApatxaDetalle();
-			apatxaDetalle = (ApatxaDetalle) ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxaDetalle);			
+			apatxa = new ApatxaDetalle();
+			apatxa = (ApatxaDetalle) ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxa);			
 			cursor.moveToNext();
 		}
 		cursor.close();
-		return apatxaDetalle;
+		return apatxa;
 	}
 
-	public List<ApatxaListado> getTodosApatxasListado() {
+	public List<ApatxaListado> getTodosApatxas() {
 		List<ApatxaListado> apatxas = new ArrayList<ApatxaListado>();
 		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, null, null, null, null, ORDEN_APATXAS_DEFECTO);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			ApatxaListado apatxaListado = new ApatxaListado(); 
-			apatxaListado = ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxaListado);
-			apatxas.add(apatxaListado);
+			ApatxaListado apatxa = new ApatxaListado(); 
+			apatxa = ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxa);			
+			apatxas.add(apatxa);
 			cursor.moveToNext();
 		}		
 		cursor.close();

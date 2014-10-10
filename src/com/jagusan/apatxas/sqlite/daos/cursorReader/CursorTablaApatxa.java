@@ -4,7 +4,7 @@ import java.util.Date;
 
 import android.database.Cursor;
 
-public class TablaApatxaCursor {
+public class CursorTablaApatxa {
 	
 	private static final Integer POSICION_ID = 0;
 	private static final Integer POSICION_NOMBRE = 1;
@@ -15,7 +15,7 @@ public class TablaApatxaCursor {
 	
 	private final Cursor cursor;
 	
-	public TablaApatxaCursor(Cursor cursor) {
+	public CursorTablaApatxa(Cursor cursor) {
 		this.cursor = cursor;
 	}
 	

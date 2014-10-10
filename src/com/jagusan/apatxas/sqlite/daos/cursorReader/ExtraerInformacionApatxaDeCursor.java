@@ -7,7 +7,7 @@ import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 public class ExtraerInformacionApatxaDeCursor {
 
 	public static ApatxaListado extraer(Cursor cursor, ApatxaListado apatxaListado) {		
-		TablaApatxaCursor tablaApatxaCursor = new TablaApatxaCursor(cursor);
+		CursorTablaApatxa tablaApatxaCursor = new CursorTablaApatxa(cursor);
 		apatxaListado.setId(tablaApatxaCursor.getId());
 		apatxaListado.setNombre(tablaApatxaCursor.getNombre());
 		apatxaListado.setFecha(tablaApatxaCursor.getFecha());				

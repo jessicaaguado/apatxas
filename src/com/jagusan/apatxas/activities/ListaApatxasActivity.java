@@ -13,22 +13,19 @@ import android.widget.ListView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosArrayAdapter;
 import com.jagusan.apatxas.listeners.OnVerDetalleApatxaClickListener;
-import com.jagusan.apatxas.sqlite.daos.ApatxaDAO;
+import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
-
 
 public class ListaApatxasActivity extends ActionBarActivity {
 
-	private ApatxaDAO apatxaDAO;
-	
+	private ApatxaService apatxaService;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_apatxas);
-		
-		apatxaDAO = new ApatxaDAO(this);
-		apatxaDAO.open();
-		
+
+		apatxaService = new ApatxaService(this);
 
 		List<ApatxaListado> gastos = recuperarApatxas();
 		ListView listaGastosListView = (ListView) findViewById(R.id.lista_gastos);
@@ -38,7 +35,6 @@ public class ListaApatxasActivity extends ActionBarActivity {
 		OnVerDetalleApatxaClickListener listener = new OnVerDetalleApatxaClickListener();
 		listaGastosListView.setOnItemClickListener(listener);
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,11 +64,11 @@ public class ListaApatxasActivity extends ActionBarActivity {
 	}
 
 	private void irAnadirApatxa() {
-		Intent intent = new Intent(this,InformacionApatxaActivity.class);		
-		startActivity(intent);		
+		Intent intent = new Intent(this, InformacionApatxaActivity.class);
+		startActivity(intent);
 	}
-	
+
 	private List<ApatxaListado> recuperarApatxas() {
-		return apatxaDAO.getTodosApatxasListado();		
+		return apatxaService.getTodosApatxasListado();
 	}
 }

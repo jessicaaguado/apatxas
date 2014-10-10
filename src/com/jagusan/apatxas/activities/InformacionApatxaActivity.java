@@ -14,19 +14,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.sqlite.daos.ApatxaDAO;
+import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public class InformacionApatxaActivity extends ActionBarActivity {
 
-	private ApatxaDAO apatxaDAO;
+	private ApatxaService apatxaService;
 	private Long idApatxaActualizar;
 
 	private EditText nombreApatxaEditText;
 	private EditText fechaApatxaEditText;
 	private EditText boteInicialEditText;
-	
+
 	private TextView gastoTotalApatxaTextView;
 	private TextView estadoApatxaTextView;
 	private TextView boteApatxaTextView;
@@ -35,13 +35,15 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		apatxaService = new ApatxaService(this);
+
 		setContentView(R.layout.activity_informacion_apatxa);
 		idApatxaActualizar = (long) -1.0;
 
 		nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
 		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
 		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
-		
+
 		gastoTotalApatxaTextView = (TextView) findViewById(R.id.gastoTotalApatxa);
 		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxa);
 		boteApatxaTextView = (TextView) findViewById(R.id.boteApatxa);
@@ -73,8 +75,6 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 	}
 
 	public void guardarApatxa(View buttonView) {
-		apatxaDAO = new ApatxaDAO(this);
-		apatxaDAO.open();
 
 		String titulo = nombreApatxaEditText.getText().toString();
 
@@ -94,22 +94,17 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		}
 
 		if (esActualizarApatxa()) {
-			apatxaDAO.actualizarApatxa(idApatxaActualizar, titulo, fecha, boteInicial);
+			apatxaService.actualizarApatxa(idApatxaActualizar, titulo, fecha, boteInicial);
 		} else {
-			apatxaDAO.nuevoApatxa(titulo, fecha, boteInicial);
+			apatxaService.crearApatxa(titulo, fecha, boteInicial);
 		}
-
-		apatxaDAO.close();
 
 		irListadoApatxasPrincipal();
 
 	}
 
 	private void cargarInformacionApatxa(Long idApatxa) {
-		apatxaDAO = new ApatxaDAO(this);
-		apatxaDAO.open();
-
-		ApatxaDetalle apatxaDetalle = apatxaDAO.getApatxaDetalle(idApatxa);
+		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxa);
 		Log.d("APATXAS", "recuperado con id " + apatxaDetalle.toString());
 		// titulo
 		nombreApatxaEditText.setText(apatxaDetalle.getNombre());
@@ -129,11 +124,7 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		// bote final
 		Double boteApatxa = apatxaDetalle.getBote();
 		boteApatxaTextView.setText(boteApatxa.toString());
-
-		apatxaDAO.close();
-
 	}
-	
 
 	private void irListadoApatxasPrincipal() {
 		Intent intent = new Intent(this, ListaApatxasActivity.class);
