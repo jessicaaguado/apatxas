@@ -19,7 +19,7 @@
 
 <resources>
 
-    <style name="Theme.Apatxasactionbar" parent="@style/Theme.AppCompat.Light">
+    <style name="Theme.Apatxasactionbar" parent="@style/ApatxasColors">
         <item name="actionBarItemBackground">@drawable/selectable_background_apatxasactionbar</item>
         <item name="popupMenuStyle">@style/PopupMenu.Apatxasactionbar</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Apatxasactionbar</item>
@@ -72,7 +72,7 @@
     </style>
     
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-    <style name="Theme.Apatxasactionbar.Widget" parent="@style/Theme.AppCompat">
+    <style name="Theme.Apatxasactionbar.Widget" parent="@style/ApatxasColors">
         <item name="popupMenuStyle">@style/PopupMenu.Apatxasactionbar</item>
         <item name="dropDownListViewStyle">@style/DropDownListView.Apatxasactionbar</item>
     </style>
