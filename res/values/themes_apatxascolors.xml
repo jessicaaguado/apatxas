@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="ApatxasColors" parent="@style/_ApatxasColors"/>
+
+  <style name="_ApatxasColors" parent="Theme.AppCompat.Light">
+
+    <item name="android:editTextStyle">@style/EditTextApatxasColors</item>
+
+    <item name="android:textColorHighlight">#99e9cffc</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewApatxasColors</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxApatxasColors</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonApatxasColors</item>
+
+    <item name="android:buttonStyle">@style/ButtonApatxasColors</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonApatxasColors</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerApatxasColors</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemApatxasColors</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarApatxasColors</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarApatxasColors</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarApatxasColors</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigApatxasColors</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallApatxasColors</item>
+
+    <item name="android:buttonStyleToggle">@style/ToggleApatxasColors</item>
+
+    <item name="android:listViewStyle">@style/ListViewApatxasColors</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewApatxasColors.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemApatxasColors</item>
+
+  </style>
+
+</resources>
