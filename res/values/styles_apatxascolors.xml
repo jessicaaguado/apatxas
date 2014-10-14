@@ -5,13 +5,13 @@
 
   <style name="EditTextApatxasColors" parent="android:Widget.EditText">
 	  <item name="android:background">@drawable/apatxascolors_edit_text_holo_light</item>
-	  <item name="android:textColor">#000000</item>
+	  <!-- item name="android:textColor">#000000</item-->
   </style>
 
   <style name="AutoCompleteTextViewApatxasColors" parent="android:Widget.AutoCompleteTextView">
       <item name="android:dropDownSelector">@drawable/apatxascolors_list_selector_holo_light</item>
 	  <item name="android:background">@drawable/apatxascolors_edit_text_holo_light</item>
-	  <item name="android:textColor">#000000</item>
+	  <!-- item name="android:textColor">#000000</item-->
   </style>
 
   <style name="CheckBoxApatxasColors" parent="android:Widget.CompoundButton.CheckBox">
@@ -26,7 +26,7 @@
 	  <item name="android:background">@drawable/apatxascolors_btn_default_holo_light</item>
 	  <item name="android:minHeight">48dip</item>
 	  <item name="android:minWidth">64dip</item>
-	  <item name="android:textColor">#000000</item>
+	  <!-- item name="android:textColor">#000000</item-->
   </style>
 
   <style name="ImageButtonApatxasColors" parent="android:Widget.ImageButton">
@@ -52,7 +52,7 @@
   </style>
 
   <style name="TabTextApatxasColors">
-	  <item name="android:textColor">#000000</item>
+	  <!-- item name="android:textColor">#000000</item-->
       <item name="android:textSize">12sp</item>
       <item name="android:textStyle">bold</item>
       <!-- v14 <item name="android:textAllCaps">true</item> -->
@@ -101,7 +101,7 @@
   <style name="ToggleApatxasColors" parent="android:Widget.Button.Toggle">
       <item name="android:background">@drawable/apatxascolors_btn_toggle_holo_light</item>
       <item name="android:minHeight">48dip</item>
-	  <item name="android:textColor">#000000</item>
+	  <!-- item name="android:textColor">#000000</item-->
   </style>
 
   <style name="ListViewApatxasColors" parent="android:Widget.ListView">
@@ -113,7 +113,7 @@
   </style>
 
   <style name="SpinnerItemApatxasColors" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
-      <item name="android:textColor">#000000</item>
+      <!-- item name="android:textColor">#000000</item-->
   </style>
 
 </resources>
