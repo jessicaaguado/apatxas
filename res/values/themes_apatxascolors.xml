@@ -17,7 +17,7 @@
 
     <item name="android:radioButtonStyle">@style/RadioButtonApatxasColors</item>
 
-    <item name="android:buttonStyle">@style/ButtonApatxasColors</item>
+    <!-- item name="android:buttonStyle">@style/ButtonApatxasColors</item-->
 
     <item name="android:imageButtonStyle">@style/ImageButtonApatxasColors</item>
 

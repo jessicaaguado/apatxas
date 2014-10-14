@@ -20,7 +20,7 @@
 
     <item name="android:listChoiceIndicatorSingle">@drawable/apatxascolors_btn_radio_holo_light</item>
 
-    <item name="android:buttonStyle">@style/ButtonApatxasColors</item>
+    <!-- item name="android:buttonStyle">@style/ButtonApatxasColors</item-->
 
     <item name="android:imageButtonStyle">@style/ImageButtonApatxasColors</item>
 
