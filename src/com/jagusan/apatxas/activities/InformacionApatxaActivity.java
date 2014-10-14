@@ -37,6 +37,8 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		personalizarActionBar();
 
 		apatxaService = new ApatxaService(this);
 
@@ -59,6 +61,7 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		}
 
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,4 +147,11 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		return idApatxaActualizar != -1;
 	}
 
+	private void personalizarActionBar() {
+		//quitamos el titulo
+		getActionBar().setDisplayShowTitleEnabled(false);
+		//boton para ir a la actividad anterior
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+	}
 }

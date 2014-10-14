@@ -23,8 +23,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.jagusan.apatxas.activities.InformacionApatxaActivity"
-            android:label="@string/title_activity_informacion_apatxa" >
+            android:name="com.jagusan.apatxas.activities.InformacionApatxaActivity">
+            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value=".activities.ListaApatxasActivity" />
         </activity>
     </application>
 
