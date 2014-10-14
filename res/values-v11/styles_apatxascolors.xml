@@ -9,7 +9,7 @@
   </style>
 
   <style name="ButtonApatxasColors" parent="android:Widget.Holo.Light.Button">
-	  <item name="android:background">@drawable/apatxascolors_btn_default_holo_light</item>
+	  <!-- item name="android:background">@drawable/apatxascolors_btn_default_holo_light</item-->
   </style>
 
   <style name="ImageButtonApatxasColors" parent="android:Widget.Holo.Light.ImageButton">
