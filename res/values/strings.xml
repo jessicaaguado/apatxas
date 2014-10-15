@@ -3,21 +3,21 @@
 
     <string name="app_name">apatxas</string>
     <string name="hello_world">Hello world!</string>
-    
     <string name="action_settings">Settings</string>
     <string name="action_buscar">Buscar</string>
     <string name="action_anadir">Añadir</string>
-    
     <string name="estado_gasto_pagado">Pagado</string>
     <string name="estado_gasto_pendiente">Pendiente</string>
     <string name="estado_gasto_falta_pagar">Falta por pagar %1$f€</string>
     <string name="estado_gasto_sobra">Sobran %1$f€</string>
-    
-    <plurals name="numero_personas_apatxa">        
+
+    <plurals name="numero_personas_apatxa">
         <item quantity="one">1 persona</item>
         <item quantity="other">%d personas</item>
     </plurals>
-    
+
     <string name="title_activity_informacion_apatxa">InformacionApatxaActivity</string>
+    <string name="title_activity_nuevo_apatxa_paso1">NuevoApatxaPaso1</string>
+    <string name="title_activity_nuevo_apatxa_paso2">NuevoApatxaPaso2Activity</string>
 
 </resources>

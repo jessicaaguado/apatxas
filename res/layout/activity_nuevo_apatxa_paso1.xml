@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    tools:context="com.jagusan.apatxas.activities.InformacionApatxaActivity" >
+
+    <EditText
+        android:id="@+id/nombreApatxa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:hint="¿Qué es?" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/fechaApatxa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/nombreApatxa"
+        android:hint="dd/mm/aaaa"
+        android:inputType="date" />
+
+    
+
+    <FrameLayout
+        android:id="@+id/boteInicialFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/fechaApatxa" >
+
+        <TextView
+            android:id="@+id/labelBoteInicialApatxa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Bote inicial:" />
+
+        <EditText
+            android:id="@+id/boteInicialApatxa"
+            android:layout_width="198dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:paddingLeft="90dp"
+            android:text="0" />
+    </FrameLayout>
+
+    
+
+    <ListView
+        android:id="@+id/listaPersonasApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/boteInicialFrame" >
+    </ListView>
+    
+    <Button
+        android:id="@+id/botonPersonasApatxa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/listaPersonasApatxa"
+        android:drawableLeft="@drawable/ic_action_group"
+        android:text="Anadir persona" 
+        android:onClick="anadirPersona"/>
+
+</RelativeLayout>

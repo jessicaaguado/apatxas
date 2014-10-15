@@ -64,7 +64,7 @@ public class ListaApatxasActivity extends ActionBarActivity {
 	}
 
 	private void irAnadirApatxa() {
-		Intent intent = new Intent(this, InformacionApatxaActivity.class);
+		Intent intent = new Intent(this, NuevoApatxaPaso1Activity.class);
 		startActivity(intent);
 	}
 

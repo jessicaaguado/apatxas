@@ -22,11 +22,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.jagusan.apatxas.activities.InformacionApatxaActivity">
+        <activity android:name=".activities.InformacionApatxaActivity" >
             <meta-data
-	            android:name="android.support.PARENT_ACTIVITY"
-	            android:value=".activities.ListaApatxasActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.ListaApatxasActivity" />
+        </activity>
+        <activity
+            android:name=".activities.NuevoApatxaPaso1Activity"
+            android:label="@string/title_activity_nuevo_apatxa_paso1"
+            android:parentActivityName=".activities.ListaApatxasActivity" >
+            
+            <!-- meta-data android:name="android.support.UI_OPTIONS"
+            	       android:value="splitActionBarWhenNarrow" /-->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jagusan.apatxas.activities.ListaApatxasActivity" />
+        </activity>
+        <activity
+            android:name="com.jagusan.apatxas.activities.NuevoApatxaPaso2Activity"
+            android:label="@string/title_activity_nuevo_apatxa_paso2"
+            android:parentActivityName=".activities.NuevoApatxaPaso1Activity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jagusan.apatxas.activities.NuevoApatxaPaso1Activity" />
         </activity>
     </application>
 
