@@ -1,0 +1,54 @@
+package com.jagusan.apatxas.adapters;
+
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+
+public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaListado> {
+
+	Context context;
+	int rowLayoutId;
+	List<GastoApatxaListado> gastos;
+
+	public ListaGastosApatxaArrayAdapter(Context context, int rowLayoutId, List<GastoApatxaListado> gastos) {
+
+		super(context, rowLayoutId, gastos);
+
+		this.context = context;
+		this.rowLayoutId = rowLayoutId;
+		this.gastos = gastos;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+
+		if (convertView == null) {
+			// inflate the layout
+			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+			convertView = inflater.inflate(rowLayoutId, parent, false);
+		}
+
+		GastoApatxaListado gasto = gastos.get(position);		
+		//titulo
+		TextView tituloGastoTextView = (TextView) convertView.findViewById(R.id.titulo);
+		tituloGastoTextView.setText(gasto.getTitulo());		
+		//total
+		TextView totalGastoTextView = (TextView) convertView.findViewById(R.id.total);
+		totalGastoTextView.setText(gasto.getTotal().toString());
+		//quien lo ha pagado
+		TextView pagadorGastoTextView = (TextView) convertView.findViewById(R.id.pagadoPor);
+		pagadorGastoTextView.setText(gasto.getPagadoPor());
+		
+		return convertView;
+	}
+	
+}

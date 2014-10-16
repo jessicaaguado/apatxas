@@ -19,5 +19,6 @@
     <string name="title_activity_informacion_apatxa">InformacionApatxaActivity</string>
     <string name="title_activity_nuevo_apatxa_paso1">NuevoApatxaPaso1</string>
     <string name="title_activity_nuevo_apatxa_paso2">NuevoApatxaPaso2Activity</string>
+    <string name="title_activity_main">NuevoGastoApatxaActivity</string>
 
 </resources>

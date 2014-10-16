@@ -1,21 +1,51 @@
 package com.jagusan.apatxas.activities;
 
-import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.R.id;
-import com.jagusan.apatxas.R.layout;
-import com.jagusan.apatxas.R.menu;
+import java.util.ArrayList;
+import java.util.List;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+
+import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
+import com.jagusan.apatxas.logicaNegocio.ApatxaService;
+import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
 
 public class NuevoApatxaPaso2Activity extends ActionBarActivity {
+
+	private ApatxaService apatxaService;
+
+	private String tituloApatxa;
+	private Long fechaApatxa;
+	private Double boteInicialApatxa;
+	private ArrayList<String> personasApatxa;
+
+	private int NUEVO_GASTO_REQUEST_CODE = 1;
+
+	private ListView gastosApatxaListView;
+	private List<GastoApatxaListado> listaGastos = new ArrayList<GastoApatxaListado>();
+	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nuevo_apatxa_paso2);
+
+		personalizarActionBar();
+
+		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
+		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, listaGastos);
+		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
+
+		recuperarDatosPasoAnterior();
+
+		apatxaService = new ApatxaService(this);
 	}
 
 	@Override
@@ -31,9 +61,56 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_guardar) {
+			guardarApatxa();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				Log.d("APATXAS", "Hemos anadido un gasto");
+				String tituloGasto = data.getStringExtra("titulo");
+				Double totalGasto = data.getDoubleExtra("total", 0);
+				String pagadoGasto = "";// data.getStringExtra("pagado");
+
+				GastoApatxaListado gastoListado = new GastoApatxaListado(tituloGasto, totalGasto, pagadoGasto);
+				listaGastos.add(gastoListado);
+				listaGastosApatxaArrayAdapter.notifyDataSetChanged();
+			} else {
+				Log.d("APATXAS", "Al final no se ha anadido ningun gasto");
+			}
+		}
+	}
+
+	private void personalizarActionBar() {
+		// quitamos el titulo
+		getActionBar().setDisplayShowTitleEnabled(false);
+	}
+
+	private void recuperarDatosPasoAnterior() {
+		Intent intent = getIntent();
+		tituloApatxa = intent.getStringExtra("titulo");
+		fechaApatxa = intent.getLongExtra("fecha", -1);
+		boteInicialApatxa = intent.getDoubleExtra("boteInicial", 0);
+		personasApatxa = intent.getStringArrayListExtra("personas");
+
+	}
+
+	public void anadirGasto(View v) {
+		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
+		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);
+	}
+
+	private void irListadoApatxasPrincipal() {
+		Intent intent = new Intent(this, ListaApatxasActivity.class);
+		startActivity(intent);
+	}
+
+	public void guardarApatxa() {
+		apatxaService.crearApatxa(tituloApatxa, fechaApatxa, boteInicialApatxa);
+		irListadoApatxasPrincipal();
 	}
 }

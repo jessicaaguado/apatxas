@@ -30,7 +30,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 	
 	private ListView personasListView;
 	private List<String> personasApatxa;
-	private ArrayAdapter listaPersonasApatxaArrayAdapter;
+	private ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
 	
 	private int numPersonasApatxaAnadidas = 1;
 
