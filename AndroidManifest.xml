@@ -22,15 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.InformacionApatxaActivity" >
+        <!-- activity android:name=".activities.InformacionApatxaActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ListaApatxasActivity" />
-        </activity>
+        </activity-->
         <activity
             android:name=".activities.NuevoApatxaPaso1Activity"
             android:label="@string/title_activity_nuevo_apatxa_paso1"
-            android:parentActivityName=".activities.ListaApatxasActivity" >
+            android:parentActivityName=".activities.ListaApatxasActivity"
+            android:launchMode="singleTop">
             
             <!-- meta-data android:name="android.support.UI_OPTIONS"
             	       android:value="splitActionBarWhenNarrow" /-->
