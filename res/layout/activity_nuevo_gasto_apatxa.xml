@@ -10,43 +10,30 @@
 
     <EditText
         android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:hint="Titulo" >
-
-        <requestFocus />
-    </EditText>
-
-    <FrameLayout
-        android:id="@+id/totalFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/titulo" >
+        android:layout_alignParentTop="true"
+        android:hint="Concepto" >
 
-        <TextView
-            android:id="@+id/labelTotalGasto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Total:" />
-
-        <EditText
+        <requestFocus />
+    </EditText>
+    
+    <EditText
             android:id="@+id/totalGasto"
-            android:layout_width="198dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:paddingLeft="90dp"
-            android:text="0" />
-    </FrameLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/titulo"
+            android:hint="Total" />
+   
 
     <Spinner
         android:id="@+id/listaPersonasApatxa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/totalFrame" />
+        android:layout_below="@+id/totalGasto" />
 
 </RelativeLayout>

@@ -9,11 +9,11 @@
 
     <EditText
         android:id="@+id/nombreApatxa"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:hint="¿Qué es?" >
+        android:hint="Nombre" >
 
         <requestFocus />
     </EditText>
@@ -27,49 +27,31 @@
         android:hint="dd/mm/aaaa"
         android:inputType="date" />
 
-    
-
-    <FrameLayout
-        android:id="@+id/boteInicialFrame"
+    <EditText
+        android:id="@+id/boteInicialApatxa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="numberSigned"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/fechaApatxa" >
-
-        <TextView
-            android:id="@+id/labelBoteInicialApatxa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Bote inicial:" />
-
-        <EditText
-            android:id="@+id/boteInicialApatxa"
-            android:layout_width="198dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned"
-            android:paddingLeft="90dp"
-            android:text="0" />
-    </FrameLayout>
-
-    
+        android:layout_below="@+id/fechaApatxa"
+        android:hint="Bote inicial" />    
 
     <ListView
         android:id="@+id/listaPersonasApatxa"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"        
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/boteInicialFrame" >
-    </ListView>
-    
-    <Button
-        android:id="@+id/botonAnadirPersonaApatxa"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/boteInicialApatxa" >
+    </ListView>
+
+    <Button
+        android:id="@+id/botonAnadirPersonaApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/listaPersonasApatxa"
         android:drawableLeft="@drawable/ic_action_group"
-        android:text="Anadir persona" 
-        android:onClick="anadirPersona"/>
+        android:onClick="anadirPersona"
+        android:text="Anadir persona" />
 
 </RelativeLayout>
