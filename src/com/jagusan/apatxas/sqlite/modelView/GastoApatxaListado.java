@@ -3,21 +3,21 @@ package com.jagusan.apatxas.sqlite.modelView;
 public class GastoApatxaListado {
 
 	private Long id;
-	private String titulo;
+	private String concepto;
 	private Double total;
 	private String pagadoPor;
 
-	public GastoApatxaListado(Long id, String titulo, Double total, String pagadoPor) {
+	public GastoApatxaListado(Long id, String concepto, Double total, String pagadoPor) {
 		super();
 		this.id = id;
-		this.titulo = titulo;
+		this.concepto = concepto;
 		this.total = total;
 		this.pagadoPor = pagadoPor;
 	}
 
-	public GastoApatxaListado(String titulo, Double total, String pagadoPor) {
+	public GastoApatxaListado(String concepto, Double total, String pagadoPor) {
 		super();
-		this.titulo = titulo;
+		this.concepto = concepto;
 		this.total = total;
 		this.pagadoPor = pagadoPor;
 	}
@@ -30,12 +30,12 @@ public class GastoApatxaListado {
 		this.id = id;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getConcepto() {
+		return concepto;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setConcepto(String titulo) {
+		this.concepto = titulo;
 	}
 
 	public Double getTotal() {

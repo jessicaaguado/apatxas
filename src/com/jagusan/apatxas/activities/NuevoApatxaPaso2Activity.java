@@ -72,11 +72,11 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				Log.d("APATXAS", "Hemos anadido un gasto");
-				String tituloGasto = data.getStringExtra("titulo");
+				String conceptoGasto = data.getStringExtra("concepto");
 				Double totalGasto = data.getDoubleExtra("total", 0);
 				String pagadoGasto = data.getStringExtra("pagadoPor");
 
-				GastoApatxaListado gastoListado = new GastoApatxaListado(tituloGasto, totalGasto, pagadoGasto);
+				GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
 				listaGastos.add(gastoListado);
 				listaGastosApatxaArrayAdapter.notifyDataSetChanged();
 			} else {

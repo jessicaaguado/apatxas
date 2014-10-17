@@ -9,7 +9,7 @@
     tools:context="com.jagusan.apatxas.activities.NuevoGastoApatxaActivity" >
 
     <EditText
-        android:id="@+id/titulo"
+        android:id="@+id/concepto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/titulo"
+            android:layout_below="@+id/concepto"
             android:hint="Total" />
    
 

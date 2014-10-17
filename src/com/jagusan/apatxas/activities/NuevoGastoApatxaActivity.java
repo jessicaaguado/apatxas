@@ -1,24 +1,21 @@
 package com.jagusan.apatxas.activities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.jagusan.apatxas.R;
 
 public class NuevoGastoApatxaActivity extends ActionBarActivity {
 	
-	private EditText tituloGastoEditText;
+	private EditText conceptoGastoEditText;
 	private EditText totalGastoEditText;
 	
 	private Spinner personasSpinner;
@@ -35,7 +32,7 @@ public class NuevoGastoApatxaActivity extends ActionBarActivity {
 		
 		recuperarDatosPasoAnterior();
 		
-		tituloGastoEditText = (EditText) findViewById(R.id.titulo);
+		conceptoGastoEditText = (EditText) findViewById(R.id.concepto);
 		totalGastoEditText = (EditText) findViewById(R.id.totalGasto);
 		
 		personasSpinner = (Spinner) findViewById(R.id.listaPersonasApatxa);		
@@ -60,7 +57,7 @@ public class NuevoGastoApatxaActivity extends ActionBarActivity {
 		if (id == R.id.action_asociar_gasto_apatxa) {
 			Intent returnIntent = new Intent();
 			
-			String titulo = tituloGastoEditText.getText().toString();			
+			String concepto = conceptoGastoEditText.getText().toString();			
 			Double totalGasto = 0.0;
 			try {
 				totalGasto = Double.parseDouble(totalGastoEditText.getText().toString());
@@ -69,7 +66,7 @@ public class NuevoGastoApatxaActivity extends ActionBarActivity {
 			}			
 			int elementoSeleccionado = personasSpinner.getSelectedItemPosition();
 			
-			returnIntent.putExtra("titulo",titulo);
+			returnIntent.putExtra("concepto",concepto);
 			returnIntent.putExtra("total",totalGasto);
 			returnIntent.putExtra("pagadoPor", personasApatxa.get(elementoSeleccionado));
 			
