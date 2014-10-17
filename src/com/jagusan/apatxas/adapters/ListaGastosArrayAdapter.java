@@ -34,31 +34,31 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-Log.d("APATXAS", "lista "+position);
+
 		if (convertView == null) {
 			// inflate the layout
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 			convertView = inflater.inflate(rowLayoutId, parent, false);
 		}
 
-		ApatxaListado apatxa = apatxas.get(position);	
+		ApatxaListado apatxa = apatxas.get(position);
 		
-		//nombre
+		// nombre
 		TextView nombreApatxaTextView = (TextView) convertView.findViewById(R.id.nombre);
 		nombreApatxaTextView.setText(apatxa.getNombre());
-		//fecha
+		// fecha
 		TextView fechaApatxaTextView = (TextView) convertView.findViewById(R.id.fecha);
 		Date fecha = apatxa.getFecha();
 		if (fecha != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			fechaApatxaTextView.setText(sdf.format(fecha));	
+			fechaApatxaTextView.setText(sdf.format(fecha));
 		}
-		//estado
-		TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);		
+		// estado
+		TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);
 		String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getGastoTotal(), apatxa.getPagado(), apatxa.getBoteInicial());
 		estadoApatxaTextView.setText(descripcionEstadoApatxa);
-
+	
 		return convertView;
 	}
-	
+
 }

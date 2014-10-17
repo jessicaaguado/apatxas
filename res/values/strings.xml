@@ -8,8 +8,8 @@
     <string name="action_anadir">Añadir</string>
     <string name="estado_gasto_pagado">Pagado</string>
     <string name="estado_gasto_pendiente">Pendiente</string>
-    <string name="estado_gasto_falta_pagar">Falta por pagar %1$f€</string>
-    <string name="estado_gasto_sobra">Sobran %1$f€</string>
+    <string name="estado_gasto_falta_pagar">Falta por pagar %1$.2f€</string>
+    <string name="estado_gasto_sobra">Sobran %1$.2f€</string>
 
     <plurals name="numero_personas_apatxa">
         <item quantity="one">1 persona</item>
