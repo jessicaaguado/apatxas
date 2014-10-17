@@ -18,7 +18,7 @@
 
         <requestFocus />
     </EditText>
-    
+
     <FrameLayout
         android:id="@+id/totalFrame"
         android:layout_width="match_parent"
@@ -41,15 +41,12 @@
             android:paddingLeft="90dp"
             android:text="0" />
     </FrameLayout>
-    
-    <ListView
+
+    <Spinner
         android:id="@+id/listaPersonasApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"        
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/totalFrame" >
-    </ListView>
-    
-    
+        android:layout_below="@+id/totalFrame" />
 
 </RelativeLayout>

@@ -74,7 +74,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 				Log.d("APATXAS", "Hemos anadido un gasto");
 				String tituloGasto = data.getStringExtra("titulo");
 				Double totalGasto = data.getDoubleExtra("total", 0);
-				String pagadoGasto = "";// data.getStringExtra("pagado");
+				String pagadoGasto = data.getStringExtra("pagadoPor");
 
 				GastoApatxaListado gastoListado = new GastoApatxaListado(tituloGasto, totalGasto, pagadoGasto);
 				listaGastos.add(gastoListado);
@@ -101,6 +101,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	public void anadirGasto(View v) {
 		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
+		intent.putStringArrayListExtra("personas", personasApatxa);
 		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);
 	}
 
