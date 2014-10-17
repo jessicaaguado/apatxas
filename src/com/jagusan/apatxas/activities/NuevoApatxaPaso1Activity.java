@@ -7,9 +7,11 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -40,8 +42,13 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
 		
 		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+		LayoutInflater inflater = getLayoutInflater();
+		ViewGroup header = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
+		ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_footer, personasListView, false);
+		personasListView.addHeaderView(header, null, false);
+		personasListView.addFooterView(footer, null, false);
 		personasApatxa = new ArrayList<String>();
-		listaPersonasApatxaArrayAdapter= new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, personasApatxa);
+		listaPersonasApatxaArrayAdapter= new ArrayAdapter<String>(this, R.layout.lista_personas_apatxa_row, personasApatxa);
 		personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
 
 		//OnVerDetalleApatxaClickListener listener = new OnVerDetalleApatxaClickListener();

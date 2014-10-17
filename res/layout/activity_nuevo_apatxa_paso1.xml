@@ -3,7 +3,6 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
     android:orientation="vertical"
     tools:context="com.jagusan.apatxas.activities.InformacionApatxaActivity" >
 
@@ -41,17 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/boteInicialApatxa" >
+        android:layout_below="@+id/boteInicialApatxa" 
+        android:headerDividersEnabled="true"
+        android:footerDividersEnabled="true"        
+        android:padding="10dp">
     </ListView>
 
-    <Button
-        android:id="@+id/botonAnadirPersonaApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/listaPersonasApatxa"
-        android:drawableLeft="@drawable/ic_action_group"
-        android:onClick="anadirPersona"
-        android:text="Anadir persona" />
+   
 
 </RelativeLayout>
