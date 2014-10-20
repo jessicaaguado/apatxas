@@ -5,11 +5,11 @@
 
   <style name="ApatxasColors" parent="@style/_ApatxasColors"/>
 
-  <style name="_ApatxasColors" parent="Theme.AppCompat.Light">
+  <style name="_ApatxasColors" parent="Theme.AppCompat.Light.DarkActionBar">
 
     <item name="android:editTextStyle">@style/EditTextApatxasColors</item>
 
-    <item name="android:textColorHighlight">#99e9cffc</item>
+    <item name="android:textColorHighlight">#9985729e</item>
 
     <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewApatxasColors</item>
 

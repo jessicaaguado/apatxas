@@ -5,11 +5,11 @@
 
   <style name="ApatxasColors" parent="@style/_ApatxasColors"/>
 
-  <style name="_ApatxasColors" parent="Theme.AppCompat.Light">
+  <style name="_ApatxasColors" parent="Theme.AppCompat.Light.DarkActionBar">
 
     <item name="android:editTextBackground">@drawable/apatxascolors_edit_text_holo_light</item>
 
-    <item name="android:textColorHighlight">#99e9cffc</item>
+    <item name="android:textColorHighlight">#9985729e</item>
     <item name="android:textSelectHandleLeft">@drawable/apatxascolors_text_select_handle_left</item>
     <item name="android:textSelectHandleRight">@drawable/apatxascolors_text_select_handle_right</item>
     <item name="android:textSelectHandle">@drawable/apatxascolors_text_select_handle_middle</item>
