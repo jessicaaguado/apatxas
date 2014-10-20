@@ -11,7 +11,7 @@
         android:id="@+id/botonAnadirPersonaApatxa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_action_group"
+        android:drawableLeft="@drawable/ic_action_anadir_persona_dark"
         android:onClick="anadirPersona"
         android:text="Anadir persona"
         style="@style/boton_pie_lista"
