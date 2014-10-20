@@ -30,17 +30,19 @@
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_apatxasactionbar</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Apatxasactionbar</item>
         
-        
+                <!-- Light.DarkActionBar specific -->
+        <item name="android:actionBarWidgetTheme">@style/Theme.Apatxasactionbar.Widget</item>
+
     </style>
 
-    <style name="ActionBar.Solid.Apatxasactionbar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
+    <style name="ActionBar.Solid.Apatxasactionbar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@drawable/ab_solid_apatxasactionbar</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_apatxasactionbar</item>
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_apatxasactionbar</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Apatxasactionbar</item>
     </style>
 
-    <style name="ActionBar.Transparent.Apatxasactionbar" parent="@style/Widget.AppCompat.Light.ActionBar">
+    <style name="ActionBar.Transparent.Apatxasactionbar" parent="@style/Widget.AppCompat.ActionBar">
         <item name="android:background">@drawable/ab_transparent_apatxasactionbar</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Apatxasactionbar</item>
     </style>
