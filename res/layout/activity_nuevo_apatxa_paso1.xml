@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jagusan.apatxas.activities.InformacionApatxaActivity" >
+    tools:context="com.jagusan.apatxas.activities.InformacionApatxaActivity"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
 
     <EditText
         android:id="@+id/nombreApatxa"
@@ -43,7 +45,7 @@
         android:layout_below="@+id/boteInicialApatxa" 
         android:headerDividersEnabled="true"
         android:footerDividersEnabled="true"        
-        android:padding="10dp">
+        android:padding="10dp"        >
     </ListView>
 
    
