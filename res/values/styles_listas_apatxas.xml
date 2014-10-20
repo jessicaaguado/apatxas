@@ -24,8 +24,10 @@
     </style>
     
     <style name="boton_pie_lista" parent="@style/ButtonApatxasColors">
-        <item name="android:background">#ffffff</item>
         <item name="android:textAppearance">@style/texto_pie_lista</item>        
+        <item name="android:textColor">#404040</item>
+        <item name="android:background">#ffffff</item>
+        <item name="android:gravity">left|center_vertical</item>
     </style>
     
 </resources>

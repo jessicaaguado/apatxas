@@ -1,10 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/RelativeLayout1"
+    xmlns:tools="http://schemas.android.com/tools"    
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.jagusan.apatxas.activities.InformacionApatxaActivity"
     android:paddingLeft="10dp"
     android:paddingRight="10dp">
 

@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jagusan.apatxas.activities.InformacionApatxaActivity" >
+    tools:context="com.jagusan.apatxas.activities.NuevoApatxaPaso2Activity" >
 
     <Button 
-        android:id="@+id/botonAnadirPersonaApatxa"
+        android:id="@+id/botonAnadirGastoApatxa"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content"        
         android:drawableLeft="@drawable/ic_action_anadir_persona_dark"
-        android:onClick="anadirPersona"
-        android:text="Anadir persona"
+        android:onClick="anadirGasto"
+        android:text="Anadir gasto"
         style="@style/boton_pie_lista"/>
 
 </LinearLayout>

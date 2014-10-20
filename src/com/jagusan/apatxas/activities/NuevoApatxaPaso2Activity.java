@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.jagusan.apatxas.R;
@@ -40,6 +42,11 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		personalizarActionBar();
 
 		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
+		LayoutInflater inflater = getLayoutInflater();
+		ViewGroup header = (ViewGroup) inflater.inflate(R.layout.lista_gastos_apatxa_header, gastosApatxaListView, false);
+		ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.lista_gastos_apatxa_footer, gastosApatxaListView, false);
+		gastosApatxaListView.addHeaderView(header, null, false);
+		gastosApatxaListView.addFooterView(footer, null, false);
 		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, listaGastos);
 		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
 
