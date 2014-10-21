@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -16,36 +17,39 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.CaptioningManager;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.dialogs.CambiarNombrePersonaApatxaDialogFragment;
+import com.jagusan.apatxas.listeners.CambiarNombrePersonaApatxaDialogListener;
 
-public class NuevoApatxaPaso1Activity extends ActionBarActivity {
-	
+public class NuevoApatxaPaso1Activity extends ActionBarActivity implements CambiarNombrePersonaApatxaDialogListener {
+
 	private EditText nombreApatxaEditText;
 	private EditText fechaApatxaEditText;
 	private EditText boteInicialEditText;
-	
+
 	private ListView personasListView;
 	private List<String> personasApatxa;
 	private ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
-	
+
 	private int numPersonasApatxaAnadidas = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nuevo_apatxa_paso1);
-		
+
 		personalizarActionBar();
-		
+
 		nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
 		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
 		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
-		
+
 		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
 		LayoutInflater inflater = getLayoutInflater();
 		ViewGroup header = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
@@ -53,13 +57,14 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 		personasListView.addHeaderView(header, null, false);
 		personasListView.addFooterView(footer, null, false);
 		personasApatxa = new ArrayList<String>();
-		listaPersonasApatxaArrayAdapter= new ArrayAdapter<String>(this, R.layout.lista_personas_apatxa_row, personasApatxa);
+		listaPersonasApatxaArrayAdapter = new ArrayAdapter<String>(this, R.layout.lista_personas_apatxa_row, personasApatxa);
 		personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
-		
+
 		registerForContextMenu(personasListView);
 
-		//OnVerDetalleApatxaClickListener listener = new OnVerDetalleApatxaClickListener();
-		//personasListView.setOnItemClickListener(listener);
+		// OnVerDetalleApatxaClickListener listener = new
+		// OnVerDetalleApatxaClickListener();
+		// personasListView.setOnItemClickListener(listener);
 	}
 
 	@Override
@@ -81,51 +86,70 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	
-	
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-		
+
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.context_menu_persona_apatxa, menu);
 	}
-	
+
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	    Log.d("APATXAS", ""+info.position);
-	    switch (item.getItemId()) {
-	        case R.id.action_persona_apatxa_cambiar:
-	            Log.d("APATXAS","Cambiar persona");
-	            return true;
-	        case R.id.action_persona_apatxa_borrar:
-	        	Log.d("APATXAS","Borrar persona");
-	        	borrarPersona(info.position);
-	            return true;
-	        default:
-	            return super.onContextItemSelected(item);
-	    }
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		Log.d("APATXAS", "" + info.position);
+		switch (item.getItemId()) {
+		case R.id.action_persona_apatxa_cambiar:
+			Log.d("APATXAS", "Cambiar persona");
+			DialogFragment dialog = new CambiarNombrePersonaApatxaDialogFragment();
+			Bundle parametros = new Bundle();
+			parametros.putInt("posicionPersonaCambiar", info.position-1);
+			parametros.putString("nombrePersonaCambiar", personasApatxa.get(info.position-1));
+			dialog.setArguments(parametros);
+			dialog.show(getSupportFragmentManager(), "CambiarNombrePersonaApatxaDialogFragment");
+			return true;
+		case R.id.action_persona_apatxa_borrar:
+			Log.d("APATXAS", "Borrar persona");
+			borrarPersona(info.position);
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}
 	}
 
-	
+	@Override
+	public void onClickListoCambiarNombrePersona(int posicionPersonaCambiar, String nuevoNombre) {
+		Log.d("APATXAS", " TOMAAAAA, listo cambio de nombre "+nuevoNombre+" en posicion "+posicionPersonaCambiar);
+		personasApatxa.set(posicionPersonaCambiar, nuevoNombre);
+		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
+		
+
+	}
+
+	@Override
+	public void onClickCancelarCambiarNombrePersona(DialogFragment dialog) {
+		// TODO Auto-generated method stub
+		Log.d("APATXAS", " OOOOO, cancelar cambio de nombre");
+
+	}
+
 	public void anadirPersona(View v) {
-		String nombre = "Apatxero "+ numPersonasApatxaAnadidas++;
+		String nombre = "Apatxero " + numPersonasApatxaAnadidas++;
 		personasApatxa.add(nombre);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
-    }
-	
-	public void borrarPersona(int posicion){
-		personasApatxa.remove(posicion-1);
+	}
+
+	public void borrarPersona(int posicion) {
+		personasApatxa.remove(posicion - 1);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 	}
-	
+
 	private void personalizarActionBar() {
-		//quitamos el titulo
+		// quitamos el titulo
 		getActionBar().setDisplayShowTitleEnabled(false);
 	}
-	
+
 	private void continuarAnadirApatxas() {
 		String titulo = nombreApatxaEditText.getText().toString();
 		Long fecha = null;
@@ -140,14 +164,14 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 			boteInicial = Double.parseDouble(boteInicialEditText.getText().toString());
 		} catch (Exception e) {
 			// mantenemos bote inicial a 0
-		}			
-		
+		}
+
 		Intent intent = new Intent(this, NuevoApatxaPaso2Activity.class);
 		intent.putExtra("titulo", titulo);
 		intent.putExtra("fecha", fecha);
 		intent.putExtra("boteInicial", boteInicial);
 		intent.putStringArrayListExtra("personas", (ArrayList<String>) personasApatxa);
-		
+
 		startActivity(intent);
 	}
 
