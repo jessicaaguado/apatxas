@@ -7,11 +7,16 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -50,6 +55,8 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 		personasApatxa = new ArrayList<String>();
 		listaPersonasApatxaArrayAdapter= new ArrayAdapter<String>(this, R.layout.lista_personas_apatxa_row, personasApatxa);
 		personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
+		
+		registerForContextMenu(personasListView);
 
 		//OnVerDetalleApatxaClickListener listener = new OnVerDetalleApatxaClickListener();
 		//personasListView.setOnItemClickListener(listener);
@@ -75,13 +82,44 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.context_menu_persona_apatxa, menu);
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	    AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    Log.d("APATXAS", ""+info.position);
+	    switch (item.getItemId()) {
+	        case R.id.action_persona_apatxa_cambiar:
+	            Log.d("APATXAS","Cambiar persona");
+	            return true;
+	        case R.id.action_persona_apatxa_borrar:
+	        	Log.d("APATXAS","Borrar persona");
+	        	borrarPersona(info.position);
+	            return true;
+	        default:
+	            return super.onContextItemSelected(item);
+	    }
+	}
+
+	
 	public void anadirPersona(View v) {
 		String nombre = "Apatxero "+ numPersonasApatxaAnadidas++;
-//		Persona personaAnadida = new Persona();
-//		personaAnadida.setNombre(nombre);
 		personasApatxa.add(nombre);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
     }
+	
+	public void borrarPersona(int posicion){
+		personasApatxa.remove(posicion-1);
+		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
+	}
 	
 	private void personalizarActionBar() {
 		//quitamos el titulo
@@ -112,4 +150,5 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 		
 		startActivity(intent);
 	}
+
 }
