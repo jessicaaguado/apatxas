@@ -117,7 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/labelBoteApatxa"
-        android:drawableLeft="@drawable/ic_action_anadir_apatxa"
+        android:drawableLeft="@drawable/ic_action_anadir_gasto_apatxa"
         android:text="Añadir gasto" />
 
     <ListView

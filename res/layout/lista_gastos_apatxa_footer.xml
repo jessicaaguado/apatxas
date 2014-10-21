@@ -11,7 +11,7 @@
         android:id="@+id/botonAnadirGastoApatxa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"        
-        android:drawableLeft="@drawable/ic_action_anadir_persona_dark"
+        android:drawableLeft="@drawable/ic_action_anadir_gasto_apatxa"
         android:onClick="anadirGasto"
         android:text="Anadir gasto"
         style="@style/boton_pie_lista"/>
