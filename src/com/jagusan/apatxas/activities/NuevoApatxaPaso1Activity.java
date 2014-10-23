@@ -137,7 +137,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 
 	private void personalizarActionBar() {
 		// quitamos el titulo
-		getActionBar().setDisplayShowTitleEnabled(false);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 	}
 
 	private void continuarAnadirApatxas() {

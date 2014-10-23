@@ -94,7 +94,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	private void personalizarActionBar() {
 		// quitamos el titulo
-		getActionBar().setDisplayShowTitleEnabled(false);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
 	}
 
 	private void recuperarDatosPasoAnterior() {
