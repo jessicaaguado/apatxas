@@ -17,7 +17,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.accessibility.CaptioningManager;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -119,20 +118,11 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	}
 
 	@Override
-	public void onClickListoCambiarNombrePersona(int posicionPersonaCambiar, String nuevoNombre) {
-		Log.d("APATXAS", " TOMAAAAA, listo cambio de nombre "+nuevoNombre+" en posicion "+posicionPersonaCambiar);
+	public void onClickListoCambiarNombrePersona(int posicionPersonaCambiar, String nuevoNombre) {		
 		personasApatxa.set(posicionPersonaCambiar, nuevoNombre);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
-		
-
 	}
 
-	@Override
-	public void onClickCancelarCambiarNombrePersona(DialogFragment dialog) {
-		// TODO Auto-generated method stub
-		Log.d("APATXAS", " OOOOO, cancelar cambio de nombre");
-
-	}
 
 	public void anadirPersona(View v) {
 		String nombre = "Apatxero " + numPersonasApatxaAnadidas++;

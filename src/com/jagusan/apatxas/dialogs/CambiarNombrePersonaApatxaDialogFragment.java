@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -21,7 +21,6 @@ public class CambiarNombrePersonaApatxaDialogFragment extends DialogFragment {
 
 	private int posicionPersonaCambiar;
 	private String nombrePersonaCambiar;
-	private String nombrePersonaNuevo;
 
 	TextView nombreAntiguoTextView;
 	EditText nombreNuevoEditText;
@@ -39,27 +38,20 @@ public class CambiarNombrePersonaApatxaDialogFragment extends DialogFragment {
 		nombreAntiguoTextView = (TextView) dialogView.findViewById(R.id.nombreAntiguoPersona);
 		nombreAntiguoTextView.setText(nombrePersonaCambiar);
 		nombreNuevoEditText = (EditText) dialogView.findViewById(R.id.nuevoNombrePersona);
-		builder.setView(dialogView);
-		builder.setTitle(R.string.titulo_dialog_cambio_nombre_persona);
+		builder.setView(dialogView);		
 		builder.setPositiveButton(R.string.action_listo, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				// FIRE ZE MISSILES!
-				Log.d("APATXAS", "Listo -- " + posicionPersonaCambiar + " -- " + nombrePersonaCambiar);
 				listener.onClickListoCambiarNombrePersona(posicionPersonaCambiar, nombreNuevoEditText.getText().toString());
 			}
 		});
 		builder.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				Log.d("APATXAS", "Cancelar ID -- " + id);
-				listener.onClickCancelarCambiarNombrePersona(CambiarNombrePersonaApatxaDialogFragment.this);
+
 			}
 		});
-		// Create the AlertDialog object and return it
 		return builder.create();
 	}
 
-	// Override the Fragment.onAttach() method to instantiate the
-	// CambiarNombrePersonaApatxaDialogListener
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);

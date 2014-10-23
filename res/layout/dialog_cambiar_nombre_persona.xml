@@ -2,12 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    style="apatxas_dialog">
+
+    <TextView
+        android:id="@+id/tituloDialogCambioNombrePersona"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/apatxas_dialog_titulo"
+        android:text="Cambiar el nombre" />
+
+    <View
+        style="@style/apatxas_dialog_separador_titulo"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dialog_altura_linea_separadora_titulo"
+        android:layout_marginBottom="10dp"/>
+    
 
     <TextView
         android:id="@+id/nombreAntiguoPersona"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="@style/apatxas_dialog_texto"
         android:text="Cambiar el nombre" />
 
     <EditText
