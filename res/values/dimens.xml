@@ -6,4 +6,13 @@
         
        
 	<dimen name="dialog_altura_linea_separadora_titulo">1dp</dimen>
+	
+	<dimen name="texto_dialog">16sp</dimen>
+	<dimen name="texto_titulo_dialog">18sp</dimen>
+	<dimen name="texto_contenido_dialog">16sp</dimen>
+	
+	<dimen name="texto_listado_linea1">16sp</dimen>
+	<dimen name="texto_listado_linea2">14sp</dimen>
+	<dimen name="texto_listado_extra">12sp</dimen>
+	<dimen name="texto_listado_extra_importante">14sp</dimen>
 </resources>
