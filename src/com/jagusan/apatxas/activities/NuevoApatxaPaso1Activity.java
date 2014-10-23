@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
@@ -21,6 +22,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.dialogs.CambiarNombrePersonaApatxaDialogFragment;
@@ -33,15 +35,22 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	private EditText boteInicialEditText;
 
 	private ListView personasListView;
-	private List<String> personasApatxa;
+	private ViewGroup personasListViewHeader;
+	private ViewGroup personasListViewFooter;
+	private TextView tituloPersonasListViewHeader;
+	private List<String> personasApatxa = new ArrayList<String>();;
 	private ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
+	
+	Resources resources;
 
-	private int numPersonasApatxaAnadidas = 1;
+	private int numPersonasApatxaAnadidas = 0;	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nuevo_apatxa_paso1);
+		
+		resources = getResources();
 
 		personalizarActionBar();
 
@@ -51,20 +60,16 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 
 		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
 		LayoutInflater inflater = getLayoutInflater();
-		ViewGroup header = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
-		ViewGroup footer = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_footer, personasListView, false);
-		personasListView.addHeaderView(header, null, false);
-		personasListView.addFooterView(footer, null, false);
-		personasApatxa = new ArrayList<String>();
+		anadirCabeceraListaPersonas(inflater);
+		anadirPieListaPersonas(inflater);
+		 
 		listaPersonasApatxaArrayAdapter = new ArrayAdapter<String>(this, R.layout.lista_personas_apatxa_row, personasApatxa);
 		personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
 
 		registerForContextMenu(personasListView);
 
-		// OnVerDetalleApatxaClickListener listener = new
-		// OnVerDetalleApatxaClickListener();
-		// personasListView.setOnItemClickListener(listener);
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,8 +108,8 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 			Log.d("APATXAS", "Cambiar persona");
 			DialogFragment dialog = new CambiarNombrePersonaApatxaDialogFragment();
 			Bundle parametros = new Bundle();
-			parametros.putInt("posicionPersonaCambiar", info.position-1);
-			parametros.putString("nombrePersonaCambiar", personasApatxa.get(info.position-1));
+			parametros.putInt("posicionPersonaCambiar", info.position - 1);
+			parametros.putString("nombrePersonaCambiar", personasApatxa.get(info.position - 1));
 			dialog.setArguments(parametros);
 			dialog.show(getSupportFragmentManager(), "CambiarNombrePersonaApatxaDialogFragment");
 			return true;
@@ -118,21 +123,40 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	}
 
 	@Override
-	public void onClickListoCambiarNombrePersona(int posicionPersonaCambiar, String nuevoNombre) {		
+	public void onClickListoCambiarNombrePersona(int posicionPersonaCambiar, String nuevoNombre) {
 		personasApatxa.set(posicionPersonaCambiar, nuevoNombre);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 	}
 
-
-	public void anadirPersona(View v) {
-		String nombre = "Apatxero " + numPersonasApatxaAnadidas++;
-		personasApatxa.add(nombre);
-		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
+	private void anadirPieListaPersonas(LayoutInflater inflater) {
+		personasListViewFooter = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_footer, personasListView, false);
+		personasListView.addFooterView(personasListViewFooter);
+		
+	}
+	
+	private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
+		personasListViewHeader = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
+		personasListView.addHeaderView(personasListViewHeader);
+		tituloPersonasListViewHeader = (TextView) personasListViewHeader.findViewById(R.id.listaPersonasApatxaCabecera);
+		actualizarTituloCabeceraListaPersonas();
+	}
+	
+	private void actualizarTituloCabeceraListaPersonas(){
+		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_personas), personasApatxa.size());
+		tituloPersonasListViewHeader.setText(titulo);
 	}
 
-	public void borrarPersona(int posicion) {
+	public void anadirPersona(View v) {		
+		String nombre = "Apatxero " + ++numPersonasApatxaAnadidas;
+		personasApatxa.add(nombre);
+		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
+		actualizarTituloCabeceraListaPersonas();
+	}
+
+	public void borrarPersona(int posicion) {		
 		personasApatxa.remove(posicion - 1);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
+		actualizarTituloCabeceraListaPersonas();
 	}
 
 	private void personalizarActionBar() {
