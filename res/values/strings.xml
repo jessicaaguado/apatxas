@@ -22,6 +22,7 @@
     </plurals>
     
     <string name="titulo_cabecera_lista_personas">%d PERSONAS</string>
+    <string name="titulo_cabecera_lista_gastos">%1$d GASTOS: %2$.2f€</string>
 
     <string name="titulo_dialog_cambio_nombre_persona">Cambiar nombre</string>
     
