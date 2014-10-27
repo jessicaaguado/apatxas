@@ -1,6 +1,6 @@
 package com.jagusan.apatxas.sqlite.modelView;
 
-public class Persona {
+public class PersonaListado {
 	
 	private Long id;
 	private String nombre;

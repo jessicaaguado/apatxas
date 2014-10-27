@@ -11,15 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.sqlite.modelView.Persona;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 
-public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<Persona> {
+public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<PersonaListado> {
 
 	Context context;
 	int rowLayoutId;
-	List<Persona> personas;
+	List<PersonaListado> personas;
 
-	public ListaPersonasApatxaArrayAdapter(Context context, int rowLayoutId, List<Persona> personas) {
+	public ListaPersonasApatxaArrayAdapter(Context context, int rowLayoutId, List<PersonaListado> personas) {
 
 		super(context, rowLayoutId, personas);
 
@@ -37,7 +37,7 @@ public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<Persona> {
 			convertView = inflater.inflate(rowLayoutId, parent, false);
 		}
 
-		Persona persona = personas.get(position);		
+		PersonaListado persona = personas.get(position);		
 		//nombre
 		TextView nombrePersonaTextView = (TextView) convertView.findViewById(R.id.nombre);
 		nombrePersonaTextView.setText(persona.getNombre());
