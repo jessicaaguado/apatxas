@@ -6,14 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
-import com.jagusan.apatxas.sqlite.tables.TablaApatxaPersonas;
 import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private static final String NOMBRE_BASE_DATOS = "apatxas.db";
-	private static final int VERSION_BASE_DATOS = 2;
+	private static final int VERSION_BASE_DATOS = 1;
 
 	public DatabaseHelper(Context context) {
 		super(context, NOMBRE_BASE_DATOS, null, VERSION_BASE_DATOS);
@@ -24,14 +23,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Log.d("APATXAS", "BD: Creando la base de datos");
 		db.execSQL(TablaApatxa.CREATE_TABLE);
 		db.execSQL(TablaGasto.CREATE_TABLE);
-		db.execSQL(TablaPersona.CREATE_TABLE);
-		db.execSQL(TablaApatxaPersonas.CREATE_TABLE);
+		db.execSQL(TablaPersona.CREATE_TABLE);		
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.d("APATXAS", "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);
-		db.execSQL(TablaApatxaPersonas.DROP_TABLE);
+		Log.d("APATXAS", "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);		
 		db.execSQL(TablaGasto.DROP_TABLE);
 		db.execSQL(TablaPersona.DROP_TABLE);
 		db.execSQL(TablaApatxa.DROP_TABLE);
@@ -40,8 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.d("APATXAS", "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);
-		db.execSQL(TablaApatxaPersonas.DROP_TABLE);
+		Log.d("APATXAS", "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);		
 		db.execSQL(TablaGasto.DROP_TABLE);
 		db.execSQL(TablaPersona.DROP_TABLE);
 		db.execSQL(TablaApatxa.DROP_TABLE);
