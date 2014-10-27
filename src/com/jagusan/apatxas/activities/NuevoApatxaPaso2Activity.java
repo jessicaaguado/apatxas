@@ -19,11 +19,13 @@ import android.widget.TextView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
+import com.jagusan.apatxas.logicaNegocio.PersonaService;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
 
 public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	private ApatxaService apatxaService;
+	private PersonaService personaService;
 	private Resources resources;
 
 	private String tituloApatxa;
@@ -122,11 +124,11 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	}
 
-	private void borrarGasto(int posicion) {
-		Double importeGasto = listaGastos.get(posicion).getTotal();
-		listaGastos.remove(posicion);
-		refrescarListado(importeGasto * -1);
-	}
+//	private void borrarGasto(int posicion) {
+//		Double importeGasto = listaGastos.get(posicion).getTotal();
+//		listaGastos.remove(posicion);
+//		refrescarListado(importeGasto * -1);
+//	}
 
 	private void refrescarListado(Double totalGasto) {
 		actualizarGastoTotal(totalGasto);
@@ -164,12 +166,16 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	}
 
 	public void guardarApatxa() {
-		apatxaService.crearApatxa(tituloApatxa, fechaApatxa, boteInicialApatxa);
+		Long idApatxa = apatxaService.crearApatxa(tituloApatxa, fechaApatxa, boteInicialApatxa);
+		for (int i=0; i<personasApatxa.size(); i++){
+			personaService.crearPersona(personasApatxa.get(i), idApatxa);
+		}
 		irListadoApatxasPrincipal();
 	}
 
 	private void inicializarServicios() {
 		apatxaService = new ApatxaService(this);
+		personaService = new PersonaService(this);
 		resources = getResources();
 	}
 }

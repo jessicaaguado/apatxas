@@ -29,7 +29,7 @@ public class ApatxaDAO {
 		this.database = database;
 	}
 
-	public void nuevoApatxa(String nombre, Long fecha, Double boteInicial) {
+	public Long nuevoApatxa(String nombre, Long fecha, Double boteInicial) {
 		ContentValues values = new ContentValues();
 		values.put(TablaApatxa.COLUMNA_NOMBRE, nombre);
 		values.put(TablaApatxa.COLUMNA_FECHA, fecha);
@@ -37,6 +37,7 @@ public class ApatxaDAO {
 
 		long insertId = database.insert(TablaApatxa.NOMBRE_TABLA, null, values);
 		Log.d("APATXAS", "DAO: Creado apatxa con id " + insertId);
+		return insertId;
 	}
 	
 	public void actualizarApatxa(Long id, String nombre, Long fecha, Double boteInicial) {
