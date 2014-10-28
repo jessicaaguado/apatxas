@@ -20,7 +20,7 @@ import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
-public class InformacionApatxaActivity extends ActionBarActivity {
+public class DetalleApatxaActivity extends ActionBarActivity {
 
 	private ApatxaService apatxaService;
 	private Long idApatxaActualizar;
@@ -43,7 +43,7 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 
 		apatxaService = new ApatxaService(this);
 
-		setContentView(R.layout.activity_informacion_apatxa);
+		setContentView(R.layout.activity_detalle_apatxa);
 		idApatxaActualizar = (long) -1.0;
 
 		nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
