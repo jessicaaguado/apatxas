@@ -16,7 +16,7 @@ public class TablaPersona implements BaseColumns {
 	public static final String COLUMNA_PAGADO = "pagado";	
 	
 	public static final String CREATE_TABLE = "CREATE TABLE " + NOMBRE_TABLA + "(" + COLUMNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + 
-			 																		 COLUMNA_NOMBRE + " TEXT"  + 
+			 																		 COLUMNA_NOMBRE + " TEXT,"  + 
 			 																		 COLUMNA_ID_APATXA + " INTEGER," + 
 																					 COLUMNA_CUANTIA_PAGO + " REAL," +																					 																					  
 																					 COLUMNA_PAGADO + " REAL" + ")";
