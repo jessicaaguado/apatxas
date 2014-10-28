@@ -5,6 +5,7 @@ import java.util.Date;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -31,13 +32,13 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 	private TextView gastoTotalApatxaTextView;
 	private TextView estadoApatxaTextView;
 	private TextView boteApatxaTextView;
-	
+
 	private Button botonPersonasApatxa;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		personalizarActionBar();
 
 		apatxaService = new ApatxaService(this);
@@ -52,7 +53,7 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		gastoTotalApatxaTextView = (TextView) findViewById(R.id.gastoTotalApatxa);
 		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxa);
 		boteApatxaTextView = (TextView) findViewById(R.id.boteApatxa);
-		
+
 		botonPersonasApatxa = (Button) findViewById(R.id.botonPersonasApatxa);
 
 		idApatxaActualizar = getIntent().getLongExtra("id", -1);
@@ -61,7 +62,6 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		}
 
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -132,9 +132,9 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 		// bote final
 		Double boteApatxa = apatxaDetalle.getBote();
 		boteApatxaTextView.setText(boteApatxa.toString());
-		// numero de personas		
-		Integer numeroPersonasApatxa = apatxaDetalle.getNumeroPersonas();
-		String textoBotonNumeroPersonas = getResources().getQuantityString(R.plurals.numero_personas_apatxa, numeroPersonasApatxa, numeroPersonasApatxa);		
+		// numero de personas
+		Integer numeroPersonasApatxa = apatxaDetalle.getPersonas().size();
+		String textoBotonNumeroPersonas = getResources().getQuantityString(R.plurals.numero_personas_apatxa, numeroPersonasApatxa, numeroPersonasApatxa);
 		botonPersonasApatxa.setText(textoBotonNumeroPersonas);
 	}
 
@@ -148,10 +148,11 @@ public class InformacionApatxaActivity extends ActionBarActivity {
 	}
 
 	private void personalizarActionBar() {
-		//quitamos el titulo
-		getActionBar().setDisplayShowTitleEnabled(false);
-		//boton para ir a la actividad anterior
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
+		ActionBar actionBar = getSupportActionBar();
+		// quitamos el titulo
+		actionBar.setDisplayShowTitleEnabled(false);
+		// boton para ir a la actividad anterior
+		actionBar.setDisplayHomeAsUpEnabled(true);
+
 	}
 }
