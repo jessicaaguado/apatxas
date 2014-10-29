@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jagusan.apatxas.activities.NuevoApatxaPaso2Activity"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:paddingLeft="@dimen/apatxas_padding_izquierdo_defecto"
+    android:paddingRight="@dimen/apatxas_padding_derecho_defecto">
 
     <ListView
         android:id="@+id/listaGastosApatxa"

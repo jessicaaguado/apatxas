@@ -3,6 +3,10 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <dimen name="apatxas_padding_superior_defecto">10dp</dimen>
+    <dimen name="apatxas_padding_derecho_defecto">10dp</dimen>
+    <dimen name="apatxas_padding_izquierdo_defecto">10dp</dimen>
         
        
 	<dimen name="dialog_altura_linea_separadora_titulo">1dp</dimen>
