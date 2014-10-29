@@ -1,11 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/apatxas_detalle_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jagusan.apatxas.activities.NuevoGastoApatxaActivity"
-    android:paddingTop="@dimen/apatxas_padding_superior_defecto"
-    android:paddingLeft="@dimen/apatxas_padding_izquierdo_defecto"
-    android:paddingRight="@dimen/apatxas_padding_derecho_defecto">
+    tools:context="com.jagusan.apatxas.activities.NuevoGastoApatxaActivity" >
 
     <EditText
         android:id="@+id/concepto"
@@ -17,16 +15,15 @@
 
         <requestFocus />
     </EditText>
-    
+
     <EditText
-            android:id="@+id/totalGasto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/concepto"
-            android:hint="Total" />
-   
+        android:id="@+id/totalGasto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/concepto"
+        android:hint="Total"
+        android:inputType="number" />
 
     <Spinner
         android:id="@+id/listaPersonasApatxa"

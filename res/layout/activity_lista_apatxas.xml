@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jagusan.apatxas.activities.ListaApatxasActivity" >
+    tools:context="com.jagusan.apatxas.activities.ListaApatxasActivity"
+    style="@style/apatxas_listado_activity" >
 
     <ListView
         android:id="@+id/lista_gastos"
