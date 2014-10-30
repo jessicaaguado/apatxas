@@ -16,4 +16,29 @@
         <item name="android:paddingTop">0dp</item>                        
     </style>
     
+    <style name="apatxas_texto_label_defecto" parent="@android:style/TextAppearance">
+        <item name="android:textSize">16sp</item>        
+    </style>
+    <style name="apatxas_texto_valor_defecto" parent="@android:style/TextAppearance">
+        <item name="android:textSize">16sp</item>        
+    </style>
+    
+    <style name="apatxas_label_defecto">
+        <item name="android:textAppearance">@style/apatxas_texto_label_defecto</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    <style name="apatxas_valor_defecto">
+        <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
+    </style>
+    
+    <style name="apatxas_label_destacada">
+        <item name="android:textAppearance">@style/apatxas_texto_label_defecto</item>
+        <item name="android:textColor">@color/apatxascolors_color</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    <style name="apatxas_valor_destacado">
+        <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
+        <item name="android:textColor">@color/apatxascolors_color</item>
+    </style>
+    
 </resources>

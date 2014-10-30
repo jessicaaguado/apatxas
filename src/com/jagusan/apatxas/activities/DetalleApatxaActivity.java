@@ -25,15 +25,15 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	private ApatxaService apatxaService;
 	private Long idApatxaActualizar;
 
-	private EditText nombreApatxaEditText;
-	private EditText fechaApatxaEditText;
-	private EditText boteInicialEditText;
+	private TextView nombreApatxaTextView;
+	private TextView fechaApatxaTextView;
+	private TextView boteInicialEditText;
 
 	private TextView gastoTotalApatxaTextView;
 	private TextView estadoApatxaTextView;
 	private TextView boteApatxaTextView;
 
-	private Button botonPersonasApatxa;
+	//private Button botonPersonasApatxa;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +46,16 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_detalle_apatxa);
 		idApatxaActualizar = (long) -1.0;
 
-		nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
-		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
-		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
+		nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaDetalle);
+		fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaDetalle);
+		boteInicialEditText = (TextView) findViewById(R.id.boteInicialApatxaDetalle);
+		gastoTotalApatxaTextView = (TextView) findViewById(R.id.gastoTotalApatxaDetalle);
+		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxaDetalle);
+		boteApatxaTextView = (TextView) findViewById(R.id.boteApatxaDetalle);
+//
+//		botonPersonasApatxa = (Button) findViewById(R.id.botonPersonasApatxa);
 
-		gastoTotalApatxaTextView = (TextView) findViewById(R.id.gastoTotalApatxa);
-		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxa);
-		boteApatxaTextView = (TextView) findViewById(R.id.boteApatxa);
-
-		botonPersonasApatxa = (Button) findViewById(R.id.botonPersonasApatxa);
-
-		idApatxaActualizar = getIntent().getLongExtra("id", -1);
-		if (esActualizarApatxa()) {
-			cargarInformacionApatxa(idApatxaActualizar);
-		}
-
+		cargarInformacionApatxa();
 	}
 
 	@Override
@@ -84,12 +79,12 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 
 	public void guardarApatxa(View buttonView) {
 
-		String titulo = nombreApatxaEditText.getText().toString();
+		String titulo = nombreApatxaTextView.getText().toString();
 
 		Long fecha = null;
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			fecha = sdf.parse(fechaApatxaEditText.getText().toString()).getTime();
+			fecha = sdf.parse(fechaApatxaTextView.getText().toString()).getTime();
 		} catch (Exception e) {
 			// sin fecha
 		}
@@ -111,16 +106,18 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 
 	}
 
-	private void cargarInformacionApatxa(Long idApatxa) {
-		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxa);
+	private void cargarInformacionApatxa() {
+		idApatxaActualizar = getIntent().getLongExtra("id", -1);
+		
+		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaActualizar);
 		Log.d("APATXAS", "recuperado con id " + apatxaDetalle.toString());
 		// titulo
-		nombreApatxaEditText.setText(apatxaDetalle.getNombre());
+		nombreApatxaTextView.setText(apatxaDetalle.getNombre());
 		// fecha
 		Date fecha = apatxaDetalle.getFecha();
 		if (fecha != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			fechaApatxaEditText.setText(sdf.format(fecha));
+			fechaApatxaTextView.setText(sdf.format(fecha));
 		}
 		// bote inicial
 		boteInicialEditText.setText(apatxaDetalle.getBoteInicial().toString());
@@ -134,8 +131,8 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		boteApatxaTextView.setText(boteApatxa.toString());
 		// numero de personas
 		Integer numeroPersonasApatxa = apatxaDetalle.getPersonas().size();
-		String textoBotonNumeroPersonas = getResources().getQuantityString(R.plurals.numero_personas_apatxa, numeroPersonasApatxa, numeroPersonasApatxa);
-		botonPersonasApatxa.setText(textoBotonNumeroPersonas);
+//		String textoBotonNumeroPersonas = getResources().getQuantityString(R.plurals.numero_personas_apatxa, numeroPersonasApatxa, numeroPersonasApatxa);
+//		botonPersonasApatxa.setText(textoBotonNumeroPersonas);
 	}
 
 	private void irListadoApatxasPrincipal() {

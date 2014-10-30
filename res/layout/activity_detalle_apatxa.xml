@@ -1,150 +1,115 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
+    style="@style/apatxas_detalle_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:orientation="vertical"
     tools:context="com.jagusan.apatxas.activities.DetalleApatxaActivity" >
 
-    <EditText
-        android:id="@+id/nombreApatxa"
+    <TextView
+        android:id="@+id/nombreApatxaDetalle"
+        style="@style/apatxas_valor_destacado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:hint="¿Qué es?" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/fechaApatxa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/nombreApatxa"
-        android:hint="dd/mm/aaaa"
-        android:inputType="date" />
-
-    <Button
-        android:id="@+id/botonPersonasApatxa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/fechaApatxa"
-        android:drawableLeft="@drawable/ic_action_group"
-        android:text="0 Personas" />
+        android:text="Comida en la sociedad" />
 
     <TextView
-        android:id="@+id/labelGastoTotalApatxa"
+        android:id="@+id/fechaApatxaDetalle"
+        style="@style/apatxas_valor_destacado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/botonPersonasApatxa"
+        android:layout_below="@+id/nombreApatxaDetalle"
+        android:text="28/10/2014" />
+
+    <TextView
+        android:id="@+id/labelBoteInicialApatxaDetalle"
+        style="@style/apatxas_label_destacada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/fechaApatxaDetalle"
+        android:text="Bote inicial:" />
+
+    <TextView
+        android:id="@+id/boteInicialApatxaDetalle"
+        style="@style/apatxas_valor_destacado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/labelBoteInicialApatxaDetalle"
+        android:layout_alignParentLeft="@+id/labelBoteInicialApatxaDetalle"
+        android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle"
+        android:text="125,00 €" />
+
+    <View
+        android:id="@+id/separadorDetalleApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/labelBoteInicialApatxaDetalle"
+        android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"
+        android:layout_marginTop="@dimen/apatxas_linea_divisora_margen_superior"
+        android:background="@color/apatxascolors_color_claro2" />
+
+    <TextView
+        android:id="@+id/labelGastoTotalApatxaDetalle"
+        style="@style/apatxas_label_defecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/separadorDetalleApatxa"
         android:text="Total:" />
 
     <TextView
-        android:id="@+id/gastoTotalApatxa"
+        android:id="@+id/gastoTotalApatxaDetalle"
+        style="@style/apatxas_valor_defecto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelGastoTotalApatxa"
-        android:layout_alignBottom="@+id/labelGastoTotalApatxa"
-        android:layout_toRightOf="@+id/labelGastoTotalApatxa"
-        android:text="TextView" />
+        android:layout_alignBaseline="@+id/labelGastoTotalApatxaDetalle"
+        android:layout_toRightOf="@+id/labelGastoTotalApatxaDetalle"
+        android:text="125,00 €" />
 
     <TextView
-        android:id="@+id/labelEstadoApatxa"
+        android:id="@+id/estadoApatxaDetalle"
+        style="@style/apatxas_valor_defecto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/gastoTotalApatxa"
-        android:layout_toRightOf="@+id/gastoTotalApatxa"
-        android:paddingLeft="10dp"
-        android:text="Estado:" />
+        android:layout_alignBaseline="@+id/gastoTotalApatxaDetalle"
+        android:layout_alignBottom="@+id/gastoTotalApatxaDetalle"
+        android:layout_marginLeft="@dimen/apatxas_margen_defecto"
+        android:layout_toRightOf="@+id/gastoTotalApatxaDetalle"
+        android:text="( Pagado )" >
+    </TextView>
 
     <TextView
-        android:id="@+id/estadoApatxa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelEstadoApatxa"
-        android:layout_alignBottom="@+id/labelEstadoApatxa"
-        android:layout_toRightOf="@+id/labelEstadoApatxa"
-        android:text="TextView" />
-
-    <FrameLayout
-        android:id="@+id/boteInicialFrame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/labelGastoTotalApatxa" >
-
-        <TextView
-            android:id="@+id/labelBoteInicialApatxa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Bote inicial:" />
-
-        <EditText
-            android:id="@+id/boteInicialApatxa"
-            android:layout_width="198dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned"
-            android:paddingLeft="90dp"
-            android:text="0" />
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/labelBoteApatxa"
+        android:id="@+id/labelBoteApatxaDetalle"
+        style="@style/apatxas_label_defecto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/boteInicialFrame"
+        android:layout_below="@+id/labelGastoTotalApatxaDetalle"
         android:text="Bote:" />
 
     <TextView
-        android:id="@+id/boteApatxa"
+        android:id="@+id/boteApatxaDetalle"
+        style="@style/apatxas_valor_defecto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelBoteApatxa"
-        android:layout_alignBottom="@+id/labelBoteApatxa"
-        android:layout_toRightOf="@+id/labelBoteApatxa"
-        android:text="TextView" />
+        android:layout_alignBaseline="@+id/labelBoteApatxaDetalle"
+        android:layout_alignBottom="@+id/labelBoteApatxaDetalle"
+        android:layout_toRightOf="@+id/labelBoteApatxaDetalle"
+        android:text="125,00 €" />
 
-    <Button
-        android:id="@+id/botonAnadirGastoApatxa"
+    <ImageButton
+        android:id="@+id/botonEditarInformacionBasicaApatxas"
+        style="@style/boton_pie_lista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/labelBoteApatxa"
-        android:drawableLeft="@drawable/ic_action_anadir_gasto_apatxa"
-        android:text="Añadir gasto" />
-
-    <ListView
-        android:id="@+id/listaGastosApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/botonGuardarApatxa"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/botonAnadirGastoApatxa" >
-    </ListView>
-
-    <Button
-        android:id="@+id/botonGuardarApatxa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:drawableLeft="@drawable/ic_action_save"
-        android:text="Guardar"
-        android:onClick="guardarApatxa" />
-
-    <Button
-        android:id="@+id/botonVerRepartoApatxa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/botonGuardarApatxa"
-        android:drawableLeft="@drawable/ic_action_full_screen"
-        android:text="Reparto" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="Editar información basica"
+        android:src="@drawable/ic_action_apatxas_editar_detalle" />
 
 </RelativeLayout>
