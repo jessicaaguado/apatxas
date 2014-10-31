@@ -17,10 +17,10 @@
     </style>
     
     <style name="apatxas_texto_label_defecto" parent="@android:style/TextAppearance">
-        <item name="android:textSize">16sp</item>        
+        <item name="android:textSize">@dimen/texto_contenido_activity_normal</item>        
     </style>
     <style name="apatxas_texto_valor_defecto" parent="@android:style/TextAppearance">
-        <item name="android:textSize">16sp</item>        
+        <item name="android:textSize">@dimen/texto_contenido_activity_normal</item>        
     </style>
     
     <style name="apatxas_label_defecto">
@@ -35,10 +35,31 @@
         <item name="android:textAppearance">@style/apatxas_texto_label_defecto</item>
         <item name="android:textColor">@color/apatxascolors_color</item>
         <item name="android:paddingRight">5dp</item>
+        <item name="android:textSize">@dimen/texto_contenido_activity_importante</item>
     </style>
+    <style name="apatxas_label_destacada_nivel2">
+        <item name="android:textAppearance">@style/apatxas_texto_label_defecto</item>
+        <item name="android:textColor">@color/apatxascolors_color_claro2</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    <style name="apatxas_label_destacada_nivel3">
+        <item name="android:textAppearance">@style/apatxas_texto_label_defecto</item>
+        <item name="android:textColor">@color/apatxascolors_color_claro1</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
+    
     <style name="apatxas_valor_destacado">
         <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
         <item name="android:textColor">@color/apatxascolors_color</item>
+        <item name="android:textSize">@dimen/texto_contenido_activity_importante</item>
+    </style>
+    <style name="apatxas_valor_destacado_nivel2">
+        <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
+        <item name="android:textColor">@color/apatxascolors_color_claro2</item>
+    </style>
+    <style name="apatxas_valor_destacado_nivel3">
+        <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
+        <item name="android:textColor">@color/apatxascolors_color_claro1</item>
     </style>
     
 </resources>

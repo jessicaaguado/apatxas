@@ -26,4 +26,5 @@
 	<dimen name="texto_listado_extra_importante">14sp</dimen>
 	
 	<dimen name="texto_contenido_activity_normal">16sp</dimen>
+	<dimen name="texto_contenido_activity_importante">18sp</dimen>
 </resources>

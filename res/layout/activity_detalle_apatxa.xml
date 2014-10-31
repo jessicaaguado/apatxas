@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/fechaApatxaDetalle"
-        style="@style/apatxas_valor_destacado"
+        style="@style/apatxas_valor_destacado_nivel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -26,7 +26,7 @@
 
     <TextView
         android:id="@+id/labelBoteInicialApatxaDetalle"
-        style="@style/apatxas_label_destacada"
+        style="@style/apatxas_label_destacada_nivel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -35,7 +35,7 @@
 
     <TextView
         android:id="@+id/boteInicialApatxaDetalle"
-        style="@style/apatxas_valor_destacado"
+        style="@style/apatxas_valor_destacado_nivel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/labelBoteInicialApatxaDetalle"
