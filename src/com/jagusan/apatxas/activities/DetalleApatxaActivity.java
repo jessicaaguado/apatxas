@@ -1,23 +1,29 @@
 package com.jagusan.apatxas.activities;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public class DetalleApatxaActivity extends ActionBarActivity {
@@ -33,7 +39,13 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	private TextView estadoApatxaTextView;
 	private TextView boteApatxaTextView;
 
-	//private Button botonPersonasApatxa;
+	private ListView personasApatxaListView;
+	private ViewGroup personasApatxaListViewHeader;
+	private TextView tituloPersonasApatxaListViewHeader;
+	private List<PersonaListado> personasApatxa = new ArrayList<PersonaListado>();
+	private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
+
+	Resources resources;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +54,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		personalizarActionBar();
 
 		apatxaService = new ApatxaService(this);
+		resources = getResources();
 
 		setContentView(R.layout.activity_detalle_apatxa);
 		idApatxaActualizar = (long) -1.0;
@@ -52,8 +65,9 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		gastoTotalApatxaTextView = (TextView) findViewById(R.id.gastoTotalApatxaDetalle);
 		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxaDetalle);
 		boteApatxaTextView = (TextView) findViewById(R.id.boteApatxaDetalle);
-//
-//		botonPersonasApatxa = (Button) findViewById(R.id.botonPersonasApatxa);
+		personasApatxaListView = (ListView) findViewById(R.id.listaPersonasApatxaDetalle);
+		LayoutInflater inflater = getLayoutInflater();
+		anadirCabeceraListaPersonas(inflater);		
 
 		cargarInformacionApatxa();
 	}
@@ -108,7 +122,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 
 	private void cargarInformacionApatxa() {
 		idApatxaActualizar = getIntent().getLongExtra("id", -1);
-		
+
 		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaActualizar);
 		Log.d("APATXAS", "recuperado con id " + apatxaDetalle.toString());
 		// titulo
@@ -130,9 +144,10 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		Double boteApatxa = apatxaDetalle.getBote();
 		boteApatxaTextView.setText(boteApatxa.toString());
 		// numero de personas
-		Integer numeroPersonasApatxa = apatxaDetalle.getPersonas().size();
-//		String textoBotonNumeroPersonas = getResources().getQuantityString(R.plurals.numero_personas_apatxa, numeroPersonasApatxa, numeroPersonasApatxa);
-//		botonPersonasApatxa.setText(textoBotonNumeroPersonas);
+		personasApatxa = apatxaDetalle.getPersonas();		
+		listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
+		personasApatxaListView.setAdapter(listaPersonasApatxaArrayAdapter);
+		actualizarTituloCabeceraListaPersonas();
 	}
 
 	private void irListadoApatxasPrincipal() {
@@ -151,5 +166,17 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		// boton para ir a la actividad anterior
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
+	}
+	
+	
+	private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
+		personasApatxaListViewHeader = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasApatxaListView, false);
+		personasApatxaListView.addHeaderView(personasApatxaListViewHeader);
+		tituloPersonasApatxaListViewHeader = (TextView) personasApatxaListViewHeader.findViewById(R.id.listaPersonasApatxaCabecera);		
+	}
+	
+	private void actualizarTituloCabeceraListaPersonas(){
+		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_personas), personasApatxa.size());
+		tituloPersonasApatxaListViewHeader.setText(titulo);
 	}
 }

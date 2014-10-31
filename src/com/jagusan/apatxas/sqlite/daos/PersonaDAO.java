@@ -55,7 +55,7 @@ public class PersonaDAO {
 
 	public List<PersonaListado> recuperarPersonasApatxa(Long idApatxa) {
 		List<PersonaListado> personas = new ArrayList<PersonaListado>();
-		Cursor cursor = database.query(NOMBRE_TABLA_PERSONA, COLUMNAS_PERSONA, null, null, null, null, ORDEN_PERSONAS_DEFECTO);
+		Cursor cursor = database.query(NOMBRE_TABLA_PERSONA, COLUMNAS_PERSONA, TablaPersona.COLUMNA_ID_APATXA +" = "+idApatxa, null, null, null, ORDEN_PERSONAS_DEFECTO);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
