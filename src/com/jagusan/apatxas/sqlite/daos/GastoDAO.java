@@ -50,7 +50,7 @@ public class GastoDAO {
 
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();		
 		queryBuilder.setTables(TablaGasto.NOMBRE_TABLA+" left outer join "+TablaPersona.NOMBRE_TABLA+ " on "+TablaGasto.COLUMNA_ID_PAGADO_POR+"="+TablaPersona.COLUMNA_FULL_ID);
-		Cursor cursor = queryBuilder.query(database, COLUMNAS_GASTO, null, null, null, null, ORDEN_GASTOS_DEFECTO);		
+		Cursor cursor = queryBuilder.query(database, COLUMNAS_GASTO, TablaGasto.NOMBRE_TABLA+"."+TablaGasto.COLUMNA_ID_APATXA + " = "+idApatxa, null, null, null, ORDEN_GASTOS_DEFECTO);		
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			GastoApatxaListado gasto = new GastoApatxaListado();

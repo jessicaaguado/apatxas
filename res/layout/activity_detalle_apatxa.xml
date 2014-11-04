@@ -42,7 +42,7 @@
         android:layout_alignParentLeft="@+id/labelBoteInicialApatxaDetalle"
         android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle"
         android:text="125,00 €" />
-    
+
     <ImageButton
         android:id="@+id/botonEditarInformacionBasicaApatxas"
         style="@style/boton_pie_lista"
@@ -52,7 +52,6 @@
         android:layout_alignParentTop="true"
         android:contentDescription="Editar información basica"
         android:src="@drawable/ic_action_apatxas_editar_detalle" />
-    
 
     <View
         android:id="@+id/separadorDetalleApatxa"
@@ -112,26 +111,25 @@
         android:layout_alignBottom="@+id/labelBoteApatxaDetalle"
         android:layout_toRightOf="@+id/labelBoteApatxaDetalle"
         android:text="125,00 €" />
-   
-    
-     <ListView
-        android:id="@+id/listaPersonasApatxaDetalle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/boteApatxaDetalle" 
-        android:headerDividersEnabled="true"
-        android:footerDividersEnabled="true"
-        android:layout_marginTop="@dimen/apatxas_margen_defecto"/>
-     
-     <ListView
+
+    <ListView
         android:id="@+id/listaGastosApatxaDetalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/listaPersonasApatxaDetalle" 
-        android:headerDividersEnabled="true"
-        android:footerDividersEnabled="true"/>
-    
+        android:layout_below="@+id/boteApatxaDetalle"
+        android:layout_marginTop="@dimen/apatxas_margen_defecto"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true" />
+
+    <ListView
+        android:id="@+id/listaPersonasApatxaDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/listaGastosApatxaDetalle"
+        android:layout_marginTop="@dimen/apatxas_margen_defecto"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true" />
 
 </RelativeLayout>
