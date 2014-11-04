@@ -7,6 +7,7 @@ public class TablaPersona implements BaseColumns {
 	public static final String NOMBRE_TABLA = "persona";
 	
 	public static final String COLUMNA_ID = "id";
+	public static final String COLUMNA_FULL_ID = NOMBRE_TABLA+"."+COLUMNA_ID;
 	public static final String COLUMNA_NOMBRE = "nombre";
 	
 	//una persona no existe si no es asociada a un apatxa

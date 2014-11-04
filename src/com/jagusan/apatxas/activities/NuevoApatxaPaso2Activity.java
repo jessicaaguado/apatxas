@@ -1,7 +1,9 @@
 package com.jagusan.apatxas.activities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Intent;
 import android.content.res.Resources;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
+import com.jagusan.apatxas.logicaNegocio.GastoService;
 import com.jagusan.apatxas.logicaNegocio.PersonaService;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
 
@@ -26,6 +29,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	private ApatxaService apatxaService;
 	private PersonaService personaService;
+	private GastoService gastoService;
 	private Resources resources;
 
 	private String tituloApatxa;
@@ -121,14 +125,13 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
 		listaGastos.add(gastoListado);
 		refrescarListado(totalGasto);
-
 	}
 
-//	private void borrarGasto(int posicion) {
-//		Double importeGasto = listaGastos.get(posicion).getTotal();
-//		listaGastos.remove(posicion);
-//		refrescarListado(importeGasto * -1);
-//	}
+	// private void borrarGasto(int posicion) {
+	// Double importeGasto = listaGastos.get(posicion).getTotal();
+	// listaGastos.remove(posicion);
+	// refrescarListado(importeGasto * -1);
+	// }
 
 	private void refrescarListado(Double totalGasto) {
 		actualizarGastoTotal(totalGasto);
@@ -167,15 +170,27 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	public void guardarApatxa() {
 		Long idApatxa = apatxaService.crearApatxa(tituloApatxa, fechaApatxa, boteInicialApatxa);
-		for (int i=0; i<personasApatxa.size(); i++){
-			personaService.crearPersona(personasApatxa.get(i), idApatxa);
+		Map<String, Long> personas = new HashMap<String, Long>(personasApatxa.size());
+		for (int i = 0; i < personasApatxa.size(); i++) {
+			String nombrePersona = personasApatxa.get(i);
+			Long idPersona = personaService.crearPersona(nombrePersona, idApatxa);
+			personas.put(nombrePersona, idPersona);
 		}
+		for (int i = 0; i < listaGastos.size(); i++) {
+			GastoApatxaListado gasto = listaGastos.get(i);
+			String concepto = gasto.getConcepto();
+			Double total = gasto.getTotal();
+			Long idPersona = personas.get(gasto.getPagadoPor());
+			gastoService.crearGasto(concepto, total, idApatxa, idPersona);
+		}
+		apatxaService.actualizarGastoTotalApatxa(idApatxa);
 		irListadoApatxasPrincipal();
 	}
 
 	private void inicializarServicios() {
 		apatxaService = new ApatxaService(this);
 		personaService = new PersonaService(this);
+		gastoService = new GastoService(this);
 		resources = getResources();
 	}
 }

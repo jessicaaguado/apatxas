@@ -12,6 +12,7 @@ import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionApatxaDeCu
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
+import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 
 public class ApatxaDAO {
 
@@ -83,7 +84,11 @@ public class ApatxaDAO {
 		return apatxas;
 	}
 
-
+	public void actualizarGastoTotalApatxa(Long idApatxa){
+		String sqlCalculoGastoTotal = "select sum("+TablaGasto.COLUMNA_TOTAL+") from "+TablaGasto.NOMBRE_TABLA+" where "+TablaGasto.COLUMNA_ID_APATXA+" = "+idApatxa;
+		String sqlActualizar = "update "+TablaApatxa.NOMBRE_TABLA+" set "+TablaApatxa.COLUMNA_GASTO_TOTAL+" = ("+sqlCalculoGastoTotal+") where "+TablaApatxa.COLUMNA_ID + " = "+idApatxa;
+		database.execSQL(sqlActualizar);
+	}
 	
 	
 }

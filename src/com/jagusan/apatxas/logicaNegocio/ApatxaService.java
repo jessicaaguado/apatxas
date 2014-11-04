@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.daos.ApatxaDAO;
+import com.jagusan.apatxas.sqlite.daos.GastoDAO;
 import com.jagusan.apatxas.sqlite.daos.PersonaDAO;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
@@ -19,19 +20,22 @@ public class ApatxaService {
 	private SQLiteDatabase database;
 	
 	private ApatxaDAO apatxaDAO;
-	private PersonaDAO personaDao;
+	private PersonaDAO personaDAO;
+	private GastoDAO gastoDAO;
 	
 	public ApatxaService (Context context) {
 		dbHelper = new DatabaseHelper(context);	
 		apatxaDAO = new ApatxaDAO();
-		personaDao = new PersonaDAO();
+		personaDAO = new PersonaDAO();
+		gastoDAO = new GastoDAO();
 	}
 	
 	public void open() throws SQLException {
 		Log.d("APATXAS", "LN: Abrir trans");
 		database = dbHelper.getWritableDatabase();
 		apatxaDAO.setDatabase(database);
-		personaDao.setDatabase(database);
+		personaDAO.setDatabase(database);
+		gastoDAO.setDatabase(database);
 	}
 
 	public void close() {
@@ -52,6 +56,12 @@ public class ApatxaService {
 		close();
 	}
 	
+	public void actualizarGastoTotalApatxa(Long id){
+		open();
+		apatxaDAO.actualizarGastoTotalApatxa(id);
+		close();
+	}
+	
 	public void borrarApatxa(Long id){
 		open();
 		apatxaDAO.borrarApatxa(id);
@@ -61,7 +71,8 @@ public class ApatxaService {
 	public ApatxaDetalle getApatxaDetalle(Long id){
 		open();
 		ApatxaDetalle apatxa = apatxaDAO.getApatxa(id);		
-		apatxa.setPersonas(personaDao.recuperarPersonasApatxa(id));
+		apatxa.setPersonas(personaDAO.recuperarPersonasApatxa(id));
+		apatxa.setGastos(gastoDAO.recuperarGastosApatxa(id));
 		close();
 		return apatxa;
 	}

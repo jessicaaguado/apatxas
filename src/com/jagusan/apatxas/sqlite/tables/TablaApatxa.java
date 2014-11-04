@@ -6,6 +6,7 @@ public class TablaApatxa implements BaseColumns {
 
 	public static final String NOMBRE_TABLA = "apatxa";
 	public static final String COLUMNA_ID = "id";
+	public static final String COLUMNA_FULL_ID = NOMBRE_TABLA+"."+COLUMNA_ID;
 	public static final String COLUMNA_NOMBRE = "nombre";
 	public static final String COLUMNA_FECHA = "fecha";
 	public static final String COLUMNA_BOTE_INICIAL = "boteInicial";

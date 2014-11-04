@@ -5,21 +5,18 @@ public class GastoApatxaListado {
 	private Long id;
 	private String concepto;
 	private Double total;
+	private Long idPagadoPor;
 	private String pagadoPor;
-
-	public GastoApatxaListado(Long id, String concepto, Double total, String pagadoPor) {
-		super();
-		this.id = id;
-		this.concepto = concepto;
-		this.total = total;
-		this.pagadoPor = pagadoPor;
-	}
-
+	
 	public GastoApatxaListado(String concepto, Double total, String pagadoPor) {
 		super();
 		this.concepto = concepto;
 		this.total = total;
 		this.pagadoPor = pagadoPor;
+	}
+
+	public GastoApatxaListado() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -52,6 +49,14 @@ public class GastoApatxaListado {
 
 	public void setPagadoPor(String pagadoPor) {
 		this.pagadoPor = pagadoPor;
+	}
+
+	public Long getIdPagadoPor() {
+		return idPagadoPor;
+	}
+
+	public void setIdPagadoPor(Long idPagadoPor) {
+		this.idPagadoPor = idPagadoPor;
 	}
 
 }
