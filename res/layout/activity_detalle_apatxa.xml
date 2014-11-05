@@ -81,7 +81,7 @@
         android:layout_alignBottom="@+id/separador2DetalleApatxa"
         android:layout_alignParentRight="true"
         android:contentDescription="Editar información personas"
-        android:src="@drawable/ic_action_apatxas_editar_detalle" />
+        android:src="@drawable/ic_action_apatxas_modificar_personas_detalle" />
 
     <View
         android:id="@+id/separador2DetalleApatxa"
