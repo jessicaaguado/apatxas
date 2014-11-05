@@ -106,11 +106,12 @@
 
     <TextView
         android:id="@+id/estadoApatxaDetalle"
-        style="@style/apatxas_valor_destacado"
+        style="@style/apatxas_valor_destacado"        
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/separador2DetalleApatxa"
         android:layout_centerHorizontal="true"
-        android:text="( Pagado )" />
+        android:gravity="center"
+        android:text="( Pagado )"/>
     
 </RelativeLayout>

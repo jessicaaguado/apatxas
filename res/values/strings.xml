@@ -14,7 +14,7 @@
     <string name="cantidad_dinero_euros">%1$.2f€</string>
     
     <string name="estado_gasto_pagado">Pagado</string>
-    <string name="estado_gasto_pagado_bote">Pagado. BOTE: %1$.2f€</string>
+    <string name="estado_gasto_pagado_bote">Pagado\nBOTE: %1$.2f€</string>
     <string name="estado_gasto_pendiente">Pendiente</string>
     <string name="estado_gasto_falta_pagar">Falta por pagar %1$.2f€</string>
     <string name="estado_gasto_sobra">Sobran %1$.2f€</string>
