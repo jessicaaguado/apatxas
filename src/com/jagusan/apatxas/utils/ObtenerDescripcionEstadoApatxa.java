@@ -9,7 +9,7 @@ public class ObtenerDescripcionEstadoApatxa {
 
 	public static String getDescripcionParaListado(Resources res, Double gastoTotal, Double gastoPagado, Double boteInicial) {
 		Double estadoGasto = calcularEstadoGasto(gastoTotal, gastoPagado, boteInicial);
-		Log.d("APATXAS"," estado "+estadoGasto);
+		Log.d("APATXAS", " estado " + estadoGasto);
 		String descripcionEstadoGasto = res.getString(R.string.estado_gasto_pagado);
 		if (estadoGasto < 0) {
 			descripcionEstadoGasto = String.format(res.getString(R.string.estado_gasto_sobra), estadoGasto * -1);
@@ -18,12 +18,14 @@ public class ObtenerDescripcionEstadoApatxa {
 		}
 		return descripcionEstadoGasto;
 	}
-	
+
 	public static String getDescripcionParaDetalle(Resources res, Double gastoTotal, Double gastoPagado, Double boteInicial) {
 		Double estadoGasto = calcularEstadoGasto(gastoTotal, gastoPagado, boteInicial);
 		String descripcionEstadoGasto = res.getString(R.string.estado_gasto_pagado);
 		if (estadoGasto > 0) {
 			descripcionEstadoGasto = res.getString(R.string.estado_gasto_pendiente);
+		} else if (estadoGasto > 0) {
+			descripcionEstadoGasto = String.format(res.getString(R.string.estado_gasto_pagado_bote), estadoGasto * -1);
 		}
 		return descripcionEstadoGasto;
 	}

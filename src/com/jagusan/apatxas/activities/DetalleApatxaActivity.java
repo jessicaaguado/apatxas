@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,11 +20,9 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
-import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public class DetalleApatxaActivity extends ActionBarActivity {
@@ -36,23 +33,15 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	private TextView nombreApatxaTextView;
 	private TextView fechaApatxaTextView;
 	private TextView boteInicialEditText;
-
-	private TextView gastoTotalApatxaTextView;
+	private TextView numeroPersonasTextView;
 	private TextView estadoApatxaTextView;
-	private TextView boteApatxaTextView;
-
-	private ListView personasApatxaListView;
-	private ViewGroup personasApatxaListViewHeader;
-	private TextView tituloPersonasApatxaListViewHeader;
-	private List<PersonaListado> personasApatxa = new ArrayList<PersonaListado>();
-	private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
 	private ListView gastosApatxaListView;
 	private ViewGroup gastosApatxaListViewHeader;
 	private TextView tituloGastosApatxaListViewHeader;
 	private List<GastoApatxaListado> gastosApatxa = new ArrayList<GastoApatxaListado>();
 	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
-	
+
 	Resources resources;
 
 	@Override
@@ -66,18 +55,14 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaDetalle);
 		fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaDetalle);
 		boteInicialEditText = (TextView) findViewById(R.id.boteInicialApatxaDetalle);
-		gastoTotalApatxaTextView = (TextView) findViewById(R.id.gastoTotalApatxaDetalle);
+		numeroPersonasTextView = (TextView) findViewById(R.id.numeroPersonasApatxaDetalle);
 		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxaDetalle);
-		boteApatxaTextView = (TextView) findViewById(R.id.boteApatxaDetalle);
-		personasApatxaListView = (ListView) findViewById(R.id.listaPersonasApatxaDetalle);
-		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxaDetalle);		
-		anadirCabeceraListaPersonas();
+
+		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxaDetalle);
 		anadirCabeceraListaGastos();
 
 		cargarInformacionApatxa();
 	}
-
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,26 +127,21 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		}
 		// bote inicial
 		boteInicialEditText.setText(apatxaDetalle.getBoteInicial().toString());
-		// gasto total
-		Double totalGastosApatxa = apatxaDetalle.getGastoTotal();		
-		gastoTotalApatxaTextView.setText(totalGastosApatxa.toString());
+		// personas
+		int numPersonas = apatxaDetalle.getPersonas().size();
+		String titulo =	resources.getQuantityString(R.plurals.numero_personas_apatxa, numPersonas, numPersonas);
+		numeroPersonasTextView.setText(titulo);
+
 		// estado actual
+		Double totalGastosApatxa = apatxaDetalle.getGastoTotal();
 		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), totalGastosApatxa, apatxaDetalle.getPagado(), apatxaDetalle.getBoteInicial());
 		estadoApatxaTextView.setText(estadoApatxa);
-		// bote final
-		Double boteApatxa = apatxaDetalle.getBote();
-		boteApatxaTextView.setText(boteApatxa.toString());
-		// personas
-		personasApatxa = apatxaDetalle.getPersonas();
-		listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
-		personasApatxaListView.setAdapter(listaPersonasApatxaArrayAdapter);
-		actualizarTituloCabeceraListaPersonas(personasApatxa.size());
 		// gastos
 		gastosApatxa = apatxaDetalle.getGastos();
 		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, gastosApatxa);
 		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
 		actualizarTituloCabeceraListaGastos(gastosApatxa.size(), totalGastosApatxa);
-		
+
 	}
 
 	private void irListadoApatxasPrincipal() {
@@ -182,17 +162,6 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 
 	}
 
-	private void anadirCabeceraListaPersonas() {
-		personasApatxaListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_personas_apatxa_header, personasApatxaListView, false);
-		personasApatxaListView.addHeaderView(personasApatxaListViewHeader);
-		tituloPersonasApatxaListViewHeader = (TextView) personasApatxaListViewHeader.findViewById(R.id.listaPersonasApatxaCabecera);
-	}
-
-	private void actualizarTituloCabeceraListaPersonas(Integer numeroPersonas) {
-		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_personas), numeroPersonas);
-		tituloPersonasApatxaListViewHeader.setText(titulo);
-	}
-	
 	private void anadirCabeceraListaGastos() {
 		gastosApatxaListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_gastos_apatxa_header, gastosApatxaListView, false);
 		gastosApatxaListView.addHeaderView(gastosApatxaListViewHeader);
@@ -200,12 +169,12 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	}
 
 	private void actualizarTituloCabeceraListaGastos(Integer numeroGastos, Double totalGastosApatxa) {
-		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_gastos), numeroGastos, totalGastosApatxa);
+		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_gastos_detalle_apatxa), totalGastosApatxa);
 		tituloGastosApatxaListViewHeader.setText(titulo);
 	}
-	
+
 	private void inicializarServicios() {
 		apatxaService = new ApatxaService(this);
-		resources = getResources();		
+		resources = getResources();
 	}
 }

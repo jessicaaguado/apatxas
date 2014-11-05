@@ -12,6 +12,7 @@
     
     
     <string name="estado_gasto_pagado">Pagado</string>
+    <string name="estado_gasto_pagado_bote">Pagado. BOTE: %1$.2f€</string>
     <string name="estado_gasto_pendiente">Pendiente</string>
     <string name="estado_gasto_falta_pagar">Falta por pagar %1$.2f€</string>
     <string name="estado_gasto_sobra">Sobran %1$.2f€</string>
@@ -23,6 +24,7 @@
     
     <string name="titulo_cabecera_lista_personas">%d PERSONAS</string>
     <string name="titulo_cabecera_lista_gastos">%1$d GASTOS: %2$.2f€</string>
+    <string name="titulo_cabecera_lista_gastos_detalle_apatxa">GASTO TOTAL: %1$.2f€</string>
 
     <string name="titulo_dialog_cambio_nombre_persona">Cambiar nombre</string>
     
