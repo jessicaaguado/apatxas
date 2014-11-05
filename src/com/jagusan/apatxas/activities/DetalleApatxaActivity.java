@@ -23,6 +23,7 @@ import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.utils.FormatearNumero;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public class DetalleApatxaActivity extends ActionBarActivity {
@@ -115,8 +116,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	private void cargarInformacionApatxa() {
 		idApatxaActualizar = getIntent().getLongExtra("id", -1);
 
-		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaActualizar);
-		Log.d("APATXAS", "recuperado con id " + apatxaDetalle.toString());
+		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaActualizar);		
 		// titulo
 		nombreApatxaTextView.setText(apatxaDetalle.getNombre());
 		// fecha
@@ -126,7 +126,8 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 			fechaApatxaTextView.setText(sdf.format(fecha));
 		}
 		// bote inicial
-		boteInicialEditText.setText(apatxaDetalle.getBoteInicial().toString());
+		Double boteInicial = apatxaDetalle.getBoteInicial();
+		boteInicialEditText.setText(FormatearNumero.aDineroEuros(resources, boteInicial));
 		// personas
 		int numPersonas = apatxaDetalle.getPersonas().size();
 		String titulo =	resources.getQuantityString(R.plurals.numero_personas_apatxa, numPersonas, numPersonas);

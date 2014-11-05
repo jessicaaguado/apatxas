@@ -10,6 +10,8 @@
     <string name="action_listo">Listo</string>
     <string name="action_cancelar">Cancelar</string>
     
+    <string name="cantidad_dinero">%1$.2f</string>
+    <string name="cantidad_dinero_euros">%1$.2f€</string>
     
     <string name="estado_gasto_pagado">Pagado</string>
     <string name="estado_gasto_pagado_bote">Pagado. BOTE: %1$.2f€</string>
@@ -20,7 +22,8 @@
     <plurals name="numero_personas_apatxa">
         <item quantity="one">1 persona</item>
         <item quantity="other">%d personas</item>
-    </plurals>
+    </plurals> 
+    
     
     <string name="titulo_cabecera_lista_personas">%d PERSONAS</string>
     <string name="titulo_cabecera_lista_gastos">%1$d GASTOS: %2$.2f€</string>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.utils.FormatearNumero;
 
 public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaListado> {
 
@@ -43,7 +44,7 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
 		conceptoGastoTextView.setText(gasto.getConcepto());		
 		//total
 		TextView totalGastoTextView = (TextView) convertView.findViewById(R.id.total);
-		totalGastoTextView.setText(gasto.getTotal().toString());
+		totalGastoTextView.setText(FormatearNumero.aDinero(context.getResources(), gasto.getTotal()));
 		//quien lo ha pagado
 		TextView pagadorGastoTextView = (TextView) convertView.findViewById(R.id.pagadoPor);
 		pagadorGastoTextView.setText(gasto.getPagadoPor());
