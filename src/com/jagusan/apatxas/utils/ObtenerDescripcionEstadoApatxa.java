@@ -24,7 +24,7 @@ public class ObtenerDescripcionEstadoApatxa {
 		String descripcionEstadoGasto = res.getString(R.string.estado_gasto_pagado);
 		if (estadoGasto > 0) {
 			descripcionEstadoGasto = res.getString(R.string.estado_gasto_pendiente);
-		} else if (estadoGasto > 0) {
+		} else if (estadoGasto < 0) {
 			descripcionEstadoGasto = String.format(res.getString(R.string.estado_gasto_pagado_bote), estadoGasto * -1);
 		}
 		return descripcionEstadoGasto;
