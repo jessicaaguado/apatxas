@@ -10,6 +10,7 @@
     <dimen name="apatxas_linea_divisora_margen_inferior">15dp</dimen>
     
     <dimen name="apatxas_padding_superior_defecto">10dp</dimen>
+    <dimen name="apatxas_padding_inferior_defecto">10dp</dimen>
     <dimen name="apatxas_padding_derecho_defecto">10dp</dimen>
     <dimen name="apatxas_padding_izquierdo_defecto">10dp</dimen>
         

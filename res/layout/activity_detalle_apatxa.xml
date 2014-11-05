@@ -9,10 +9,11 @@
     <TextView
         android:id="@+id/nombreApatxaDetalle"
         style="@style/apatxas_valor_destacado"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
         android:text="Comida en la sociedad" />
 
     <TextView
@@ -49,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/nombreApatxaDetalle"
         android:contentDescription="Editar información basica"
         android:src="@drawable/ic_action_apatxas_editar_detalle" />
 
@@ -92,8 +93,6 @@
         android:layout_marginTop="@dimen/apatxas_linea_divisora_margen_superior"
         android:background="@color/apatxascolors_color_claro2" />   
     
-    
-
     <ListView
         android:id="@+id/listaGastosApatxaDetalle"
         android:layout_width="match_parent"
@@ -112,6 +111,7 @@
         android:layout_below="@+id/separador2DetalleApatxa"
         android:layout_centerHorizontal="true"
         android:gravity="center"
+        android:lineSpacingMultiplier="1.2"
         android:text="( Pagado )"/>
     
 </RelativeLayout>
