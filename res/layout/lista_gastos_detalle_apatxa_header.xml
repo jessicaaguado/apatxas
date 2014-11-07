@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
 
     <TextView
         android:id="@+id/listaGastosDetalleApatxaCabecera"
-        android:layout_width="match_parent"
+        style="@style/apatxas_valor_defecto"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:padding="5dp"
-        android:text="0 GASTOS: 0€"
-        android:textAppearance="@style/texto_cabecera_lista" />
+        android:layout_weight="0.8"
+        android:text="0 GASTOS: 0€" />
+
+    <ImageButton
+        android:id="@+id/botonAnadirGastosDetalleApatxas"
+        style="@style/apatxas_boton_solo_icono"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_weight="0.2"
+        android:contentDescription="Anadir gastos"
+        android:src="@drawable/ic_action_anadir_gasto_detalle_apatxa" />
 
 </LinearLayout>
