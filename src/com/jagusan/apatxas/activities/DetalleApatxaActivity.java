@@ -139,7 +139,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		estadoApatxaTextView.setText(estadoApatxa);
 		// gastos
 		gastosApatxa = apatxaDetalle.getGastos();
-		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, gastosApatxa);
+		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_detalle_apatxa_row, gastosApatxa);
 		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
 		actualizarTituloCabeceraListaGastos(gastosApatxa.size(), totalGastosApatxa);
 
@@ -164,9 +164,9 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	}
 
 	private void anadirCabeceraListaGastos() {
-		gastosApatxaListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_gastos_apatxa_header, gastosApatxaListView, false);
+		gastosApatxaListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_gastos_detalle_apatxa_header, gastosApatxaListView, false);
 		gastosApatxaListView.addHeaderView(gastosApatxaListViewHeader);
-		tituloGastosApatxaListViewHeader = (TextView) gastosApatxaListViewHeader.findViewById(R.id.listaGastosApatxaCabecera);
+		tituloGastosApatxaListViewHeader = (TextView) gastosApatxaListViewHeader.findViewById(R.id.listaGastosDetalleApatxaCabecera);
 	}
 
 	private void actualizarTituloCabeceraListaGastos(Integer numeroGastos, Double totalGastosApatxa) {

@@ -62,4 +62,12 @@
         <item name="android:textColor">@color/apatxascolors_color_claro1</item>
     </style>
     
+    <style name="apatxas_boton_solo_icono" parent="@style/ButtonApatxasColors">
+        <item name="android:textAppearance">@style/texto_pie_lista</item>        
+        <item name="android:textColor">@color/apatxascolors_gris_medio</item>
+        <item name="android:background">@color/apatxascolors_color_fondo</item>
+        <item name="android:gravity">left|bottom</item>
+        <item name="android:minHeight">0dip</item>
+    </style>
+    
 </resources>

@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="apatxascolors_gris_claro">#505050</color>
+    <color name="apatxascolors_gris_oscuro">#202020</color>
+    <color name="apatxascolors_gris_medio">#404040</color>
+    
     <color name="apatxascolors_color_claro1">#d1c4e9</color>
     <color name="apatxascolors_color_claro2">#9575cd</color>
     <color name="apatxascolors_color_oscuro1">#512da8</color>
     <color name="apatxascolors_color_oscuro2">#311b92</color>
     
     <color name="apatxascolors_color_fondo">#ffffff</color>
+    
+    <color name="apatxascolors_color_linea_divisoria">#d1c4e9</color>
+    <color name="apatxascolors_color_linea_divisoria_lista">#d1c4e9</color>
+    
 </resources>

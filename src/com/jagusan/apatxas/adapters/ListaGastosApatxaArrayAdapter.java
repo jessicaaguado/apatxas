@@ -38,18 +38,20 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
 			convertView = inflater.inflate(rowLayoutId, parent, false);
 		}
 
-		GastoApatxaListado gasto = gastos.get(position);		
-		//titulo
+		GastoApatxaListado gasto = gastos.get(position);
+		// titulo
 		TextView conceptoGastoTextView = (TextView) convertView.findViewById(R.id.concepto);
-		conceptoGastoTextView.setText(gasto.getConcepto());		
-		//total
+		conceptoGastoTextView.setText(gasto.getConcepto());
+		// total
 		TextView totalGastoTextView = (TextView) convertView.findViewById(R.id.total);
 		totalGastoTextView.setText(FormatearNumero.aDinero(context.getResources(), gasto.getTotal()));
-		//quien lo ha pagado
+		// quien lo ha pagado
 		TextView pagadorGastoTextView = (TextView) convertView.findViewById(R.id.pagadoPor);
-		pagadorGastoTextView.setText(gasto.getPagadoPor());
-		
+		if (pagadorGastoTextView != null) {
+			pagadorGastoTextView.setText(gasto.getPagadoPor());
+		}
+
 		return convertView;
 	}
-	
+
 }

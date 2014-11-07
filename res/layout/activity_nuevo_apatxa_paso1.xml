@@ -40,7 +40,9 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/boteInicialApatxa" 
         android:headerDividersEnabled="true"
-        android:footerDividersEnabled="true"        
+        android:footerDividersEnabled="true"         
+        android:divider="@color/apatxascolors_color_linea_divisoria_lista" 
+        android:dividerHeight="1px"      
         android:padding="10dp"        >
     </ListView>
 
