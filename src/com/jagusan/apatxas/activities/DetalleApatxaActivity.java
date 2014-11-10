@@ -29,7 +29,7 @@ import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 public class DetalleApatxaActivity extends ActionBarActivity {
 
 	private ApatxaService apatxaService;
-	private Long idApatxaActualizar;
+	private Long idApatxaDetalle;
 
 	private TextView nombreApatxaTextView;
 	private TextView fechaApatxaTextView;
@@ -44,6 +44,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
 
 	Resources resources;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_detalle_apatxa);
 
 		personalizarActionBar();
+		
+		idApatxaDetalle = getIntent().getLongExtra("id", -1);
 
 		nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaDetalle);
 		fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaDetalle);
@@ -68,55 +71,35 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.informacion_apatxa, menu);
+		getMenuInflater().inflate(R.menu.detalle_apatxa, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case R.id.action_settings:
 			return true;
+		case R.id.action_repartir_apatxa:
+			verReparto();
+			return true;
+		default:
+			break;
 		}
+
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void guardarApatxa(View buttonView) {
-
-		String titulo = nombreApatxaTextView.getText().toString();
-
-		Long fecha = null;
-		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			fecha = sdf.parse(fechaApatxaTextView.getText().toString()).getTime();
-		} catch (Exception e) {
-			// sin fecha
-		}
-
-		Double boteInicial = 0.0;
-		try {
-			boteInicial = Double.parseDouble(boteInicialEditText.getText().toString());
-		} catch (Exception e) {
-			// mantenemos bote inicial a 0
-		}
-
-		if (esActualizarApatxa()) {
-			apatxaService.actualizarApatxa(idApatxaActualizar, titulo, fecha, boteInicial);
-		} else {
-			apatxaService.crearApatxa(titulo, fecha, boteInicial);
-		}
-
-		irListadoApatxasPrincipal();
+	private void verReparto() {		
+		Intent intent = new Intent(this, RepartoApatxaActivity.class);
+		intent.putExtra("id", idApatxaDetalle);
+		startActivity(intent);
 
 	}
 
 	private void cargarInformacionApatxa() {
-		idApatxaActualizar = getIntent().getLongExtra("id", -1);
 
-		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaActualizar);		
+		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaDetalle);
 		// titulo
 		nombreApatxaTextView.setText(apatxaDetalle.getNombre());
 		// fecha
@@ -130,7 +113,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		boteInicialEditText.setText(FormatearNumero.aDineroEuros(resources, boteInicial));
 		// personas
 		int numPersonas = apatxaDetalle.getPersonas().size();
-		String titulo =	resources.getQuantityString(R.plurals.numero_personas_apatxa, numPersonas, numPersonas);
+		String titulo = resources.getQuantityString(R.plurals.numero_personas_apatxa, numPersonas, numPersonas);
 		numeroPersonasTextView.setText(titulo);
 
 		// estado actual
@@ -151,7 +134,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	}
 
 	private Boolean esActualizarApatxa() {
-		return idApatxaActualizar != -1;
+		return idApatxaDetalle != -1;
 	}
 
 	private void personalizarActionBar() {

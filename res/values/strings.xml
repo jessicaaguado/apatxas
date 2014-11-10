@@ -3,16 +3,13 @@
 
     <string name="app_name">Apatxas</string>
     <string name="hello_world">Hello world!</string>
-    
     <string name="action_settings">Settings</string>
     <string name="action_buscar">Buscar</string>
     <string name="action_anadir">Añadir</string>
     <string name="action_listo">Listo</string>
     <string name="action_cancelar">Cancelar</string>
-    
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f€</string>
-    
     <string name="estado_gasto_pagado">Pagado</string>
     <string name="estado_gasto_pagado_bote">Pagado\nBOTE: %1$.2f€</string>
     <string name="estado_gasto_pendiente">Pendiente</string>
@@ -22,18 +19,16 @@
     <plurals name="numero_personas_apatxa">
         <item quantity="one">1 persona</item>
         <item quantity="other">%d personas</item>
-    </plurals> 
-    
-    
+    </plurals>
+
     <string name="titulo_cabecera_lista_personas">%d PERSONAS</string>
     <string name="titulo_cabecera_lista_gastos">%1$d GASTOS: %2$.2f€</string>
     <string name="titulo_cabecera_lista_gastos_detalle_apatxa">GASTO TOTAL: %1$.2f€</string>
-
     <string name="titulo_dialog_cambio_nombre_persona">Cambiar nombre</string>
-    
     <string name="title_activity_informacion_apatxa">InformacionApatxaActivity</string>
     <string name="title_activity_nuevo_apatxa_paso1">NuevoApatxaPaso1</string>
     <string name="title_activity_nuevo_apatxa_paso2">NuevoApatxaPaso2Activity</string>
     <string name="title_activity_main">NuevoGastoApatxaActivity</string>
+    <string name="title_activity_reparto_apatxa">RepartoApatxaActivity</string>
 
 </resources>

@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.DetalleApatxaActivity" >
+        <activity
+            android:name=".activities.DetalleApatxaActivity"
+            android:launchMode="singleTop" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ListaApatxasActivity" />
@@ -35,7 +37,7 @@
 
             <!--
                  meta-data android:name="android.support.UI_OPTIONS"
-            	       android:value="splitActionBarWhenNarrow" /
+            	       android:value="splitActionBarWhenNarrow" /
             -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -51,12 +53,20 @@
                 android:value="com.jagusan.apatxas.activities.NuevoApatxaPaso1Activity" />
         </activity>
         <activity
-            android:name="com.jagusan.apatxas.activities.NuevoGastoApatxaActivity"
+            android:name=".activities.NuevoGastoApatxaActivity"
             android:label="@string/title_activity_main"
             android:parentActivityName=".activities.NuevoApatxaPaso2Activity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.NuevoApatxaPaso2Activity" />
+        </activity>
+        <activity
+            android:name="com.jagusan.apatxas.activities.RepartoApatxaActivity"
+            android:label="@string/title_activity_reparto_apatxa"
+            android:parentActivityName=".activities.DetalleApatxaActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jagusan.apatxas.activities.DetalleApatxaActivity" />
         </activity>
     </application>
 
