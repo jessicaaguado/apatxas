@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:contentDescription="Editar información personas"
-            android:src="@drawable/ic_action_apatxas_modificar_personas_detalle" />
+            android:src="@drawable/ic_action_apatxas_acceso_personas_apatxa" />
     </LinearLayout>
     
      <View
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:contentDescription="Anadir gasto"
-            android:src="@drawable/ic_action_apatxas_anadir_gasto_detalle_apatxa" />
+            android:src="@drawable/ic_action_apatxas_acceso_gastos_apatxa" />
     </LinearLayout>
     
     <View
