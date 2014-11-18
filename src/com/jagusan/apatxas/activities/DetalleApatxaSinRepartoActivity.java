@@ -1,15 +1,7 @@
 package com.jagusan.apatxas.activities;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -18,57 +10,20 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
-import com.jagusan.apatxas.logicaNegocio.ApatxaService;
-import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
-import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
-import com.jagusan.apatxas.utils.FormatearNumero;
-import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
-public class DetalleApatxaSinRepartoActivity extends ActionBarActivity {
+public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
-	private ApatxaService apatxaService;
-	private Long idApatxaDetalle;
-
-	private TextView nombreApatxaTextView;
-	private TextView fechaApatxaTextView;
-	private TextView boteInicialEditText;
-	private TextView numeroPersonasTextView;
-	private TextView estadoApatxaTextView;
-
-	private ListView gastosApatxaListView;
-	private ViewGroup gastosApatxaListViewHeader;
+	private ListView gastosApatxaListView;	
 	private TextView tituloGastosApatxaListViewHeader;
-	private List<GastoApatxaListado> gastosApatxa = new ArrayList<GastoApatxaListado>();
-	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
-
-	Resources resources;
-	private ApatxaDetalle apatxaDetalle;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		idApatxaDetalle = getIntent().getLongExtra("id", -1);
-
-		setContentView(R.layout.activity_detalle_apatxa_sin_reparto);
-
-		inicializarServicios();
-
-		personalizarActionBar();
-
-		nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaDetalle);
-		fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaDetalle);
-		boteInicialEditText = (TextView) findViewById(R.id.boteInicialApatxaDetalle);
-		numeroPersonasTextView = (TextView) findViewById(R.id.numeroPersonasApatxaDetalle);
-		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxaDetalle);
-
-		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxaDetalle);
-
-		cargarInformacionApatxa();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.detalle_apatxa, menu);
 		return true;
 	}
@@ -79,7 +34,7 @@ public class DetalleApatxaSinRepartoActivity extends ActionBarActivity {
 		case R.id.action_settings:
 			return true;
 		case R.id.action_repartir_apatxa:
-			apatxaService.realizarRepartoSiNecesario(apatxaDetalle);
+			apatxaService.realizarRepartoSiNecesario(apatxa);
 			verReparto();
 			return true;
 		default:
@@ -89,83 +44,42 @@ public class DetalleApatxaSinRepartoActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	protected void setContentView() {
+		setContentView(R.layout.activity_detalle_apatxa_sin_reparto);
+
+	}
+
 	private void verReparto() {
 		Intent intent = new Intent(this, DetalleApatxaConRepartoActivity.class);
-		intent.putExtra("id", idApatxaDetalle);
+		intent.putExtra("id", idApatxa);
 		startActivity(intent);
 	}
 
-	private void cargarInformacionApatxa() {
-		apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaDetalle);
-		cargarInformacionTitulo();
-		cargarInformacionFecha();
-		cargarInformacionBoteInicial();
-		cargarInformacionPersonas();
-		cargarInformacionEstado();
-		cargarInformacionGastos(); 
-	}
-
-	private void cargarInformacionTitulo() {
-		nombreApatxaTextView.setText(apatxaDetalle.getNombre());
-	}
-
-	private void cargarInformacionFecha() {
-		Date fecha = apatxaDetalle.getFecha();
-		if (fecha != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			fechaApatxaTextView.setText(sdf.format(fecha));
-		}
-	}
-
-	private void cargarInformacionBoteInicial() {
-		Double boteInicial = apatxaDetalle.getBoteInicial();
-		boteInicialEditText.setText(FormatearNumero.aDineroEuros(resources, boteInicial));
-	}
-
-	private void cargarInformacionPersonas() {
-		int numPersonas = apatxaDetalle.getPersonas().size();
-		String titulo = resources.getQuantityString(R.plurals.numero_personas_apatxa, numPersonas, numPersonas);
-		numeroPersonasTextView.setText(titulo);
-	}
-
-	private void cargarInformacionEstado() {
-		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxaDetalle.getGastoTotal(), apatxaDetalle.getPagado(), apatxaDetalle.getBoteInicial());
-		estadoApatxaTextView.setText(estadoApatxa);
-	}
-
-	private void cargarInformacionGastos() {
-		anadirCabeceraListaGastos();
-
-		gastosApatxa = apatxaDetalle.getGastos();
-		Double gastoTotal = apatxaDetalle.getGastoTotal();
-		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_detalle_apatxa_row, gastosApatxa);
-		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
-		actualizarTituloCabeceraListaGastos(gastosApatxa.size(), gastoTotal);
-
-	}
-
-	private void anadirCabeceraListaGastos() {
-		gastosApatxaListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_gastos_detalle_apatxa_header, gastosApatxaListView, false);
+	@Override
+	protected void cargarElementosLayout() {
+		super.cargarElementosLayout();
+		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxaDetalle);
+		ViewGroup gastosApatxaListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_gastos_detalle_apatxa_header, gastosApatxaListView, false);
 		gastosApatxaListView.addHeaderView(gastosApatxaListViewHeader);
 		tituloGastosApatxaListViewHeader = (TextView) gastosApatxaListViewHeader.findViewById(R.id.listaGastosDetalleApatxaCabecera);
+	}
+
+	@Override
+	protected void cargarInformacionApatxa() {
+		super.cargarInformacionApatxa();
+		cargarInformacionGastos();
+	}
+
+	private void cargarInformacionGastos() {		
+		ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_detalle_apatxa_row, apatxa.getGastos());
+		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
+		actualizarTituloCabeceraListaGastos(apatxa.getGastos().size(), apatxa.getGastoTotal());
 	}
 
 	private void actualizarTituloCabeceraListaGastos(Integer numeroGastos, Double totalGastosApatxa) {
 		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_gastos_detalle_apatxa), totalGastosApatxa);
 		tituloGastosApatxaListViewHeader.setText(titulo);
-	}
-
-	private void inicializarServicios() {
-		apatxaService = new ApatxaService(this);
-		resources = getResources();
-	}
-
-	private void personalizarActionBar() {
-		ActionBar actionBar = getSupportActionBar();
-		// quitamos el titulo
-		actionBar.setDisplayShowTitleEnabled(false);
-		// boton para ir a la actividad anterior
-		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 }
