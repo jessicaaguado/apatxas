@@ -63,10 +63,10 @@
         <activity
             android:name="com.jagusan.apatxas.activities.RepartoApatxaActivity"
             android:label="@string/title_activity_reparto_apatxa"
-            android:parentActivityName=".activities.DetalleApatxaActivity" >
+            android:parentActivityName=".activities.ListaApatxasActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jagusan.apatxas.activities.DetalleApatxaActivity" />
+                android:value="com.jagusan.apatxas.activities.ListaApatxasActivity" />
         </activity>
     </application>
 

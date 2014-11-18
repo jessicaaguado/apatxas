@@ -43,17 +43,17 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 
 	Resources resources;
 	private ApatxaDetalle apatxaDetalle;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		idApatxaDetalle = getIntent().getLongExtra("id", -1);
+
+		setContentView(R.layout.activity_detalle_apatxa_sin_reparto);
+
 		inicializarServicios();
-		setContentView(R.layout.activity_detalle_apatxa);
 
 		personalizarActionBar();
-		
-		idApatxaDetalle = getIntent().getLongExtra("id", -1);
 
 		nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaDetalle);
 		fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaDetalle);
@@ -62,7 +62,6 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxaDetalle);
 
 		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxaDetalle);
-		anadirCabeceraListaGastos();
 
 		cargarInformacionApatxa();
 	}
@@ -90,50 +89,58 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void verReparto() {		
+	private void verReparto() {
 		Intent intent = new Intent(this, RepartoApatxaActivity.class);
 		intent.putExtra("id", idApatxaDetalle);
 		startActivity(intent);
 	}
 
 	private void cargarInformacionApatxa() {
-
 		apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaDetalle);
-		// titulo
+		cargarInformacionTitulo();
+		cargarInformacionFecha();
+		cargarInformacionBoteInicial();
+		cargarInformacionPersonas();
+		cargarInformacionEstado();
+		cargarInformacionGastos(); 
+	}
+
+	private void cargarInformacionTitulo() {
 		nombreApatxaTextView.setText(apatxaDetalle.getNombre());
-		// fecha
+	}
+
+	private void cargarInformacionFecha() {
 		Date fecha = apatxaDetalle.getFecha();
 		if (fecha != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			fechaApatxaTextView.setText(sdf.format(fecha));
 		}
-		// bote inicial
+	}
+
+	private void cargarInformacionBoteInicial() {
 		Double boteInicial = apatxaDetalle.getBoteInicial();
 		boteInicialEditText.setText(FormatearNumero.aDineroEuros(resources, boteInicial));
-		// personas
+	}
+
+	private void cargarInformacionPersonas() {
 		int numPersonas = apatxaDetalle.getPersonas().size();
 		String titulo = resources.getQuantityString(R.plurals.numero_personas_apatxa, numPersonas, numPersonas);
 		numeroPersonasTextView.setText(titulo);
-
-		// estado actual
-		Double totalGastosApatxa = apatxaDetalle.getGastoTotal();
-		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), totalGastosApatxa, apatxaDetalle.getPagado(), apatxaDetalle.getBoteInicial());
-		estadoApatxaTextView.setText(estadoApatxa);
-		// gastos
-		gastosApatxa = apatxaDetalle.getGastos();
-		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_detalle_apatxa_row, gastosApatxa);
-		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
-		actualizarTituloCabeceraListaGastos(gastosApatxa.size(), totalGastosApatxa);
-
 	}
 
+	private void cargarInformacionEstado() {
+		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxaDetalle.getGastoTotal(), apatxaDetalle.getPagado(), apatxaDetalle.getBoteInicial());
+		estadoApatxaTextView.setText(estadoApatxa);
+	}
 
-	private void personalizarActionBar() {
-		ActionBar actionBar = getSupportActionBar();
-		// quitamos el titulo
-		actionBar.setDisplayShowTitleEnabled(false);
-		// boton para ir a la actividad anterior
-		actionBar.setDisplayHomeAsUpEnabled(true);
+	private void cargarInformacionGastos() {
+		anadirCabeceraListaGastos();
+
+		gastosApatxa = apatxaDetalle.getGastos();
+		Double gastoTotal = apatxaDetalle.getGastoTotal();
+		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_detalle_apatxa_row, gastosApatxa);
+		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
+		actualizarTituloCabeceraListaGastos(gastosApatxa.size(), gastoTotal);
 
 	}
 
@@ -152,4 +159,13 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		apatxaService = new ApatxaService(this);
 		resources = getResources();
 	}
+
+	private void personalizarActionBar() {
+		ActionBar actionBar = getSupportActionBar();
+		// quitamos el titulo
+		actionBar.setDisplayShowTitleEnabled(false);
+		// boton para ir a la actividad anterior
+		actionBar.setDisplayHomeAsUpEnabled(true);
+	}
+
 }

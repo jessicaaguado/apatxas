@@ -14,12 +14,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
 import com.jagusan.apatxas.adapters.ListaPersonasRepartoApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.logicaNegocio.PersonaService;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.utils.FormatearNumero;
+import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public class RepartoApatxaActivity extends ActionBarActivity {
 
@@ -30,12 +32,16 @@ public class RepartoApatxaActivity extends ActionBarActivity {
 
 	private TextView nombreApatxaTextView;
 	private TextView fechaApatxaTextView;
-	private TextView totalApatxaTextView;
-	private TextView pendienteApatxaTextView;
+	private TextView boteInicialEditText;
+	private TextView numeroPersonasTextView;
+	private TextView estadoApatxaTextView;
+	private TextView resumenGastosApatxaTextView;
 
 	private ListView personasRepartoListView;
 	private List<PersonaListadoReparto> listaPersonasReparto;
 	private ListaPersonasRepartoApatxaArrayAdapter listaPersonasRepartoApatxaArrayAdapter;
+
+	private ApatxaDetalle apatxaDetalle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +53,13 @@ public class RepartoApatxaActivity extends ActionBarActivity {
 
 		idApatxaReparto = getIntent().getLongExtra("id", -1);
 
-		nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaReparto);
-		fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaReparto);
-		totalApatxaTextView = (TextView) findViewById(R.id.totalApatxaReparto);
-		pendienteApatxaTextView = (TextView) findViewById(R.id.pendienteApatxaReparto);
+		nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaDetalle);
+		fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaDetalle);
+		boteInicialEditText = (TextView) findViewById(R.id.boteInicialApatxaDetalle);
+		numeroPersonasTextView = (TextView) findViewById(R.id.numeroPersonasApatxaDetalle);
+		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxaDetalle);
+
+		resumenGastosApatxaTextView = (TextView) findViewById(R.id.resumenGastosApatxaDetalle);
 		personasRepartoListView = (ListView) findViewById(R.id.listaDesgloseRepartoApatxa);
 
 		cargarInformacionApatxa();
@@ -76,23 +85,52 @@ public class RepartoApatxaActivity extends ActionBarActivity {
 	}
 
 	private void cargarInformacionApatxa() {
+		apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaReparto);
+		cargarInformacionTitulo();
+		cargarInformacionFecha();
+		cargarInformacionBoteInicial();
+		cargarInformacionPersonas();
+		cargarInformacionEstado();
+		cargarInformacionGastos();
+		cargarInformacionReparto();
+	}
 
-		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaReparto);
+	private void cargarInformacionTitulo() {
 		nombreApatxaTextView.setText(apatxaDetalle.getNombre());
+	}
+
+	private void cargarInformacionFecha() {
 		Date fecha = apatxaDetalle.getFecha();
 		if (fecha != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			fechaApatxaTextView.setText(sdf.format(fecha));
 		}
-		Double gastoTotal = apatxaDetalle.getGastoTotal();
-		totalApatxaTextView.setText(FormatearNumero.aDineroEuros(resources, gastoTotal));
-		Double gastoPendiente = gastoTotal - apatxaDetalle.getPagado();
-		pendienteApatxaTextView.setText(FormatearNumero.aDineroEuros(resources, gastoPendiente));
-		
+	}
+
+	private void cargarInformacionBoteInicial() {
+		Double boteInicial = apatxaDetalle.getBoteInicial();
+		boteInicialEditText.setText(FormatearNumero.aDineroEuros(resources, boteInicial));
+	}
+
+	private void cargarInformacionPersonas() {
+		int numPersonas = apatxaDetalle.getPersonas().size();
+		String titulo = resources.getQuantityString(R.plurals.numero_personas_apatxa, numPersonas, numPersonas);
+		numeroPersonasTextView.setText(titulo);
+	}
+
+	private void cargarInformacionEstado() {
+		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxaDetalle.getGastoTotal(), apatxaDetalle.getPagado(), apatxaDetalle.getBoteInicial());
+		estadoApatxaTextView.setText(estadoApatxa);
+	}
+
+	private void cargarInformacionGastos() {
+		resumenGastosApatxaTextView.setText(apatxaDetalle.getGastos().size() + " gastos. Total: " + FormatearNumero.aDineroEuros(resources, apatxaDetalle.getGastoTotal()));
+	}
+
+	private void cargarInformacionReparto() {
 		listaPersonasReparto = apatxaService.getResultadoReparto(idApatxaReparto);
 		listaPersonasRepartoApatxaArrayAdapter = new ListaPersonasRepartoApatxaArrayAdapter(this, R.layout.lista_personas_resultado_reparto_row, listaPersonasReparto);
 		personasRepartoListView.setAdapter(listaPersonasRepartoApatxaArrayAdapter);
-
 	}
 
 	private void personalizarActionBar() {

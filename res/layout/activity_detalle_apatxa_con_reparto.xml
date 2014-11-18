@@ -1,15 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    style="@style/apatxas_detalle_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.jagusan.apatxas.activities.RepartoApatxaActivity" >
+    tools:context="com.jagusan.apatxas.activities.DetalleApatxaActivity" >
 
-    <include layout="@layout/subactivity_informacion_apatxa_editable" />
-    
+    <include layout="@layout/subactivity_informacion_apatxa_editable"/>
+
     <LinearLayout
         android:id="@+id/informacionPersonasApatxaDetalle"
         android:layout_width="match_parent"
@@ -36,8 +34,8 @@
             android:contentDescription="Editar información personas"
             android:src="@drawable/ic_action_apatxas_modificar_personas_detalle" />
     </LinearLayout>
-    
-     <View
+
+    <View
         android:id="@+id/separador2DetalleApatxa"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -80,8 +78,8 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/informacionGastosApatxaDetalle"
         android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"        
-        android:background="@color/apatxascolors_color_linea_divisoria" /> 
-    
+        android:background="@color/apatxascolors_color_linea_divisoria" />    
+
     <TextView
         android:id="@+id/estadoApatxaDetalle"
         style="@style/apatxas_valor_destacado"
@@ -92,17 +90,5 @@
         android:gravity="center"
         android:lineSpacingMultiplier="1.2"
         android:text="( Pagado )" />
-
-    <ListView
-        android:id="@+id/listaDesgloseRepartoApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/estadoApatxaDetalle"
-        android:layout_marginTop="@dimen/apatxas_margen_defecto"
-        android:divider="@color/apatxascolors_color_linea_divisoria_lista"
-        android:dividerHeight="1px"
-        android:footerDividersEnabled="true"
-        android:headerDividersEnabled="true" />
 
 </RelativeLayout>
