@@ -3,6 +3,7 @@ package com.jagusan.apatxas.sqlite.daos.cursorReader;
 import android.database.Cursor;
 
 import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
 
 public class ExtraerInformacionPersonaDeCursor {
 
@@ -13,6 +14,14 @@ public class ExtraerInformacionPersonaDeCursor {
 		return persona;
 	}
 	
+	public static PersonaListadoReparto extraer(Cursor cursor, PersonaListadoReparto persona) {		
+		CursorTablaPersona tablaPersonaCursor = new CursorTablaPersona(cursor);
+		persona.setId(tablaPersonaCursor.getId());
+		persona.setNombre(tablaPersonaCursor.getNombre());	
+		persona.setCantidadPago(tablaPersonaCursor.getCuantiaPago());
+		persona.setPagado(tablaPersonaCursor.getPagado());
+		return persona;
+	}
 	
 
 }

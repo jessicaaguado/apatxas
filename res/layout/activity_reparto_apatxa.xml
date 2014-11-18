@@ -8,7 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.jagusan.apatxas.activities.RepartoApatxaActivity" >
 
- <TextView
+    <TextView
         android:id="@+id/nombreApatxaReparto"
         style="@style/apatxas_valor_destacado"
         android:layout_width="match_parent"
@@ -25,8 +25,68 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/nombreApatxaReparto"
+        android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
         android:text="28/10/2014" />
-
     
+    <TextView android:id="@+id/labelTotalApatxaReparto"
+        style="@style/apatxas_label_defecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/fechaApatxaReparto"        
+        android:text="Total:"/>
+    
+    <TextView
+        android:id="@+id/totalApatxaReparto"
+        style="@style/apatxas_valor_defecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/labelTotalApatxaReparto"
+        android:layout_alignParentLeft="@+id/labelTotalApatxaReparto"
+        android:layout_toRightOf="@+id/labelTotalApatxaReparto"
+        android:text="125,00 €" />
+    
+    <TextView
+        android:id="@+id/labelPendienteApatxaReparto"
+        style="@style/apatxas_label_defecto"
+        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/totalApatxaReparto"
+        android:layout_alignParentLeft="@+id/totalApatxaReparto"
+        android:layout_toRightOf="@+id/totalApatxaReparto"
+        android:text="Pendiente:" />
+    
+    <TextView
+        android:id="@+id/pendienteApatxaReparto"
+        style="@style/apatxas_valor_defecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/labelPendienteApatxaReparto"
+        android:layout_alignParentLeft="@+id/labelPendienteApatxaReparto"
+        android:layout_toRightOf="@+id/labelPendienteApatxaReparto"
+        android:text="100,00 €" />
+    
+    
+    <View
+        android:id="@+id/separadorRepartoApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/labelTotalApatxaReparto"        
+        android:layout_marginTop="@dimen/apatxas_linea_divisora_margen_superior"
+        android:background="@color/apatxascolors_color_linea_divisoria" />
+    
+    <ListView
+        android:id="@+id/listaDesgloseRepartoApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/separadorRepartoApatxa"
+        android:layout_marginTop="@dimen/apatxas_margen_defecto"
+        android:divider="@color/apatxascolors_color_linea_divisoria_lista"
+        android:dividerHeight="1px"
+        android:footerDividersEnabled="true"
+        android:headerDividersEnabled="true" />
 
 </RelativeLayout>

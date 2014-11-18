@@ -12,6 +12,7 @@ public class CursorTablaApatxa {
 	private static final Integer POSICION_BOTE_INICIAL = 3;
 	private static final Integer POSICION_GASTO_TOTAL = 4;
 	private static final Integer POSICION_GASTO_PAGADO = 5;
+	private static final Integer POSICION_REPARTO_HECHO = 6;
 	
 	private final Cursor cursor;
 	
@@ -45,6 +46,11 @@ public class CursorTablaApatxa {
 	
 	public Double getGastoPagado() {
 		return cursor.getDouble(POSICION_GASTO_PAGADO);
+	}
+	
+	public boolean getRepartoHecho(){
+		return cursor.getInt(POSICION_REPARTO_HECHO) == 1;
+		
 	}
 
 }

@@ -13,23 +13,28 @@ import com.jagusan.apatxas.sqlite.daos.PersonaDAO;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
 
 public class ApatxaService {
-	
+
 	private DatabaseHelper dbHelper;
 	private SQLiteDatabase database;
-	
+
 	private ApatxaDAO apatxaDAO;
 	private PersonaDAO personaDAO;
 	private GastoDAO gastoDAO;
-	
-	public ApatxaService (Context context) {
-		dbHelper = new DatabaseHelper(context);	
+
+	private CalcularRepartoService calcularRepartoService;
+
+	public ApatxaService(Context context) {
+		dbHelper = new DatabaseHelper(context);
 		apatxaDAO = new ApatxaDAO();
 		personaDAO = new PersonaDAO();
 		gastoDAO = new GastoDAO();
+		calcularRepartoService = new CalcularRepartoService();
 	}
-	
+
 	public void open() throws SQLException {
 		Log.d("APATXAS", "LN: Abrir trans");
 		database = dbHelper.getWritableDatabase();
@@ -40,48 +45,73 @@ public class ApatxaService {
 
 	public void close() {
 		Log.d("APATXAS", "LN: Cerrar trans");
-		dbHelper.close();		
+		dbHelper.close();
 	}
-	
-	public Long crearApatxa(String nombre, Long fecha, Double boteInicial){
+
+	public Long crearApatxa(String nombre, Long fecha, Double boteInicial) {
 		open();
 		Long idApatxa = apatxaDAO.nuevoApatxa(nombre, fecha, boteInicial);
 		close();
 		return idApatxa;
 	}
-	
+
 	public void actualizarApatxa(Long id, String nombre, Long fecha, Double boteInicial) {
 		open();
 		apatxaDAO.actualizarApatxa(id, nombre, fecha, boteInicial);
 		close();
 	}
-	
-	public void actualizarGastoTotalApatxa(Long id){
+
+	public void actualizarGastoTotalApatxa(Long id) {
 		open();
 		apatxaDAO.actualizarGastoTotalApatxa(id);
 		close();
 	}
-	
-	public void borrarApatxa(Long id){
+
+	public void borrarApatxa(Long id) {
 		open();
 		apatxaDAO.borrarApatxa(id);
 		close();
 	}
-	
-	public ApatxaDetalle getApatxaDetalle(Long id){
+
+	public ApatxaDetalle getApatxaDetalle(Long id) {
 		open();
-		ApatxaDetalle apatxa = apatxaDAO.getApatxa(id);		
+		ApatxaDetalle apatxa = apatxaDAO.getApatxa(id);
 		apatxa.setPersonas(personaDAO.recuperarPersonasApatxa(id));
 		apatxa.setGastos(gastoDAO.recuperarGastosApatxa(id));
 		close();
 		return apatxa;
 	}
-	
-	public List<ApatxaListado> getTodosApatxasListado(){
+
+	public List<ApatxaListado> getTodosApatxasListado() {
 		open();
 		List<ApatxaListado> listaApatxas = apatxaDAO.getTodosApatxas();
 		close();
 		return listaApatxas;
+	}
+
+	public void realizarRepartoSiNecesario(ApatxaDetalle apatxaDetalle) {
+		if (!apatxaDetalle.getRepartoRealizado()) {
+			Log.d("APATXAS", "Realizando reparto......");
+			realizarReparto(apatxaDetalle);
+		}
+	}
+
+	public void realizarReparto(ApatxaDetalle apatxaDetalle) {
+		open();
+		Double gastoProporcional = calcularRepartoService.calcularParteProporcional(apatxaDetalle);
+		for (int i = 0; i < apatxaDetalle.getPersonas().size(); i++) {	
+			Log.d("APATXAS"," REPARTO - "+apatxaDetalle.getPersonas().get(i).getNombre()+" "+gastoProporcional);
+			personaDAO.asociarPagoPersona(apatxaDetalle.getPersonas().get(i).getId(), gastoProporcional);
+		}
+		apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.getId(), true);
+		close();
+	}
+	
+	public List<PersonaListadoReparto> getResultadoReparto(Long idApatxa) {
+		open();
+		List<PersonaListadoReparto> resultadoReparto = personaDAO.obtenerResultadoRepartoPersonas(idApatxa);
+		close();
+		return resultadoReparto;
 	}
 
 }

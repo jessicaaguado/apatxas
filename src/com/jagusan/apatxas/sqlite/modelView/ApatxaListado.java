@@ -10,6 +10,7 @@ public class ApatxaListado {
 	private Double gastoTotal = 0.0;
 	private Double pagado = 0.0;
 	private Double boteInicial = 0.0;
+	private Boolean repartoRealizado;
 
 	public String getNombre() {
 		return nombre;
@@ -68,5 +69,14 @@ public class ApatxaListado {
 	public void setBoteInicial(Double boteInicial) {
 		this.boteInicial = boteInicial;
 	}
+
+	public Boolean getRepartoRealizado() {
+		return repartoRealizado;
+	}
+
+	public void setRepartoRealizado(Boolean repartoRealizado) {
+		this.repartoRealizado = repartoRealizado;
+	}
+
 
 }

@@ -19,7 +19,7 @@ public class ApatxaDAO {
 	private SQLiteDatabase database;
 
 	private static final String[] COLUMNAS_APATXA = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, 
-													  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO };
+													  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO, TablaApatxa.COLUMNA_REPARTO_REALIZADO };
 
 	private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA + " DESC";
 	
@@ -88,6 +88,13 @@ public class ApatxaDAO {
 		String sqlCalculoGastoTotal = "select sum("+TablaGasto.COLUMNA_TOTAL+") from "+TablaGasto.NOMBRE_TABLA+" where "+TablaGasto.COLUMNA_ID_APATXA+" = "+idApatxa;
 		String sqlActualizar = "update "+TablaApatxa.NOMBRE_TABLA+" set "+TablaApatxa.COLUMNA_GASTO_TOTAL+" = ("+sqlCalculoGastoTotal+") where "+TablaApatxa.COLUMNA_ID + " = "+idApatxa;
 		database.execSQL(sqlActualizar);
+	}
+
+	public void cambiarEstadoRepartoApatxa(Long idApatxa, boolean repartoHecho) {
+		Integer valorRepartoHecho = repartoHecho ? 1 : 0;
+		String sqlActualizar = "update "+TablaApatxa.NOMBRE_TABLA+" set "+TablaApatxa.COLUMNA_REPARTO_REALIZADO +" = "+valorRepartoHecho+" where "+TablaApatxa.COLUMNA_ID+" = "+idApatxa;
+		database.execSQL(sqlActualizar);
+		
 	}
 	
 	

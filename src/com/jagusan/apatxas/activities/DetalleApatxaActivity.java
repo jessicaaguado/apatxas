@@ -42,6 +42,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
 
 	Resources resources;
+	private ApatxaDetalle apatxaDetalle;
 	
 
 	@Override
@@ -79,6 +80,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		case R.id.action_settings:
 			return true;
 		case R.id.action_repartir_apatxa:
+			apatxaService.realizarRepartoSiNecesario(apatxaDetalle);
 			verReparto();
 			return true;
 		default:
@@ -92,12 +94,11 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 		Intent intent = new Intent(this, RepartoApatxaActivity.class);
 		intent.putExtra("id", idApatxaDetalle);
 		startActivity(intent);
-
 	}
 
 	private void cargarInformacionApatxa() {
 
-		ApatxaDetalle apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaDetalle);
+		apatxaDetalle = apatxaService.getApatxaDetalle(idApatxaDetalle);
 		// titulo
 		nombreApatxaTextView.setText(apatxaDetalle.getNombre());
 		// fecha

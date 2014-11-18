@@ -10,6 +10,9 @@ import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionPersonaDeCursor;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
+import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
+import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
 
 public class PersonaDAO {
@@ -18,6 +21,8 @@ public class PersonaDAO {
 	
 	private static final String[] COLUMNAS_PERSONA = { TablaPersona.COLUMNA_ID, TablaPersona.COLUMNA_NOMBRE, TablaPersona.COLUMNA_ID_APATXA, TablaPersona.COLUMNA_CUANTIA_PAGO,
 		TablaPersona.COLUMNA_PAGADO };
+	
+	private static final String[] COLUMNAS_PERSONA_REPARTO = {TablaPersona.COLUMNA_FULL_ID, TablaPersona.COLUMNA_NOMBRE, TablaPersona.COLUMNA_CUANTIA_PAGO, TablaPersona.COLUMNA_PAGADO, TablaGasto.SUMA_COLUMNA_GASTOS};
 	
 	private static final String ORDEN_PERSONAS_DEFECTO = TablaPersona.COLUMNA_NOMBRE + " ASC";
 
@@ -68,9 +73,27 @@ public class PersonaDAO {
 		return personas;
 
 	}
+	
+	public List<PersonaListadoReparto> obtenerResultadoRepartoPersonas(Long idApatxa){
+		List<PersonaListadoReparto> personas = new ArrayList<PersonaListadoReparto>();
+		Cursor cursor = database.query(NOMBRE_TABLA_PERSONA, COLUMNAS_PERSONA, TablaPersona.COLUMNA_ID_APATXA +" = "+idApatxa, null, null, null, ORDEN_PERSONAS_DEFECTO);
 
-	public void asociarPagoPersona(Integer idPersona, Double cuantia) {
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			PersonaListadoReparto persona = new PersonaListadoReparto();
+			persona = ExtraerInformacionPersonaDeCursor.extraer(cursor, persona);
+			personas.add(persona);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return personas;
+	}
 
+	public void asociarPagoPersona(Long idPersona, Double cuantia) {		
+		String subselectGastosPagados = "ifnull((select sum("+TablaGasto.COLUMNA_TOTAL+") from "+TablaGasto.NOMBRE_TABLA+" where "+TablaGasto.COLUMNA_ID_PAGADO_POR+" = "+idPersona+"),0)";		
+		String sqlActualizar = "update "+TablaPersona.NOMBRE_TABLA+" set "+TablaPersona.COLUMNA_CUANTIA_PAGO+" = ("+cuantia+" - "+subselectGastosPagados+") where "+TablaPersona.COLUMNA_ID + " = "+idPersona;
+		Log.d("APATXAS-SQL", sqlActualizar);
+		database.execSQL(sqlActualizar);
 	}
 
 }
