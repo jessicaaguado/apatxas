@@ -12,7 +12,7 @@ import com.jagusan.apatxas.sqlite.tables.TablaPersona;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private static final String NOMBRE_BASE_DATOS = "apatxas.db";
-	private static final int VERSION_BASE_DATOS = 2;
+	private static final int VERSION_BASE_DATOS = 1;
 
 	public DatabaseHelper(Context context) {
 		super(context, NOMBRE_BASE_DATOS, null, VERSION_BASE_DATOS);
