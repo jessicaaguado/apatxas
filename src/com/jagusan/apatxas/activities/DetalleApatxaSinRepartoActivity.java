@@ -24,7 +24,7 @@ import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.utils.FormatearNumero;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
-public class DetalleApatxaActivity extends ActionBarActivity {
+public class DetalleApatxaSinRepartoActivity extends ActionBarActivity {
 
 	private ApatxaService apatxaService;
 	private Long idApatxaDetalle;
@@ -90,7 +90,7 @@ public class DetalleApatxaActivity extends ActionBarActivity {
 	}
 
 	private void verReparto() {
-		Intent intent = new Intent(this, RepartoApatxaActivity.class);
+		Intent intent = new Intent(this, DetalleApatxaConRepartoActivity.class);
 		intent.putExtra("id", idApatxaDetalle);
 		startActivity(intent);
 	}

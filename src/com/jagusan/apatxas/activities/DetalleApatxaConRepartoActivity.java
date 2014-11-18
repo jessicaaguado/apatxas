@@ -23,7 +23,7 @@ import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.utils.FormatearNumero;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
-public class RepartoApatxaActivity extends ActionBarActivity {
+public class DetalleApatxaConRepartoActivity extends ActionBarActivity {
 
 	private ApatxaService apatxaService;
 	private PersonaService personaService;
@@ -47,7 +47,7 @@ public class RepartoApatxaActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		inicializarServicios();
-		setContentView(R.layout.activity_reparto_apatxa);
+		setContentView(R.layout.activity_detalle_apatxa_con_reparto);
 
 		personalizarActionBar();
 

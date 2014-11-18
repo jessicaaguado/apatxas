@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.jagusan.apatxas.activities.DetalleApatxaActivity;
-import com.jagusan.apatxas.activities.RepartoApatxaActivity;
+import com.jagusan.apatxas.activities.DetalleApatxaSinRepartoActivity;
+import com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 
 public class OnVerDetalleApatxaClickListener implements OnItemClickListener {
@@ -18,9 +18,9 @@ public class OnVerDetalleApatxaClickListener implements OnItemClickListener {
 		ApatxaListado apatxaClicked = (ApatxaListado) apatxaListadoListView.getItemAtPosition(position);
 				
 		Context context = apatxaListadoListView.getContext();
-		Class activityToGo = RepartoApatxaActivity.class;
+		Class activityToGo = DetalleApatxaConRepartoActivity.class;
 		if (!apatxaClicked.getRepartoRealizado()){
-			activityToGo = DetalleApatxaActivity.class;
+			activityToGo = DetalleApatxaSinRepartoActivity.class;
 		}
 		Intent intent = new Intent(context, activityToGo);
 		intent.putExtra("id", apatxaClicked.getId());
