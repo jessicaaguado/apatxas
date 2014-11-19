@@ -47,7 +47,7 @@
         </activity>
         <activity
             android:name=".activities.NuevoGastoApatxaActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/title_activity_nuevo_gasto"
             android:parentActivityName=".activities.NuevoApatxaPaso2Activity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -55,14 +55,15 @@
         </activity>
         <activity
             android:name=".activities.DetalleApatxaSinRepartoActivity"
-            android:launchMode="singleTop" >
+            android:label="@string/title_activity_detalle_apatxa"
+            android:parentActivityName=".activities.ListaApatxasActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ListaApatxasActivity" />
         </activity>
         <activity
             android:name=".activities.DetalleApatxaConRepartoActivity"
-            android:label="@string/title_activity_reparto_apatxa"
+            android:label="@string/title_activity_detalle_apatxa"
             android:parentActivityName=".activities.ListaApatxasActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

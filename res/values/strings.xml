@@ -25,10 +25,10 @@
     <string name="titulo_cabecera_lista_gastos">%1$d GASTOS: %2$.2f€</string>
     <string name="titulo_cabecera_lista_gastos_detalle_apatxa">GASTO TOTAL: %1$.2f€</string>
     <string name="titulo_dialog_cambio_nombre_persona">Cambiar nombre</string>
-    <string name="title_activity_informacion_apatxa">InformacionApatxaActivity</string>
-    <string name="title_activity_nuevo_apatxa_paso1">NuevoApatxaPaso1</string>
-    <string name="title_activity_nuevo_apatxa_paso2">NuevoApatxaPaso2Activity</string>
-    <string name="title_activity_main">NuevoGastoApatxaActivity</string>
-    <string name="title_activity_reparto_apatxa">RepartoApatxaActivity</string>
+    
+    <string name="title_activity_nuevo_apatxa_paso1">Nuevo</string>
+    <string name="title_activity_nuevo_apatxa_paso2">Nuevo</string>
+    <string name="title_activity_nuevo_gasto">Nuevo gasto</string>
+    <string name="title_activity_detalle_apatxa">Información</string>
 
 </resources>

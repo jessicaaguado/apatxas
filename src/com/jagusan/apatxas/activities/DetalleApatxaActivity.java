@@ -19,6 +19,8 @@ import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public abstract class DetalleApatxaActivity extends ActionBarActivity {
 
+	private final Boolean MOSTRAR_TITULO_PANTALLA = true;
+	
 	protected ApatxaService apatxaService;
 	protected Resources resources;
 	protected Long idApatxa;
@@ -67,8 +69,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 
 	protected void personalizarActionBar() {
 		ActionBar actionBar = getSupportActionBar();
-		// quitamos el titulo
-		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
 		// boton para ir a la actividad anterior
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}

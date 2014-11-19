@@ -29,6 +29,8 @@ import com.jagusan.apatxas.dialogs.CambiarNombrePersonaApatxaDialogFragment;
 import com.jagusan.apatxas.listeners.CambiarNombrePersonaApatxaDialogListener;
 
 public class NuevoApatxaPaso1Activity extends ActionBarActivity implements CambiarNombrePersonaApatxaDialogListener {
+	
+	private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
 	private EditText nombreApatxaEditText;
 	private EditText fechaApatxaEditText;
@@ -73,16 +75,12 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.nuevo_apatxa_paso1, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_siguiente_paso) {
 			continuarAnadirApatxas();
@@ -160,8 +158,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	}
 
 	private void personalizarActionBar() {
-		// quitamos el titulo
-		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		getSupportActionBar().setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
 	}
 
 	private void continuarAnadirApatxas() {

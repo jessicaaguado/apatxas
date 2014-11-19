@@ -5,6 +5,7 @@ import java.util.List;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -74,10 +75,14 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 	}
 
 	private void cargarInformacionReparto() {
-		List<PersonaListadoReparto> listaPersonasReparto = apatxaService.getResultadoReparto(idApatxa);
+		ViewGroup personasRepartoListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_personas_resultado_reparto_header, personasRepartoListView, false);
+		personasRepartoListView.addHeaderView(personasRepartoListViewHeader);
+		
+		List<PersonaListadoReparto> listaPersonasReparto = apatxaService.getResultadoReparto(idApatxa);		
 		ListaPersonasRepartoApatxaArrayAdapter listaPersonasRepartoApatxaArrayAdapter = new ListaPersonasRepartoApatxaArrayAdapter(this, R.layout.lista_personas_resultado_reparto_row,
 				listaPersonasReparto);
 		personasRepartoListView.setAdapter(listaPersonasRepartoApatxaArrayAdapter);
+		
 	}
 
 }

@@ -17,7 +17,7 @@ import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 
 public class ListaApatxasActivity extends ActionBarActivity {
-
+	
 	private ApatxaService apatxaService;
 
 	@Override
@@ -38,16 +38,12 @@ public class ListaApatxasActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.lista_gastos, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
 		case R.id.action_buscar:
 			Log.d("APATXAS", "buscar");
