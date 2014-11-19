@@ -25,17 +25,29 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.reparto_apatxa, menu);
+		getMenuInflater().inflate(R.menu.detalle_apatxa_con_reparto, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case R.id.action_settings:
 			return true;
+		case R.id.action_repartir_apatxa:
+			apatxaService.realizarReparto(apatxa);
+			recargar();
+			return true;
+		default:
+			break;
 		}
+
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private void recargar() {
+		finish();
+		startActivity(getIntent());
 	}
 
 	@Override

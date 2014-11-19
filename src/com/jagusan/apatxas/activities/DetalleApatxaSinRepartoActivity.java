@@ -24,7 +24,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.detalle_apatxa, menu);
+		getMenuInflater().inflate(R.menu.detalle_apatxa_sin_reparto, menu);
 		return true;
 	}
 
