@@ -2,6 +2,8 @@ package com.jagusan.apatxas.sqlite.modelView;
 
 import java.util.Date;
 
+import com.jagusan.apatxas.utils.EstadoApatxa;
+
 public class ApatxaListado {
 
 	private Long id;
@@ -11,6 +13,7 @@ public class ApatxaListado {
 	private Double pagado = 0.0;
 	private Double boteInicial = 0.0;
 	private Boolean repartoRealizado;
+	private Integer personasPendientesPagarCobrar;
 
 	public String getNombre() {
 		return nombre;
@@ -61,6 +64,16 @@ public class ApatxaListado {
 		apatxaListadoString = apatxaListadoString + "\n-------------------";
 		return apatxaListadoString;
 	}
+	
+	public EstadoApatxa getEstadoApatxa(){
+		EstadoApatxa estadoApatxa = EstadoApatxa.HECHO;
+		if (!repartoRealizado) {
+			estadoApatxa = EstadoApatxa.SIN_REPARTIR;
+		} else if (personasPendientesPagarCobrar > 0){
+			estadoApatxa = EstadoApatxa.PENDIENTE;
+		}
+		return estadoApatxa;
+	}
 
 	public Double getBoteInicial() {
 		return boteInicial;
@@ -77,6 +90,16 @@ public class ApatxaListado {
 	public void setRepartoRealizado(Boolean repartoRealizado) {
 		this.repartoRealizado = repartoRealizado;
 	}
+
+	public Integer getPersonasPendientesPagarCobrar() {
+		return personasPendientesPagarCobrar;
+	}
+
+	public void setPersonasPendientesPagarCobrar(Integer personasPendientesPagarCobrar) {
+		this.personasPendientesPagarCobrar = personasPendientesPagarCobrar;
+	}
+
+	
 
 
 }

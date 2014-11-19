@@ -15,8 +15,8 @@ public class TablaGasto implements BaseColumns {
 
 	public static final String CREATE_TABLE = "CREATE TABLE " + NOMBRE_TABLA + "(" + COLUMNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + 
 																					 COLUMNA_CONCEPTO + " TEXT," + 
-																					 COLUMNA_TOTAL + " REAL," + 
-																					 COLUMNA_ID_PAGADO_POR + " INTEGER," +																					  
+																					 COLUMNA_TOTAL + " REAL DEFAULT 0," + 
+																					 COLUMNA_ID_PAGADO_POR + " INTEGER DEFAULT 0," +																					  
 																					 COLUMNA_ID_APATXA + " INTEGER" + ")";
 
 	public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + NOMBRE_TABLA;

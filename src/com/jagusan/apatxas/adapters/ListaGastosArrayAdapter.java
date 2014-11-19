@@ -42,7 +42,7 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 		}
 
 		ApatxaListado apatxa = apatxas.get(position);
-		
+
 		// nombre
 		TextView nombreApatxaTextView = (TextView) convertView.findViewById(R.id.nombre);
 		nombreApatxaTextView.setText(apatxa.getNombre());
@@ -55,9 +55,12 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 		}
 		// estado
 		TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);
-		String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getGastoTotal(), apatxa.getPagado(), apatxa.getBoteInicial());
+		// String descripcionEstadoApatxa =
+		// ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(),
+		// apatxa.getGastoTotal(), apatxa.getPagado(), apatxa.getBoteInicial());
+		String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getEstadoApatxa());
 		estadoApatxaTextView.setText(descripcionEstadoApatxa);
-	
+
 		return convertView;
 	}
 

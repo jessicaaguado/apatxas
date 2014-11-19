@@ -21,10 +21,10 @@ public class TablaApatxa implements BaseColumns {
 	public static final String CREATE_TABLE = "CREATE TABLE " + NOMBRE_TABLA + "(" + COLUMNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + 
 																					 COLUMNA_NOMBRE + " TEXT," + 
 																					 COLUMNA_FECHA + " INTEGER," + 
-																					 COLUMNA_BOTE_INICIAL + " REAL,"+
-																					 COLUMNA_REPARTO_REALIZADO + " INTEGER,"+
-																					 COLUMNA_GASTO_TOTAL + " REAL,"+
-																					 COLUMNA_GASTO_PAGADO + " REAL"+
+																					 COLUMNA_BOTE_INICIAL + " REAL DEFAULT 0,"+
+																					 COLUMNA_REPARTO_REALIZADO + " INTEGER DEFAULT 0,"+
+																					 COLUMNA_GASTO_TOTAL + " REAL DEFAULT 0,"+
+																					 COLUMNA_GASTO_PAGADO + " REAL DEFAULT 0"+
 																					 ")";		
 
 	public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + NOMBRE_TABLA;
