@@ -90,7 +90,7 @@ public class PersonaDAO {
 	}
 
 	public void asociarPagoPersona(Long idPersona, Double cuantia) {		
-		String subselectGastosPagados = "(select sum("+TablaGasto.COLUMNA_TOTAL+") from "+TablaGasto.NOMBRE_TABLA+" where "+TablaGasto.COLUMNA_ID_PAGADO_POR+" = "+idPersona+")";		
+		String subselectGastosPagados = "ifnull((select sum("+TablaGasto.COLUMNA_TOTAL+") from "+TablaGasto.NOMBRE_TABLA+" where "+TablaGasto.COLUMNA_ID_PAGADO_POR+" = "+idPersona+"),0)";		
 		String sqlActualizar = "update "+TablaPersona.NOMBRE_TABLA+" set "+TablaPersona.COLUMNA_CUANTIA_PAGO+" = ("+cuantia+" - "+subselectGastosPagados+") where "+TablaPersona.COLUMNA_ID + " = "+idPersona;
 		Log.d("APATXAS-SQL", sqlActualizar);
 		database.execSQL(sqlActualizar);
