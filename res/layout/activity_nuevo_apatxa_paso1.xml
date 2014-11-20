@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/nombreApatxa"
-        android:hint="dd/mm/aaaa"
+        android:hint="@string/patron_fecha_dia_mes_ano_ux"
         android:inputType="date" />
 
     <EditText

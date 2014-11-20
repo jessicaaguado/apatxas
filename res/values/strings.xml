@@ -35,6 +35,11 @@
     <string name="title_activity_detalle_apatxa">Información</string>
     <!--  TITULOS (FIN) -->
     
+    <!-- PATRONES FECHAS -->
+    <string name="patron_fecha_dia_mes_ano">dd/MM/yyyy</string>
+    <string name="patron_fecha_dia_mes_ano_ux">dd/mm/aaaa</string>
+    <!-- PATRONES FECHAS (FIN) -->
+    
      <plurals name="numero_personas_apatxa">
         <item quantity="one">1 persona</item>
         <item quantity="other">%d personas</item>

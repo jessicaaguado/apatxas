@@ -9,7 +9,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -27,9 +26,10 @@ import android.widget.TextView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.dialogs.CambiarNombrePersonaApatxaDialogFragment;
 import com.jagusan.apatxas.listeners.CambiarNombrePersonaApatxaDialogListener;
+import com.jagusan.apatxas.utils.FormatearFecha;
 
 public class NuevoApatxaPaso1Activity extends ActionBarActivity implements CambiarNombrePersonaApatxaDialogListener {
-	
+
 	private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
 	private EditText nombreApatxaEditText;
@@ -42,36 +42,23 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	private TextView tituloPersonasListViewHeader;
 	private List<String> personasApatxa = new ArrayList<String>();;
 	private ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
-	
+
 	Resources resources;
 
-	private int numPersonasApatxaAnadidas = 0;	
+	private int numPersonasApatxaAnadidas = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nuevo_apatxa_paso1);
-		
-		resources = getResources();
+
+		inicializarServicios();
 
 		personalizarActionBar();
 
-		nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
-		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
-		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
-
-		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
-		LayoutInflater inflater = getLayoutInflater();
-		anadirCabeceraListaPersonas(inflater);
-		anadirPieListaPersonas(inflater);
-		 
-		listaPersonasApatxaArrayAdapter = new ArrayAdapter<String>(this, R.layout.lista_personas_apatxa_row, personasApatxa);
-		personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
-
-		registerForContextMenu(personasListView);
-
+		cargarElementosLayout();		
+		inicializarElementosLayout();
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -99,9 +86,9 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();		
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		switch (item.getItemId()) {
-		case R.id.action_persona_apatxa_cambiar:			
+		case R.id.action_persona_apatxa_cambiar:
 			DialogFragment dialog = new CambiarNombrePersonaApatxaDialogFragment();
 			Bundle parametros = new Bundle();
 			parametros.putInt("posicionPersonaCambiar", info.position - 1);
@@ -109,7 +96,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 			dialog.setArguments(parametros);
 			dialog.show(getSupportFragmentManager(), "CambiarNombrePersonaApatxaDialogFragment");
 			return true;
-		case R.id.action_persona_apatxa_borrar:			
+		case R.id.action_persona_apatxa_borrar:
 			borrarPersona(info.position);
 			return true;
 		default:
@@ -126,36 +113,32 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	private void anadirPieListaPersonas(LayoutInflater inflater) {
 		personasListViewFooter = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_footer, personasListView, false);
 		personasListView.addFooterView(personasListViewFooter);
-		
+
 	}
-	
+
 	private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
 		personasListViewHeader = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
 		personasListView.addHeaderView(personasListViewHeader);
 		tituloPersonasListViewHeader = (TextView) personasListViewHeader.findViewById(R.id.listaPersonasApatxaCabecera);
 		actualizarTituloCabeceraListaPersonas();
 	}
-	
-	private void actualizarTituloCabeceraListaPersonas(){
+
+	private void actualizarTituloCabeceraListaPersonas() {
 		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_personas), personasApatxa.size());
 		tituloPersonasListViewHeader.setText(titulo);
 	}
 
-	public void anadirPersona(View v) {		
+	public void anadirPersona(View v) {
 		String nombre = "Apatxero " + ++numPersonasApatxaAnadidas;
 		personasApatxa.add(nombre);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();
 	}
 
-	public void borrarPersona(int posicion) {		
+	public void borrarPersona(int posicion) {
 		personasApatxa.remove(posicion - 1);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();
-	}
-
-	private void personalizarActionBar() {
-		getSupportActionBar().setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
 	}
 
 	private void continuarAnadirApatxas() {
@@ -181,6 +164,32 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 		intent.putStringArrayListExtra("personas", (ArrayList<String>) personasApatxa);
 
 		startActivity(intent);
+	}
+
+	private void inicializarServicios() {
+		resources = getResources();
+	}
+
+	private void personalizarActionBar() {
+		getSupportActionBar().setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
+	}
+
+	private void cargarElementosLayout() {
+		nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
+		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
+		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
+
+		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+		LayoutInflater inflater = getLayoutInflater();
+		anadirCabeceraListaPersonas(inflater);
+		anadirPieListaPersonas(inflater);
+		listaPersonasApatxaArrayAdapter = new ArrayAdapter<String>(this, R.layout.lista_personas_apatxa_row, personasApatxa);
+		personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
+		registerForContextMenu(personasListView);
+	}
+	
+	private void inicializarElementosLayout(){
+		fechaApatxaEditText.setText(FormatearFecha.formatearHoy(resources));
 	}
 
 }
