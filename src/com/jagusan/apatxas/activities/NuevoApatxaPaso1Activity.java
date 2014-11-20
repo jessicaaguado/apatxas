@@ -99,11 +99,9 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		Log.d("APATXAS", "" + info.position);
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();		
 		switch (item.getItemId()) {
-		case R.id.action_persona_apatxa_cambiar:
-			Log.d("APATXAS", "Cambiar persona");
+		case R.id.action_persona_apatxa_cambiar:			
 			DialogFragment dialog = new CambiarNombrePersonaApatxaDialogFragment();
 			Bundle parametros = new Bundle();
 			parametros.putInt("posicionPersonaCambiar", info.position - 1);
@@ -111,8 +109,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 			dialog.setArguments(parametros);
 			dialog.show(getSupportFragmentManager(), "CambiarNombrePersonaApatxaDialogFragment");
 			return true;
-		case R.id.action_persona_apatxa_borrar:
-			Log.d("APATXAS", "Borrar persona");
+		case R.id.action_persona_apatxa_borrar:			
 			borrarPersona(info.position);
 			return true;
 		default:

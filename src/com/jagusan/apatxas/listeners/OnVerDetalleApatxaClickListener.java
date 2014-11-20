@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.jagusan.apatxas.activities.DetalleApatxaSinRepartoActivity;
 import com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity;
+import com.jagusan.apatxas.activities.DetalleApatxaSinRepartoActivity;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 
 public class OnVerDetalleApatxaClickListener implements OnItemClickListener {

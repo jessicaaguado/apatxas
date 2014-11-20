@@ -24,13 +24,11 @@ public class GastoService {
 	}
 
 	public void open() throws SQLException {
-		Log.d("APATXAS", "LN: Abrir trans");
 		database = dbHelper.getWritableDatabase();
 		gastoDAO.setDatabase(database);
 	}
 
 	public void close() {
-		Log.d("APATXAS", "LN: Cerrar trans");
 		dbHelper.close();
 	}
 

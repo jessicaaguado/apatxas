@@ -37,7 +37,6 @@ public class ApatxaDAO {
 		values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
 
 		long insertId = database.insert(TablaApatxa.NOMBRE_TABLA, null, values);
-		Log.d("APATXAS", "DAO: Creado apatxa con id " + insertId);
 		return insertId;
 	}
 	
@@ -50,13 +49,10 @@ public class ApatxaDAO {
 		String where = TablaApatxa.COLUMNA_ID + " = ?";
 		String[] whereArgs = { String.valueOf(id) };
 		database.update(TablaApatxa.NOMBRE_TABLA, values, where, whereArgs);
-		Log.d("APATXAS", "DAO: Actualizado apatxa con id " + id);
 	}
 
 	public void borrarApatxa(Long id) {
 		database.delete(TablaApatxa.NOMBRE_TABLA, TablaApatxa.COLUMNA_ID + " = " + id, null);
-		Log.d("APATXAS", "DAO: Borrado apatxa con id " + id);
-
 	}
 	
 	public ApatxaDetalle getApatxa(Long id){

@@ -8,6 +8,7 @@ import android.util.Log;
 import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
 import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
+import com.jagusan.apatxas.utils.LogTags;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -20,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		Log.d("APATXAS", "BD: Creando la base de datos");
+		Log.i(LogTags.DEFAULT, "BD: Creando la base de datos");
 		db.execSQL(TablaApatxa.CREATE_TABLE);
 		db.execSQL(TablaGasto.CREATE_TABLE);
 		db.execSQL(TablaPersona.CREATE_TABLE);		
@@ -28,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.d("APATXAS", "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);		
+		Log.i(LogTags.DEFAULT, "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);		
 		db.execSQL(TablaGasto.DROP_TABLE);
 		db.execSQL(TablaPersona.DROP_TABLE);
 		db.execSQL(TablaApatxa.DROP_TABLE);
@@ -37,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.d("APATXAS", "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);		
+		Log.i(LogTags.DEFAULT, "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);		
 		db.execSQL(TablaGasto.DROP_TABLE);
 		db.execSQL(TablaPersona.DROP_TABLE);
 		db.execSQL(TablaApatxa.DROP_TABLE);

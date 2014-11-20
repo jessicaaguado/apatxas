@@ -36,13 +36,11 @@ public class GastoDAO {
 		values.put(TablaGasto.COLUMNA_ID_APATXA, idApatxa);
 
 		long insertId = database.insert(NOMBRE_TABLA_GASTO, null, values);
-		Log.d("APATXAS", "DAO: Creado gasto con id " + insertId);
 		return insertId;
 	}
 
 	public void borrarGasto(Long id) {
 		database.delete(NOMBRE_TABLA_GASTO, TablaGasto.COLUMNA_ID + " = " + id, null);
-		Log.d("APATXAS", "DAO: Borrado gasto con id " + id);
 	}
 
 	public List<GastoApatxaListado> recuperarGastosApatxa(Long idApatxa) {

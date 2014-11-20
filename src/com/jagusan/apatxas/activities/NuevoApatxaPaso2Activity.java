@@ -88,11 +88,8 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
-			if (resultCode == RESULT_OK) {
-				Log.d("APATXAS", "Hemos anadido un gasto");
+			if (resultCode == RESULT_OK) {				
 				anadirGasto(data);
-			} else {
-				Log.d("APATXAS", "Al final no se ha anadido ningun gasto");
 			}
 		}
 	}

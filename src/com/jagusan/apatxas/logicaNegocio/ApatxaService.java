@@ -5,7 +5,6 @@ import java.util.List;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.daos.ApatxaDAO;
 import com.jagusan.apatxas.sqlite.daos.GastoDAO;
@@ -13,7 +12,6 @@ import com.jagusan.apatxas.sqlite.daos.PersonaDAO;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
 
 public class ApatxaService {
@@ -35,16 +33,14 @@ public class ApatxaService {
 		calcularRepartoService = new CalcularRepartoService();
 	}
 
-	public void open() throws SQLException {
-		Log.d("APATXAS", "LN: Abrir trans");
+	public void open() throws SQLException {		
 		database = dbHelper.getWritableDatabase();
 		apatxaDAO.setDatabase(database);
 		personaDAO.setDatabase(database);
 		gastoDAO.setDatabase(database);
 	}
 
-	public void close() {
-		Log.d("APATXAS", "LN: Cerrar trans");
+	public void close() {		
 		dbHelper.close();
 	}
 
@@ -90,8 +86,7 @@ public class ApatxaService {
 	}
 
 	public void realizarRepartoSiNecesario(ApatxaDetalle apatxaDetalle) {
-		if (!apatxaDetalle.getRepartoRealizado()) {
-			Log.d("APATXAS", "Realizando reparto......");
+		if (!apatxaDetalle.getRepartoRealizado()) {			
 			realizarReparto(apatxaDetalle);
 		}
 	}
@@ -99,8 +94,7 @@ public class ApatxaService {
 	public void realizarReparto(ApatxaDetalle apatxaDetalle) {
 		open();
 		Double gastoProporcional = calcularRepartoService.calcularParteProporcional(apatxaDetalle);
-		for (int i = 0; i < apatxaDetalle.getPersonas().size(); i++) {	
-			Log.d("APATXAS"," REPARTO - "+apatxaDetalle.getPersonas().get(i).getNombre()+" "+gastoProporcional);
+		for (int i = 0; i < apatxaDetalle.getPersonas().size(); i++) {			
 			personaDAO.asociarPagoPersona(apatxaDetalle.getPersonas().get(i).getId(), gastoProporcional);
 		}
 		apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.getId(), true);

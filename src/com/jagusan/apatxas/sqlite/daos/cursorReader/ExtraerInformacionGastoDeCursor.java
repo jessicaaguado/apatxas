@@ -14,7 +14,6 @@ public class ExtraerInformacionGastoDeCursor {
 		gasto.setTotal(tablaGastoCursor.getTotal());
 		gasto.setIdPagadoPor(tablaGastoCursor.getIdPagador());
 		gasto.setPagadoPor(tablaGastoCursor.getNombrePagador());
-		Log.d("APATXAS", "GASTO "+gasto.getId()+" -- "+gasto.getConcepto()+" "+gasto.getTotal()+" "+gasto.getPagadoPor());
 		return gasto;
 	}
 	

@@ -30,7 +30,6 @@ public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<PersonaListado
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Log.d("APATXAS", "Posicion de la lista " + position);
 		if (convertView == null) {
 			// inflate the layout
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();

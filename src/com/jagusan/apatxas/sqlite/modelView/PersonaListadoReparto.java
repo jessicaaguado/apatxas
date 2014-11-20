@@ -4,12 +4,7 @@ public class PersonaListadoReparto extends PersonaListado {
 	
 	private Double cantidadPago;
 	private Double pagado;
-	private Double gastosPagados;
-	
-	private Double getPagoPendiente(){
-		return cantidadPago - pagado;
-	}
-	
+	private Double gastosPagados;	
 	
 	public Double getCantidadPago() {
 		return cantidadPago;

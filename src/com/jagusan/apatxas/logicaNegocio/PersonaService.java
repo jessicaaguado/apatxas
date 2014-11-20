@@ -24,13 +24,11 @@ public class PersonaService {
 	}
 
 	public void open() throws SQLException {
-		Log.d("APATXAS", "LN: Abrir trans");
 		database = dbHelper.getWritableDatabase();
 		personaDAO.setDatabase(database);
 	}
 
 	public void close() {
-		Log.d("APATXAS", "LN: Cerrar trans");
 		dbHelper.close();
 	}
 
