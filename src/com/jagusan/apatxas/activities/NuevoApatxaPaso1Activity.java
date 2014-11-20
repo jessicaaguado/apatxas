@@ -37,8 +37,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	private EditText boteInicialEditText;
 
 	private ListView personasListView;
-	private ViewGroup personasListViewHeader;
-	private ViewGroup personasListViewFooter;
+	private ViewGroup personasListViewHeader;	
 	private TextView tituloPersonasListViewHeader;
 	private List<String> personasApatxa = new ArrayList<String>();;
 	private ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
@@ -108,13 +107,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	public void onClickListoCambiarNombrePersona(int posicionPersonaCambiar, String nuevoNombre) {
 		personasApatxa.set(posicionPersonaCambiar, nuevoNombre);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
-	}
-
-	private void anadirPieListaPersonas(LayoutInflater inflater) {
-		personasListViewFooter = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_footer, personasListView, false);
-		personasListView.addFooterView(personasListViewFooter);
-
-	}
+	}	
 
 	private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
 		personasListViewHeader = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
@@ -179,10 +172,9 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
 		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
 
-		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
-		LayoutInflater inflater = getLayoutInflater();
-		anadirCabeceraListaPersonas(inflater);
-		anadirPieListaPersonas(inflater);
+		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);		
+		anadirCabeceraListaPersonas(getLayoutInflater());		
+		
 		listaPersonasApatxaArrayAdapter = new ArrayAdapter<String>(this, R.layout.lista_personas_apatxa_row, personasApatxa);
 		personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
 		registerForContextMenu(personasListView);

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:hint="Nombre" >
+        android:hint="@string/nombre" >
 
         <requestFocus />
     </EditText>
@@ -31,7 +31,7 @@
         android:inputType="numberSigned"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/fechaApatxa"
-        android:hint="Bote inicial" />    
+        android:hint="@string/bote_inicial" />    
 
     <ListView
         android:id="@+id/listaPersonasApatxa"
@@ -42,9 +42,9 @@
         android:headerDividersEnabled="true"
         android:footerDividersEnabled="true"         
         android:divider="@color/apatxascolors_color_linea_divisoria_lista" 
-        android:dividerHeight="1px"      
-        android:padding="10dp"        >
-    </ListView>
+        android:dividerHeight="1px"
+        android:paddingTop="@dimen/apatxas_padding_superior_defecto"  />
+    
 
    
 

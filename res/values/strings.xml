@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Apatxas</string>
-    
+
     <!-- ACCIONES -->
     <string name="action_settings">Settings</string>
     <string name="action_buscar">Buscar</string>
@@ -10,7 +10,8 @@
     <string name="action_listo">Listo</string>
     <string name="action_cancelar">Cancelar</string>
     <!-- ACCIONES (FIN) -->
-        
+
+
     <!-- ESTADOS APATXA -->
     <string name="estado_apatxa_sin_repartir">Sin repartir</string>
     <string name="estado_apatxa_sin_repartir_detalle">SIN REPARTIR</string>
@@ -18,13 +19,15 @@
     <string name="estado_apatxa_hecho_detalle">HECHO</string>
     <string name="estado_apatxa_hecho_detalle_sobra_bote">HECHO.\nBote: %1$.2f€</string>
     <string name="estado_apatxa_pendiente">Pendiente</string>
+
     <plurals name="estado_apatxa_pendiente_detalle_numero_personas">
         <item quantity="one">PENDIENTE. \n Falta 1 persona</item>
         <item quantity="other">PENDIENTE. \n Faltan %d personas</item>
     </plurals>
-    <!-- ESTADOS APATXA (FIN) -->   
+    <!-- ESTADOS APATXA (FIN) -->
 
-	<!--  TITULOS -->
+
+    <!-- TITULOS -->
     <string name="titulo_cabecera_lista_personas">%d PERSONAS</string>
     <string name="titulo_cabecera_lista_gastos">%1$d GASTOS: %2$.2f€</string>
     <string name="titulo_cabecera_lista_gastos_detalle_apatxa">GASTO TOTAL: %1$.2f€</string>
@@ -33,19 +36,27 @@
     <string name="title_activity_nuevo_apatxa_paso2">Nuevo</string>
     <string name="title_activity_nuevo_gasto">Nuevo gasto</string>
     <string name="title_activity_detalle_apatxa">Información</string>
-    <!--  TITULOS (FIN) -->
-    
+    <!-- TITULOS (FIN) -->
+
+
     <!-- PATRONES FECHAS -->
     <string name="patron_fecha_dia_mes_ano">dd/MM/yyyy</string>
     <string name="patron_fecha_dia_mes_ano_ux">dd/mm/aaaa</string>
     <!-- PATRONES FECHAS (FIN) -->
     
-     <plurals name="numero_personas_apatxa">
+    <string name="anadir_persona">Añadir persona</string>
+    
+    <string name="bote_inicial">Bote inicial</string>
+
+    <string name="cantidad_dinero">%1$.2f</string>
+    <string name="cantidad_dinero_euros">%1$.2f€</string>
+    
+    
+    <string name="nombre">Nombre</string>
+
+    <plurals name="numero_personas_apatxa">
         <item quantity="one">1 persona</item>
         <item quantity="other">%d personas</item>
     </plurals>
-    
-    <string name="cantidad_dinero">%1$.2f</string>
-    <string name="cantidad_dinero_euros">%1$.2f€</string>
 
 </resources>

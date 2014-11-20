@@ -16,11 +16,16 @@
     </style>
     
     <style name="texto_cabecera_lista" parent="@style/texto_principal_lista">
-        <item name="android:textColor">@color/apatxascolors_color</item> 
-               
+        <item name="android:textColor">@color/apatxascolors_color</item>
+        <item name="android:background">@color/apatxascolors_gris_claro</item>       
     </style>
     
     <style name="texto_pie_lista" parent="@style/texto_principal_lista">        
+    </style>
+    
+    
+    <style name="boton_icono_accion_cabecera_lista" parent="@style/apatxas_boton_solo_icono">        
+        <item name="android:background">@color/apatxascolors_color_cabecera_lista</item>        
     </style>
     
     <style name="boton_pie_lista" parent="@style/ButtonApatxasColors">
