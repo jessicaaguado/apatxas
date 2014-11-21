@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.dialogs.CambiarNombrePersonaApatxaDialogFragment;
 import com.jagusan.apatxas.listeners.CambiarNombrePersonaApatxaDialogListener;
 import com.jagusan.apatxas.utils.FormatearFecha;
+import com.jagusan.apatxas.utils.ValidacionActivity;
 
 public class NuevoApatxaPaso1Activity extends ActionBarActivity implements CambiarNombrePersonaApatxaDialogListener {
 
@@ -37,7 +39,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	private EditText boteInicialEditText;
 
 	private ListView personasListView;
-	private ViewGroup personasListViewHeader;	
+	private ViewGroup personasListViewHeader;
 	private TextView tituloPersonasListViewHeader;
 	private List<String> personasApatxa = new ArrayList<String>();;
 	private ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
@@ -55,7 +57,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 
 		personalizarActionBar();
 
-		cargarElementosLayout();		
+		cargarElementosLayout();
 		inicializarElementosLayout();
 	}
 
@@ -107,7 +109,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	public void onClickListoCambiarNombrePersona(int posicionPersonaCambiar, String nuevoNombre) {
 		personasApatxa.set(posicionPersonaCambiar, nuevoNombre);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
-	}	
+	}
 
 	private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
 		personasListViewHeader = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
@@ -150,13 +152,21 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 			// mantenemos bote inicial a 0
 		}
 
-		Intent intent = new Intent(this, NuevoApatxaPaso2Activity.class);
-		intent.putExtra("titulo", titulo);
-		intent.putExtra("fecha", fecha);
-		intent.putExtra("boteInicial", boteInicial);
-		intent.putStringArrayListExtra("personas", (ArrayList<String>) personasApatxa);
+		if (validacionesCorrectas()) {
+			Intent intent = new Intent(this, NuevoApatxaPaso2Activity.class);
+			intent.putExtra("titulo", titulo);
+			intent.putExtra("fecha", fecha);
+			intent.putExtra("boteInicial", boteInicial);
+			intent.putStringArrayListExtra("personas", (ArrayList<String>) personasApatxa);
 
-		startActivity(intent);
+			startActivity(intent);
+		}
+	}
+
+	private Boolean validacionesCorrectas() {
+		Boolean tituloOk = ValidacionActivity.validarTituloObligatorio(nombreApatxaEditText, resources);
+		Boolean fechaOk = ValidacionActivity.validarFechaObligatoria(fechaApatxaEditText, resources);
+		return tituloOk && fechaOk;
 	}
 
 	private void inicializarServicios() {
@@ -172,15 +182,15 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
 		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
 
-		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);		
-		anadirCabeceraListaPersonas(getLayoutInflater());		
-		
+		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+		anadirCabeceraListaPersonas(getLayoutInflater());
+
 		listaPersonasApatxaArrayAdapter = new ArrayAdapter<String>(this, R.layout.lista_personas_apatxa_row, personasApatxa);
 		personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
 		registerForContextMenu(personasListView);
 	}
-	
-	private void inicializarElementosLayout(){
+
+	private void inicializarElementosLayout() {
 		fechaApatxaEditText.setText(FormatearFecha.formatearHoy(resources));
 	}
 

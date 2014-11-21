@@ -12,6 +12,12 @@
     <!-- ACCIONES (FIN) -->
 
 
+    <!-- VALIDACIONES -->
+    <string name="validacion_mensaje_obligatorio">Obligatorio</string>
+    <string name="validacion_mensaje_formato_fecha_incorrecto">Obligatorio introducir fecha con el formato %s</string>
+    <!-- VALIDACIONES (FIN) -->
+
+
     <!-- ESTADOS APATXA -->
     <string name="estado_apatxa_sin_repartir">Sin repartir</string>
     <string name="estado_apatxa_sin_repartir_detalle">SIN REPARTIR</string>
@@ -41,17 +47,13 @@
 
     <!-- PATRONES FECHAS -->
     <string name="patron_fecha_dia_mes_ano">dd/MM/yyyy</string>
-    <string name="patron_fecha_dia_mes_ano_ux">dd/mm/aaaa</string>
+    <string name="patron_fecha_dia_mes_ano_ux">dd/mm/aaaa</string>    
     <!-- PATRONES FECHAS (FIN) -->
-    
-    <string name="anadir_persona">Añadir persona</string>
-    
-    <string name="bote_inicial">Bote inicial</string>
 
+    <string name="anadir_persona">Añadir persona</string>
+    <string name="bote_inicial">Bote inicial</string>
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f€</string>
-    
-    
     <string name="nombre">Nombre</string>
 
     <plurals name="numero_personas_apatxa">
