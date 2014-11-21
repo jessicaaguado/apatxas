@@ -10,8 +10,7 @@
         style="@style/apatxas_valor_defecto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.8"
-        android:text="0 GASTOS: 0€" />
+        android:layout_weight="0.8" />
 
     <ImageButton
         android:id="@+id/botonAnadirGastosDetalleApatxas"
@@ -20,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_weight="0.2"
-        android:contentDescription="Anadir gastos"
+        android:contentDescription="@string/anadir_gasto"
         android:src="@drawable/ic_action_apatxas_anadir_gasto_detalle_apatxa" />
 
 </LinearLayout>

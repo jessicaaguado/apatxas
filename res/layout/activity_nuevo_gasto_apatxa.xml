@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/apatxas_detalle_activity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.jagusan.apatxas.activities.NuevoGastoApatxaActivity" >
+    android:layout_height="match_parent" >
 
     <EditText
         android:id="@+id/concepto"
@@ -11,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:hint="Concepto" >
+        android:hint="@string/concepto" >
 
         <requestFocus />
     </EditText>
@@ -22,8 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/concepto"
-        android:hint="Total"
-        android:inputType="number" />
+        android:hint="@string/importe"
+        android:inputType="numberDecimal" />
 
     <Spinner
         android:id="@+id/listaPersonasApatxa"

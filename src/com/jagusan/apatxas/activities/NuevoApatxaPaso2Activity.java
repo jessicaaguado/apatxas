@@ -8,23 +8,21 @@ import java.util.Map;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
-import com.jagusan.apatxas.dialogs.CambiarNombrePersonaApatxaDialogFragment;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.logicaNegocio.GastoService;
 import com.jagusan.apatxas.logicaNegocio.PersonaService;
@@ -46,6 +44,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	private Double totalGastos = 0.0;
 
 	private int NUEVO_GASTO_REQUEST_CODE = 1;
+	private int EDITAR_GASTO_REQUEST_CODE = 2;
 
 	private ListView gastosApatxaListView;
 	private ViewGroup gastosApatxaListViewHeader;
@@ -95,13 +94,14 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		switch (item.getItemId()) {
 		case R.id.action_gasto_apatxa_cambiar:
-//			DialogFragment dialog = new CambiarNombrePersonaApatxaDialogFragment();
-//			Bundle parametros = new Bundle();
-//			parametros.putInt("posicionGastoCambiar", info.position - 1);
-//			parametros.putString("conceptoGastoCambiar", listaGastos.get(info.position - 1).getConcepto());
-//			//TODO
-//			dialog.setArguments(parametros);
-//			dialog.show(getSupportFragmentManager(), "CambiarNombrePersonaApatxaDialogFragment");
+			GastoApatxaListado gasto = listaGastos.get(info.position - 1);			
+			Intent intent = new Intent(this, EditarGastoApatxaActivity.class);
+			intent.putExtra("conceptoGasto", gasto.getConcepto());
+			intent.putExtra("importeGasto", gasto.getTotal());
+			intent.putExtra("nombrePersonaPagadoGasto", gasto.getPagadoPor());
+			intent.putStringArrayListExtra("personas", personasApatxa);
+			intent.putExtra("posicionGastoEditar", info.position - 1);
+			startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
 			return true;
 		case R.id.action_gasto_apatxa_borrar:
 			borrarGasto(info.position);
@@ -117,7 +117,13 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 				anadirGastoAListaDeGastos(data);
 			}
 		}
+		if (requestCode == EDITAR_GASTO_REQUEST_CODE){
+			if (resultCode == RESULT_OK) {
+				actualizarGastoListaDeGastos(data);
+			}
+		}
 	}
+	
 
 	public void anadirGasto(View v) {
 		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
@@ -196,18 +202,35 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 		GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
 		listaGastos.add(gastoListado);
-		actualizarListaGastos(totalGasto);
+		actualizarListaGastos(totalGasto, 0.0);
 	}
 
 	private void borrarGasto(int posicion) {
 		Double importeGasto = listaGastos.get(posicion - 1).getTotal();
 		listaGastos.remove(posicion - 1);
-		actualizarListaGastos(importeGasto * -1);
+		actualizarListaGastos(0.0, importeGasto);
+	}
+	
+	private void actualizarGastoListaDeGastos(Intent data) {
+		String conceptoGasto = data.getStringExtra("concepto");
+		Double totalGasto = data.getDoubleExtra("total", 0);
+		String pagadoGasto = data.getStringExtra("pagadoPor");
+		Integer posicionGastoActualizar = data.getIntExtra("posicionGastoEditar", -1);
+		
+		Double importeGastoAnterior = listaGastos.get(posicionGastoActualizar).getTotal();
+		GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
+		listaGastos.set(posicionGastoActualizar, gastoListado);
+				
+		actualizarListaGastos(totalGasto,importeGastoAnterior);		
 	}
 
-	private void actualizarListaGastos(Double importeGastoNuevo) {
-		totalGastos += importeGastoNuevo;
+	private void actualizarListaGastos(Double importeGastoNuevo, Double importeGastoEliminar) {
+		calcularTotalGastosApatxa(importeGastoNuevo, importeGastoEliminar);
 		listaGastosApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaGastos();
+	}
+	
+	private void calcularTotalGastosApatxa(Double importeGastoNuevo, Double importeGastoEliminar){
+		totalGastos = totalGastos - importeGastoEliminar + importeGastoNuevo;
 	}
 }

@@ -41,6 +41,7 @@
     <string name="title_activity_nuevo_apatxa_paso1">Nuevo</string>
     <string name="title_activity_nuevo_apatxa_paso2">Nuevo</string>
     <string name="title_activity_nuevo_gasto">Nuevo gasto</string>
+    <string name="title_activity_editar_gasto">Cambiar gasto</string>
     <string name="title_activity_detalle_apatxa">Información</string>
     <!-- TITULOS (FIN) -->
 
@@ -53,13 +54,17 @@
 	<string name="anadir_gasto">Añadir gasto</string>
     <string name="anadir_persona">Añadir persona</string>
     <string name="bote_inicial">Bote inicial</string>
+    <string name="concepto">Concepto</string>
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f€</string>
+    <string name="importe">Importe</string>
     <string name="nombre">Nombre</string>
 
     <plurals name="numero_personas_apatxa">
         <item quantity="one">1 persona</item>
         <item quantity="other">%d personas</item>
     </plurals>
+    
+    
 
 </resources>
