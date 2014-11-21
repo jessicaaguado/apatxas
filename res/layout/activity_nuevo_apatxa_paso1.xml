@@ -28,7 +28,7 @@
         android:id="@+id/boteInicialApatxa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberSigned"
+        android:inputType="numberDecimal|numberSigned"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/fechaApatxa"
         android:hint="@string/bote_inicial" />    
