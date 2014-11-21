@@ -8,17 +8,23 @@ import java.util.Map;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
+import com.jagusan.apatxas.dialogs.CambiarNombrePersonaApatxaDialogFragment;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.logicaNegocio.GastoService;
 import com.jagusan.apatxas.logicaNegocio.PersonaService;
@@ -76,6 +82,34 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.context_menu_gasto_apatxa, menu);
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		switch (item.getItemId()) {
+		case R.id.action_gasto_apatxa_cambiar:
+//			DialogFragment dialog = new CambiarNombrePersonaApatxaDialogFragment();
+//			Bundle parametros = new Bundle();
+//			parametros.putInt("posicionGastoCambiar", info.position - 1);
+//			parametros.putString("conceptoGastoCambiar", listaGastos.get(info.position - 1).getConcepto());
+//			//TODO
+//			dialog.setArguments(parametros);
+//			dialog.show(getSupportFragmentManager(), "CambiarNombrePersonaApatxaDialogFragment");
+			return true;
+		case R.id.action_gasto_apatxa_borrar:
+			borrarGasto(info.position);
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}
+	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
@@ -132,6 +166,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, listaGastos);
 		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
+		registerForContextMenu(gastosApatxaListView);
 	}
 
 	private void recuperarDatosPasoAnterior() {
@@ -164,11 +199,11 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		actualizarListaGastos(totalGasto);
 	}
 
-	// private void borrarGasto(int posicion) {
-	// Double importeGasto = listaGastos.get(posicion).getTotal();
-	// listaGastos.remove(posicion);
-	// actualizarListaGastos(importeGasto * -1);
-	// }
+	private void borrarGasto(int posicion) {
+		Double importeGasto = listaGastos.get(posicion - 1).getTotal();
+		listaGastos.remove(posicion - 1);
+		actualizarListaGastos(importeGasto * -1);
+	}
 
 	private void actualizarListaGastos(Double importeGastoNuevo) {
 		totalGastos += importeGastoNuevo;
