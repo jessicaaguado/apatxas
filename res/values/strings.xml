@@ -50,6 +50,7 @@
     <string name="patron_fecha_dia_mes_ano_ux">dd/mm/aaaa</string>    
     <!-- PATRONES FECHAS (FIN) -->
 
+	<string name="anadir_gasto">Añadir gasto</string>
     <string name="anadir_persona">Añadir persona</string>
     <string name="bote_inicial">Bote inicial</string>
     <string name="cantidad_dinero">%1$.2f</string>
