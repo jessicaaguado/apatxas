@@ -79,6 +79,9 @@
             android:name=".activities.EditarInformacionBasicaApatxaActivity"
             android:windowSoftInputMode="stateVisible" >
         </activity>
+        <activity
+            android:name=".activities.ListaPersonasApatxaActivity">
+        </activity>
     </application>
 
 </manifest>

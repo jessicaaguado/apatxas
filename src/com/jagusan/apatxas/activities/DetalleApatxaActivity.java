@@ -36,6 +36,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	protected ApatxaDetalle apatxa;
 
 	private int EDITAR_INFORMACION_BASICA_REQUEST_CODE = 1;
+	private int EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE = 2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -133,12 +134,23 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 		startActivityForResult(intent, EDITAR_INFORMACION_BASICA_REQUEST_CODE );
 	}
 	
+	public void irEditarListaPersonasApatxa(View view){
+		Intent intent = new Intent(this, ListaPersonasApatxaActivity.class);
+		startActivityForResult(intent, EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE );
+	}
+	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				
 			}
-		}		
+		}	
+		
+		if (requestCode == EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				
+			}
+		}
 	}
 
 }

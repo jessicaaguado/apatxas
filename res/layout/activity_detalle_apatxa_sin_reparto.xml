@@ -32,7 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:contentDescription="Editar información personas"
-            android:src="@drawable/ic_action_apatxas_modificar_personas_detalle" />
+            android:src="@drawable/ic_action_apatxas_modificar_personas_detalle"
+            android:onClick="irEditarListaPersonasApatxa" />
     </LinearLayout>
 
     <View
