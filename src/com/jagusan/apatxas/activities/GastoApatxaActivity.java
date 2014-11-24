@@ -3,16 +3,17 @@ package com.jagusan.apatxas.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jagusan.apatxas.R;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.jagusan.apatxas.R;
 
 public abstract class GastoApatxaActivity extends ActionBarActivity{
 	
@@ -20,6 +21,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity{
 	
 	protected EditText conceptoGastoEditText;
 	protected EditText totalGastoEditText;
+	private TextView labelPagadoPorTextView;
 	
 	protected Spinner personasSpinner;
 	protected List<String> personasApatxa;
@@ -61,6 +63,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity{
 	protected void cargarElementosLayout() {
 		conceptoGastoEditText = (EditText) findViewById(R.id.concepto);
 		totalGastoEditText = (EditText) findViewById(R.id.totalGasto);
+		labelPagadoPorTextView = (TextView) findViewById(R.id.labelGastoPagadoPor);
 		
 		personasSpinner = (Spinner) findViewById(R.id.listaPersonasApatxa);
 		if (!personasApatxa.isEmpty()){
@@ -71,6 +74,8 @@ public abstract class GastoApatxaActivity extends ActionBarActivity{
 			personasSpinner.setAdapter(listaPersonasApatxaArrayAdapter);	
 		}else{
 			//TODO eliminar label y spinner
+			labelPagadoPorTextView.setVisibility(View.GONE);
+			personasSpinner.setVisibility(View.GONE);
 		}
 		
 		

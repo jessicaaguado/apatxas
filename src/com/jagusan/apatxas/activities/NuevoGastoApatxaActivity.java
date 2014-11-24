@@ -34,7 +34,7 @@ public class NuevoGastoApatxaActivity extends GastoApatxaActivity {
 			} catch (Exception e) {
 				// mantenemos total a 0
 			}			
-			Integer elementoSeleccionado = personasSpinner.getSelectedItemPosition() == 0 ? null : personasSpinner.getSelectedItemPosition();
+			Integer elementoSeleccionado = personasSpinner.getSelectedItemPosition() <= 0 ? null : personasSpinner.getSelectedItemPosition();
 			
 			returnIntent.putExtra("concepto",concepto);
 			returnIntent.putExtra("total",totalGasto);
