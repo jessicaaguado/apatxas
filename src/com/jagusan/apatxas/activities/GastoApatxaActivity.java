@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.utils.ValidacionActivity;
 
 public abstract class GastoApatxaActivity extends ActionBarActivity {
 
@@ -75,16 +77,47 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 		personasSpinner = (Spinner) findViewById(R.id.listaPersonasApatxa);
 		if (!personasApatxa.isEmpty()) {
 			List<String> personasApatxaConOpcionSinPagar = new ArrayList<String>();
-			personasApatxaConOpcionSinPagar.add("Sin pagar");
+			personasApatxaConOpcionSinPagar.add(resources.getString(R.string.sin_pagar));
 			personasApatxaConOpcionSinPagar.addAll(personasApatxa);
 			listaPersonasApatxaArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, personasApatxaConOpcionSinPagar);
 			personasSpinner.setAdapter(listaPersonasApatxaArrayAdapter);
 		} else {
-			// TODO eliminar label y spinner
 			labelPagadoPorTextView.setVisibility(View.GONE);
 			personasSpinner.setVisibility(View.GONE);
 		}
 
 	}
+
+	protected Boolean validacionesCorrectas() {
+		Boolean tituloOk = ValidacionActivity.validarTituloObligatorio(conceptoGastoEditText, resources);
+		Boolean fechaOk = ValidacionActivity.validarCantidadObligatoria(totalGastoEditText, resources);
+		return tituloOk && fechaOk;
+	}
+	
+	protected String getPagadorSeleccionado() {
+		// el 0 es  #sin pagar#		
+		Integer personaSeleccionada = personasSpinner.getSelectedItemPosition() <= 0 ? null : personasSpinner.getSelectedItemPosition() -1;		
+		String pagador = null;
+		if (personaSeleccionada != null){ 
+			pagador = personasApatxa.get(personaSeleccionada);	
+		}
+		return pagador;
+	}
+
+	protected Double getImporteIntroducido() {
+		Double totalGasto = 0.0;
+		try {
+			totalGasto = Double.parseDouble(totalGastoEditText.getText().toString());
+		} catch (Exception e) {
+			// mantenemos total a 0
+		}
+		return totalGasto;
+	}
+
+	protected String getConceptoIntroducido() {
+		return conceptoGastoEditText.getText().toString();
+	}
+
+
 
 }

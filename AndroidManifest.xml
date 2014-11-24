@@ -30,7 +30,7 @@
 
             <!--
                  meta-data android:name="android.support.UI_OPTIONS"
-            	       android:value="splitActionBarWhenNarrow" /
+            	       android:value="splitActionBarWhenNarrow" /
             -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -56,7 +56,8 @@
         </activity>
         <activity
             android:name=".activities.EditarGastoApatxaActivity"
-            android:label="@string/title_activity_editar_gasto" >
+            android:label="@string/title_activity_editar_gasto"
+            android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
             android:name=".activities.DetalleApatxaSinRepartoActivity"
