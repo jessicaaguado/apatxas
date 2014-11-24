@@ -144,8 +144,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 			if (resultCode == RESULT_OK) {
 				
 			}
-		}	
-		
+		}			
 		if (requestCode == EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				

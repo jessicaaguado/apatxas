@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,6 +16,9 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
 	private ListView gastosApatxaListView;	
 	private TextView tituloGastosApatxaListViewHeader;
+	
+	private final int NUEVO_GASTO_REQUEST_CODE = 1;
+	private final int EDITAR_GASTO_REQUEST_CODE = 2;
 	
 
 	@Override
@@ -80,6 +84,26 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	private void actualizarTituloCabeceraListaGastos(Integer numeroGastos, Double totalGastosApatxa) {
 		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_gastos_detalle_apatxa), totalGastosApatxa);
 		tituloGastosApatxaListViewHeader.setText(titulo);
+	}
+	
+	public void anadirGastoDetalleApatxa(View view){
+		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);		
+		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);		
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+	//			anadirGastoAListaDeGastos(data);
+			}
+		}
+		if (requestCode == EDITAR_GASTO_REQUEST_CODE){
+			if (resultCode == RESULT_OK) {
+		//		actualizarGastoListaDeGastos(data);
+			}
+		}
 	}
 
 }

@@ -65,7 +65,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 	}
 
 	protected void recuperarDatosPasoAnterior() {
-		personasApatxa = getIntent().getStringArrayListExtra("personas");
+		personasApatxa = getIntent().getStringArrayListExtra("personas") != null ? getIntent().getStringArrayListExtra("personas") : new ArrayList<String>();
 	}
 
 	protected void cargarElementosLayout() {
@@ -92,13 +92,13 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 		Boolean fechaOk = ValidacionActivity.validarCantidadObligatoria(totalGastoEditText, resources);
 		return tituloOk && fechaOk;
 	}
-	
+
 	protected String getPagadorSeleccionado() {
-		// el 0 es  #sin pagar#		
-		Integer personaSeleccionada = personasSpinner.getSelectedItemPosition() <= 0 ? null : personasSpinner.getSelectedItemPosition() -1;		
+		// el 0 es #sin pagar#
+		Integer personaSeleccionada = personasSpinner.getSelectedItemPosition() <= 0 ? null : personasSpinner.getSelectedItemPosition() - 1;
 		String pagador = null;
-		if (personaSeleccionada != null){ 
-			pagador = personasApatxa.get(personaSeleccionada);	
+		if (personaSeleccionada != null) {
+			pagador = personasApatxa.get(personaSeleccionada);
 		}
 		return pagador;
 	}
@@ -116,7 +116,5 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 	protected String getConceptoIntroducido() {
 		return conceptoGastoEditText.getText().toString();
 	}
-
-
 
 }
