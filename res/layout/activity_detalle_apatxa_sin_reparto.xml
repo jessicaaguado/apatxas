@@ -22,8 +22,7 @@
             style="@style/apatxas_valor_defecto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:text="x Personas" />
+            android:layout_weight="0.8"/>
 
         <ImageButton
             android:id="@+id/botonEditarInformacionPersonasApatxas"
@@ -31,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
-            android:contentDescription="Editar información personas"
+            android:contentDescription="@string/cambiar_informacion_personas_apatxa"
             android:src="@drawable/ic_action_apatxas_modificar_personas_detalle"
             android:onClick="irEditarListaPersonasApatxa" />
     </LinearLayout>
@@ -65,7 +64,6 @@
         android:layout_below="@+id/separador2DetalleApatxa"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:lineSpacingMultiplier="1.2"
-        android:text="( Pagado )" />
+        android:lineSpacingMultiplier="1.2"/>
 
 </RelativeLayout>

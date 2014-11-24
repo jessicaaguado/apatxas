@@ -1,5 +1,8 @@
 package com.jagusan.apatxas.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,15 +14,22 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
+import com.jagusan.apatxas.logicaNegocio.GastoService;
+import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
+import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 
 public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
 	private ListView gastosApatxaListView;	
 	private TextView tituloGastosApatxaListViewHeader;
+	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
+	private List<GastoApatxaListado> gastosApatxa;
 	
 	private final int NUEVO_GASTO_REQUEST_CODE = 1;
 	private final int EDITAR_GASTO_REQUEST_CODE = 2;
 	
+	private GastoService gastoService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +61,12 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	@Override
 	protected void setContentView() {
 		setContentView(R.layout.activity_detalle_apatxa_sin_reparto);
-
+	}
+	
+	@Override
+	protected void inicializarServicios() {
+		super.inicializarServicios();
+		gastoService = new GastoService(this);
 	}
 
 	private void verReparto() {
@@ -76,7 +91,8 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	}
 
 	private void cargarInformacionGastos() {		
-		ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_detalle_apatxa_row, apatxa.getGastos());
+		gastosApatxa = apatxa.getGastos();
+		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_detalle_apatxa_row, gastosApatxa);
 		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
 		actualizarTituloCabeceraListaGastos(apatxa.getGastos().size(), apatxa.getGastoTotal());
 	}
@@ -87,8 +103,14 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	}
 	
 	public void anadirGastoDetalleApatxa(View view){
-		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);		
-		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);		
+		ArrayList<String> personas = new ArrayList<String>();
+		List<PersonaListado> personasApatxa = apatxa.getPersonas();
+		for (int i=0; i<personasApatxa.size(); i++){
+			personas.add(personasApatxa.get(i).getNombre());
+		}
+		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
+		intent.putStringArrayListExtra("personas", personas);
+		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);
 	}
 	
 	@Override
@@ -96,7 +118,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
-	//			anadirGastoAListaDeGastos(data);
+				guardarNuevoGastoApatxa(data);
 			}
 		}
 		if (requestCode == EDITAR_GASTO_REQUEST_CODE){
@@ -104,6 +126,36 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 		//		actualizarGastoListaDeGastos(data);
 			}
 		}
+	}
+	
+	private void guardarNuevoGastoApatxa(Intent data) {
+		String conceptoGasto = data.getStringExtra("concepto");
+		Double totalGasto = data.getDoubleExtra("total", 0);
+		String nombrePersonaPagadoGasto = data.getStringExtra("pagadoPor");
+		Long idPersona = getIdPersonaPagadoGasto(apatxa.getPersonas(), nombrePersonaPagadoGasto);
+		gastoService.crearGasto(conceptoGasto, totalGasto, idApatxa, idPersona);
+		apatxaService.actualizarGastoTotalApatxa(idApatxa);		
+		recargarInformacionGastos();
+	}
+
+	private void recargarInformacionGastos() {
+		ApatxaDetalle apatxaActualizada = apatxaService.getApatxaDetalle(idApatxa);
+		gastosApatxa.clear();
+		gastosApatxa.addAll(apatxaActualizada.getGastos());		
+		listaGastosApatxaArrayAdapter.notifyDataSetChanged();	
+		actualizarTituloCabeceraListaGastos(apatxaActualizada.getGastos().size(), apatxaActualizada.getGastoTotal());
+	}
+
+	private Long getIdPersonaPagadoGasto(List<PersonaListado> personas, String nombrePersonaPagadoGasto) {
+		Long idPersona = null;
+		int i=0;
+		while (nombrePersonaPagadoGasto != null && !nombrePersonaPagadoGasto.equals(personas.get(i).getNombre()) && i < personas.size()){
+			i++;
+		}
+		if (nombrePersonaPagadoGasto != null && nombrePersonaPagadoGasto.equals(personas.get(i).getNombre())){
+			idPersona = personas.get(i).getId();
+		}
+		return idPersona;
 	}
 
 }

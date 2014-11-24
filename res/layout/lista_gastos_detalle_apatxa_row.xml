@@ -10,8 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.7"
-        android:textAppearance="@style/texto_principal_lista"
-        android:text="hola" />
+        android:textAppearance="@style/texto_principal_lista"/>
 
     <TextView
         android:id="@+id/total"
@@ -19,7 +18,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.3"
         android:gravity="right"
-        android:textAppearance="@style/texto_extra_lista"
-        android:text="caracola" />
+        android:textAppearance="@style/texto_extra_lista" />
 
 </LinearLayout>

@@ -128,7 +128,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	public void anadirGasto(View v) {
 		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
 		intent.putStringArrayListExtra("personas", personasApatxa);
-		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);
+		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);		
 	}
 
 	public void guardarApatxa() {
@@ -152,6 +152,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	private void irListadoApatxasPrincipal() {
 		Intent intent = new Intent(this, ListaApatxasActivity.class);
+		//TODO finish?
 		startActivity(intent);
 	}
 
