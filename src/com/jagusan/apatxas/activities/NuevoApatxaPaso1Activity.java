@@ -43,7 +43,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	private List<String> personasApatxa = new ArrayList<String>();;
 	private ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
 
-	Resources resources;
+	private Resources resources;
 
 	private int numPersonasApatxaAnadidas = 0;
 

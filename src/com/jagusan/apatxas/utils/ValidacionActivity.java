@@ -15,22 +15,24 @@ public class ValidacionActivity {
 	public static final Integer MENS_FORMATO_FECHA_INCORRECTA = R.string.validacion_mensaje_formato_fecha_incorrecto;
 
 	public static final String REGEX_DEFAULT = ".*";
-
-	public static boolean validarNombre() {
-		return false;
-	}
-
+	
 	public static boolean validarTituloObligatorio(EditText editText, Resources resources) {
-		String mensaje = resources.getString(MENS_OBLIGATORIO);
-		return esValido(editText, mensaje, true, REGEX_DEFAULT);
+		return validarCampoObligatorio(editText, resources);
 	}
 
 	public static boolean validarConceptoObligatorio(EditText editText, Resources resources) {
-		String mensaje = resources.getString(MENS_OBLIGATORIO);
-		return esValido(editText, mensaje, true, REGEX_DEFAULT);
+		return validarCampoObligatorio(editText, resources);
 	}
 
 	public static boolean validarFechaObligatoria(EditText editText, Resources resources) {
+		return validarCampoObligatorio(editText, resources);
+	}
+	
+	public static Boolean validarCantidadObligatoria(EditText editText, Resources resources) {
+		return validarCampoObligatorio(editText, resources);
+	}
+
+	private static Boolean validarCampoObligatorio(EditText editText, Resources resources) {
 		String mensaje = resources.getString(MENS_OBLIGATORIO);
 		return esValido(editText, mensaje, true, REGEX_DEFAULT);
 	}
@@ -53,5 +55,7 @@ public class ValidacionActivity {
 
 		return valido;
 	}
+
+	
 
 }
