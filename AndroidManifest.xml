@@ -21,7 +21,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>        
+        </activity>
         <activity
             android:name=".activities.NuevoApatxaPaso1Activity"
             android:label="@string/title_activity_nuevo_apatxa_paso1"
@@ -30,7 +30,7 @@
 
             <!--
                  meta-data android:name="android.support.UI_OPTIONS"
-            	       android:value="splitActionBarWhenNarrow" /
+            	       android:value="splitActionBarWhenNarrow" /
             -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -48,20 +48,20 @@
         <activity
             android:name=".activities.NuevoGastoApatxaActivity"
             android:label="@string/title_activity_nuevo_gasto"
-            android:parentActivityName=".activities.NuevoApatxaPaso2Activity" >
+            android:parentActivityName=".activities.NuevoApatxaPaso2Activity"
+            android:windowSoftInputMode="stateVisible" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.NuevoApatxaPaso2Activity" />
         </activity>
         <activity
             android:name=".activities.EditarGastoApatxaActivity"
-            android:label="@string/title_activity_editar_gasto">
-            
+            android:label="@string/title_activity_editar_gasto" >
         </activity>
         <activity
             android:name=".activities.DetalleApatxaSinRepartoActivity"
             android:label="@string/title_activity_detalle_apatxa"
-            android:parentActivityName=".activities.ListaApatxasActivity">
+            android:parentActivityName=".activities.ListaApatxasActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ListaApatxasActivity" />
