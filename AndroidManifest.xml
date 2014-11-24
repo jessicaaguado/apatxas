@@ -75,6 +75,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.ListaApatxasActivity" />
         </activity>
+        <activity
+            android:name=".activities.EditarInformacionBasicaApatxaActivity"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
     </application>
 
 </manifest>

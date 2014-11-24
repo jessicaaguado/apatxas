@@ -4,34 +4,7 @@
     android:layout_height="match_parent"
      style="@style/apatxas_detalle_activity">
 
-    <EditText
-        android:id="@+id/nombreApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:hint="@string/nombre" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/fechaApatxa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/nombreApatxa"
-        android:hint="@string/patron_fecha_dia_mes_ano_ux"
-        android:inputType="date" />
-
-    <EditText
-        android:id="@+id/boteInicialApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal|numberSigned"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/fechaApatxa"
-        android:hint="@string/bote_inicial" />    
+	<include layout="@layout/subactivity_informacion_basica_apatxa"/>   
 
     <ListView
         android:id="@+id/listaPersonasApatxa"

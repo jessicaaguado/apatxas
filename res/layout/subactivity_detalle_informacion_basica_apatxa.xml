@@ -46,7 +46,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/nombreApatxaDetalle"
         android:contentDescription="Editar información basica"
-        android:src="@drawable/ic_action_apatxas_editar_detalle" />
+        android:src="@drawable/ic_action_apatxas_editar_detalle"
+        android:onClick="irEditarInformacionBasicaApatxa" />
 
     <View
         android:id="@+id/separador1DetalleApatxa"

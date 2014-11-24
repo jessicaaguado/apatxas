@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.jagusan.apatxas.activities.DetalleApatxaSinRepartoActivity" >
 
-	<include layout="@layout/subactivity_informacion_apatxa_editable"/>    
+	<include layout="@layout/subactivity_detalle_informacion_basica_apatxa"/>    
 
     <LinearLayout
         android:id="@+id/informacionPersonasApatxaDetalle"

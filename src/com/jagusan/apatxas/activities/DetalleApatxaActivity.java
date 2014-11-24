@@ -3,12 +3,14 @@ package com.jagusan.apatxas.activities;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
@@ -32,6 +34,8 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	private TextView estadoApatxaTextView;
 
 	protected ApatxaDetalle apatxa;
+
+	private int EDITAR_INFORMACION_BASICA_REQUEST_CODE = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +121,24 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	private void cargarInformacionEstado() {
 		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxa.getEstadoApatxa(), apatxa.getPersonasPendientesPagarCobrar(), apatxa.getGastoTotal(), apatxa.getPagado(), apatxa.getBoteInicial());
 		estadoApatxaTextView.setText(estadoApatxa);
+	}
+	
+	public void irEditarInformacionBasicaApatxa(View view){
+		Intent intent = new Intent(this, EditarInformacionBasicaApatxaActivity.class);
+//		intent.putExtra("titulo", titulo);
+//		intent.putExtra("fecha", fecha);
+//		intent.putExtra("boteInicial", boteInicial);
+//		intent.putExtra("idApatxa",idApatxa)
+
+		startActivityForResult(intent, EDITAR_INFORMACION_BASICA_REQUEST_CODE );
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				
+			}
+		}		
 	}
 
 }
