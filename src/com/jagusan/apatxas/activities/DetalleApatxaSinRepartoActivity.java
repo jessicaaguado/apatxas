@@ -26,8 +26,8 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
 	private List<GastoApatxaListado> gastosApatxa;
 	
-	private final int NUEVO_GASTO_REQUEST_CODE = 1;
-	private final int EDITAR_GASTO_REQUEST_CODE = 2;
+	private final int NUEVO_GASTO_REQUEST_CODE = 20;
+	private final int EDITAR_GASTO_REQUEST_CODE = 21;
 	
 	private GastoService gastoService;
 
