@@ -24,11 +24,21 @@
         android:hint="@string/importe"
         android:inputType="numberDecimal" />
 
+    <TextView
+        android:id="@+id/labelGastoPagadoPor"
+        style="@style/apatxas_label_defecto"
+        android:paddingTop="@dimen/apatxas_padding_superior_defecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/totalGasto"
+        android:text="@string/pagado_por" />
+
     <Spinner
         android:id="@+id/listaPersonasApatxa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/totalGasto" />
+        android:layout_below="@+id/labelGastoPagadoPor"/>
 
 </RelativeLayout>

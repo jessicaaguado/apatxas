@@ -64,6 +64,9 @@
         <item quantity="one">1 persona</item>
         <item quantity="other">%d personas</item>
     </plurals>
+    <string name="pagado_por">Pagado por</string>
+    
+    <string name="sin_pagar">Sin pagar</string>
     
     
 
