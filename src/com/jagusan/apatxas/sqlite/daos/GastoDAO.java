@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionGastoDeCursor;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
 import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
 
@@ -58,6 +59,18 @@ public class GastoDAO {
 		}
 		cursor.close();
 		return gastos;
+	}
+
+	public void actualizarGasto(Long idGasto, String conceptoGasto, Double totalGasto, Long idPersona) {
+		ContentValues values = new ContentValues();
+		values.put(TablaGasto.COLUMNA_CONCEPTO, conceptoGasto);
+		values.put(TablaGasto.COLUMNA_TOTAL, totalGasto);
+		values.put(TablaGasto.COLUMNA_ID_PAGADO_POR, idPersona);
+
+		String where = TablaGasto.COLUMNA_ID + " = ?";
+		String[] whereArgs = { String.valueOf(idGasto) };
+		database.update(TablaGasto.NOMBRE_TABLA, values, where, whereArgs);
+		
 	}
 
 }

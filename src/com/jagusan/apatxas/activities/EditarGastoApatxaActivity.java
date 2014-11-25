@@ -14,8 +14,6 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 	private String conceptoGasto;
 	private Double importeGasto;
 	private String nombrePersonaPagadoGasto;
-	private Long idPersonaPagadoGasto;
-	private Long idApatxa;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +41,12 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 				returnIntent.putExtra("concepto", concepto);
 				returnIntent.putExtra("total", totalGasto);				
 				returnIntent.putExtra("pagadoPor", pagador);
-				returnIntent.putExtra("posicionGastoEditar", posicionGastoEditar);
+				if (posicionGastoEditar != -1){					
+					returnIntent.putExtra("posicionGastoEditar", posicionGastoEditar);
+				}
+				if (idGasto != -1){					
+					returnIntent.putExtra("idGasto", idGasto);
+				}
 				setResult(RESULT_OK, returnIntent);
 				
 				finish();
@@ -61,10 +64,8 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 		importeGasto = intent.getDoubleExtra("importeGasto", 0.0);
 		nombrePersonaPagadoGasto = intent.getStringExtra("nombrePersonaPagadoGasto");
 		personasApatxa = intent.getStringArrayListExtra("personas");
-		posicionGastoEditar = intent.getIntExtra("posicionGastoEditar", -1);
-		idApatxa = intent.getLongExtra("idApatxa", -1);
-		idGasto = intent.getLongExtra("idGasto", -1);
-		idPersonaPagadoGasto = intent.getLongExtra("idPersonaPagadoGasto", -1);
+		posicionGastoEditar = intent.getIntExtra("posicionGastoEditar", -1);		
+		idGasto = intent.getLongExtra("idGasto", -1);		
 	}
 
 	private void cargarInformacionGasto() {

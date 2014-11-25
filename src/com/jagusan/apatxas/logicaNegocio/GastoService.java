@@ -46,4 +46,10 @@ public class GastoService {
 		return listaGastos;
 	}
 
+	public void actualizarGasto(Long idGasto, String conceptoGasto, Double totalGasto, Long idPersona) {
+		open();
+		gastoDAO.actualizarGasto(idGasto, conceptoGasto, totalGasto, idPersona);
+		close();				
+	}
+
 }
