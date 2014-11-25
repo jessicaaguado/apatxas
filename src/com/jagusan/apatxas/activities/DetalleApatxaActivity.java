@@ -1,6 +1,7 @@
 package com.jagusan.apatxas.activities;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Intent;
@@ -142,6 +143,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 
 	public void irEditarListaPersonasApatxa(View view) {
 		Intent intent = new Intent(this, ListaPersonasApatxaActivity.class);
+		intent.putExtra("personas", new ArrayList(apatxa.getPersonas()));
 		startActivityForResult(intent, EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE);
 	}
 
