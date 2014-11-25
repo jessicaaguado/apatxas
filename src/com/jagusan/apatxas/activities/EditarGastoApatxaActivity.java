@@ -39,16 +39,16 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 
 				Intent returnIntent = new Intent();
 				returnIntent.putExtra("concepto", concepto);
-				returnIntent.putExtra("total", totalGasto);				
+				returnIntent.putExtra("total", totalGasto);
 				returnIntent.putExtra("pagadoPor", pagador);
-				if (posicionGastoEditar != -1){					
+				if (posicionGastoEditar != -1) {
 					returnIntent.putExtra("posicionGastoEditar", posicionGastoEditar);
 				}
-				if (idGasto != -1){					
+				if (idGasto != -1) {
 					returnIntent.putExtra("idGasto", idGasto);
 				}
 				setResult(RESULT_OK, returnIntent);
-				
+
 				finish();
 				return true;
 			}
@@ -56,7 +56,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-		@Override
+	@Override
 	protected void recuperarDatosPasoAnterior() {
 		super.recuperarDatosPasoAnterior();
 		Intent intent = getIntent();
@@ -64,8 +64,8 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 		importeGasto = intent.getDoubleExtra("importeGasto", 0.0);
 		nombrePersonaPagadoGasto = intent.getStringExtra("nombrePersonaPagadoGasto");
 		personasApatxa = intent.getStringArrayListExtra("personas");
-		posicionGastoEditar = intent.getIntExtra("posicionGastoEditar", -1);		
-		idGasto = intent.getLongExtra("idGasto", -1);		
+		posicionGastoEditar = intent.getIntExtra("posicionGastoEditar", -1);
+		idGasto = intent.getLongExtra("idGasto", -1);
 	}
 
 	private void cargarInformacionGasto() {
@@ -76,8 +76,9 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 	}
 
 	private int getPosicionPersonaSeleccionada() {
-		//anadimos 1 porque hemos forzado un nuevo elemento en la lista por delante #sin pagar#
-		return personasApatxa.indexOf(nombrePersonaPagadoGasto)+1;
+		// anadimos 1 porque hemos forzado un nuevo elemento en la lista por
+		// delante #sin pagar#
+		return personasApatxa.indexOf(nombrePersonaPagadoGasto) + 1;
 	}
 
 }

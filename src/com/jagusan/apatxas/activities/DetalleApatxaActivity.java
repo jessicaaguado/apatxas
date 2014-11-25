@@ -22,7 +22,7 @@ import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 public abstract class DetalleApatxaActivity extends ActionBarActivity {
 
 	private final Boolean MOSTRAR_TITULO_PANTALLA = true;
-	
+
 	protected ApatxaService apatxaService;
 	protected Resources resources;
 	protected Long idApatxa;
@@ -96,6 +96,13 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 		cargarInformacionEstado();
 	}
 
+	private void recargarInformacionBasicaApatxa() {
+		apatxa = apatxaService.getApatxaDetalle(idApatxa);
+		cargarInformacionTitulo();
+		cargarInformacionFecha();
+		cargarInformacionBoteInicial();
+	}
+
 	private void cargarInformacionTitulo() {
 		nombreApatxaTextView.setText(apatxa.getNombre());
 	}
@@ -120,34 +127,37 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	}
 
 	private void cargarInformacionEstado() {
-		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxa.getEstadoApatxa(), apatxa.getPersonasPendientesPagarCobrar(), apatxa.getGastoTotal(), apatxa.getPagado(), apatxa.getBoteInicial());
+		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxa.getEstadoApatxa(), apatxa.getPersonasPendientesPagarCobrar(), apatxa.getGastoTotal(),
+				apatxa.getPagado(), apatxa.getBoteInicial());
 		estadoApatxaTextView.setText(estadoApatxa);
 	}
-	
-	public void irEditarInformacionBasicaApatxa(View view){
-		Intent intent = new Intent(this, EditarInformacionBasicaApatxaActivity.class);
-//		intent.putExtra("titulo", titulo);
-//		intent.putExtra("fecha", fecha);
-//		intent.putExtra("boteInicial", boteInicial);
-//		intent.putExtra("idApatxa",idApatxa)
 
-		startActivityForResult(intent, EDITAR_INFORMACION_BASICA_REQUEST_CODE );
+	public void irEditarInformacionBasicaApatxa(View view) {
+		Intent intent = new Intent(this, EditarInformacionBasicaApatxaActivity.class);
+		intent.putExtra("nombre", apatxa.getNombre());
+		intent.putExtra("fecha", apatxa.getFecha().getTime());
+		intent.putExtra("boteInicial", apatxa.getBoteInicial());
+		startActivityForResult(intent, EDITAR_INFORMACION_BASICA_REQUEST_CODE);
 	}
-	
-	public void irEditarListaPersonasApatxa(View view){
+
+	public void irEditarListaPersonasApatxa(View view) {
 		Intent intent = new Intent(this, ListaPersonasApatxaActivity.class);
-		startActivityForResult(intent, EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE );
+		startActivityForResult(intent, EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE);
 	}
-	
+
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
-				
+				String nombre = data.getStringExtra("nombre");
+				Double boteInicial = data.getDoubleExtra("boteInicial", 0.0);
+				Long fecha = data.getLongExtra("fecha", -1);
+				apatxaService.actualizarApatxa(idApatxa, nombre, fecha, boteInicial);
+				recargarInformacionBasicaApatxa();
 			}
-		}			
+		}
 		if (requestCode == EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
-				
+
 			}
 		}
 	}

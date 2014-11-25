@@ -7,8 +7,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
-        android:text="Comida en la sociedad" />
+        android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"/>
 
     <TextView
         android:id="@+id/fechaApatxaDetalle"
@@ -16,8 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/nombreApatxaDetalle"
-        android:text="28/10/2014" />
+        android:layout_below="@+id/nombreApatxaDetalle"/>
 
     <TextView
         android:id="@+id/labelBoteInicialApatxaDetalle"
@@ -26,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/fechaApatxaDetalle"
-        android:text="Bote inicial:" />
+        android:text="@string/bote_inicial"/>
 
     <TextView
         android:id="@+id/boteInicialApatxaDetalle"
@@ -35,8 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/labelBoteInicialApatxaDetalle"
         android:layout_alignParentLeft="@+id/labelBoteInicialApatxaDetalle"
-        android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle"
-        android:text="125,00 €" />
+        android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle"/>
 
     <ImageButton
         android:id="@+id/botonEditarInformacionBasicaApatxas"
