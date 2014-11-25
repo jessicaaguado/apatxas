@@ -51,5 +51,11 @@ public class GastoService {
 		gastoDAO.actualizarGasto(idGasto, conceptoGasto, totalGasto, idPersona);
 		close();				
 	}
+	
+	public void borrarGasto(Long idGasto){
+		open();
+		gastoDAO.borrarGasto(idGasto);
+		close();
+	}
 
 }
