@@ -86,17 +86,18 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		int posicionSeleccionada = info.position - 1;
 		switch (item.getItemId()) {
 		case R.id.action_persona_apatxa_cambiar:
 			DialogFragment dialog = new CambiarNombrePersonaApatxaDialogFragment();
 			Bundle parametros = new Bundle();
-			parametros.putInt("posicionPersonaCambiar", info.position - 1);
-			parametros.putString("nombrePersonaCambiar", personasApatxa.get(info.position - 1));
+			parametros.putInt("posicionPersonaCambiar", posicionSeleccionada);
+			parametros.putString("nombrePersonaCambiar", personasApatxa.get(posicionSeleccionada));
 			dialog.setArguments(parametros);
 			dialog.show(getSupportFragmentManager(), "CambiarNombrePersonaApatxaDialogFragment");
 			return true;
 		case R.id.action_persona_apatxa_borrar:
-			borrarPersona(info.position);
+			borrarPersona(posicionSeleccionada);
 			return true;
 		default:
 			return super.onContextItemSelected(item);
@@ -129,7 +130,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	}
 
 	public void borrarPersona(int posicion) {
-		personasApatxa.remove(posicion - 1);
+		personasApatxa.remove(posicion);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();
 	}

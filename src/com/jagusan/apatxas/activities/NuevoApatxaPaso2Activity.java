@@ -92,19 +92,20 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		int posicionSeleccionada = info.position - 1;
 		switch (item.getItemId()) {
 		case R.id.action_gasto_apatxa_cambiar:
-			GastoApatxaListado gasto = listaGastos.get(info.position - 1);			
+			GastoApatxaListado gasto = listaGastos.get(posicionSeleccionada);			
 			Intent intent = new Intent(this, EditarGastoApatxaActivity.class);
 			intent.putExtra("conceptoGasto", gasto.getConcepto());
 			intent.putExtra("importeGasto", gasto.getTotal());
 			intent.putExtra("nombrePersonaPagadoGasto", gasto.getPagadoPor());
 			intent.putStringArrayListExtra("personas", personasApatxa);
-			intent.putExtra("posicionGastoEditar", info.position - 1);
+			intent.putExtra("posicionGastoEditar", posicionSeleccionada);
 			startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
 			return true;
 		case R.id.action_gasto_apatxa_borrar:
-			borrarGasto(info.position);
+			borrarGasto(posicionSeleccionada);
 			return true;
 		default:
 			return super.onContextItemSelected(item);
@@ -207,8 +208,8 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	}
 
 	private void borrarGasto(int posicion) {
-		Double importeGasto = listaGastos.get(posicion - 1).getTotal();
-		listaGastos.remove(posicion - 1);
+		Double importeGasto = listaGastos.get(posicion).getTotal();
+		listaGastos.remove(posicion);
 		actualizarListaGastos(0.0, importeGasto);
 	}
 	
