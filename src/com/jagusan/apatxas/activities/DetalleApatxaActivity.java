@@ -97,13 +97,6 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 		cargarInformacionEstado();
 	}
 
-	private void recargarInformacionBasicaApatxa() {
-		apatxa = apatxaService.getApatxaDetalle(idApatxa);
-		cargarInformacionTitulo();
-		cargarInformacionFecha();
-		cargarInformacionBoteInicial();
-	}
-
 	private void cargarInformacionTitulo() {
 		nombreApatxaTextView.setText(apatxa.getNombre());
 	}
@@ -144,6 +137,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	public void irEditarListaPersonasApatxa(View view) {
 		Intent intent = new Intent(this, ListaPersonasApatxaActivity.class);
 		intent.putExtra("personas", new ArrayList(apatxa.getPersonas()));
+		intent.putExtra("idApatxa", apatxa.getId());
 		startActivityForResult(intent, EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE);
 	}
 
@@ -154,12 +148,12 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 				Double boteInicial = data.getDoubleExtra("boteInicial", 0.0);
 				Long fecha = data.getLongExtra("fecha", -1);
 				apatxaService.actualizarApatxa(idApatxa, nombre, fecha, boteInicial);
-				recargarInformacionBasicaApatxa();
+				cargarInformacionApatxa();
 			}
 		}
 		if (requestCode == EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
-
+				cargarInformacionApatxa();
 			}
 		}
 	}

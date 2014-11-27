@@ -46,4 +46,10 @@ public class PersonaService {
 		return listaPersonas;
 	}
 
+	public void borrarPersona(Long idPersona) {
+		open();
+		personaDAO.borrarPersona(idPersona);
+		close();		
+	}
+
 }

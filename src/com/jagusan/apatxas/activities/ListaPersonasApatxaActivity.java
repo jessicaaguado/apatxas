@@ -6,25 +6,23 @@ import java.util.List;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
-import com.jagusan.apatxas.dialogs.CambiarNombrePersonaApatxaDialogFragment;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
+import com.jagusan.apatxas.logicaNegocio.PersonaService;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 
 public class ListaPersonasApatxaActivity extends ActionBarActivity {
@@ -41,6 +39,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 
 	private Resources resources;
 	private ApatxaService apatxaService;
+	private PersonaService personaService;
 	
 	private int numPersonasApatxaAnadidas;
 
@@ -107,6 +106,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	private void inicializarServicios() {
 		resources = getResources();
 		apatxaService = new ApatxaService(this);
+		personaService = new PersonaService(this);
 	}
 
 	private void personalizarActionBar() {
@@ -150,8 +150,10 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 		actualizarTituloCabeceraListaPersonas();
 	}
 
-	public void borrarPersona(int posicion) {
-		personasApatxa.remove(posicion);
+	public void borrarPersona(int posicion) {		
+		personaService.borrarPersona(personasApatxa.get(posicion).getId());
+		personasApatxa.clear();
+		personasApatxa.addAll(personaService.getTodasPersonasApatxa(idApatxa));
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();
 	}

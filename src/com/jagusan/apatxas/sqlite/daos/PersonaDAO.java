@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionPersonaDeCursor;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
@@ -37,7 +38,7 @@ public class PersonaDAO {
 		return insertId;
 	}
 
-	public void borrarPersona(Long id) {
+	public void borrarPersona(Long id) {		
 		database.delete(NOMBRE_TABLA_PERSONA, TablaPersona.COLUMNA_ID + " = " + id, null);
 	}
 
@@ -63,7 +64,7 @@ public class PersonaDAO {
 			personas.add(persona);
 			cursor.moveToNext();
 		}
-		cursor.close();
+		cursor.close();		
 		return personas;
 
 	}
