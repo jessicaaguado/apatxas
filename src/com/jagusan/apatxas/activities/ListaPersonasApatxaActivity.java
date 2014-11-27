@@ -37,8 +37,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	private TextView tituloPersonasListViewHeader;
 	private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
-	private Resources resources;
-	private ApatxaService apatxaService;
+	private Resources resources;	
 	private PersonaService personaService;
 	
 	private int numPersonasApatxaAnadidas;
@@ -86,10 +85,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		switch (item.getItemId()) {
-		case R.id.action_persona_apatxa_cambiar:
-			irEdicionPersona();
-			return true;
+		switch (item.getItemId()) {	
 		case R.id.action_persona_apatxa_borrar:
 			borrarPersona(info.position -1);
 			return true;
@@ -97,15 +93,10 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 			return super.onContextItemSelected(item);
 		}
 	}
-
-	private void irEdicionPersona() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	private void inicializarServicios() {
-		resources = getResources();
-		apatxaService = new ApatxaService(this);
+		resources = getResources();		
 		personaService = new PersonaService(this);
 	}
 
@@ -143,9 +134,9 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	
 	public void anadirPersona(View v) {
 		String nombre = "Apatxero " + ++numPersonasApatxaAnadidas;
-		PersonaListado persona = new PersonaListado();
-		persona.setNombre(nombre);
-		personasApatxa.add(persona);
+		personaService.crearPersona(nombre, idApatxa);
+		personasApatxa.clear();
+		personasApatxa.addAll(personaService.getTodasPersonasApatxa(idApatxa));
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();
 	}
@@ -156,14 +147,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 		personasApatxa.addAll(personaService.getTodasPersonasApatxa(idApatxa));
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();
-	}
-	
-	public void irEdicionPersona(int posicion){
-		
-	}
+	}	
 
-	// private Boolean validacionesCorrectas() {
-	// return true;
-	// }
 
 }
