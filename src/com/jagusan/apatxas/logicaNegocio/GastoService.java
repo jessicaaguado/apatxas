@@ -58,4 +58,9 @@ public class GastoService {
 		close();
 	}
 
+	public boolean hayGastosAsociadosA(Long id) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

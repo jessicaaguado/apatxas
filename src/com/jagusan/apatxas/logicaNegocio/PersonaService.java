@@ -5,8 +5,8 @@ import java.util.List;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
+import com.jagusan.apatxas.sqlite.daos.GastoDAO;
 import com.jagusan.apatxas.sqlite.daos.PersonaDAO;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
@@ -17,10 +17,12 @@ public class PersonaService {
 	private SQLiteDatabase database;
 
 	private PersonaDAO personaDAO;
+	private GastoDAO gastoDAO;
 
 	public PersonaService(Context context) {
 		dbHelper = new DatabaseHelper(context);
 		personaDAO = new PersonaDAO();
+		gastoDAO = new GastoDAO();
 	}
 
 	public void open() throws SQLException {
@@ -49,6 +51,7 @@ public class PersonaService {
 	public void borrarPersona(Long idPersona) {
 		open();
 		personaDAO.borrarPersona(idPersona);
+		gastoDAO.establecerComoNoPagadosGastosPagadosPorPersona(idPersona);
 		close();		
 	}
 

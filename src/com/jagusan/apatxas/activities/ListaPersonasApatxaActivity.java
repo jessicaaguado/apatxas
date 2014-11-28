@@ -3,6 +3,8 @@ package com.jagusan.apatxas.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -16,12 +18,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
-import com.jagusan.apatxas.logicaNegocio.ApatxaService;
+import com.jagusan.apatxas.logicaNegocio.GastoService;
 import com.jagusan.apatxas.logicaNegocio.PersonaService;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 
@@ -37,9 +40,10 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	private TextView tituloPersonasListViewHeader;
 	private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
-	private Resources resources;	
+	private Resources resources;
 	private PersonaService personaService;
-	
+	private GastoService gastoService;
+
 	private int numPersonasApatxaAnadidas;
 
 	@Override
@@ -74,7 +78,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -85,19 +89,19 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		switch (item.getItemId()) {	
+		switch (item.getItemId()) {
 		case R.id.action_persona_apatxa_borrar:
-			borrarPersona(info.position -1);
+			borrarPersona(info.position - 1);
 			return true;
 		default:
 			return super.onContextItemSelected(item);
 		}
 	}
-	
 
 	private void inicializarServicios() {
-		resources = getResources();		
+		resources = getResources();
 		personaService = new PersonaService(this);
+		gastoService = new GastoService(this);
 	}
 
 	private void personalizarActionBar() {
@@ -118,7 +122,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 		listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
 		personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
 		registerForContextMenu(personasListView);
-	}	
+	}
 
 	private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
 		personasListViewHeader = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
@@ -131,7 +135,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_personas), personasApatxa.size());
 		tituloPersonasListViewHeader.setText(titulo);
 	}
-	
+
 	public void anadirPersona(View v) {
 		String nombre = "Apatxero " + ++numPersonasApatxaAnadidas;
 		personaService.crearPersona(nombre, idApatxa);
@@ -141,13 +145,38 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 		actualizarTituloCabeceraListaPersonas();
 	}
 
-	public void borrarPersona(int posicion) {		
-		personaService.borrarPersona(personasApatxa.get(posicion).getId());
+	public void borrarPersona(int posicion) {
+		Long idPersona = personasApatxa.get(posicion).getId();
+		if (gastoService.hayGastosAsociadosA(idPersona)) {
+			confimarBorradoPersonaConGastosAsociados(idPersona);
+		} else {
+			borrarPersonaYRecargar(idPersona);
+		}
+	}
+
+	private void confimarBorradoPersonaConGastosAsociados(final Long idPersona) {
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);		
+		alertDialog.setMessage(R.string.mensaje_aviso_borrar_persona_con_gastos);
+		alertDialog.setPositiveButton(R.string.action_borrar, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				borrarPersonaYRecargar(idPersona);
+			}
+		});
+		alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+
+			}
+		});
+		alertDialog.create();
+		alertDialog.show();
+	}
+
+	private void borrarPersonaYRecargar(Long idPersona) {
+		personaService.borrarPersona(idPersona);
 		personasApatxa.clear();
 		personasApatxa.addAll(personaService.getTodasPersonasApatxa(idApatxa));
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();
-	}	
-
+	}
 
 }

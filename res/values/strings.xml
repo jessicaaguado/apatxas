@@ -9,6 +9,7 @@
     <string name="action_anadir">Añadir</string>
     <string name="action_listo">Listo</string>
     <string name="action_cancelar">Cancelar</string>
+    <string name="action_borrar">Borrar</string>
     <!-- ACCIONES (FIN) -->
 
 
@@ -44,6 +45,10 @@
     <string name="title_activity_editar_gasto">Cambiar gasto</string>
     <string name="title_activity_detalle_apatxa">Información</string>
     <!-- TITULOS (FIN) -->
+    
+    <!-- MENSAJES DE AVISO -->
+    <string name="mensaje_aviso_borrar_persona_con_gastos">Esta persona ha pagado gastos. Si la borras esos gastos quedarán sin pagar</string>
+    <!--  MENSAJES AVISO (FIN) -->
 
 
     <!-- PATRONES FECHAS -->
