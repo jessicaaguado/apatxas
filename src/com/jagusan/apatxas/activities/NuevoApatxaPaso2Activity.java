@@ -153,7 +153,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	private void irListadoApatxasPrincipal() {
 		Intent intent = new Intent(this, ListaApatxasActivity.class);
-		//TODO finish?
+		finish();
 		startActivity(intent);
 	}
 
