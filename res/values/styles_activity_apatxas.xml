@@ -46,7 +46,7 @@
     </style>
     
     
-    <style name="apatxas_boton_solo_icono" parent="@style/ButtonApatxasColors">
+    <style name="apatxas_boton_solo_icono">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:gravity">left|bottom</item>
         <item name="android:minHeight">0dip</item>
