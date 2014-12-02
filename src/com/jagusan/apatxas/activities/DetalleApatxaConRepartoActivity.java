@@ -3,6 +3,7 @@ package com.jagusan.apatxas.activities;
 import java.util.List;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
 	@Override
 	protected void cargarInformacionApatxa() {
+		Log.d("APATXAS","Cargar informacion apatxa");
 		super.cargarInformacionApatxa();
 		cargarInformacionGastos();
 		cargarInformacionReparto();
@@ -75,6 +77,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 	}
 
 	private void cargarInformacionReparto() {
+		Log.d("APATXAS","Cargar informacion reparto");
 		ViewGroup personasRepartoListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_personas_resultado_reparto_header, personasRepartoListView, false);
 		personasRepartoListView.addHeaderView(personasRepartoListViewHeader);
 		

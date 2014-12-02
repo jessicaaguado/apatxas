@@ -31,7 +31,7 @@
     <style name="boton_pie_lista" parent="@style/ButtonApatxasColors">
         <item name="android:textAppearance">@style/texto_pie_lista</item>        
         <item name="android:textColor">@color/apatxascolors_gris_medio</item>
-        <item name="android:background">@color/apatxascolors_color_fondo</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:gravity">left|center_vertical</item>        
     </style>
     

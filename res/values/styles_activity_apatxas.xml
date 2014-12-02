@@ -37,33 +37,17 @@
         <item name="android:paddingRight">5dp</item>
         <item name="android:textSize">@dimen/texto_contenido_activity_importante</item>
     </style>
-    <style name="apatxas_label_destacada_nivel2">
-        <item name="android:textAppearance">@style/apatxas_texto_label_defecto</item>
-        <item name="android:textColor">@color/apatxascolors_color_claro2</item>
-        <item name="android:paddingRight">5dp</item>
-    </style>
-    <style name="apatxas_label_destacada_nivel3">
-        <item name="android:textAppearance">@style/apatxas_texto_label_defecto</item>
-        <item name="android:textColor">@color/apatxascolors_color_claro1</item>
-        <item name="android:paddingRight">5dp</item>
-    </style>
+
     
     <style name="apatxas_valor_destacado">
         <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
         <item name="android:textColor">@color/apatxascolors_color</item>
         <item name="android:textSize">@dimen/texto_contenido_activity_importante</item>
     </style>
-    <style name="apatxas_valor_destacado_nivel2">
-        <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
-        <item name="android:textColor">@color/apatxascolors_color_claro2</item>
-    </style>
-    <style name="apatxas_valor_destacado_nivel3">
-        <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
-        <item name="android:textColor">@color/apatxascolors_color_claro1</item>
-    </style>
+    
     
     <style name="apatxas_boton_solo_icono" parent="@style/ButtonApatxasColors">
-        <item name="android:background">@color/apatxascolors_color_fondo</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:gravity">left|bottom</item>
         <item name="android:minHeight">0dip</item>
     </style>

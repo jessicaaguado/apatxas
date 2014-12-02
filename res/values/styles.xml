@@ -14,11 +14,11 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+      
     </style>
 
     <style name="boton_solo_icono" parent="@style/ButtonApatxasColors">
-        <item name="android:background">@color/apatxascolors_color_fondo</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:gravity">left|center_vertical</item>
     </style>
 
