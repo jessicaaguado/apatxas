@@ -7,7 +7,7 @@
         android:id="@+id/action_asociar_gasto_apatxa"
         android:orderInCategory="1"
         android:title="Listo"
-        android:icon="@drawable/ic_action_apatxas_listo"
+        android:icon="@drawable/ic_menu_action_apatxas_listo"
         app:showAsAction="withText|ifRoom"/> 
 
 </menu>

@@ -7,7 +7,7 @@
         android:id="@+id/action_repartir_apatxa"
         android:orderInCategory="1"
         android:title="Reparto"
-        android:icon="@drawable/ic_action_reparto"
+        android:icon="@drawable/ic_menu_action_reparto"
         app:showAsAction="withText|ifRoom"/>    
     
     <item

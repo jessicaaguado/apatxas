@@ -7,7 +7,7 @@
         android:id="@+id/action_siguiente_paso"
         android:orderInCategory="1"
         android:title="Sig."
-        android:icon="@drawable/ic_action_apatxas_siguiente"
+        android:icon="@drawable/ic_menu_action_apatxas_siguiente"
         app:showAsAction="withText|ifRoom"/>    
     
      

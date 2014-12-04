@@ -5,13 +5,13 @@
 
    
     <item android:id="@+id/action_anadir"
-          android:icon="@drawable/ic_action_apatxas_anadir_apatxa"
+          android:icon="@drawable/ic_menu_action_apatxas_anadir_apatxa"
           android:title="@string/action_anadir"
           app:showAsAction="ifRoom"  />
     
     
     <item android:id="@+id/action_buscar"
-          android:icon="@drawable/ic_action_buscar"
+          android:icon="@drawable/ic_menu_apatxas_action_buscar"
           android:title="@string/action_buscar"
           app:showAsAction="ifRoom"  />
     
