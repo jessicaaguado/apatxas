@@ -6,6 +6,7 @@ import java.util.Date;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -78,7 +79,9 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 	}
 
 	private void personalizarActionBar() {
-		getSupportActionBar().setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setElevation(0);
+		actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
 	}
 
 	private void cargarElementosLayout() {

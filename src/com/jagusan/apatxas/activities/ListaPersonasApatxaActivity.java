@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -105,7 +106,9 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	}
 
 	private void personalizarActionBar() {
-		getSupportActionBar().setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setElevation(0);
+		actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
 	}
 
 	private void recuperarDatosPasoAnterior() {

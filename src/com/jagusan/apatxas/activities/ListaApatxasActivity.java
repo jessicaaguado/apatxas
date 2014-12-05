@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,14 +17,15 @@ import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
 
 public class ListaApatxasActivity extends ActionBarActivity {
-	
+
 	private ApatxaService apatxaService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_lista_apatxas);
 
+		setContentView(R.layout.activity_lista_apatxas);
+		personalizarActionBar();
 		apatxaService = new ApatxaService(this);
 
 		List<ApatxaListado> gastos = recuperarApatxas();
@@ -44,9 +46,9 @@ public class ListaApatxasActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_buscar:			
+		case R.id.action_buscar:
 			return true;
-		case R.id.action_anadir:			
+		case R.id.action_anadir:
 			irAnadirApatxa();
 			return true;
 		case R.id.action_settings:
@@ -54,6 +56,11 @@ public class ListaApatxasActivity extends ActionBarActivity {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	protected void personalizarActionBar() {
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setElevation(0);
 	}
 
 	private void irAnadirApatxa() {
