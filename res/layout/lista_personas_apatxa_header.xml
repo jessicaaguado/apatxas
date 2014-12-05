@@ -16,7 +16,7 @@
 
     <ImageButton
         android:id="@+id/botonAnadirPersonaApatxa"
-        style="@style/boton_icono_accion_cabecera_lista"        
+        style="@style/apatxas_boton_solo_icono"        
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"

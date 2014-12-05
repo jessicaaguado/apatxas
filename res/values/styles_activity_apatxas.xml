@@ -16,12 +16,9 @@
         <item name="android:paddingTop">0dp</item>                        
     </style>
     
-    <style name="apatxas_texto_label_defecto" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/texto_contenido_activity_normal</item>        
-    </style>
-    <style name="apatxas_texto_valor_defecto" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/texto_contenido_activity_normal</item>        
-    </style>
+    <style name="apatxas_texto_label_defecto" parent="@style/TextAppearance.AppCompat.Subhead"/>     
+
+    <style name="apatxas_texto_valor_defecto" parent="@style/TextAppearance.AppCompat.Subhead"/>
     
     <style name="apatxas_label_defecto">
         <item name="android:textAppearance">@style/apatxas_texto_label_defecto</item>
@@ -31,18 +28,13 @@
         <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
     </style>
     
-    <style name="apatxas_label_destacada">
-        <item name="android:textAppearance">@style/apatxas_texto_label_defecto</item>
-        <item name="android:textColor">@color/apatxascolors_color</item>
-        <item name="android:paddingRight">5dp</item>
-        <item name="android:textSize">@dimen/texto_contenido_activity_importante</item>
+    <style name="apatxas_label_destacada" parent="@style/TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/apatxascolors_color</item>                
     </style>
 
     
-    <style name="apatxas_valor_destacado">
-        <item name="android:textAppearance">@style/apatxas_texto_valor_defecto</item>
-        <item name="android:textColor">@color/apatxascolors_color</item>
-        <item name="android:textSize">@dimen/texto_contenido_activity_importante</item>
+    <style name="apatxas_valor_destacado" parent="@style/TextAppearance.AppCompat.Title">        
+        <item name="android:textColor">@color/apatxascolors_color</item>        
     </style>
     
     

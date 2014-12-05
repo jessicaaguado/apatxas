@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="texto_principal_lista" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/texto_listado_linea1</item>
-        <item name="android:textColor">@color/apatxascolors_gris_oscuro</item>
+
+    <style name="texto_principal_lista" parent="@style/TextAppearance.AppCompat.Title" />
+
+    <style name="texto_secundario_lista" parent="@style/TextAppearance.AppCompat.Subhead" />
+
+    <style name="texto_extra_lista" parent="@style/TextAppearance.AppCompat.Subhead">
+        <item name="android:textColor">@color/apatxascolors_color_destacado</item>
     </style>
-    
-    <style name="texto_secundario_lista" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/texto_listado_linea2</item>
-        <item name="android:textColor">@color/apatxascolors_gris_claro</item>
-    </style>
-    
-    <style name="texto_extra_lista" parent="@android:style/TextAppearance">
-        <item name="android:textSize">@dimen/texto_listado_extra_importante</item>
-        <item name="android:textColor">@color/apatxascolors_gris_medio</item>
-    </style>
-    
-    <style name="texto_cabecera_lista" parent="@style/texto_principal_lista">
-        <item name="android:textColor">@color/apatxascolors_color</item>
-        <item name="android:background">@color/apatxascolors_gris_claro</item>       
-    </style>
-    
-    <style name="texto_pie_lista" parent="@style/texto_principal_lista">        
-    </style>
-    
-    
-    <style name="boton_icono_accion_cabecera_lista" parent="@style/apatxas_boton_solo_icono">        
-        <item name="android:background">@color/apatxascolors_color_cabecera_lista</item>        
-    </style>
-    
-    <style name="boton_pie_lista">
-        <item name="android:textAppearance">@style/texto_pie_lista</item>        
-        <item name="android:textColor">@color/apatxascolors_gris_medio</item>
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:gravity">left|center_vertical</item>        
-    </style>
-    
-    
-    
+
+    <style name="texto_cabecera_lista" parent="@style/TextAppearance.AppCompat.Title.Inverse">
+        <item name="android:background">@color/apatxascolors_gris_claro</item>
+    </style> 
+        
+
 </resources>

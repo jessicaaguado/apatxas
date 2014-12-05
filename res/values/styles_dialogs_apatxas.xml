@@ -3,23 +3,20 @@
 
     <style name="apatxas_dialog">
         <item name="android:paddingLeft">15dp</item>
-        <item name="android:paddingRight">15dp</item>
-        <item name="android:textSize">@dimen/texto_dialog</item>        
+        <item name="android:paddingRight">15dp</item>                
     </style>
 
     <style name="apatxas_dialog_titulo" parent="@style/apatxas_dialog">        
         <item name="android:textColor">@color/apatxascolors_color</item>
         <item name="android:paddingTop">15dp</item>
-        <item name="android:paddingBottom">15dp</item>
-        <item name="android:textSize">@dimen/texto_titulo_dialog</item>
+        <item name="android:paddingBottom">15dp</item>        
     </style>
 
     <style name="apatxas_dialog_separador_titulo" parent="@style/apatxas_dialog">        
         <item name="android:background">@color/apatxascolors_color</item>        
     </style>
 
-    <style name="apatxas_dialog_texto" parent="@style/apatxas_dialog">
-        <item name="android:textSize">@dimen/texto_contenido_dialog</item>
+    <style name="apatxas_dialog_texto" parent="@style/apatxas_dialog">        
     </style>
 
 </resources>
