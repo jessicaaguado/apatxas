@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="texto_principal_lista" parent="@style/TextAppearance.AppCompat.Title" />
+    <style name="texto_principal_lista" parent="@style/TextAppearance.AppCompat.Subhead">
+        <item name="android:textStyle">bold</item>
+    </style>
 
-    <style name="texto_secundario_lista" parent="@style/TextAppearance.AppCompat.Subhead" />
+    <style name="texto_lista" parent="@style/TextAppearance.AppCompat.Subhead" />
 
-    <style name="texto_extra_lista" parent="@style/TextAppearance.AppCompat.Subhead">
+    <style name="texto_secundario_lista" parent="@style/TextAppearance.AppCompat.Body2" />
+
+    <style name="texto_extra_lista" parent="@style/TextAppearance.AppCompat.Body2">
         <item name="android:textColor">@color/apatxascolors_color_destacado</item>
     </style>
 
-    <style name="texto_cabecera_lista" parent="@style/TextAppearance.AppCompat.Title.Inverse">
-        <item name="android:background">@color/apatxascolors_gris_claro</item>
-    </style> 
-        
+    <style name="texto_cabecera_lista" parent="@style/TextAppearance.AppCompat.Subhead"/>
+
 
 </resources>

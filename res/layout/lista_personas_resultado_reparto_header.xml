@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:gravity="left"
         android:padding="5dp"
-        android:text="Reparto"
+        android:text="REPARTO"
         android:textAppearance="@style/texto_cabecera_lista" />
 
 </LinearLayout>

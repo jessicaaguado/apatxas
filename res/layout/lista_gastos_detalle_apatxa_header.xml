@@ -20,7 +20,7 @@
         android:layout_gravity="right"
         android:layout_weight="0.2"
         android:contentDescription="@string/anadir_gasto"
-        android:src="@drawable/ic_action_apatxas_anadir_gasto_detalle_apatxa"
+        android:src="@drawable/ic_action_apatxas_anadir_gasto_apatxa"
         android:onClick="anadirGastoDetalleApatxa" />
 
 </LinearLayout>

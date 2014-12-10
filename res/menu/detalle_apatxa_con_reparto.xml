@@ -7,7 +7,7 @@
         android:id="@+id/action_actualizar_reparto_apatxa"
         android:orderInCategory="1"
         android:title="Reparto"
-        android:icon="@drawable/ic_action_apatxas_actualizar_reparto"
+        android:icon="@drawable/ic_menu_action_apatxas_actualizar_reparto"
         app:showAsAction="withText|ifRoom"/>    
     
     <item

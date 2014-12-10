@@ -2,21 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" >
 
     <include layout="@layout/subactivity_detalle_informacion_basica_apatxa" />
-    
+
     <LinearLayout
         android:id="@+id/informacionPersonasApatxaDetalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/separador1DetalleApatxa"
-        android:gravity="center_vertical"       
+        android:layout_below="@+id/informacionBasicaApatxaDetalle"
+        android:layout_marginBottom="@dimen/apatxas_margen_defecto"
+        android:layout_marginLeft="@dimen/apatxas_margen_defecto"
+        android:layout_marginTop="@dimen/apatxas_margen_defecto"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <TextView
@@ -34,25 +33,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:contentDescription="Editar información personas"
-            android:src="@drawable/ic_action_apatxas_acceso_personas_apatxa" />
+            android:src="@drawable/ic_action_apatxas_modificar_personas_detalle" />
     </LinearLayout>
-    
-     <View
+
+    <View
         android:id="@+id/separador2DetalleApatxa"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/informacionPersonasApatxaDetalle"
-                
         android:background="@color/apatxascolors_color_linea_divisoria" />
-    
+
     <LinearLayout
         android:id="@+id/informacionGastosApatxaDetalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/separador2DetalleApatxa"
-        android:gravity="center_vertical"       
+        android:layout_marginBottom="@dimen/apatxas_margen_defecto"
+        android:layout_marginLeft="@dimen/apatxas_margen_defecto"
+        android:layout_marginTop="@dimen/apatxas_margen_defecto"
+        android:gravity="center_vertical"
         android:orientation="horizontal" >
 
         <TextView
@@ -72,19 +73,19 @@
             android:contentDescription="Anadir gasto"
             android:src="@drawable/ic_action_apatxas_acceso_gastos_apatxa" />
     </LinearLayout>
-    
+
     <View
         android:id="@+id/separador3DetalleApatxa"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/informacionGastosApatxaDetalle"
-        android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"        
-        android:background="@color/apatxascolors_color_linea_divisoria" /> 
-    
+        android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"
+        android:background="@color/apatxascolors_color_linea_divisoria" />
+
     <TextView
         android:id="@+id/estadoApatxaDetalle"
-        style="@style/apatxas_valor_destacado"
+        style="@style/apatxas_valor_importante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/separador3DetalleApatxa"

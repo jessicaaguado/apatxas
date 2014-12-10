@@ -8,9 +8,9 @@
     <color name="apatxascolors_color_claro">#d1c4e9</color>    
     <color name="apatxascolors_color_oscuro">#512da8</color>
     
-    <color name="apatxascolors_color_destacado">#FF4081</color>
-    <color name="apatxascolors_color_destacado_claro">#FF80AB</color>
-    <color name="apatxascolors_color_destacado_oscuro">#F50057</color>
+    <color name="apatxascolors_color_destacado">#7C4DFF</color>
+    <color name="apatxascolors_color_destacado_claro">#B388FF</color>
+    <color name="apatxascolors_color_destacado_oscuro">#651FFF</color>
     
     
     <color name="apatxascolors_color_linea_divisoria">#d1c4e9</color>

@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.7"
-        android:textAppearance="@style/texto_principal_lista" />
+        android:textAppearance="@style/texto_lista" />
 
     <TextView
         android:id="@+id/totalGastoReparto"

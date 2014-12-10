@@ -1,28 +1,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
-    style="@style/apatxas_detalle_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jagusan.apatxas.activities.DetalleApatxaSinRepartoActivity" >
 
-	<include layout="@layout/subactivity_detalle_informacion_basica_apatxa"/>    
+    <include layout="@layout/subactivity_detalle_informacion_basica_apatxa" />
 
     <LinearLayout
         android:id="@+id/informacionPersonasApatxaDetalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/separador1DetalleApatxa"
-        android:gravity="center_vertical"       
-        android:orientation="horizontal" >
+        android:layout_below="@+id/informacionBasicaApatxaDetalle"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/apatxas_margen_defecto"
+        android:layout_marginTop="@dimen/apatxas_margen_defecto"
+        android:layout_marginBottom="@dimen/apatxas_margen_defecto" >
 
         <TextView
             android:id="@+id/numeroPersonasApatxaDetalle"
             style="@style/apatxas_valor_defecto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"/>
+            android:layout_weight="0.8" 
+            android:text="tarari"/>
 
         <ImageButton
             android:id="@+id/botonEditarInformacionPersonasApatxas"
@@ -31,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:contentDescription="@string/cambiar_informacion_personas_apatxa"
-            android:src="@drawable/ic_action_apatxas_modificar_personas_detalle"
-            android:onClick="irEditarListaPersonasApatxa" />
+            android:onClick="irEditarListaPersonasApatxa"
+            android:src="@drawable/ic_action_apatxas_modificar_personas_detalle" />
     </LinearLayout>
 
     <View
@@ -41,7 +44,7 @@
         android:layout_height="1dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/informacionPersonasApatxaDetalle"
-        android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"        
+        android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"
         android:background="@color/apatxascolors_color_linea_divisoria" />
 
     <ListView
@@ -58,12 +61,12 @@
 
     <TextView
         android:id="@+id/estadoApatxaDetalle"
-        style="@style/apatxas_valor_destacado"
+        style="@style/apatxas_valor_importante"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/separador2DetalleApatxa"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:lineSpacingMultiplier="1.2"/>
+        android:lineSpacingMultiplier="1.2" />
 
 </RelativeLayout>

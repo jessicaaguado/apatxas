@@ -5,6 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     
     <dimen name="apatxas_margen_defecto">15dp</dimen>
+    <dimen name="apatxas_margen_extra_defecto">20dp</dimen>
     
     <dimen name="apatxas_linea_divisora_margen_superior">15dp</dimen>
     <dimen name="apatxas_linea_divisora_margen_inferior">15dp</dimen>
