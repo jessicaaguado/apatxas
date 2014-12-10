@@ -1,9 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jagusan.apatxas.activities.DetalleApatxaSinRepartoActivity" >
+    android:orientation="vertical" >
 
     <include layout="@layout/subactivity_detalle_informacion_basica_apatxa" />
 
@@ -11,21 +10,19 @@
         android:id="@+id/informacionPersonasApatxaDetalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/informacionBasicaApatxaDetalle"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/apatxas_margen_defecto"
         android:layout_marginLeft="@dimen/apatxas_margen_defecto"
         android:layout_marginTop="@dimen/apatxas_margen_defecto"
-        android:layout_marginBottom="@dimen/apatxas_margen_defecto" >
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/numeroPersonasApatxaDetalle"
             style="@style/apatxas_valor_defecto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8" 
-            android:text="tarari"/>
+            android:layout_weight="0.8"
+            android:text="tarari" />
 
         <ImageButton
             android:id="@+id/botonEditarInformacionPersonasApatxas"
@@ -42,31 +39,21 @@
         android:id="@+id/separador2DetalleApatxa"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/informacionPersonasApatxaDetalle"
         android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"
         android:background="@color/apatxascolors_color_linea_divisoria" />
-
-    <ListView
-        android:id="@+id/listaGastosApatxaDetalle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/estadoApatxaDetalle"
-        android:layout_marginTop="@dimen/apatxas_margen_defecto"
-        android:divider="@color/apatxascolors_color_linea_divisoria_lista"
-        android:dividerHeight="1px"
-        android:footerDividersEnabled="true"
-        android:headerDividersEnabled="true" />
 
     <TextView
         android:id="@+id/estadoApatxaDetalle"
         style="@style/apatxas_valor_importante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/separador2DetalleApatxa"
-        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"        
         android:gravity="center"
         android:lineSpacingMultiplier="1.2" />
 
-</RelativeLayout>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/subactivity_lista_gastos"
+        style="@style/apatxas_detalle_activity" />
+
+</LinearLayout>

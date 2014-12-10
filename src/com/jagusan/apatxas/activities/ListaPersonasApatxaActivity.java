@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,6 +34,8 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 
 	private Long idApatxa;
 	private List<PersonaListado> personasApatxa;
+	private List<String> nombresPersonasAnadidas = new ArrayList<String>();
+	private List<PersonaListado> personasEliminadas = new ArrayList<PersonaListado>();
 
 	private ListView personasListView;
 	private ViewGroup personasListViewHeader;
@@ -71,13 +72,35 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.action_guardar_lista_personas_apatxa) {
+		switch (id) {
+		case R.id.action_guardar_lista_personas_apatxa:
+			actualizarPersonasAnadidasBorradas();
 			Intent returnIntent = new Intent();
 			setResult(RESULT_OK, returnIntent);
 			finish();
 			return true;
+		case R.id.action_anadir_persona:
+			anadirPersonaParaGuardar();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
+	}
+
+	private void actualizarPersonasAnadidasBorradas() {
+		for (PersonaListado persona: personasEliminadas){
+			Long idPersona = persona.getId();
+			if (idPersona == null){
+				nombresPersonasAnadidas.remove(persona.getNombre());
+			}else{				
+				personaService.borrarPersona(persona.getId());
+			}
+		}
+		for (String nombre : nombresPersonasAnadidas) {
+			personaService.crearPersona(nombre, idApatxa);
+		}
+		
+		
 	}
 
 	@Override
@@ -92,7 +115,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		switch (item.getItemId()) {
 		case R.id.action_persona_apatxa_borrar:
-			borrarPersona(info.position - 1);
+			anadirPersonaParaBorrar(info.position - 1);
 			return true;
 		default:
 			return super.onContextItemSelected(item);
@@ -135,34 +158,37 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	}
 
 	private void actualizarTituloCabeceraListaPersonas() {
-		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_personas), personasApatxa.size());
+		int numPersonas = personasApatxa.size();
+		String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_personas, numPersonas, numPersonas);
 		tituloPersonasListViewHeader.setText(titulo);
 	}
 
-	public void anadirPersona(View v) {
+	public void anadirPersonaParaGuardar() {
 		String nombre = "Apatxero " + ++numPersonasApatxaAnadidas;
-		personaService.crearPersona(nombre, idApatxa);
-		personasApatxa.clear();
-		personasApatxa.addAll(personaService.getTodasPersonasApatxa(idApatxa));
+		PersonaListado nuevaPersona = new PersonaListado();
+		nuevaPersona.setNombre(nombre);
+		personasApatxa.add(nuevaPersona);
+		nombresPersonasAnadidas.add(nombre);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();
 	}
 
-	public void borrarPersona(int posicion) {
-		Long idPersona = personasApatxa.get(posicion).getId();
+	public void anadirPersonaParaBorrar(int posicion) {
+		PersonaListado personaSeleccionada = personasApatxa.get(posicion);
+		Long idPersona = personaSeleccionada.getId();
 		if (gastoService.hayGastosAsociadosA(idPersona)) {
-			confimarBorradoPersonaConGastosAsociados(idPersona);
+			confimarBorradoPersonaConGastosAsociados(personaSeleccionada);
 		} else {
-			borrarPersonaYRecargar(idPersona);
+			anadirPersonaListaBorrado(personaSeleccionada);
 		}
 	}
 
-	private void confimarBorradoPersonaConGastosAsociados(final Long idPersona) {
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);		
+	private void confimarBorradoPersonaConGastosAsociados(final PersonaListado persona) {
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 		alertDialog.setMessage(R.string.mensaje_aviso_borrar_persona_con_gastos);
 		alertDialog.setPositiveButton(R.string.action_borrar, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				borrarPersonaYRecargar(idPersona);
+				anadirPersonaListaBorrado(persona);
 			}
 		});
 		alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
@@ -174,10 +200,9 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 		alertDialog.show();
 	}
 
-	private void borrarPersonaYRecargar(Long idPersona) {
-		personaService.borrarPersona(idPersona);
-		personasApatxa.clear();
-		personasApatxa.addAll(personaService.getTodasPersonasApatxa(idApatxa));
+	private void anadirPersonaListaBorrado(PersonaListado persona) {
+		personasApatxa.remove(persona);		
+		personasEliminadas.add(persona);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();
 	}

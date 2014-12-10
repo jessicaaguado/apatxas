@@ -4,8 +4,15 @@
     tools:context="com.jagusan.apatxas.NuevoApatxaPaso2Activity" >
 
     <item
-        android:id="@+id/action_guardar"
+        android:id="@+id/action_anadir_gasto"
         android:orderInCategory="1"
+        android:title="Añadir gasto"
+        android:icon="@drawable/ic_menu_action_apatxas_anadir_gasto"
+        app:showAsAction="ifRoom"/> 
+    
+    <item
+        android:id="@+id/action_guardar"
+        android:orderInCategory="100"
         android:title="Listo"
         android:icon="@drawable/ic_menu_action_apatxas_listo"
         app:showAsAction="withText|ifRoom"/> 

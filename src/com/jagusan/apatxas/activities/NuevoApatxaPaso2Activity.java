@@ -74,13 +74,18 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) {		
 		int id = item.getItemId();
-		if (id == R.id.action_guardar) {
+		switch (id) {
+		case R.id.action_guardar:
 			guardarApatxa();
 			return true;
+		case R.id.action_anadir_gasto:
+			anadirGasto();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 	
 	@Override
@@ -127,7 +132,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	}
 	
 
-	public void anadirGasto(View v) {
+	public void anadirGasto() {
 		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
 		intent.putStringArrayListExtra("personas", personasApatxa);
 		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);		
@@ -195,8 +200,9 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		actualizarTituloCabeceraListaGastos();
 	}
 
-	private void actualizarTituloCabeceraListaGastos() {
-		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_gastos), listaGastos.size(), totalGastos);
+	private void actualizarTituloCabeceraListaGastos() {		
+		int numGastos = listaGastos.size();
+		String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_gastos, numGastos, numGastos, totalGastos);
 		tituloGastosApatxaListViewHeader.setText(titulo);
 	}
 

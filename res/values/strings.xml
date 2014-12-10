@@ -34,10 +34,16 @@
     <!-- ESTADOS APATXA (FIN) -->
 
 
-    <!-- TITULOS -->
-    <string name="titulo_cabecera_lista_personas">%d PERSONAS</string>
-    <string name="titulo_cabecera_lista_gastos">%1$d GASTOS: %2$.2f€</string>
-    <string name="titulo_cabecera_lista_gastos_detalle_apatxa">GASTO TOTAL: %1$.2f€</string>
+    <!-- TITULOS -->    
+    <plurals name="titulo_cabecera_lista_personas">
+        <item quantity="one">%d persona</item>
+        <item quantity="other">%d personas</item>
+    </plurals> 
+    <plurals name="titulo_cabecera_lista_gastos">
+        <item quantity="one">%1$d Gasto: %2$.2f€</item>
+        <item quantity="other">%1$d Gastos: %2$.2f€</item>
+    </plurals>    
+    <string name="titulo_cabecera_lista_gastos_detalle_apatxa">Gasto total: %1$.2f€</string>
     <string name="titulo_dialog_cambio_nombre_persona">Cambiar nombre</string>
     <string name="title_activity_nuevo_apatxa_paso1">Nuevo</string>
     <string name="title_activity_nuevo_apatxa_paso2">Nuevo</string>
@@ -71,6 +77,8 @@
         <item quantity="other">%d personas</item>
     </plurals>
     <string name="pagado_por">Pagado por</string>
+    
+    <string name="reparto">Reparto</string>
     
     <string name="sin_pagar">Sin pagar</string>
     

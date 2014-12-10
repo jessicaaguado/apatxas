@@ -28,6 +28,7 @@ public class PersonaService {
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 		personaDAO.setDatabase(database);
+		gastoDAO.setDatabase(database);
 	}
 
 	public void close() {

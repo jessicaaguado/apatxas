@@ -4,16 +4,17 @@
     tools:context="com.jagusan.apatxas.InformacionApatxaActivity" >
 
     <item
-        android:id="@+id/action_repartir_apatxa"
+        android:id="@+id/action_anadir_gasto"
         android:orderInCategory="1"
-        android:title="Reparto"
-        android:icon="@drawable/ic_menu_action_apatxas_hacer_reparto"
-        app:showAsAction="withText|ifRoom"/>    
+        android:title="Añadir gasto"
+        android:icon="@drawable/ic_menu_action_apatxas_anadir_gasto"
+        app:showAsAction="ifRoom"/> 
     
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never"/>
+        android:id="@+id/action_repartir_apatxa"
+        android:orderInCategory="2"
+        android:title="Repartir"
+        android:icon="@drawable/ic_menu_action_apatxas_hacer_reparto"
+        app:showAsAction="withText|ifRoom"/>
 
 </menu>

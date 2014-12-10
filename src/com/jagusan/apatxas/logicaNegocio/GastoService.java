@@ -59,8 +59,10 @@ public class GastoService {
 	}
 
 	public boolean hayGastosAsociadosA(Long id) {
-		// TODO Auto-generated method stub
-		return true;
+		open();
+		Boolean hayGastos = gastoDAO.hayGastosPagadosPorIdPersona(id);
+		close();
+		return hayGastos;
 	}
 
 }

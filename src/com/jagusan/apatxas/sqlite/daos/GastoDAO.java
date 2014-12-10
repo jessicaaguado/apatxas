@@ -8,8 +8,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 
+import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionApatxaDeCursor;
 import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionGastoDeCursor;
+import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
 import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
 
@@ -78,6 +81,13 @@ public class GastoDAO {
 		String where = TablaGasto.COLUMNA_ID_PAGADO_POR + " = ?";
 		String[] whereArgs = { String.valueOf(idPersona) };
 		database.update(TablaGasto.NOMBRE_TABLA, values, where, whereArgs);
+	}
+
+	public Boolean hayGastosPagadosPorIdPersona(Long id) {		
+		Cursor cursor = database.query(TablaGasto.NOMBRE_TABLA, new String[]{TablaGasto.COLUMNA_ID}, TablaGasto.COLUMNA_ID_PAGADO_POR + "= "+id, null, null, null, null);
+		boolean hayGastos = cursor.getCount() > 0;
+		cursor.close();
+		return hayGastos;		
 	}
 
 }

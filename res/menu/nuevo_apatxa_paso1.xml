@@ -4,8 +4,15 @@
     tools:context="com.jagusan.apatxas.NuevoApatxaPaso1" >
 
     <item
-        android:id="@+id/action_siguiente_paso"
+        android:id="@+id/action_anadir_persona"
         android:orderInCategory="1"
+        android:title="Añadir persona"
+        android:icon="@drawable/ic_menu_action_apatxas_anadir_persona"
+        app:showAsAction="ifRoom"/> 
+    
+    <item
+        android:id="@+id/action_siguiente_paso"
+        android:orderInCategory="100"
         android:title="Sig."
         android:icon="@drawable/ic_menu_action_apatxas_siguiente"
         app:showAsAction="withText|ifRoom"/>    

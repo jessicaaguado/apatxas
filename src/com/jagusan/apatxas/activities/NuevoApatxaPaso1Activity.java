@@ -70,11 +70,17 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.action_siguiente_paso) {
+		switch (id) {
+		case R.id.action_siguiente_paso:
 			continuarAnadirApatxas();
 			return true;
+		case R.id.action_anadir_persona:
+			anadirPersona();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
+
 	}
 
 	@Override
@@ -118,12 +124,13 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 		actualizarTituloCabeceraListaPersonas();
 	}
 
-	private void actualizarTituloCabeceraListaPersonas() {
-		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_personas), personasApatxa.size());
+	private void actualizarTituloCabeceraListaPersonas() {		
+		int numPersonas = personasApatxa.size();
+		String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_personas, numPersonas,numPersonas);
 		tituloPersonasListViewHeader.setText(titulo);
 	}
 
-	public void anadirPersona(View v) {
+	public void anadirPersona() {
 		String nombre = "Apatxero " + ++numPersonasApatxaAnadidas;
 		personasApatxa.add(nombre);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();

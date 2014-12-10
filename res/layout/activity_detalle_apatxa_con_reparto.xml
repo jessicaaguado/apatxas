@@ -1,8 +1,8 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" >
+    android:orientation="vertical" >
 
     <include layout="@layout/subactivity_detalle_informacion_basica_apatxa" />
 
@@ -10,9 +10,7 @@
         android:id="@+id/informacionPersonasApatxaDetalle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/informacionBasicaApatxaDetalle"
-        android:layout_marginBottom="@dimen/apatxas_margen_defecto"
+         android:layout_marginBottom="@dimen/apatxas_margen_defecto"
         android:layout_marginLeft="@dimen/apatxas_margen_defecto"
         android:layout_marginTop="@dimen/apatxas_margen_defecto"
         android:gravity="center_vertical"
@@ -106,4 +104,5 @@
         android:footerDividersEnabled="true"
         android:headerDividersEnabled="true" />
 
-</RelativeLayout>
+    
+    </LinearLayout>

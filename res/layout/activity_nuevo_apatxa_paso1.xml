@@ -1,23 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"    
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/apatxas_detalle_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     style="@style/apatxas_detalle_activity">
+    android:orientation="vertical" >
 
-	<include layout="@layout/subactivity_informacion_basica_apatxa"/>   
+    <include
+        android:id="@+id/include_informacion_basica_apatxa"
+        layout="@layout/subactivity_informacion_basica_apatxa" />
 
-    <ListView
-        android:id="@+id/listaPersonasApatxa"
+    <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/boteInicialApatxa" 
-        android:headerDividersEnabled="true"                 
-        android:divider="@color/apatxascolors_color_linea_divisoria_lista" 
-        android:dividerHeight="1px"
-        android:paddingTop="@dimen/apatxas_padding_superior_defecto"  />
-    
+        layout="@layout/subactivity_lista_personas" />
 
-   
-
-</RelativeLayout>
+</LinearLayout>

@@ -1,18 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"    
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jagusan.apatxas.activities.NuevoApatxaPaso2Activity" >
+    android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/listaGastosApatxa"
+    <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:divider="@color/apatxascolors_color_linea_divisoria_lista"
-        android:dividerHeight="1px"
-        android:headerDividersEnabled="true"
-        android:paddingTop="@dimen/apatxas_padding_superior_defecto" />
+        layout="@layout/subactivity_lista_gastos" />
 
-</RelativeLayout>
+</LinearLayout>

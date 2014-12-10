@@ -55,6 +55,9 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 			apatxaService.realizarRepartoSiNecesario(apatxa);
 			verReparto();
 			return true;
+		case R.id.action_anadir_gasto:
+			anadirGastoDetalleApatxa();
+			return true;
 		default:
 			break;
 		}
@@ -116,10 +119,10 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	@Override
 	protected void cargarElementosLayout() {
 		super.cargarElementosLayout();
-		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxaDetalle);
-		ViewGroup gastosApatxaListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_gastos_detalle_apatxa_header, gastosApatxaListView, false);
+		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
+		ViewGroup gastosApatxaListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_gastos_apatxa_header, gastosApatxaListView, false);
 		gastosApatxaListView.addHeaderView(gastosApatxaListViewHeader);
-		tituloGastosApatxaListViewHeader = (TextView) gastosApatxaListViewHeader.findViewById(R.id.listaGastosDetalleApatxaCabecera);
+		tituloGastosApatxaListViewHeader = (TextView) gastosApatxaListViewHeader.findViewById(R.id.listaGastosApatxaCabecera);
 		registerForContextMenu(gastosApatxaListView);
 	}
 
@@ -141,7 +144,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 		tituloGastosApatxaListViewHeader.setText(titulo);
 	}
 	
-	public void anadirGastoDetalleApatxa(View view){
+	public void anadirGastoDetalleApatxa(){
 		ArrayList<String> nombresPersonas = obtenerListaNombresPersonasApatxa();
 		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
 		intent.putStringArrayListExtra("personas", nombresPersonas);
