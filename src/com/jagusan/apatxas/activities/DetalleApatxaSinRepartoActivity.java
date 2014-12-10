@@ -131,7 +131,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
 	private void cargarInformacionGastos() {		
 		gastosApatxa = apatxa.getGastos();
-		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_detalle_apatxa_row, gastosApatxa);
+		listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, gastosApatxa);
 		gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
 		actualizarTituloCabeceraListaGastos(apatxa.getGastos().size(), apatxa.getGastoTotal());
 	}
