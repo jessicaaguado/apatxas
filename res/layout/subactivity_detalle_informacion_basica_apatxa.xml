@@ -5,10 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/apatxascolors_color"
-        android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
-        android:paddingLeft="@dimen/apatxas_padding_izquierdo_defecto"
-        android:paddingRight="@dimen/apatxas_padding_derecho_defecto"
-        android:paddingTop="@dimen/apatxas_padding_superior_defecto" >
+        android:padding="@dimen/apatxas_padding_defecto">
 
         <TextView
             android:id="@+id/nombreApatxaDetalle"
@@ -46,16 +43,7 @@
             android:layout_alignParentLeft="@+id/labelBoteInicialApatxaDetalle"
             android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle" />
 
-        <ImageButton
-            android:id="@+id/botonEditarInformacionBasicaApatxas"
-            style="@style/apatxas_boton_solo_icono"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/nombreApatxaDetalle"
-            android:contentDescription="Editar información basica"
-            android:onClick="irEditarInformacionBasicaApatxa"
-            android:src="@drawable/ic_action_apatxas_editar_detalle" />
+        
     </RelativeLayout>
 
 </merge>

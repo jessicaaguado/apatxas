@@ -58,10 +58,8 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 			anadirGastoDetalleApatxa();
 			return true;
 		default:
-			break;
+			return super.onOptionsItemSelected(item);
 		}
-
-		return super.onOptionsItemSelected(item);
 	}
 	
 	@Override

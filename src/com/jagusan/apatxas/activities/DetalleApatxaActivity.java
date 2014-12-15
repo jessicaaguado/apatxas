@@ -62,8 +62,14 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		return super.onOptionsItemSelected(item);
+	public boolean onOptionsItemSelected(MenuItem item) {		
+		switch (item.getItemId()) {
+		case R.id.action_editar_detalle_apatxa:
+			irEditarInformacionBasicaApatxa();
+			return true;
+		default:			
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	abstract protected void setContentView();
@@ -127,7 +133,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 		estadoApatxaTextView.setText(estadoApatxa);
 	}
 
-	public void irEditarInformacionBasicaApatxa(View view) {
+	public void irEditarInformacionBasicaApatxa() {
 		Intent intent = new Intent(this, EditarInformacionBasicaApatxaActivity.class);
 		intent.putExtra("nombre", apatxa.getNombre());
 		intent.putExtra("fecha", apatxa.getFecha().getTime());

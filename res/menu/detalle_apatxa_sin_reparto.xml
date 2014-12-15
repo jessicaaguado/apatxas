@@ -8,11 +8,18 @@
         android:orderInCategory="1"
         android:title="Añadir gasto"
         android:icon="@drawable/ic_menu_action_apatxas_anadir_gasto"
-        app:showAsAction="ifRoom"/> 
+        app:showAsAction="ifRoom"/>
+    
+    <item
+        android:id="@+id/action_editar_detalle_apatxa"
+        android:orderInCategory="2"
+        android:title="Editar"
+        android:icon="@drawable/ic_menu_action_apatxas_editar"
+        app:showAsAction="ifRoom"/>
     
     <item
         android:id="@+id/action_repartir_apatxa"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:title="Repartir"
         android:icon="@drawable/ic_menu_action_apatxas_hacer_reparto"
         app:showAsAction="withText|ifRoom"/>

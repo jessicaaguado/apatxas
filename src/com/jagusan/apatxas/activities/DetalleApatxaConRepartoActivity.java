@@ -32,6 +32,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Log.d("APATXAS","Detalle con reparto...."+item.getItemId());
 		switch (item.getItemId()) {
 		case R.id.action_settings:
 			return true;
@@ -39,11 +40,9 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 			apatxaService.realizarReparto(apatxa);
 			recargar();
 			return true;
-		default:
-			break;
+		default:			
+			return super.onOptionsItemSelected(item);
 		}
-
-		return super.onOptionsItemSelected(item);
 	}
 	
 	private void recargar() {
