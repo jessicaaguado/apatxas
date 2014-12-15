@@ -4,36 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/subactivity_detalle_informacion_basica_apatxa" />
+    <include layout="@layout/subactivity_detalle_informacion_basica_apatxa" />    
 
-    <LinearLayout
-        android:id="@+id/informacionPersonasApatxaDetalle"
+    <TextView
+        android:id="@+id/numeroPersonasApatxaDetalle"
+        style="@style/apatxas_valor_defecto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/apatxas_margen_defecto"
         android:layout_marginLeft="@dimen/apatxas_margen_defecto"
         android:layout_marginTop="@dimen/apatxas_margen_defecto"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/numeroPersonasApatxaDetalle"
-            style="@style/apatxas_valor_defecto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.8"
-            android:text="tarari" />
-
-        <ImageButton
-            android:id="@+id/botonEditarInformacionPersonasApatxas"
-            style="@style/apatxas_boton_solo_icono"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.2"
-            android:contentDescription="@string/cambiar_informacion_personas_apatxa"
-            android:onClick="irEditarListaPersonasApatxa"
-            android:src="@drawable/ic_action_apatxas_modificar_personas_detalle" />
-    </LinearLayout>
+        android:drawableLeft="@drawable/ic_action_apatxas_modificar_personas_detalle" 
+        android:drawablePadding="@dimen/apatxas_padding_defecto"       
+        android:text="tarari"
+        android:clickable="true"
+        android:onClick="irEditarListaPersonasApatxa" />
 
     <View
         android:id="@+id/separador2DetalleApatxa"
@@ -46,14 +32,14 @@
         android:id="@+id/estadoApatxaDetalle"
         style="@style/apatxas_valor_importante"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"        
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:lineSpacingMultiplier="1.2" />
 
     <include
+        style="@style/apatxas_detalle_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/subactivity_lista_gastos"
-        style="@style/apatxas_detalle_activity" />
+        layout="@layout/subactivity_lista_gastos" />
 
 </LinearLayout>
