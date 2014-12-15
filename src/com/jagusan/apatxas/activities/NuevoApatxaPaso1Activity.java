@@ -39,7 +39,6 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	private EditText boteInicialEditText;
 
 	private ListView personasListView;
-	private ViewGroup personasListViewHeader;
 	private TextView tituloPersonasListViewHeader;
 	private List<String> personasApatxa = new ArrayList<String>();;
 	private ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
@@ -118,9 +117,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	}
 
 	private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
-		personasListViewHeader = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
-		personasListView.addHeaderView(personasListViewHeader);
-		tituloPersonasListViewHeader = (TextView) personasListViewHeader.findViewById(R.id.listaPersonasApatxaCabecera);
+		tituloPersonasListViewHeader = (TextView) findViewById(R.id.listaPersonasApatxaCabecera);
 		actualizarTituloCabeceraListaPersonas();
 	}
 

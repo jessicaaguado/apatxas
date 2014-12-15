@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,7 +37,6 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	private List<PersonaListado> personasEliminadas = new ArrayList<PersonaListado>();
 
 	private ListView personasListView;
-	private ViewGroup personasListViewHeader;
 	private TextView tituloPersonasListViewHeader;
 	private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
@@ -151,9 +149,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	}
 
 	private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
-		personasListViewHeader = (ViewGroup) inflater.inflate(R.layout.lista_personas_apatxa_header, personasListView, false);
-		personasListView.addHeaderView(personasListViewHeader);
-		tituloPersonasListViewHeader = (TextView) personasListViewHeader.findViewById(R.id.listaPersonasApatxaCabecera);
+		tituloPersonasListViewHeader = (TextView) findViewById(R.id.listaPersonasApatxaCabecera);
 		actualizarTituloCabeceraListaPersonas();
 	}
 

@@ -6,15 +6,14 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
@@ -120,9 +119,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	protected void cargarElementosLayout() {
 		super.cargarElementosLayout();
 		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
-		ViewGroup gastosApatxaListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_gastos_apatxa_header, gastosApatxaListView, false);
-		gastosApatxaListView.addHeaderView(gastosApatxaListViewHeader);
-		tituloGastosApatxaListViewHeader = (TextView) gastosApatxaListViewHeader.findViewById(R.id.listaGastosApatxaCabecera);
+		tituloGastosApatxaListViewHeader = (TextView) findViewById(R.id.listaGastosApatxaCabecera);
 		registerForContextMenu(gastosApatxaListView);
 	}
 

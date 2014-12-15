@@ -47,8 +47,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	private int NUEVO_GASTO_REQUEST_CODE = 1;
 	private int EDITAR_GASTO_REQUEST_CODE = 2;
 
-	private ListView gastosApatxaListView;
-	private ViewGroup gastosApatxaListViewHeader;
+	private ListView gastosApatxaListView;	
 	private TextView tituloGastosApatxaListViewHeader;
 	private List<GastoApatxaListado> listaGastos = new ArrayList<GastoApatxaListado>();
 	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
@@ -194,9 +193,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	}
 
 	private void anadirCabeceraListaGastos(LayoutInflater inflater) {
-		gastosApatxaListViewHeader = (ViewGroup) inflater.inflate(R.layout.lista_gastos_apatxa_header, gastosApatxaListView, false);
-		gastosApatxaListView.addHeaderView(gastosApatxaListViewHeader);
-		tituloGastosApatxaListViewHeader = (TextView) gastosApatxaListViewHeader.findViewById(R.id.listaGastosApatxaCabecera);
+		tituloGastosApatxaListViewHeader = (TextView) findViewById(R.id.listaGastosApatxaCabecera);
 		actualizarTituloCabeceraListaGastos();
 	}
 

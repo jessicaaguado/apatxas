@@ -14,10 +14,10 @@
         android:layout_marginBottom="@dimen/apatxas_margen_defecto"
         android:layout_marginLeft="@dimen/apatxas_margen_defecto"
         android:layout_marginTop="@dimen/apatxas_margen_defecto"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_action_apatxas_modificar_personas_detalle"
+        android:drawablePadding="@dimen/apatxas_padding_defecto"
         android:gravity="center_vertical"
-        android:drawableLeft="@drawable/ic_action_apatxas_modificar_personas_detalle" 
-        android:drawablePadding="@dimen/apatxas_padding_defecto"       
-       android:clickable="true"
         android:onClick="irEditarListaPersonasApatxa" />
 
     <View
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/apatxascolors_color_linea_divisoria" />
-    
+
     <TextView
         android:id="@+id/resumenGastosApatxaDetalle"
         style="@style/apatxas_valor_defecto"
@@ -34,36 +34,28 @@
         android:layout_marginBottom="@dimen/apatxas_margen_defecto"
         android:layout_marginLeft="@dimen/apatxas_margen_defecto"
         android:layout_marginTop="@dimen/apatxas_margen_defecto"
-        android:gravity="center_vertical"
-        android:drawableLeft="@drawable/ic_action_apatxas_acceso_gastos_apatxa" 
-        android:drawablePadding="@dimen/apatxas_padding_defecto"       
         android:clickable="true"
-        android:onClick="irEditarListaGastosApatxa" />    
+        android:drawableLeft="@drawable/ic_action_apatxas_acceso_gastos_apatxa"
+        android:drawablePadding="@dimen/apatxas_padding_defecto"
+        android:gravity="center_vertical"
+        android:onClick="irEditarListaGastosApatxa" />
 
     <View
         android:id="@+id/separador3DetalleApatxa"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-         android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"
+        android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"
         android:background="@color/apatxascolors_color_linea_divisoria" />
 
     <TextView
         android:id="@+id/estadoApatxaDetalle"
         style="@style/apatxas_valor_importante"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/apatxas_margen_defecto"
         android:gravity="center"
         android:lineSpacingMultiplier="1.2" />
 
-    <ListView
-        android:id="@+id/listaDesgloseRepartoApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"       
-        android:layout_marginTop="@dimen/apatxas_margen_defecto"
-        android:divider="@color/apatxascolors_color_linea_divisoria_lista"
-        android:dividerHeight="1px"
-        android:footerDividersEnabled="true"
-        android:headerDividersEnabled="true" />
+    <include layout="@layout/subactivity_lista_resultado_reparto" />
 
-    
-    </LinearLayout>
+</LinearLayout>

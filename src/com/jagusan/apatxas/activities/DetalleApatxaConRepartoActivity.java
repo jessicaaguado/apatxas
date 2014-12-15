@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -77,10 +76,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 	}
 
 	private void cargarInformacionReparto() {
-		Log.d("APATXAS","Cargar informacion reparto");
-		ViewGroup personasRepartoListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.lista_personas_resultado_reparto_header, personasRepartoListView, false);
-		personasRepartoListView.addHeaderView(personasRepartoListViewHeader);
-		
+		Log.d("APATXAS","Cargar informacion reparto");		
 		List<PersonaListadoReparto> listaPersonasReparto = apatxaService.getResultadoReparto(idApatxa);		
 		ListaPersonasRepartoApatxaArrayAdapter listaPersonasRepartoApatxaArrayAdapter = new ListaPersonasRepartoApatxaArrayAdapter(this, R.layout.lista_personas_resultado_reparto_row,
 				listaPersonasReparto);

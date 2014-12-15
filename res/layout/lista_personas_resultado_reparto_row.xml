@@ -3,7 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="5dp" >
+    android:paddingBottom="@dimen/apatxas_padding_izquierdo_defecto"
+    android:paddingLeft="@dimen/apatxas_padding_izquierdo_defecto"
+    android:paddingRight="@dimen/apatxas_padding_derecho_defecto"
+    android:paddingTop="@dimen/apatxas_padding_izquierdo_defecto" >
 
     <TextView
         android:id="@+id/nombre"
