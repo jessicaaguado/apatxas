@@ -112,7 +112,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		switch (item.getItemId()) {
 		case R.id.action_persona_apatxa_borrar:
-			anadirPersonaParaBorrar(info.position - 1);
+			anadirPersonaParaBorrar(info.position);
 			return true;
 		default:
 			return super.onContextItemSelected(item);

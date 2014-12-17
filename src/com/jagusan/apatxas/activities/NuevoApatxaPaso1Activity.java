@@ -91,7 +91,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		int posicionSeleccionada = info.position - 1;
+		int posicionSeleccionada = info.position;
 		switch (item.getItemId()) {
 		case R.id.action_persona_apatxa_cambiar:
 			DialogFragment dialog = new CambiarNombrePersonaApatxaDialogFragment();

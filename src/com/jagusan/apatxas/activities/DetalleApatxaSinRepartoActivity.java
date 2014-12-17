@@ -72,7 +72,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		int posicionSeleccionada = info.position - 1;
+		int posicionSeleccionada = info.position;
 		switch (item.getItemId()) {
 		case R.id.action_gasto_apatxa_cambiar:
 			GastoApatxaListado gasto = gastosApatxa.get(posicionSeleccionada);
