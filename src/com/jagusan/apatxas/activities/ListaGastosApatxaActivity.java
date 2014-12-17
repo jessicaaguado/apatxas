@@ -1,15 +1,14 @@
 package com.jagusan.apatxas.activities;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,29 +26,31 @@ import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.logicaNegocio.GastoService;
 import com.jagusan.apatxas.logicaNegocio.PersonaService;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 
-public class NuevoApatxaPaso2Activity extends ActionBarActivity {
+public class ListaGastosApatxaActivity extends ActionBarActivity {
 
 	private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
-	private ApatxaService apatxaService;
-	private PersonaService personaService;
-	private GastoService gastoService;
-	private Resources resources;
-
-	private String tituloApatxa;
-	private Long fechaApatxa;
-	private Double boteInicialApatxa;
-	private ArrayList<String> personasApatxa;
-	private Double totalGastos = 0.0;
-
 	private int NUEVO_GASTO_REQUEST_CODE = 1;
 	private int EDITAR_GASTO_REQUEST_CODE = 2;
+
+	private Long idApatxa;	
+	private ArrayList<String> nombresPersonasApatxa = new ArrayList<String>();
+	private List<GastoApatxaListado> gastosAnadidos = new ArrayList<GastoApatxaListado>();
+	private List<GastoApatxaListado> gastosEliminados = new ArrayList<GastoApatxaListado>();
+	private List<GastoApatxaListado> gastosModificados = new ArrayList<GastoApatxaListado>();
+	private Double totalGastos = 0.0;
 
 	private ListView gastosApatxaListView;	
 	private TextView tituloGastosApatxaListViewHeader;
 	private List<GastoApatxaListado> listaGastos = new ArrayList<GastoApatxaListado>();
 	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
+
+	private ApatxaService apatxaService;
+	private PersonaService personaService;
+	private GastoService gastoService;
+	private Resources resources;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +61,15 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 		personalizarActionBar();
 
+		recuperarDatosPasoAnterior();
+
 		cargarElementosLayout();
 
-		recuperarDatosPasoAnterior();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.nuevo_apatxa_paso2, menu);
+		getMenuInflater().inflate(R.menu.lista_gastos_apatxa, menu);
 		return true;
 	}
 
@@ -77,7 +78,10 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		int id = item.getItemId();
 		switch (id) {
 		case R.id.action_guardar:
-			guardarApatxa();
+			actualizarGastosAnadidosBorradosActualizados();
+			Intent returnIntent = new Intent();
+			setResult(RESULT_OK, returnIntent);
+			finish();
 			return true;
 		case R.id.action_anadir_gasto:
 			anadirGasto();
@@ -87,6 +91,31 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		}
 	}
 	
+	private void actualizarGastosAnadidosBorradosActualizados() {
+		Log.d("APATXAS"," 1.- BORRAR "+gastosEliminados.size());
+		for (GastoApatxaListado gasto: gastosEliminados){
+			Long idGasto = gasto.getId();
+			if (idGasto == null){
+				gastosAnadidos.remove(gasto);
+			}else{	
+				gastoService.borrarGasto(idGasto);				
+			}
+		}
+		Log.d("APATXAS"," 2.- AÑADIR "+gastosAnadidos.size());
+		for (GastoApatxaListado gasto : gastosAnadidos) {
+			Long idPersonaPagado = personaService.recuperarIdPersonaConNombre(gasto.getPagadoPor(), idApatxa);
+			Log.d("APATXAS", "id persona "+idPersonaPagado);
+			gastoService.crearGasto(gasto.getConcepto(), gasto.getTotal(), idApatxa, idPersonaPagado);
+		}
+		Log.d("APATXAS"," 3.- ACTUALIZAR "+gastosModificados.size());
+		for (GastoApatxaListado gasto: gastosModificados){
+			Long idPersonaPagado = personaService.recuperarIdPersonaConNombre(gasto.getPagadoPor(), idApatxa);
+			gastoService.actualizarGasto(gasto.getId(), gasto.getConcepto(), gasto.getTotal(), idPersonaPagado);
+		}
+		
+		apatxaService.actualizarGastoTotalApatxa(idApatxa);		
+	}
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -105,7 +134,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 			intent.putExtra("conceptoGasto", gasto.getConcepto());
 			intent.putExtra("importeGasto", gasto.getTotal());
 			intent.putExtra("nombrePersonaPagadoGasto", gasto.getPagadoPor());
-			intent.putStringArrayListExtra("personas", personasApatxa);
+			intent.putStringArrayListExtra("personas", nombresPersonasApatxa);
 			intent.putExtra("posicionGastoEditar", posicionSeleccionada);
 			startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
 			return true;
@@ -115,7 +144,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		default:
 			return super.onContextItemSelected(item);
 		}
-	}
+	}	
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
@@ -133,34 +162,34 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 	public void anadirGasto() {
 		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
-		intent.putStringArrayListExtra("personas", personasApatxa);
+		intent.putStringArrayListExtra("personas", nombresPersonasApatxa);
 		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);		
 	}
 
-	public void guardarApatxa() {
-		Long idApatxa = apatxaService.crearApatxa(tituloApatxa, fechaApatxa, boteInicialApatxa);
-		Map<String, Long> personas = new HashMap<String, Long>(personasApatxa.size());
-		for (int i = 0; i < personasApatxa.size(); i++) {
-			String nombrePersona = personasApatxa.get(i);
-			Long idPersona = personaService.crearPersona(nombrePersona, idApatxa);
-			personas.put(nombrePersona, idPersona);
-		}
-		for (int i = 0; i < listaGastos.size(); i++) {
-			GastoApatxaListado gasto = listaGastos.get(i);
-			String concepto = gasto.getConcepto();
-			Double total = gasto.getTotal();
-			Long idPersona = personas.get(gasto.getPagadoPor());
-			gastoService.crearGasto(concepto, total, idApatxa, idPersona);
-		}
-		apatxaService.actualizarGastoTotalApatxa(idApatxa);
-		irListadoApatxasPrincipal();
-	}
+//	public void guardarApatxa() {
+//		Long idApatxa = apatxaService.crearApatxa(tituloApatxa, fechaApatxa, boteInicialApatxa);
+//		Map<String, Long> personas = new HashMap<String, Long>(personasApatxa.size());
+//		for (int i = 0; i < personasApatxa.size(); i++) {
+//			String nombrePersona = personasApatxa.get(i);
+//			Long idPersona = personaService.crearPersona(nombrePersona, idApatxa);
+//			personas.put(nombrePersona, idPersona);
+//		}
+//		for (int i = 0; i < listaGastos.size(); i++) {
+//			GastoApatxaListado gasto = listaGastos.get(i);
+//			String concepto = gasto.getConcepto();
+//			Double total = gasto.getTotal();
+//			Long idPersona = personas.get(gasto.getPagadoPor());
+//			gastoService.crearGasto(concepto, total, idApatxa, idPersona);
+//		}
+//		apatxaService.actualizarGastoTotalApatxa(idApatxa);
+//		irListadoApatxasPrincipal();
+//	}
 
-	private void irListadoApatxasPrincipal() {
-		Intent intent = new Intent(this, ListaApatxasActivity.class);
-		finish();
-		startActivity(intent);
-	}
+//	private void irListadoApatxasPrincipal() {
+//		Intent intent = new Intent(this, ListaApatxasActivity.class);
+//		finish();
+//		startActivity(intent);
+//	}
 
 	private void inicializarServicios() {
 		apatxaService = new ApatxaService(this);
@@ -185,11 +214,16 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	}
 
 	private void recuperarDatosPasoAnterior() {
-		Intent intent = getIntent();
-		tituloApatxa = intent.getStringExtra("titulo");
-		fechaApatxa = intent.getLongExtra("fecha", -1);
-		boteInicialApatxa = intent.getDoubleExtra("boteInicial", 0);
-		personasApatxa = intent.getStringArrayListExtra("personas");
+		Intent intent = getIntent();		
+		List<PersonaListado> personasApatxa = (List<PersonaListado>) intent.getSerializableExtra("personas");
+		for (PersonaListado persona:personasApatxa){
+			nombresPersonasApatxa.add(persona.getNombre());
+		}
+		idApatxa = intent.getLongExtra("idApatxa", -1);
+		listaGastos = (List<GastoApatxaListado>) intent.getSerializableExtra("gastos");
+		for (GastoApatxaListado gasto: listaGastos){
+			totalGastos += gasto.getTotal();
+		}
 	}
 
 	private void anadirCabeceraListaGastos(LayoutInflater inflater) {
@@ -209,12 +243,16 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		String pagadoGasto = data.getStringExtra("pagadoPor");
 
 		GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
+		gastosAnadidos.add(gastoListado);
 		listaGastos.add(gastoListado);
 		actualizarListaGastos(totalGasto, 0.0);
 	}
 
 	private void borrarGasto(int posicion) {
-		Double importeGasto = listaGastos.get(posicion).getTotal();
+		GastoApatxaListado gastoBorrado = listaGastos.get(posicion);
+		Log.d("APATXAS","Borrar gasto en posicion "+posicion+" "+gastoBorrado.getConcepto());
+		Double importeGasto = gastoBorrado.getTotal();
+		gastosEliminados.add(gastoBorrado);
 		listaGastos.remove(posicion);
 		actualizarListaGastos(0.0, importeGasto);
 	}
@@ -225,10 +263,14 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		String pagadoGasto = data.getStringExtra("pagadoPor");
 		Integer posicionGastoActualizar = data.getIntExtra("posicionGastoEditar", -1);
 		
-		Double importeGastoAnterior = listaGastos.get(posicionGastoActualizar).getTotal();
-		GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
-		listaGastos.set(posicionGastoActualizar, gastoListado);
-				
+		GastoApatxaListado gastoActualizado = listaGastos.get(posicionGastoActualizar);
+		Double importeGastoAnterior = gastoActualizado.getTotal();
+		gastoActualizado.setConcepto(conceptoGasto);
+		gastoActualizado.setTotal(totalGasto);
+		gastoActualizado.setPagadoPor(pagadoGasto);
+		listaGastos.set(posicionGastoActualizar, gastoActualizado);
+		gastosModificados.add(gastoActualizado);
+		
 		actualizarListaGastos(totalGasto,importeGastoAnterior);		
 	}
 
@@ -241,4 +283,5 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	private void calcularTotalGastosApatxa(Double importeGastoNuevo, Double importeGastoEliminar){
 		totalGastos = totalGastos - importeGastoEliminar + importeGastoNuevo;
 	}
+
 }

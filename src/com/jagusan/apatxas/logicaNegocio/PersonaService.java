@@ -55,5 +55,12 @@ public class PersonaService {
 		gastoDAO.establecerComoNoPagadosGastosPagadosPorPersona(idPersona);
 		close();		
 	}
+	
+	public Long recuperarIdPersonaConNombre(String nombre, Long idApatxa){
+		open();
+		Long idPersona = personaDAO.recuperarIdPersonaPorNombre(nombre, idApatxa);
+		close();
+		return idPersona;
+	}
 
 }

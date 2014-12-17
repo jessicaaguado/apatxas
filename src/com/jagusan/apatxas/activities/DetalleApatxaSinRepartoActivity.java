@@ -190,6 +190,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 		String conceptoGasto = data.getStringExtra("concepto");
 		Double totalGasto = data.getDoubleExtra("total", 0);
 		String nombrePersonaPagadoGasto = data.getStringExtra("pagadoPor");
+		//TODO sustituir esto por personaService.recuperarIdPersonaConNombre
 		Long idPersona = getIdPersonaPagadoGasto(apatxa.getPersonas(), nombrePersonaPagadoGasto);
 		Long idGasto = data.getLongExtra("idGasto", -1);
 		

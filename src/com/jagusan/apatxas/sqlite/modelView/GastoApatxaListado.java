@@ -1,6 +1,11 @@
 package com.jagusan.apatxas.sqlite.modelView;
 
-public class GastoApatxaListado {
+import java.io.Serializable;
+
+public class GastoApatxaListado  implements Serializable{
+	
+	
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String concepto;
