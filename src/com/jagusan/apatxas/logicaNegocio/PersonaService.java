@@ -53,10 +53,10 @@ public class PersonaService {
 		open();
 		personaDAO.borrarPersona(idPersona);
 		gastoDAO.establecerComoNoPagadosGastosPagadosPorPersona(idPersona);
-		close();		
+		close();
 	}
-	
-	public Long recuperarIdPersonaConNombre(String nombre, Long idApatxa){
+
+	public Long recuperarIdPersonaConNombre(String nombre, Long idApatxa) {
 		open();
 		Long idPersona = personaDAO.recuperarIdPersonaPorNombre(nombre, idApatxa);
 		close();

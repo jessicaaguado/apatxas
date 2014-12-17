@@ -120,9 +120,9 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 		actualizarTituloCabeceraListaPersonas();
 	}
 
-	private void actualizarTituloCabeceraListaPersonas() {		
+	private void actualizarTituloCabeceraListaPersonas() {
 		int numPersonas = personasApatxa.size();
-		String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_personas, numPersonas,numPersonas);
+		String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_personas, numPersonas, numPersonas);
 		tituloPersonasListViewHeader.setText(titulo);
 	}
 

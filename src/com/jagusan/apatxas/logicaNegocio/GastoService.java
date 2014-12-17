@@ -48,10 +48,10 @@ public class GastoService {
 	public void actualizarGasto(Long idGasto, String conceptoGasto, Double totalGasto, Long idPersona) {
 		open();
 		gastoDAO.actualizarGasto(idGasto, conceptoGasto, totalGasto, idPersona);
-		close();				
+		close();
 	}
-	
-	public void borrarGasto(Long idGasto){
+
+	public void borrarGasto(Long idGasto) {
 		open();
 		gastoDAO.borrarGasto(idGasto);
 		close();

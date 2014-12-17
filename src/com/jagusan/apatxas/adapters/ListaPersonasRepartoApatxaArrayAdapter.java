@@ -31,7 +31,7 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		
+
 		if (convertView == null) {
 			// inflate the layout
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();

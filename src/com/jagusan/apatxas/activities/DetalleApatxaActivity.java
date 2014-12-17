@@ -62,12 +62,12 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {		
+	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_editar_detalle_apatxa:
 			irEditarInformacionBasicaApatxa();
 			return true;
-		default:			
+		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}

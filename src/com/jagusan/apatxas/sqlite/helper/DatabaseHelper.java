@@ -24,28 +24,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Log.i(LogTags.DEFAULT, "BD: Creando la base de datos");
 		db.execSQL(TablaApatxa.CREATE_TABLE);
 		db.execSQL(TablaGasto.CREATE_TABLE);
-		db.execSQL(TablaPersona.CREATE_TABLE);		
+		db.execSQL(TablaPersona.CREATE_TABLE);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.i(LogTags.DEFAULT, "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);		
+		Log.i(LogTags.DEFAULT, "BD: Actualizando la base de datos de " + oldVersion + " a " + newVersion);
 		db.execSQL(TablaGasto.DROP_TABLE);
 		db.execSQL(TablaPersona.DROP_TABLE);
 		db.execSQL(TablaApatxa.DROP_TABLE);
-        onCreate(db);
+		onCreate(db);
 	}
 
 	@Override
 	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.i(LogTags.DEFAULT, "BD: Actualizando la base de datos de "+oldVersion+" a "+newVersion);		
+		Log.i(LogTags.DEFAULT, "BD: Actualizando la base de datos de " + oldVersion + " a " + newVersion);
 		db.execSQL(TablaGasto.DROP_TABLE);
 		db.execSQL(TablaPersona.DROP_TABLE);
 		db.execSQL(TablaApatxa.DROP_TABLE);
-        onCreate(db);
+		onCreate(db);
 	}
-	
-	
-	
 
 }

@@ -2,9 +2,8 @@ package com.jagusan.apatxas.sqlite.modelView;
 
 import java.io.Serializable;
 
-public class GastoApatxaListado  implements Serializable{
-	
-	
+public class GastoApatxaListado implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -12,7 +11,7 @@ public class GastoApatxaListado  implements Serializable{
 	private Double total;
 	private Long idPagadoPor;
 	private String pagadoPor;
-	
+
 	public GastoApatxaListado(String concepto, Double total, String pagadoPor) {
 		super();
 		this.concepto = concepto;

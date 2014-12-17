@@ -46,7 +46,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	private int NUEVO_GASTO_REQUEST_CODE = 1;
 	private int EDITAR_GASTO_REQUEST_CODE = 2;
 
-	private ListView gastosApatxaListView;	
+	private ListView gastosApatxaListView;
 	private TextView tituloGastosApatxaListViewHeader;
 	private List<GastoApatxaListado> listaGastos = new ArrayList<GastoApatxaListado>();
 	private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
@@ -72,7 +72,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {		
+	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		switch (id) {
 		case R.id.action_guardar:
@@ -85,7 +85,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
@@ -99,7 +99,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		int posicionSeleccionada = info.position;
 		switch (item.getItemId()) {
 		case R.id.action_gasto_apatxa_cambiar:
-			GastoApatxaListado gasto = listaGastos.get(posicionSeleccionada);			
+			GastoApatxaListado gasto = listaGastos.get(posicionSeleccionada);
 			Intent intent = new Intent(this, EditarGastoApatxaActivity.class);
 			intent.putExtra("conceptoGasto", gasto.getConcepto());
 			intent.putExtra("importeGasto", gasto.getTotal());
@@ -122,18 +122,17 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 				anadirGastoAListaDeGastos(data);
 			}
 		}
-		if (requestCode == EDITAR_GASTO_REQUEST_CODE){
+		if (requestCode == EDITAR_GASTO_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				actualizarGastoListaDeGastos(data);
 			}
 		}
 	}
-	
 
 	public void anadirGasto() {
 		Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
 		intent.putStringArrayListExtra("personas", personasApatxa);
-		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);		
+		startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);
 	}
 
 	public void guardarApatxa() {
@@ -196,7 +195,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		actualizarTituloCabeceraListaGastos();
 	}
 
-	private void actualizarTituloCabeceraListaGastos() {		
+	private void actualizarTituloCabeceraListaGastos() {
 		int numGastos = listaGastos.size();
 		String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_gastos, numGastos, numGastos, totalGastos);
 		tituloGastosApatxaListViewHeader.setText(titulo);
@@ -217,18 +216,18 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		listaGastos.remove(posicion);
 		actualizarListaGastos(0.0, importeGasto);
 	}
-	
+
 	private void actualizarGastoListaDeGastos(Intent data) {
 		String conceptoGasto = data.getStringExtra("concepto");
 		Double totalGasto = data.getDoubleExtra("total", 0);
 		String pagadoGasto = data.getStringExtra("pagadoPor");
 		Integer posicionGastoActualizar = data.getIntExtra("posicionGastoEditar", -1);
-		
+
 		Double importeGastoAnterior = listaGastos.get(posicionGastoActualizar).getTotal();
 		GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
 		listaGastos.set(posicionGastoActualizar, gastoListado);
-				
-		actualizarListaGastos(totalGasto,importeGastoAnterior);		
+
+		actualizarListaGastos(totalGasto, importeGastoAnterior);
 	}
 
 	private void actualizarListaGastos(Double importeGastoNuevo, Double importeGastoEliminar) {
@@ -236,8 +235,8 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		listaGastosApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaGastos();
 	}
-	
-	private void calcularTotalGastosApatxa(Double importeGastoNuevo, Double importeGastoEliminar){
+
+	private void calcularTotalGastosApatxa(Double importeGastoNuevo, Double importeGastoEliminar) {
 		totalGastos = totalGastos - importeGastoEliminar + importeGastoNuevo;
 	}
 }

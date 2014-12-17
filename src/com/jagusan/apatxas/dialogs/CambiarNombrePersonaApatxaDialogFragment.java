@@ -37,7 +37,7 @@ public class CambiarNombrePersonaApatxaDialogFragment extends DialogFragment {
 		nombreAntiguoTextView = (TextView) dialogView.findViewById(R.id.nombreAntiguoPersona);
 		nombreAntiguoTextView.setText(nombrePersonaCambiar);
 		nombreNuevoEditText = (EditText) dialogView.findViewById(R.id.nuevoNombrePersona);
-		builder.setView(dialogView);		
+		builder.setView(dialogView);
 		builder.setPositiveButton(R.string.action_listo, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				listener.onClickListoCambiarNombrePersona(posicionPersonaCambiar, nombreNuevoEditText.getText().toString());

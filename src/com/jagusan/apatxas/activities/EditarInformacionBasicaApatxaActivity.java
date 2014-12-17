@@ -56,11 +56,11 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.action_guardar_informacion_basica) {
-			if (validacionesCorrectas()){				
+			if (validacionesCorrectas()) {
 				String nombre = getNombreIntroducido();
 				Long fecha = getFechaIntroducida();
 				Double boteInicial = getBoteIntroducido();
-				
+
 				Intent returnIntent = new Intent();
 				returnIntent.putExtra("nombre", nombre);
 				returnIntent.putExtra("fecha", fecha);
@@ -104,11 +104,10 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 		}
 		boteInicialEditText.setText(boteInicial.toString());
 	}
-	
-	
+
 	protected String getNombreIntroducido() {
 		return nombreApatxaEditText.getText().toString();
-	}	
+	}
 
 	protected Long getFechaIntroducida() {
 		Long fecha = null;

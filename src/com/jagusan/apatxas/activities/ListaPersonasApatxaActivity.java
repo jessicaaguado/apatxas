@@ -86,19 +86,18 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	}
 
 	private void actualizarPersonasAnadidasBorradas() {
-		for (PersonaListado persona: personasEliminadas){
+		for (PersonaListado persona : personasEliminadas) {
 			Long idPersona = persona.getId();
-			if (idPersona == null){
+			if (idPersona == null) {
 				nombresPersonasAnadidas.remove(persona.getNombre());
-			}else{				
+			} else {
 				personaService.borrarPersona(persona.getId());
 			}
 		}
 		for (String nombre : nombresPersonasAnadidas) {
 			personaService.crearPersona(nombre, idApatxa);
 		}
-		
-		
+
 	}
 
 	@Override
@@ -197,7 +196,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 	}
 
 	private void anadirPersonaListaBorrado(PersonaListado persona) {
-		personasApatxa.remove(persona);		
+		personasApatxa.remove(persona);
 		personasEliminadas.add(persona);
 		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
 		actualizarTituloCabeceraListaPersonas();

@@ -42,10 +42,10 @@ public class PersonaDAO {
 	}
 
 	public Long recuperarIdPersonaPorNombre(String nombre, Long idApatxa) {
-		Long idPersona = null;		
+		Long idPersona = null;
 		Cursor cursor = database.query(NOMBRE_TABLA_PERSONA, new String[] { TablaPersona.COLUMNA_ID }, TablaPersona.COLUMNA_ID_APATXA + " = " + idApatxa + " and " + TablaPersona.COLUMNA_NOMBRE
-				+ " = '" + nombre + "'", null, null, null, ORDEN_PERSONAS_DEFECTO);		
-		if (cursor.moveToFirst()){			
+				+ " = '" + nombre + "'", null, null, null, ORDEN_PERSONAS_DEFECTO);
+		if (cursor.moveToFirst()) {
 			idPersona = cursor.getLong(0);
 		}
 		cursor.close();

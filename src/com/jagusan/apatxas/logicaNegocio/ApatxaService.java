@@ -33,14 +33,14 @@ public class ApatxaService {
 		calcularRepartoService = new CalcularRepartoService();
 	}
 
-	public void open() throws SQLException {		
+	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 		apatxaDAO.setDatabase(database);
 		personaDAO.setDatabase(database);
 		gastoDAO.setDatabase(database);
 	}
 
-	public void close() {		
+	public void close() {
 		dbHelper.close();
 	}
 
@@ -86,7 +86,7 @@ public class ApatxaService {
 	}
 
 	public void realizarRepartoSiNecesario(ApatxaDetalle apatxaDetalle) {
-		if (!apatxaDetalle.getRepartoRealizado()) {			
+		if (!apatxaDetalle.getRepartoRealizado()) {
 			realizarReparto(apatxaDetalle);
 		}
 	}
@@ -94,13 +94,13 @@ public class ApatxaService {
 	public void realizarReparto(ApatxaDetalle apatxaDetalle) {
 		open();
 		Double gastoProporcional = calcularRepartoService.calcularParteProporcional(apatxaDetalle);
-		for (int i = 0; i < apatxaDetalle.getPersonas().size(); i++) {			
+		for (int i = 0; i < apatxaDetalle.getPersonas().size(); i++) {
 			personaDAO.asociarPagoPersona(apatxaDetalle.getPersonas().get(i).getId(), gastoProporcional);
 		}
 		apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.getId(), true);
 		close();
 	}
-	
+
 	public List<PersonaListadoReparto> getResultadoReparto(Long idApatxa) {
 		open();
 		List<PersonaListadoReparto> resultadoReparto = personaDAO.obtenerResultadoRepartoPersonas(idApatxa);

@@ -27,11 +27,11 @@ public class CursorTablaGasto {
 	public Double getTotal() {
 		return cursor.getDouble(POSICION_TOTAL);
 	}
-	
+
 	public Long getIdPagador() {
 		return cursor.getLong(POSICION_ID_PAGADOR);
 	}
-	
+
 	public String getNombrePagador() {
 		return cursor.getString(POSICION_NOMBRE_PAGADOR);
 	}

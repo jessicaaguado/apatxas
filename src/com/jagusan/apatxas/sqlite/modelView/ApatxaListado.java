@@ -58,18 +58,18 @@ public class ApatxaListado {
 	@Override
 	public String toString() {
 		String apatxaListadoString = "-------------------";
-		apatxaListadoString = apatxaListadoString + "\nID: "+this.getId();
-		apatxaListadoString = apatxaListadoString + "\nNOMBRE: "+this.getNombre();
-		apatxaListadoString = apatxaListadoString + "\nFECHA: "+this.getFecha();
+		apatxaListadoString = apatxaListadoString + "\nID: " + this.getId();
+		apatxaListadoString = apatxaListadoString + "\nNOMBRE: " + this.getNombre();
+		apatxaListadoString = apatxaListadoString + "\nFECHA: " + this.getFecha();
 		apatxaListadoString = apatxaListadoString + "\n-------------------";
 		return apatxaListadoString;
 	}
-	
-	public EstadoApatxa getEstadoApatxa(){
+
+	public EstadoApatxa getEstadoApatxa() {
 		EstadoApatxa estadoApatxa = EstadoApatxa.HECHO;
 		if (!repartoRealizado) {
 			estadoApatxa = EstadoApatxa.SIN_REPARTIR;
-		} else if (personasPendientesPagarCobrar > 0){
+		} else if (personasPendientesPagarCobrar > 0) {
 			estadoApatxa = EstadoApatxa.PENDIENTE;
 		}
 		return estadoApatxa;
@@ -98,8 +98,5 @@ public class ApatxaListado {
 	public void setPersonasPendientesPagarCobrar(Integer personasPendientesPagarCobrar) {
 		this.personasPendientesPagarCobrar = personasPendientesPagarCobrar;
 	}
-
-	
-
 
 }

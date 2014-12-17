@@ -15,7 +15,7 @@ public class ValidacionActivity {
 	public static final Integer MENS_FORMATO_FECHA_INCORRECTA = R.string.validacion_mensaje_formato_fecha_incorrecto;
 
 	public static final String REGEX_DEFAULT = ".*";
-	
+
 	public static boolean validarTituloObligatorio(EditText editText, Resources resources) {
 		return validarCampoObligatorio(editText, resources);
 	}
@@ -27,7 +27,7 @@ public class ValidacionActivity {
 	public static boolean validarFechaObligatoria(EditText editText, Resources resources) {
 		return validarCampoObligatorio(editText, resources);
 	}
-	
+
 	public static Boolean validarCantidadObligatoria(EditText editText, Resources resources) {
 		return validarCampoObligatorio(editText, resources);
 	}
@@ -48,14 +48,12 @@ public class ValidacionActivity {
 			valido = false;
 		}
 		// pattern doesn't match so returning false
-		if (obligatorio && !Pattern.matches(regex, text)) {			
+		if (obligatorio && !Pattern.matches(regex, text)) {
 			editText.setError(mensaje);
 			valido = false;
 		}
 
 		return valido;
 	}
-
-	
 
 }

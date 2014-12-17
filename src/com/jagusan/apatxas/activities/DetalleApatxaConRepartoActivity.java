@@ -22,7 +22,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
 	private TextView resumenGastosApatxaTextView;
 	private ListView personasRepartoListView;
-	
+
 	private int EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE = 20;
 
 	@Override
@@ -83,7 +83,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 		personasRepartoListView.setAdapter(listaPersonasRepartoApatxaArrayAdapter);
 
 	}
-	
+
 	public void irEditarListaGastosApatxa(View view) {
 		Intent intent = new Intent(this, ListaGastosApatxaActivity.class);
 		intent.putExtra("personas", new ArrayList<PersonaListado>(apatxa.getPersonas()));
@@ -91,7 +91,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 		intent.putExtra("gastos", new ArrayList<GastoApatxaListado>(apatxa.getGastos()));
 		startActivityForResult(intent, EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE);
 	}
-	
+
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {

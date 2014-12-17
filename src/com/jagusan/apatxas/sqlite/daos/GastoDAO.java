@@ -45,9 +45,9 @@ public class GastoDAO {
 	public List<GastoApatxaListado> recuperarGastosApatxa(Long idApatxa) {
 		List<GastoApatxaListado> gastos = new ArrayList<GastoApatxaListado>();
 
-		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();		
-		queryBuilder.setTables(TablaGasto.NOMBRE_TABLA+" left outer join "+TablaPersona.NOMBRE_TABLA+ " on "+TablaGasto.COLUMNA_ID_PAGADO_POR+"="+TablaPersona.COLUMNA_FULL_ID);
-		Cursor cursor = queryBuilder.query(database, COLUMNAS_GASTO, TablaGasto.NOMBRE_TABLA+"."+TablaGasto.COLUMNA_ID_APATXA + " = "+idApatxa, null, null, null, ORDEN_GASTOS_DEFECTO);		
+		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
+		queryBuilder.setTables(TablaGasto.NOMBRE_TABLA + " left outer join " + TablaPersona.NOMBRE_TABLA + " on " + TablaGasto.COLUMNA_ID_PAGADO_POR + "=" + TablaPersona.COLUMNA_FULL_ID);
+		Cursor cursor = queryBuilder.query(database, COLUMNAS_GASTO, TablaGasto.NOMBRE_TABLA + "." + TablaGasto.COLUMNA_ID_APATXA + " = " + idApatxa, null, null, null, ORDEN_GASTOS_DEFECTO);
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			GastoApatxaListado gasto = new GastoApatxaListado();
@@ -68,23 +68,23 @@ public class GastoDAO {
 		String where = TablaGasto.COLUMNA_ID + " = ?";
 		String[] whereArgs = { String.valueOf(idGasto) };
 		database.update(TablaGasto.NOMBRE_TABLA, values, where, whereArgs);
-		
+
 	}
 
 	public void establecerComoNoPagadosGastosPagadosPorPersona(Long idPersona) {
 		ContentValues values = new ContentValues();
 		values.put(TablaGasto.COLUMNA_ID_PAGADO_POR, idPersona);
-		
+
 		String where = TablaGasto.COLUMNA_ID_PAGADO_POR + " = ?";
 		String[] whereArgs = { String.valueOf(idPersona) };
 		database.update(TablaGasto.NOMBRE_TABLA, values, where, whereArgs);
 	}
 
-	public Boolean hayGastosPagadosPorIdPersona(Long id) {		
-		Cursor cursor = database.query(TablaGasto.NOMBRE_TABLA, new String[]{TablaGasto.COLUMNA_ID}, TablaGasto.COLUMNA_ID_PAGADO_POR + "= "+id, null, null, null, null);
+	public Boolean hayGastosPagadosPorIdPersona(Long id) {
+		Cursor cursor = database.query(TablaGasto.NOMBRE_TABLA, new String[] { TablaGasto.COLUMNA_ID }, TablaGasto.COLUMNA_ID_PAGADO_POR + "= " + id, null, null, null, null);
 		boolean hayGastos = cursor.getCount() > 0;
 		cursor.close();
-		return hayGastos;		
+		return hayGastos;
 	}
 
 }

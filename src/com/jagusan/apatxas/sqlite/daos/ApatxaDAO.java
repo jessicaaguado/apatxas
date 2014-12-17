@@ -18,13 +18,14 @@ public class ApatxaDAO {
 
 	private SQLiteDatabase database;
 
-	private static final String SQL_NUM_PERSONAS_PTES_APATXA = "(select count(*) from "+TablaPersona.NOMBRE_TABLA+" where "+TablaPersona.COLUMNA_ID_APATXA +" = "+TablaApatxa.COLUMNA_FULL_ID+" and ("+TablaPersona.COLUMNA_HECHO+" = 0 or "+TablaPersona.COLUMNA_HECHO+" is null))";
-	
-	private static final String[] COLUMNAS_APATXA = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, 
-													  TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL, TablaApatxa.COLUMNA_GASTO_PAGADO, TablaApatxa.COLUMNA_REPARTO_REALIZADO,SQL_NUM_PERSONAS_PTES_APATXA };
+	private static final String SQL_NUM_PERSONAS_PTES_APATXA = "(select count(*) from " + TablaPersona.NOMBRE_TABLA + " where " + TablaPersona.COLUMNA_ID_APATXA + " = " + TablaApatxa.COLUMNA_FULL_ID
+			+ " and (" + TablaPersona.COLUMNA_HECHO + " = 0 or " + TablaPersona.COLUMNA_HECHO + " is null))";
+
+	private static final String[] COLUMNAS_APATXA = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL,
+			TablaApatxa.COLUMNA_GASTO_PAGADO, TablaApatxa.COLUMNA_REPARTO_REALIZADO, SQL_NUM_PERSONAS_PTES_APATXA };
 
 	private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA + " DESC";
-	
+
 	public void setDatabase(SQLiteDatabase database) {
 		this.database = database;
 	}
@@ -38,7 +39,7 @@ public class ApatxaDAO {
 		long insertId = database.insert(TablaApatxa.NOMBRE_TABLA, null, values);
 		return insertId;
 	}
-	
+
 	public void actualizarApatxa(Long id, String nombre, Long fecha, Double boteInicial) {
 		ContentValues values = new ContentValues();
 		values.put(TablaApatxa.COLUMNA_NOMBRE, nombre);
@@ -53,14 +54,14 @@ public class ApatxaDAO {
 	public void borrarApatxa(Long id) {
 		database.delete(TablaApatxa.NOMBRE_TABLA, TablaApatxa.COLUMNA_ID + " = " + id, null);
 	}
-	
-	public ApatxaDetalle getApatxa(Long id){
+
+	public ApatxaDetalle getApatxa(Long id) {
 		ApatxaDetalle apatxa = null;
-		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, TablaApatxa.COLUMNA_ID + "= "+id, null, null, null, ORDEN_APATXAS_DEFECTO);
+		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, TablaApatxa.COLUMNA_ID + "= " + id, null, null, null, ORDEN_APATXAS_DEFECTO);
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			apatxa = new ApatxaDetalle();
-			apatxa = (ApatxaDetalle) ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxa);			
+			apatxa = (ApatxaDetalle) ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxa);
 			cursor.moveToNext();
 		}
 		cursor.close();
@@ -68,32 +69,33 @@ public class ApatxaDAO {
 	}
 
 	public List<ApatxaListado> getTodosApatxas() {
-		List<ApatxaListado> apatxas = new ArrayList<ApatxaListado>();		
+		List<ApatxaListado> apatxas = new ArrayList<ApatxaListado>();
 		Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, null, null, null, null, ORDEN_APATXAS_DEFECTO);
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			ApatxaListado apatxa = new ApatxaListado(); 
-			apatxa = ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxa);			
+			ApatxaListado apatxa = new ApatxaListado();
+			apatxa = ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxa);
 			apatxas.add(apatxa);
 			cursor.moveToNext();
-		}		
+		}
 		cursor.close();
 		return apatxas;
 	}
 
-	public void actualizarGastoTotalApatxa(Long idApatxa){
-		String sqlCalculoGastoTotal = "select sum("+TablaGasto.COLUMNA_TOTAL+") from "+TablaGasto.NOMBRE_TABLA+" where "+TablaGasto.COLUMNA_ID_APATXA+" = "+idApatxa;
-		String sqlActualizar = "update "+TablaApatxa.NOMBRE_TABLA+" set "+TablaApatxa.COLUMNA_GASTO_TOTAL+" = ("+sqlCalculoGastoTotal+") where "+TablaApatxa.COLUMNA_ID + " = "+idApatxa;
+	public void actualizarGastoTotalApatxa(Long idApatxa) {
+		String sqlCalculoGastoTotal = "select sum(" + TablaGasto.COLUMNA_TOTAL + ") from " + TablaGasto.NOMBRE_TABLA + " where " + TablaGasto.COLUMNA_ID_APATXA + " = " + idApatxa;
+		String sqlActualizar = "update " + TablaApatxa.NOMBRE_TABLA + " set " + TablaApatxa.COLUMNA_GASTO_TOTAL + " = (" + sqlCalculoGastoTotal + ") where " + TablaApatxa.COLUMNA_ID + " = "
+				+ idApatxa;
 		database.execSQL(sqlActualizar);
 	}
 
 	public void cambiarEstadoRepartoApatxa(Long idApatxa, boolean repartoHecho) {
 		Integer valorRepartoHecho = repartoHecho ? 1 : 0;
-		String sqlActualizar = "update "+TablaApatxa.NOMBRE_TABLA+" set "+TablaApatxa.COLUMNA_REPARTO_REALIZADO +" = "+valorRepartoHecho+" where "+TablaApatxa.COLUMNA_ID+" = "+idApatxa;
+		String sqlActualizar = "update " + TablaApatxa.NOMBRE_TABLA + " set " + TablaApatxa.COLUMNA_REPARTO_REALIZADO + " = " + valorRepartoHecho + " where " + TablaApatxa.COLUMNA_ID + " = "
+				+ idApatxa;
 		database.execSQL(sqlActualizar);
-		
+
 	}
-	
-	
+
 }
