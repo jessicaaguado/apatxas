@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,8 +23,8 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
 	private TextView resumenGastosApatxaTextView;
 	private ListView personasRepartoListView;
-
-	private int EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE = 20;
+	
+	private int EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE = 20;	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,20 +40,16 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_repartir_apatxa:
+		case R.id.action_actualizar_reparto_apatxa:
 			apatxaService.realizarReparto(apatxa);
-			recargar();
+			cargarInformacionApatxa();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
-	private void recargar() {
-		finish();
-		startActivity(getIntent());
-	}
-
+	
 	@Override
 	protected void setContentView() {
 		setContentView(R.layout.activity_detalle_apatxa_con_reparto);
@@ -66,7 +63,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 	}
 
 	@Override
-	protected void cargarInformacionApatxa() {
+	protected void cargarInformacionApatxa() {		
 		super.cargarInformacionApatxa();
 		cargarInformacionGastos();
 		cargarInformacionReparto();
@@ -93,11 +90,24 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
-				cargarInformacionApatxa();
+				actualizarReparto();				
 			}
 		}
+		if (requestCode == EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				actualizarReparto();				
+			}
+		}
+	}
+
+	private void actualizarReparto() {
+		apatxa = apatxaService.getApatxaDetalle(idApatxa);
+		apatxaService.realizarReparto(apatxa);
+		cargarInformacionApatxa();
+		
 	}
 
 }

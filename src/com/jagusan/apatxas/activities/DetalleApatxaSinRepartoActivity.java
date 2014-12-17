@@ -167,6 +167,11 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 			if (resultCode == RESULT_OK) {
 				actualizarGastoApatxa(data);
 			}
+		}		
+		if (requestCode == EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				cargarInformacionApatxa();
+			}
 		}
 	}
 

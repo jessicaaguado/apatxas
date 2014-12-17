@@ -37,7 +37,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	protected ApatxaDetalle apatxa;
 
 	private int EDITAR_INFORMACION_BASICA_REQUEST_CODE = 1;
-	private int EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE = 10;
+	public int EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE = 10;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -157,12 +157,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 				apatxaService.actualizarApatxa(idApatxa, nombre, fecha, boteInicial);
 				cargarInformacionApatxa();
 			}
-		}
-		if (requestCode == EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE) {
-			if (resultCode == RESULT_OK) {
-				cargarInformacionApatxa();
-			}
-		}
+		}		
 	}
 
 }
