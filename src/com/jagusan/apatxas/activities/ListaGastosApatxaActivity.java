@@ -8,7 +8,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -91,8 +90,7 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
 		}
 	}
 	
-	private void actualizarGastosAnadidosBorradosActualizados() {
-		Log.d("APATXAS"," 1.- BORRAR "+gastosEliminados.size());
+	private void actualizarGastosAnadidosBorradosActualizados() {		
 		for (GastoApatxaListado gasto: gastosEliminados){
 			Long idGasto = gasto.getId();
 			if (idGasto == null){
@@ -100,14 +98,11 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
 			}else{	
 				gastoService.borrarGasto(idGasto);				
 			}
-		}
-		Log.d("APATXAS"," 2.- AÑADIR "+gastosAnadidos.size());
+		}		
 		for (GastoApatxaListado gasto : gastosAnadidos) {
-			Long idPersonaPagado = personaService.recuperarIdPersonaConNombre(gasto.getPagadoPor(), idApatxa);
-			Log.d("APATXAS", "id persona "+idPersonaPagado);
+			Long idPersonaPagado = personaService.recuperarIdPersonaConNombre(gasto.getPagadoPor(), idApatxa);			
 			gastoService.crearGasto(gasto.getConcepto(), gasto.getTotal(), idApatxa, idPersonaPagado);
-		}
-		Log.d("APATXAS"," 3.- ACTUALIZAR "+gastosModificados.size());
+		}		
 		for (GastoApatxaListado gasto: gastosModificados){
 			Long idPersonaPagado = personaService.recuperarIdPersonaConNombre(gasto.getPagadoPor(), idApatxa);
 			gastoService.actualizarGasto(gasto.getId(), gasto.getConcepto(), gasto.getTotal(), idPersonaPagado);
@@ -249,8 +244,7 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
 	}
 
 	private void borrarGasto(int posicion) {
-		GastoApatxaListado gastoBorrado = listaGastos.get(posicion);
-		Log.d("APATXAS","Borrar gasto en posicion "+posicion+" "+gastoBorrado.getConcepto());
+		GastoApatxaListado gastoBorrado = listaGastos.get(posicion);		
 		Double importeGasto = gastoBorrado.getTotal();
 		gastosEliminados.add(gastoBorrado);
 		listaGastos.remove(posicion);

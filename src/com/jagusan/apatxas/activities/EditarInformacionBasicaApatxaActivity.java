@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.utils.FormatearNumero;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
 public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {

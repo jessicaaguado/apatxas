@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionPersonaDeCursor;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
@@ -43,11 +42,9 @@ public class PersonaDAO {
 	}
 
 	public Long recuperarIdPersonaPorNombre(String nombre, Long idApatxa) {
-		Long idPersona = null;
-		Log.d("APATXAS", "DAO recuperarIdpersona " + nombre + " " + idApatxa);
+		Long idPersona = null;		
 		Cursor cursor = database.query(NOMBRE_TABLA_PERSONA, new String[] { TablaPersona.COLUMNA_ID }, TablaPersona.COLUMNA_ID_APATXA + " = " + idApatxa + " and " + TablaPersona.COLUMNA_NOMBRE
-				+ " = '" + nombre + "'", null, null, null, ORDEN_PERSONAS_DEFECTO);
-		Log.d("APATXAS", "DAO CURSOR " + cursor);
+				+ " = '" + nombre + "'", null, null, null, ORDEN_PERSONAS_DEFECTO);		
 		if (cursor.moveToFirst()){			
 			idPersona = cursor.getLong(0);
 		}

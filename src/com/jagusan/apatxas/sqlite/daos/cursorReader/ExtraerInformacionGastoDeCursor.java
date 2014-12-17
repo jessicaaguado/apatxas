@@ -1,7 +1,6 @@
 package com.jagusan.apatxas.sqlite.daos.cursorReader;
 
 import android.database.Cursor;
-import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
 

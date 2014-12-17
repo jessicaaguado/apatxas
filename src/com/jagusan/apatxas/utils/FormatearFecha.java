@@ -1,12 +1,11 @@
 package com.jagusan.apatxas.utils;
 
 import java.text.SimpleDateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.jagusan.apatxas.R;
-
 import android.content.res.Resources;
+
+import com.jagusan.apatxas.R;
 
 public class FormatearFecha {
 	

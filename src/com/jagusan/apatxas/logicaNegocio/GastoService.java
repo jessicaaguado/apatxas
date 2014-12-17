@@ -5,7 +5,6 @@ import java.util.List;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.jagusan.apatxas.sqlite.daos.GastoDAO;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
