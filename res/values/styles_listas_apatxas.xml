@@ -13,7 +13,6 @@
         <item name="android:textColor">@color/apatxascolors_color_destacado</item>
     </style>
 
-    <style name="texto_cabecera_lista" parent="@style/TextAppearance.AppCompat.Subhead"/>
-
+    <style name="texto_cabecera_lista" parent="@style/TextAppearance.AppCompat.Subhead" />
 
 </resources>

@@ -4,6 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/subactivity_lista_gastos"/>
+    <include layout="@layout/subactivity_lista_gastos" />
 
 </LinearLayout>

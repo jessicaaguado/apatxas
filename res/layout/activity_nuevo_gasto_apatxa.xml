@@ -27,11 +27,11 @@
     <TextView
         android:id="@+id/labelGastoPagadoPor"
         style="@style/apatxas_label_defecto"
-        android:paddingTop="@dimen/apatxas_padding_superior_defecto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/totalGasto"
+        android:paddingTop="@dimen/apatxas_padding_superior_defecto"
         android:text="@string/pagado_por" />
 
     <Spinner
@@ -39,6 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/labelGastoPagadoPor"/>
+        android:layout_below="@+id/labelGastoPagadoPor" />
 
 </RelativeLayout>

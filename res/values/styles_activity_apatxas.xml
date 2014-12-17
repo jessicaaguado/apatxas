@@ -29,11 +29,10 @@
     <style name="apatxas_valor_titulo_destacado" parent="@style/TextAppearance.AppCompat.Title.Inverse" />
 
     <style name="apatxas_label_destacada" parent="@style/TextAppearance.AppCompat.Subhead.Inverse">
-            <item name="android:paddingRight">5dp</item>    
+        <item name="android:paddingRight">5dp</item>
     </style>
 
-    <style name="apatxas_valor_destacado" parent="@style/TextAppearance.AppCompat.Subhead.Inverse"/>
-
+    <style name="apatxas_valor_destacado" parent="@style/TextAppearance.AppCompat.Subhead.Inverse" />
 
     <style name="apatxas_valor_importante" parent="@style/TextAppearance.AppCompat.Subhead" />
 

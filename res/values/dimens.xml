@@ -3,20 +3,15 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    
     <dimen name="apatxas_margen_defecto">15dp</dimen>
     <dimen name="apatxas_margen_extra_defecto">20dp</dimen>
-    
     <dimen name="apatxas_linea_divisora_margen_superior">15dp</dimen>
     <dimen name="apatxas_linea_divisora_margen_inferior">15dp</dimen>
-    
     <dimen name="apatxas_padding_defecto">10dp</dimen>
     <dimen name="apatxas_padding_superior_defecto">10dp</dimen>
     <dimen name="apatxas_padding_inferior_defecto">10dp</dimen>
     <dimen name="apatxas_padding_derecho_defecto">10dp</dimen>
-    <dimen name="apatxas_padding_izquierdo_defecto">10dp</dimen>           
-       
-	<dimen name="dialog_altura_linea_separadora_titulo">1dp</dimen>
-	
-	
+    <dimen name="apatxas_padding_izquierdo_defecto">10dp</dimen>
+    <dimen name="dialog_altura_linea_separadora_titulo">1dp</dimen>
+
 </resources>

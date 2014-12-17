@@ -5,17 +5,15 @@
 
     <item
         android:id="@+id/action_anadir_persona"
+        android:icon="@drawable/ic_menu_action_apatxas_anadir_persona"
         android:orderInCategory="1"
         android:title="Añadir persona"
-        android:icon="@drawable/ic_menu_action_apatxas_anadir_persona"
-        app:showAsAction="ifRoom"/> 
-    
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_guardar_lista_personas_apatxa"
+        android:icon="@drawable/ic_menu_action_apatxas_listo"
         android:orderInCategory="100"
         android:title="Sig."
-        android:icon="@drawable/ic_menu_action_apatxas_listo"
-        app:showAsAction="withText|ifRoom"/>    
-    
-     
+        app:showAsAction="withText|ifRoom"/>
+
 </menu>

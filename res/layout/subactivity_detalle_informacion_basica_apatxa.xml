@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/apatxascolors_color"
-        android:padding="@dimen/apatxas_padding_defecto">
+        android:padding="@dimen/apatxas_padding_defecto" >
 
         <TextView
             android:id="@+id/nombreApatxaDetalle"
@@ -42,8 +42,6 @@
             android:layout_alignBottom="@+id/labelBoteInicialApatxaDetalle"
             android:layout_alignParentLeft="@+id/labelBoteInicialApatxaDetalle"
             android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle" />
-
-        
     </RelativeLayout>
 
 </merge>
