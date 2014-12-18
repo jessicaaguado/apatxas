@@ -44,6 +44,9 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 			apatxaService.realizarReparto(apatxa);
 			cargarInformacionApatxa();
 			return true;
+		case R.id.action_acceso_gastos:
+			irEditarListaGastosApatxa();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -81,7 +84,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
 	}
 
-	public void irEditarListaGastosApatxa(View view) {
+	public void irEditarListaGastosApatxa() {
 		Intent intent = new Intent(this, ListaGastosApatxaActivity.class);
 		intent.putExtra("personas", new ArrayList<PersonaListado>(apatxa.getPersonas()));
 		intent.putExtra("idApatxa", apatxa.getId());

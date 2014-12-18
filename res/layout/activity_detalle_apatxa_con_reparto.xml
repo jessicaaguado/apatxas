@@ -15,10 +15,9 @@
         android:layout_marginLeft="@dimen/apatxas_margen_defecto"
         android:layout_marginTop="@dimen/apatxas_margen_defecto"
         android:clickable="true"
-        android:drawableLeft="@drawable/ic_action_apatxas_modificar_personas_detalle"
+        android:drawableLeft="@drawable/ic_apatxas_personas"
         android:drawablePadding="@dimen/apatxas_padding_defecto"
-        android:gravity="center_vertical"
-        android:onClick="irEditarListaPersonasApatxa" />
+        android:gravity="center_vertical" />
 
     <View
         android:id="@+id/separador2DetalleApatxa"
@@ -35,10 +34,9 @@
         android:layout_marginLeft="@dimen/apatxas_margen_defecto"
         android:layout_marginTop="@dimen/apatxas_margen_defecto"
         android:clickable="true"
-        android:drawableLeft="@drawable/ic_action_apatxas_acceso_gastos_apatxa"
+        android:drawableLeft="@drawable/ic_apatxas_gastos"
         android:drawablePadding="@dimen/apatxas_padding_defecto"
-        android:gravity="center_vertical"
-        android:onClick="irEditarListaGastosApatxa" />
+        android:gravity="center_vertical"/>
 
     <View
         android:id="@+id/separador3DetalleApatxa"

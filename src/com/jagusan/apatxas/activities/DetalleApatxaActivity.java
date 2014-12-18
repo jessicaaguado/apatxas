@@ -67,6 +67,9 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 		case R.id.action_editar_detalle_apatxa:
 			irEditarInformacionBasicaApatxa();
 			return true;
+		case R.id.action_acceso_personas:
+			irEditarListaPersonasApatxa();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -141,7 +144,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 		startActivityForResult(intent, EDITAR_INFORMACION_BASICA_REQUEST_CODE);
 	}
 
-	public void irEditarListaPersonasApatxa(View view) {
+	public void irEditarListaPersonasApatxa() {
 		Intent intent = new Intent(this, ListaPersonasApatxaActivity.class);
 		intent.putExtra("personas", new ArrayList(apatxa.getPersonas()));
 		intent.putExtra("idApatxa", apatxa.getId());

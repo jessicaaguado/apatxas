@@ -3,16 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.jagusan.apatxas.RepartoApatxaActivity" >
 
+    
+    <item
+        android:id="@+id/action_acceso_personas"
+        android:icon="@drawable/ic_menu_action_apatxas_acceso_personas"
+        android:orderInCategory="1"
+        android:title="Ver personas"
+        app:showAsAction="ifRoom"/>
+    
+    <item
+        android:id="@+id/action_acceso_gastos"
+        android:icon="@drawable/ic_menu_action_apatxas_acceso_gastos"
+        android:orderInCategory="2"
+        android:title="Ver gastos"
+        app:showAsAction="ifRoom"/>
+    
     <item
         android:id="@+id/action_actualizar_reparto_apatxa"
         android:icon="@drawable/ic_menu_action_apatxas_actualizar_reparto"
-        android:orderInCategory="1"
+        android:orderInCategory="3"
         android:title="Reparto"
         app:showAsAction="withText|ifRoom"/>
     <item
         android:id="@+id/action_editar_detalle_apatxa"
         android:icon="@drawable/ic_menu_action_apatxas_editar"
-        android:orderInCategory="2"
+        android:orderInCategory="4"
         android:title="Editar"
         app:showAsAction="ifRoom"/>
 
