@@ -14,6 +14,7 @@ public class CursorTablaApatxa {
 	private static final Integer POSICION_GASTO_PAGADO = 5;
 	private static final Integer POSICION_REPARTO_HECHO = 6;
 	private static final Integer POSICION_NUM_PERSONAS_PENDIENTES_PAGAR_O_COBRAR = 7;
+	private static final Integer POSICION_DESCONTAR_BOTE_INNICIAL = 8;
 
 	private final Cursor cursor;
 
@@ -51,11 +52,14 @@ public class CursorTablaApatxa {
 
 	public boolean getRepartoHecho() {
 		return cursor.getInt(POSICION_REPARTO_HECHO) == 1;
-
 	}
 
 	public Integer getNumeroPersonasPendientesPagarCobrar() {
 		return cursor.getInt(POSICION_NUM_PERSONAS_PENDIENTES_PAGAR_O_COBRAR);
+	}
+
+	public boolean getDescontarBoteInicial() {
+		return cursor.getInt(POSICION_DESCONTAR_BOTE_INNICIAL) == 1;
 	}
 
 }

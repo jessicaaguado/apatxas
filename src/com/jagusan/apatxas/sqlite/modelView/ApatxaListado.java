@@ -12,6 +12,7 @@ public class ApatxaListado {
 	private Double gastoTotal = 0.0;
 	private Double pagado = 0.0;
 	private Double boteInicial = 0.0;
+	private Boolean descontarBoteInicialGastoTotal;
 	private Boolean repartoRealizado;
 	private Integer personasPendientesPagarCobrar;
 
@@ -97,6 +98,14 @@ public class ApatxaListado {
 
 	public void setPersonasPendientesPagarCobrar(Integer personasPendientesPagarCobrar) {
 		this.personasPendientesPagarCobrar = personasPendientesPagarCobrar;
+	}
+
+	public Boolean getDescontarBoteInicialGastoTotal() {
+		return descontarBoteInicialGastoTotal;
+	}
+
+	public void setDescontarBoteInicialGastoTotal(Boolean descontarBoteInicialGastoTotal) {
+		this.descontarBoteInicialGastoTotal = descontarBoteInicialGastoTotal;
 	}
 
 }

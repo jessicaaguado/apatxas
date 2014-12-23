@@ -44,16 +44,18 @@ public class ApatxaService {
 		dbHelper.close();
 	}
 
-	public Long crearApatxa(String nombre, Long fecha, Double boteInicial) {
+	public Long crearApatxa(String nombre, Long fecha, Double boteInicial, Boolean descontarBoteInicialDeGastoTotal) {
 		open();
-		Long idApatxa = apatxaDAO.nuevoApatxa(nombre, fecha, boteInicial);
+		Integer descontarBoteInicial = descontarBoteInicialDeGastoTotal ? 1 : 0;
+		Long idApatxa = apatxaDAO.nuevoApatxa(nombre, fecha, boteInicial, descontarBoteInicial);
 		close();
 		return idApatxa;
 	}
 
-	public void actualizarApatxa(Long id, String nombre, Long fecha, Double boteInicial) {
+	public void actualizarApatxa(Long id, String nombre, Long fecha, Double boteInicial, Boolean descontarBoteInicialDeGastoTotal) {
 		open();
-		apatxaDAO.actualizarApatxa(id, nombre, fecha, boteInicial);
+		Integer descontarBoteInicial = descontarBoteInicialDeGastoTotal ? 1 : 0;
+		apatxaDAO.actualizarApatxa(id, nombre, fecha, boteInicial, descontarBoteInicial);
 		close();
 	}
 

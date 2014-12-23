@@ -157,7 +157,11 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				cargarInformacionApatxa();
+			}
+		}		
 		if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				guardarNuevoGastoApatxa(data);

@@ -10,9 +10,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
 public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
@@ -22,12 +24,17 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 	private EditText nombreApatxaEditText;
 	private EditText fechaApatxaEditText;
 	private EditText boteInicialEditText;
+	private CheckBox descontarBoteInicialCheckBox;
 
+	private long idApatxa;
 	private String nombre;
 	private Long fecha;
 	private Double boteInicial;
+	private Boolean descontarBoteInicial;
 
-	protected Resources resources;
+	private Resources resources;
+	private ApatxaService apatxaService;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +67,9 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 				String nombre = getNombreIntroducido();
 				Long fecha = getFechaIntroducida();
 				Double boteInicial = getBoteIntroducido();
-
-				Intent returnIntent = new Intent();
-				returnIntent.putExtra("nombre", nombre);
-				returnIntent.putExtra("fecha", fecha);
-				returnIntent.putExtra("boteInicial", boteInicial);
-				setResult(RESULT_OK, returnIntent);
+				Boolean descontarBoteInicial = getDescontarBoteInicial();
+				apatxaService.actualizarApatxa(idApatxa, nombre, fecha, boteInicial, descontarBoteInicial);
+				setResult(RESULT_OK);
 				finish();
 			}
 			return true;
@@ -75,6 +79,7 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 
 	private void inicializarServicios() {
 		resources = getResources();
+		apatxaService = new ApatxaService(this);
 	}
 
 	private void personalizarActionBar() {
@@ -87,13 +92,16 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 		nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
 		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
 		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
+		descontarBoteInicialCheckBox = (CheckBox) findViewById(R.id.descontarBoteInicial);
 	}
 
 	private void recuperarDatosPasoAnterior() {
 		Intent intent = getIntent();
+		idApatxa = intent.getLongExtra("idApatxa", -1);
 		nombre = intent.getStringExtra("nombre");
 		fecha = intent.getLongExtra("fecha", -1);
 		boteInicial = intent.getDoubleExtra("boteInicial", 0.0);
+		descontarBoteInicial = intent.getBooleanExtra("descontarBoteInicial", false);
 	}
 
 	private void cargarInformacionApatxa() {
@@ -103,6 +111,8 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 			fechaApatxaEditText.setText(sdf.format(new Date(fecha)));
 		}
 		boteInicialEditText.setText(boteInicial.toString());
+		descontarBoteInicialCheckBox.setChecked(descontarBoteInicial);
+		
 	}
 
 	protected String getNombreIntroducido() {
@@ -128,6 +138,10 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 			// mantenemos bote inicial a 0
 		}
 		return boteInicial;
+	}
+	
+	protected Boolean getDescontarBoteInicial() {
+		return descontarBoteInicialCheckBox.isChecked();
 	}
 
 	private Boolean validacionesCorrectas() {

@@ -16,6 +16,7 @@ public class ExtraerInformacionApatxaDeCursor {
 		apatxaListado.setPagado(tablaApatxaCursor.getGastoPagado());
 		apatxaListado.setRepartoRealizado(tablaApatxaCursor.getRepartoHecho());
 		apatxaListado.setPersonasPendientesPagarCobrar(tablaApatxaCursor.getNumeroPersonasPendientesPagarCobrar());
+		apatxaListado.setDescontarBoteInicialGastoTotal(tablaApatxaCursor.getDescontarBoteInicial());
 		return apatxaListado;
 	}
 

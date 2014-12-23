@@ -42,6 +42,16 @@
             android:layout_alignBottom="@+id/labelBoteInicialApatxaDetalle"
             android:layout_alignParentLeft="@+id/labelBoteInicialApatxaDetalle"
             android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle" />
+        
+        <TextView
+            android:id="@+id/usoBoteInicialApatxaDetalle"
+            style="@style/apatxas_valor_destacado"
+            android:paddingLeft="@dimen/apatxas_padding_izquierdo_defecto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/boteInicialApatxaDetalle"
+            android:layout_alignParentLeft="@+id/boteInicialApatxaDetalle"
+            android:layout_toRightOf="@+id/boteInicialApatxaDetalle" />
     </RelativeLayout>
 
 </merge>

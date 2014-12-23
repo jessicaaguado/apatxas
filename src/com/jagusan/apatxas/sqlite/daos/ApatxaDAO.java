@@ -22,7 +22,7 @@ public class ApatxaDAO {
 			+ " and (" + TablaPersona.COLUMNA_HECHO + " = 0 or " + TablaPersona.COLUMNA_HECHO + " is null))";
 
 	private static final String[] COLUMNAS_APATXA = { TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_GASTO_TOTAL,
-			TablaApatxa.COLUMNA_GASTO_PAGADO, TablaApatxa.COLUMNA_REPARTO_REALIZADO, SQL_NUM_PERSONAS_PTES_APATXA };
+			TablaApatxa.COLUMNA_GASTO_PAGADO, TablaApatxa.COLUMNA_REPARTO_REALIZADO, SQL_NUM_PERSONAS_PTES_APATXA, TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL };
 
 	private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA + " DESC";
 
@@ -30,21 +30,23 @@ public class ApatxaDAO {
 		this.database = database;
 	}
 
-	public Long nuevoApatxa(String nombre, Long fecha, Double boteInicial) {
+	public Long nuevoApatxa(String nombre, Long fecha, Double boteInicial, Integer descontarBoteInicialDeGastoTotal) {
 		ContentValues values = new ContentValues();
 		values.put(TablaApatxa.COLUMNA_NOMBRE, nombre);
 		values.put(TablaApatxa.COLUMNA_FECHA, fecha);
 		values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
+		values.put(TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, descontarBoteInicialDeGastoTotal);
 
 		long insertId = database.insert(TablaApatxa.NOMBRE_TABLA, null, values);
 		return insertId;
 	}
 
-	public void actualizarApatxa(Long id, String nombre, Long fecha, Double boteInicial) {
+	public void actualizarApatxa(Long id, String nombre, Long fecha, Double boteInicial, Integer descontarBoteInicialDeGastoTotal) {
 		ContentValues values = new ContentValues();
 		values.put(TablaApatxa.COLUMNA_NOMBRE, nombre);
 		values.put(TablaApatxa.COLUMNA_FECHA, fecha);
 		values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
+		values.put(TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, descontarBoteInicialDeGastoTotal);
 
 		String where = TablaApatxa.COLUMNA_ID + " = ?";
 		String[] whereArgs = { String.valueOf(id) };

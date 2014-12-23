@@ -41,6 +41,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	private Long fechaApatxa;
 	private Double boteInicialApatxa;
 	private ArrayList<String> personasApatxa;
+	private Boolean descontarBoteInicial;
 	private Double totalGastos = 0.0;
 
 	private int NUEVO_GASTO_REQUEST_CODE = 1;
@@ -136,7 +137,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 	}
 
 	public void guardarApatxa() {
-		Long idApatxa = apatxaService.crearApatxa(tituloApatxa, fechaApatxa, boteInicialApatxa);
+		Long idApatxa = apatxaService.crearApatxa(tituloApatxa, fechaApatxa, boteInicialApatxa, descontarBoteInicial);
 		Map<String, Long> personas = new HashMap<String, Long>(personasApatxa.size());
 		for (int i = 0; i < personasApatxa.size(); i++) {
 			String nombrePersona = personasApatxa.get(i);
@@ -187,6 +188,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 		tituloApatxa = intent.getStringExtra("titulo");
 		fechaApatxa = intent.getLongExtra("fecha", -1);
 		boteInicialApatxa = intent.getDoubleExtra("boteInicial", 0);
+		descontarBoteInicial = intent.getBooleanExtra("descontarBoteInicial", false);
 		personasApatxa = intent.getStringArrayListExtra("personas");
 	}
 

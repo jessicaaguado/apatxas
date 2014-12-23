@@ -33,10 +33,11 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	private TextView boteInicialEditText;
 	private TextView numeroPersonasTextView;
 	private TextView estadoApatxaTextView;
+	private TextView usoBoteInicialTextView;
 
 	protected ApatxaDetalle apatxa;
 
-	private int EDITAR_INFORMACION_BASICA_REQUEST_CODE = 1;
+	public int EDITAR_INFORMACION_BASICA_REQUEST_CODE = 1;
 	public int EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE = 10;
 
 	@Override
@@ -96,6 +97,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 		boteInicialEditText = (TextView) findViewById(R.id.boteInicialApatxaDetalle);
 		numeroPersonasTextView = (TextView) findViewById(R.id.numeroPersonasApatxaDetalle);
 		estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxaDetalle);
+		usoBoteInicialTextView = (TextView) findViewById(R.id.usoBoteInicialApatxaDetalle);
 	}
 
 	protected void cargarInformacionApatxa() {
@@ -104,7 +106,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 		cargarInformacionFecha();
 		cargarInformacionBoteInicial();
 		cargarInformacionPersonas();
-		cargarInformacionEstado();
+		cargarInformacionEstado();		
 	}
 
 	private void cargarInformacionTitulo() {
@@ -122,6 +124,8 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	private void cargarInformacionBoteInicial() {
 		Double boteInicial = apatxa.getBoteInicial();
 		boteInicialEditText.setText(FormatearNumero.aDineroEuros(resources, boteInicial));
+		String usoBoteInicial = apatxa.getDescontarBoteInicialGastoTotal() ? resources.getString(R.string.bote_inicial_a_descontar) : "";
+		usoBoteInicialTextView.setText(usoBoteInicial);
 	}
 
 	private void cargarInformacionPersonas() {
@@ -138,9 +142,11 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 
 	public void irEditarInformacionBasicaApatxa() {
 		Intent intent = new Intent(this, EditarInformacionBasicaApatxaActivity.class);
+		intent.putExtra("idApatxa", apatxa.getId());
 		intent.putExtra("nombre", apatxa.getNombre());
 		intent.putExtra("fecha", apatxa.getFecha().getTime());
 		intent.putExtra("boteInicial", apatxa.getBoteInicial());
+		intent.putExtra("descontarBoteInicial", apatxa.getDescontarBoteInicialGastoTotal());
 		startActivityForResult(intent, EDITAR_INFORMACION_BASICA_REQUEST_CODE);
 	}
 
@@ -151,16 +157,6 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 		startActivityForResult(intent, EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE);
 	}
 
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
-			if (resultCode == RESULT_OK) {
-				String nombre = data.getStringExtra("nombre");
-				Double boteInicial = data.getDoubleExtra("boteInicial", 0.0);
-				Long fecha = data.getLongExtra("fecha", -1);
-				apatxaService.actualizarApatxa(idApatxa, nombre, fecha, boteInicial);
-				cargarInformacionApatxa();
-			}
-		}		
-	}
+	
 
 }

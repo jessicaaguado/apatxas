@@ -29,4 +29,12 @@
         android:hint="@string/bote_inicial"
         android:inputType="numberDecimal|numberSigned" />
 
+    <CheckBox
+        android:id="@+id/descontarBoteInicial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/boteInicialApatxa"
+        android:text="@string/descontar_bote_inicial_gasto_reparto" />
+
 </merge>

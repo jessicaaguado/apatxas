@@ -5,10 +5,8 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -93,7 +91,11 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				actualizarReparto();
+			}
+		}		
 		if (requestCode == EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				actualizarReparto();				

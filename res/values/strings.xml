@@ -67,10 +67,12 @@
     <string name="anadir_gasto">Añadir gasto</string>
     <string name="anadir_persona">Añadir persona</string>
     <string name="bote_inicial">Bote inicial</string>
+    <string name="bote_inicial_a_descontar">(descontar en el reparto)</string>    
     <string name="cambiar_informacion_personas_apatxa">Cambiar información de las personas que participan en la apatxa</string>
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f€</string>
     <string name="concepto">Concepto</string>
+    <string name="descontar_bote_inicial_gasto_reparto">Descontar el bote inicial del gasto total al hacer el reparto</string>    
     <string name="importe">Importe</string>
     <string name="nombre">Nombre</string>
 

@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	private EditText nombreApatxaEditText;
 	private EditText fechaApatxaEditText;
 	private EditText boteInicialEditText;
+	private CheckBox descontarBoteInicialCheckBox;
 
 	private ListView personasListView;
 	private TextView tituloPersonasListViewHeader;
@@ -154,12 +156,13 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 		} catch (Exception e) {
 			// mantenemos bote inicial a 0
 		}
-
+		Boolean descontarBoteInicial = descontarBoteInicialCheckBox.isChecked();
 		if (validacionesCorrectas()) {
 			Intent intent = new Intent(this, NuevoApatxaPaso2Activity.class);
 			intent.putExtra("titulo", titulo);
 			intent.putExtra("fecha", fecha);
 			intent.putExtra("boteInicial", boteInicial);
+			intent.putExtra("descontarBoteInicial", descontarBoteInicial);
 			intent.putStringArrayListExtra("personas", (ArrayList<String>) personasApatxa);
 
 			startActivity(intent);
@@ -186,6 +189,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 		nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
 		fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
 		boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
+		descontarBoteInicialCheckBox = (CheckBox) findViewById(R.id.descontarBoteInicial);
 
 		personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
 		anadirCabeceraListaPersonas(getLayoutInflater());
