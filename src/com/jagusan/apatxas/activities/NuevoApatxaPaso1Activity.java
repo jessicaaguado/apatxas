@@ -7,7 +7,6 @@ import java.util.List;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
@@ -25,12 +24,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.dialogs.CambiarNombrePersonaApatxaDialogFragment;
-import com.jagusan.apatxas.listeners.CambiarNombrePersonaApatxaDialogListener;
 import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
-public class NuevoApatxaPaso1Activity extends ActionBarActivity implements CambiarNombrePersonaApatxaDialogListener {
+public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 
 	private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
@@ -94,15 +91,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 	public boolean onContextItemSelected(MenuItem item) {
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		int posicionSeleccionada = info.position;
-		switch (item.getItemId()) {
-		case R.id.action_persona_apatxa_cambiar:
-			DialogFragment dialog = new CambiarNombrePersonaApatxaDialogFragment();
-			Bundle parametros = new Bundle();
-			parametros.putInt("posicionPersonaCambiar", posicionSeleccionada);
-			parametros.putString("nombrePersonaCambiar", personasApatxa.get(posicionSeleccionada));
-			dialog.setArguments(parametros);
-			dialog.show(getSupportFragmentManager(), "CambiarNombrePersonaApatxaDialogFragment");
-			return true;
+		switch (item.getItemId()) {		
 		case R.id.action_persona_apatxa_borrar:
 			borrarPersona(posicionSeleccionada);
 			return true;
@@ -110,13 +99,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity implements Cambi
 			return super.onContextItemSelected(item);
 		}
 	}
-
-	@Override
-	public void onClickListoCambiarNombrePersona(int posicionPersonaCambiar, String nuevoNombre) {
-		personasApatxa.set(posicionPersonaCambiar, nuevoNombre);
-		listaPersonasApatxaArrayAdapter.notifyDataSetChanged();
-	}
-
+	
 	private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
 		tituloPersonasListViewHeader = (TextView) findViewById(R.id.listaPersonasApatxaCabecera);
 		actualizarTituloCabeceraListaPersonas();
