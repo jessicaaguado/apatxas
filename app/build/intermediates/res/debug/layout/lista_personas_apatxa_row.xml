@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/apatxas_padding_izquierdo_defecto"
+    android:paddingLeft="@dimen/apatxas_padding_izquierdo_defecto"
+    android:paddingRight="@dimen/apatxas_padding_derecho_defecto"
+    android:paddingTop="@dimen/apatxas_padding_izquierdo_defecto"
+    android:textAppearance="@style/texto_lista" />
+<!-- From: file:/D:/desarrollos/mis/android/apatxas/app/src/main/res/layout/lista_personas_apatxa_row.xml -->

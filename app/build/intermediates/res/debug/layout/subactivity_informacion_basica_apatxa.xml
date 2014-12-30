@@ -1,0 +1,40 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditText
+        android:id="@+id/nombreApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:hint="@string/nombre" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/fechaApatxa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/nombreApatxa"
+        android:hint="@string/patron_fecha_dia_mes_ano_ux"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/boteInicialApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/fechaApatxa"
+        android:hint="@string/bote_inicial"
+        android:inputType="numberDecimal|numberSigned" />
+
+    <CheckBox
+        android:id="@+id/descontarBoteInicial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/boteInicialApatxa"
+        android:text="@string/descontar_bote_inicial_gasto_reparto" />
+
+</merge><!-- From: file:/D:/desarrollos/mis/android/apatxas/app/src/main/res/layout/subactivity_informacion_basica_apatxa.xml -->

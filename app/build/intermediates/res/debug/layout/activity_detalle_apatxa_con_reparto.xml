@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/subactivity_detalle_informacion_basica_apatxa" />
+
+    <TextView
+        android:id="@+id/numeroPersonasApatxaDetalle"
+        style="@style/apatxas_valor_defecto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/apatxas_margen_defecto"
+        android:layout_marginLeft="@dimen/apatxas_margen_defecto"
+        android:layout_marginTop="@dimen/apatxas_margen_defecto"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_apatxas_personas"
+        android:drawablePadding="@dimen/apatxas_padding_defecto"
+        android:gravity="center_vertical" />
+
+    <View
+        android:id="@+id/separador2DetalleApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/apatxascolors_color_linea_divisoria" />
+
+    <TextView
+        android:id="@+id/resumenGastosApatxaDetalle"
+        style="@style/apatxas_valor_defecto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/apatxas_margen_defecto"
+        android:layout_marginLeft="@dimen/apatxas_margen_defecto"
+        android:layout_marginTop="@dimen/apatxas_margen_defecto"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_apatxas_gastos"
+        android:drawablePadding="@dimen/apatxas_padding_defecto"
+        android:gravity="center_vertical"/>
+
+    <View
+        android:id="@+id/separador3DetalleApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/apatxas_linea_divisora_margen_inferior"
+        android:background="@color/apatxascolors_color_linea_divisoria" />
+
+    <TextView
+        android:id="@+id/estadoApatxaDetalle"
+        style="@style/apatxas_valor_importante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/apatxas_margen_defecto"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.2" />
+
+    <include layout="@layout/subactivity_lista_resultado_reparto" />
+
+</LinearLayout><!-- From: file:/D:/desarrollos/mis/android/apatxas/app/src/main/res/layout/activity_detalle_apatxa_con_reparto.xml -->
