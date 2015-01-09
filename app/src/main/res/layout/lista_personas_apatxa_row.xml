@@ -2,9 +2,6 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/apatxas_padding_izquierdo_defecto"
-    android:paddingLeft="@dimen/apatxas_padding_izquierdo_defecto"
-    android:paddingRight="@dimen/apatxas_padding_derecho_defecto"
-    android:paddingTop="@dimen/apatxas_padding_izquierdo_defecto"
+    android:layout_height="@dimen/apatxas_altura_elemento_listado"
+    android:gravity="center_vertical"
     android:textAppearance="@style/texto_lista" />

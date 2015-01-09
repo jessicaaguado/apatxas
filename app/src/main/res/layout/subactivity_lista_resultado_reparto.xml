@@ -2,12 +2,11 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/apatxas_altura_elemento_listado"
         android:background="@color/apatxascolors_color_cabecera_lista"
         android:drawableLeft="@drawable/ic_apatxas_reparto"
-        android:drawablePadding="5dp"
-        android:gravity="left"
-        android:padding="@dimen/apatxas_padding_defecto"
+        android:drawablePadding="@dimen/apatxas_padding_entre_imagen_texto"
+        android:gravity="left|center_vertical"
         android:text="@string/reparto"
         android:textAppearance="@style/texto_cabecera_lista" />
 
