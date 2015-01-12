@@ -1,15 +1,15 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/apatxas_detalle_activity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content"
+    style="@style/apatxas_default_activity"
+    android:orientation="vertical">
+
 
     <EditText
         android:id="@+id/concepto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:hint="@string/concepto" >
 
         <requestFocus />
@@ -19,8 +19,6 @@
         android:id="@+id/totalGasto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/concepto"
         android:hint="@string/importe"
         android:inputType="numberDecimal" />
 
@@ -29,16 +27,12 @@
         style="@style/apatxas_label_defecto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/totalGasto"
-        android:paddingTop="@dimen/apatxas_padding_superior_defecto"
+        android:layout_marginTop="@dimen/apatxas_margen_vertical_defecto"
         android:text="@string/pagado_por" />
 
     <Spinner
         android:id="@+id/listaPersonasApatxa"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/labelGastoPagadoPor" />
+        android:layout_height="wrap_content"/>
 
-</RelativeLayout>
+</LinearLayout>
