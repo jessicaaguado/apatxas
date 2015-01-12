@@ -14,6 +14,7 @@
     <dimen name="apatxas_padding_izquierdo_defecto">16dp</dimen>
     <dimen name="apatxas_padding_entre_imagen_texto">16dp</dimen>
     <dimen name="apatxas_altura_elemento_listado">48dp</dimen>
+    <dimen name="apatxas_margen_vertical_defecto">8dp</dimen>
 
 
 </resources>

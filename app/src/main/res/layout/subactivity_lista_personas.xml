@@ -3,12 +3,8 @@
     <TextView
         android:id="@+id/listaPersonasApatxaCabecera"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/apatxas_altura_elemento_listado"
-        android:background="@color/apatxascolors_color_cabecera_lista"
         android:drawableLeft="@drawable/ic_apatxas_personas"
-        android:drawablePadding="@dimen/apatxas_padding_entre_imagen_texto"
-        android:gravity="left|center_vertical"
-        android:textAppearance="@style/texto_cabecera_lista" />
+        style="@style/apatxas_cabecera_style"/>
 
     <ListView
         android:id="@+id/listaPersonasApatxa"

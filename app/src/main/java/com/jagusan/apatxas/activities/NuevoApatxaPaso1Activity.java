@@ -38,7 +38,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 
 	private ListView personasListView;
 	private TextView tituloPersonasListViewHeader;
-	private List<String> personasApatxa = new ArrayList<String>();;
+	private List<String> personasApatxa = new ArrayList<String>();
 	private ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
 
 	private Resources resources;
