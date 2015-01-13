@@ -1,47 +1,52 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditText
-        android:id="@+id/nombreApatxa"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:hint="@string/nombre"
-        android:layout_marginLeft="@dimen/apatxas_margen_defecto">
+        android:orientation="vertical"
+        style="@style/apatxas_detalle_activity">
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/nombreApatxa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:hint="@string/nombre">
 
-    <EditText
-        android:id="@+id/fechaApatxa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/nombreApatxa"
-        android:hint="@string/patron_fecha_dia_mes_ano_ux"
-        android:inputType="date"
-        android:layout_marginLeft="@dimen/apatxas_padding_izquierdo_defecto" />
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/fechaApatxa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/nombreApatxa"
+            android:hint="@string/patron_fecha_dia_mes_ano_ux"
+            android:inputType="date" />
 
 
-    <EditText
-        android:id="@+id/boteInicialApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/fechaApatxa"
-        android:hint="@string/bote_inicial"
-        android:inputType="numberDecimal|numberSigned"
-        android:visibility="gone"
-        android:layout_marginLeft="@dimen/apatxas_padding_izquierdo_defecto"/>
+        <EditText
+            android:id="@+id/boteInicialApatxa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/fechaApatxa"
+            android:hint="@string/bote_inicial"
+            android:inputType="numberDecimal|numberSigned"
+            android:visibility="gone" />
 
-    <CheckBox
-        android:id="@+id/descontarBoteInicial"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/boteInicialApatxa"
-        android:text="@string/descontar_bote_inicial_gasto_reparto"
-        android:visibility="gone"
-        android:layout_marginLeft="@dimen/apatxas_padding_izquierdo_defecto"/>
+        <CheckBox
+            android:id="@+id/descontarBoteInicial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/boteInicialApatxa"
+            android:text="@string/descontar_bote_inicial_gasto_reparto"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
 </merge>

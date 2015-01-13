@@ -46,7 +46,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/apatxas_altura_elemento_listado"
         android:gravity="center"
-        android:lineSpacingMultiplier="1.2" />
+        android:lineSpacingMultiplier="1.2"
+        android:layout_marginTop="@dimen/apatxas_margen_vertical_defecto"
+        android:layout_marginBottom="@dimen/apatxas_margen_vertical_defecto"/>
 
     <include layout="@layout/subactivity_lista_resultado_reparto" />
 

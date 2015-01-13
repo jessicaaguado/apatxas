@@ -5,7 +5,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/apatxascolors_color"
-        android:padding="@dimen/apatxas_padding_defecto" >
+        style="@style/apatxas_detalle_activity"
+        android:paddingBottom="@dimen/apatxas_margen_vertical_defecto">
 
         <TextView
             android:id="@+id/nombreApatxaDetalle"
@@ -15,7 +16,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:gravity="center_horizontal"
-            android:paddingBottom="@dimen/apatxas_padding_inferior_defecto" />
+            android:paddingBottom="@dimen/apatxas_margen_vertical_defecto" />
 
         <TextView
             android:id="@+id/fechaApatxaDetalle"
@@ -32,7 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/fechaApatxaDetalle"
-            android:text="@string/bote_inicial" />
+            android:text="@string/bote_inicial"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/boteInicialApatxaDetalle"
@@ -41,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/labelBoteInicialApatxaDetalle"
             android:layout_alignParentLeft="@+id/labelBoteInicialApatxaDetalle"
-            android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle" />
+            android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle"
+            android:visibility="gone"/>
         
         <TextView
             android:id="@+id/usoBoteInicialApatxaDetalle"
@@ -51,7 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/boteInicialApatxaDetalle"
             android:layout_alignParentLeft="@+id/boteInicialApatxaDetalle"
-            android:layout_toRightOf="@+id/boteInicialApatxaDetalle" />
+            android:layout_toRightOf="@+id/boteInicialApatxaDetalle"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </merge>
