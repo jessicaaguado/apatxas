@@ -1,33 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="texto_lista" parent="@style/TextAppearance.AppCompat.Subhead"></style>
-
-    <style name="texto_principal_lista" parent="@style/texto_lista">
-        <item name="android:textStyle">bold</item>
+    <style name="texto_principal_lista">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primary_text_default_material_light</item>
+        <item name="android:singleLine">true</item>
     </style>
 
-    <style name="texto_secundario_lista" parent="@style/TextAppearance.AppCompat.Body2"></style>
-
-    <style name="texto_extra_lista" parent="@style/TextAppearance.AppCompat.Body2">
-        <item name="android:textColor">@color/apatxascolors_color_destacado</item>
+    <style name="texto_secundario_lista">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/secondary_text_default_material_light</item>
+        <item name="android:singleLine">true</item>
     </style>
 
-    <style name="texto_cabecera_lista" parent="@style/texto_lista" />
+    <style name="texto_extra_lista" parent="texto_secundario_lista">
+
+    </style>
+
+    <style name="texto_cabecera_lista">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/apatxascolors_color</item>
+    </style>
 
     <style name="apatxas_cabecera_style">
-        <item name="android:layout_height">@dimen/apatxas_altura_elemento_listado</item>
         <item name="android:background">@color/apatxascolors_color_cabecera_lista</item>
+        <!--item name="android:paddingTop">@dimen/apatxas_padding_superior_cabecera_listado</item>
+        <item name="android:paddingBottom">@dimen/apatxas_padding_inferior_cabecera_listado</item-->
         <item name="android:drawablePadding">@dimen/apatxas_padding_entre_imagen_texto</item>
+        <item name="android:layout_height">@dimen/apatxas_altura_elemento_listado</item>
         <item name="android:gravity">left|center_vertical</item>
-        <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_defecto</item>
+        <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_cabecera_listado</item>
+        <item name="android:paddingRight">@dimen/apatxas_padding_derecho_cabecera_listado</item>
         <item name="android:textAppearance">@style/texto_cabecera_lista</item>
     </style>
 
-    <style name="apatxas_row_style">
-        <item name="android:layout_height">@dimen/apatxas_altura_elemento_listado</item>
-        <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_defecto</item>
-        <item name="android:paddingRight">@dimen/apatxas_padding_derecho_defecto</item>
+    <style name="apatxas_una_linea_row_style">
+        <!--item name="android:layout_height">@dimen/apatxas_altura_row_listado_una_linea</item-->
+        <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_row_una_linea</item>
+        <item name="android:paddingRight">@dimen/apatxas_padding_derecho_row_una_linea</item>
+        <item name="android:paddingTop">@dimen/apatxas_padding_superior_row_una_linea</item>
+        <item name="android:paddingBottom">@dimen/apatxas_padding_inferior_row_una_linea</item>
     </style>
 
+
+    <style name="apatxas_dos_lineas_row_style">
+        <!--item name="android:layout_height">@dimen/apatxas_altura_row_listado_dos_lineas</item-->
+        <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_row_dos_lineas</item>
+        <item name="android:paddingRight">@dimen/apatxas_padding_derecho_row_dos_lineas</item>
+        <item name="android:paddingTop">@dimen/apatxas_padding_superior_row_dos_lineas</item>
+        <item name="android:paddingBottom">@dimen/apatxas_padding_inferior_row_dos_lineas</item>
+    </style>
 </resources>

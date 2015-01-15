@@ -2,7 +2,6 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     android:layout_width="match_parent"
-    android:gravity="center_vertical"
-    android:singleLine="true"
-    android:textAppearance="@style/texto_lista"
-    style="@style/apatxas_row_style"/>
+    android:layout_height="wrap_content"
+    android:textAppearance="@style/texto_principal_lista"
+    style="@style/apatxas_una_linea_row_style"/>

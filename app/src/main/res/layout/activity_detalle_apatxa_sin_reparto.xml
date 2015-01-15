@@ -11,10 +11,10 @@
         style="@style/apatxas_valor_defecto"
         android:layout_width="match_parent"
         android:layout_height="@dimen/apatxas_altura_elemento_listado"
-        android:layout_marginLeft="@dimen/apatxas_margen_defecto"
+        android:layout_marginLeft="@dimen/apatxas_padding_izquierdo_defecto"
         android:clickable="true"
         android:drawableLeft="@drawable/ic_apatxas_personas"
-        android:drawablePadding="@dimen/apatxas_padding_defecto"
+        android:drawablePadding="@dimen/apatxas_padding_entre_imagen_texto"
         android:gravity="center_vertical"/>
 
     <View
