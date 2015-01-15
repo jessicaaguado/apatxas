@@ -19,7 +19,7 @@
 
     <style name="texto_cabecera_lista">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/apatxascolors_color</item>
+        <item name="android:textColor">@color/primary_text_default_material_light</item>
     </style>
 
     <style name="apatxas_cabecera_style">

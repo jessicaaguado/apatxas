@@ -46,12 +46,8 @@ public class ListaApatxasActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_buscar:
-			return true;
 		case R.id.action_anadir:
 			irAnadirApatxa();
-			return true;
-		case R.id.action_settings:
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

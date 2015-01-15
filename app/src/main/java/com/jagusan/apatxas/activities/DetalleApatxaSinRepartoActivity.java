@@ -48,8 +48,6 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_settings:
-			return true;
 		case R.id.action_repartir_apatxa:
 			apatxaService.realizarRepartoSiNecesario(apatxa);
 			verReparto();
