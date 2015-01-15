@@ -8,15 +8,10 @@
         android:icon="@drawable/ic_menu_action_apatxas_anadir_apatxa"
         android:title="@string/action_anadir"
         app:showAsAction="ifRoom"/>
-    <item
+    <!--item
         android:id="@+id/action_buscar"
         android:icon="@drawable/ic_menu_action_apatxas_buscar"
         android:title="@string/action_buscar"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never"/>
-
+        app:showAsAction="ifRoom"/-->
+    
 </menu>

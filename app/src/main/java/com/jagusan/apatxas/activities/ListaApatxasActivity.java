@@ -39,7 +39,7 @@ public class ListaApatxasActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.lista_gastos, menu);
+		getMenuInflater().inflate(R.menu.lista_apatxas, menu);
 		return true;
 	}
 
