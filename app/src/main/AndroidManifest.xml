@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="15"
         android:targetSdkVersion="21" />
 
     <application
@@ -30,7 +30,11 @@
 
             <!--
                  meta-data android:name="android.support.UI_OPTIONS"
-            	       android:value="splitActionBarWhenNarrow" /
+            	       android:value="splitActionBarWhenNarrow" /
+
+
+
+
             -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
