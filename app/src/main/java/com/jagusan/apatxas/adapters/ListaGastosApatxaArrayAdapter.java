@@ -1,9 +1,11 @@
 package com.jagusan.apatxas.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.FormatearNumero;
 
 public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaListado> {
@@ -20,6 +23,8 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
 	int rowLayoutId;
 	List<GastoApatxaListado> gastos;
 
+    private List<GastoApatxaListado> gastosSeleccionados;
+
 	public ListaGastosApatxaArrayAdapter(Context context, int rowLayoutId, List<GastoApatxaListado> gastos) {
 
 		super(context, rowLayoutId, gastos);
@@ -27,6 +32,7 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
 		this.context = context;
 		this.rowLayoutId = rowLayoutId;
 		this.gastos = gastos;
+        gastosSeleccionados = new ArrayList<GastoApatxaListado>();
 	}
 
 	@Override
@@ -52,7 +58,51 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
 			pagadorGastoTextView.setText(pagador);
 		}
 
+        marcarSeleccion(convertView, gasto);
+
 		return convertView;
 	}
 
+    private void marcarSeleccion(View convertView, GastoApatxaListado gasto) {
+        int colorFondo = (gastosSeleccionados.contains(gasto)) ? context.getResources().getColor(R.color.apatxascolors_gris_claro) : Color.TRANSPARENT;
+        convertView.setBackgroundColor(colorFondo);
+    }
+
+    public void toggleSeleccion(Integer position, boolean checked) {
+        if (checked) {
+            gastosSeleccionados.add(gastos.get(position));
+        } else {
+            gastosSeleccionados.remove(gastos.get(position));
+        }
+        notifyDataSetChanged();
+    }
+
+    public void resetearSeleccion() {
+        gastosSeleccionados = new ArrayList<GastoApatxaListado>();
+        notifyDataSetChanged();
+    }
+
+    public void actualizarGasto(Integer posicionGastoActualizar, GastoApatxaListado gastoActualizado) {
+        gastos.set(posicionGastoActualizar, gastoActualizado);
+        notifyDataSetChanged();
+    }
+
+    public List<GastoApatxaListado> getGastosSeleccionados() {
+        return gastosSeleccionados;
+    }
+
+
+    public int numeroGastosSeleccionados(){
+        return gastosSeleccionados.size();
+    }
+
+
+    public void eliminarGastosSeleccionados() {
+        for (GastoApatxaListado gastoEliminar : gastosSeleccionados) {
+            gastos.remove(gastoEliminar);
+        }
+        resetearSeleccion();
+    }
+
+    
 }

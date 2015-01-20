@@ -1,5 +1,6 @@
 package com.jagusan.apatxas.logicaNegocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -25,6 +26,7 @@ public class ApatxaService {
 
 	private CalcularRepartoService calcularRepartoService;
 
+
 	public ApatxaService(Context context) {
 		dbHelper = new DatabaseHelper(context);
 		apatxaDAO = new ApatxaDAO();
@@ -35,13 +37,13 @@ public class ApatxaService {
 
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
-		apatxaDAO.setDatabase(database);
+        apatxaDAO.setDatabase(database);
 		personaDAO.setDatabase(database);
 		gastoDAO.setDatabase(database);
 	}
 
 	public void close() {
-		dbHelper.close();
+        dbHelper.close();
 	}
 
 	public Long crearApatxa(String nombre, Long fecha, Double boteInicial, Boolean descontarBoteInicialDeGastoTotal) {
@@ -56,18 +58,6 @@ public class ApatxaService {
 		open();
 		Integer descontarBoteInicial = descontarBoteInicialDeGastoTotal ? 1 : 0;
 		apatxaDAO.actualizarApatxa(id, nombre, fecha, boteInicial, descontarBoteInicial);
-		close();
-	}
-
-	public void actualizarGastoTotalApatxa(Long id) {
-		open();
-		apatxaDAO.actualizarGastoTotalApatxa(id);
-		close();
-	}
-
-	public void borrarApatxa(Long id) {
-		open();
-		apatxaDAO.borrarApatxa(id);
 		close();
 	}
 
@@ -109,5 +99,17 @@ public class ApatxaService {
 		close();
 		return resultadoReparto;
 	}
+
+    public void borrarApatxas(List<ApatxaListado> listaApatxas){
+        open();
+        List<Long> idsApatxasBorrar = new ArrayList<Long>(listaApatxas.size());
+        for (ApatxaListado apatxa:listaApatxas){
+            idsApatxasBorrar.add(apatxa.getId());
+        }
+        personaDAO.borrarPersonasDeApatxas(idsApatxasBorrar);
+        gastoDAO.borrarGastosDeApatxas(idsApatxasBorrar);
+        apatxaDAO.borrarApatxas(idsApatxasBorrar);
+        close();
+    }
 
 }

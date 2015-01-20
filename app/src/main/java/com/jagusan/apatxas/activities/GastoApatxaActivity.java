@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
 public abstract class GastoApatxaActivity extends ActionBarActivity {
@@ -27,7 +28,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 	private TextView labelPagadoPorTextView;
 
 	protected Spinner personasSpinner;
-	protected List<String> personasApatxa;
+	protected List<PersonaListado> personasApatxa;
 	protected ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
 
 	protected Resources resources;
@@ -68,7 +69,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 	}
 
 	protected void recuperarDatosPasoAnterior() {
-		personasApatxa = getIntent().getStringArrayListExtra("personas") != null ? getIntent().getStringArrayListExtra("personas") : new ArrayList<String>();
+        personasApatxa = getIntent().getSerializableExtra("personas") != null ? (ArrayList<PersonaListado>) getIntent().getSerializableExtra("personas") : new ArrayList<PersonaListado>();
 	}
 
 	protected void cargarElementosLayout() {
@@ -80,7 +81,9 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 		if (!personasApatxa.isEmpty()) {
 			List<String> personasApatxaConOpcionSinPagar = new ArrayList<String>();
 			personasApatxaConOpcionSinPagar.add(resources.getString(R.string.sin_pagar));
-			personasApatxaConOpcionSinPagar.addAll(personasApatxa);
+            for (PersonaListado persona:personasApatxa){
+                personasApatxaConOpcionSinPagar.add(persona.getNombre());
+            }
 			listaPersonasApatxaArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, personasApatxaConOpcionSinPagar);
 			personasSpinner.setAdapter(listaPersonasApatxaArrayAdapter);
 		} else {
@@ -101,7 +104,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 		Integer personaSeleccionada = personasSpinner.getSelectedItemPosition() <= 0 ? null : personasSpinner.getSelectedItemPosition() - 1;
 		String pagador = null;
 		if (personaSeleccionada != null) {
-			pagador = personasApatxa.get(personaSeleccionada);
+			pagador = personasApatxa.get(personaSeleccionada).getNombre();
 		}
 		return pagador;
 	}

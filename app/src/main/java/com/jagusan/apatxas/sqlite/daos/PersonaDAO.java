@@ -6,10 +6,12 @@ import java.util.List;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 
 import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionPersonaDeCursor;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
+import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
 import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
 
@@ -18,7 +20,7 @@ public class PersonaDAO {
 	private static final String NOMBRE_TABLA_PERSONA = TablaPersona.NOMBRE_TABLA;
 
 	private static final String[] COLUMNAS_PERSONA = { TablaPersona.COLUMNA_ID, TablaPersona.COLUMNA_NOMBRE, TablaPersona.COLUMNA_ID_APATXA, TablaPersona.COLUMNA_CUANTIA_PAGO,
-			TablaPersona.COLUMNA_PAGADO };
+			TablaPersona.COLUMNA_PAGADO, TablaPersona.COLUMNA_HECHO };
 
 	private static final String ORDEN_PERSONAS_DEFECTO = TablaPersona.COLUMNA_NOMBRE + " ASC";
 
@@ -40,6 +42,12 @@ public class PersonaDAO {
 	public void borrarPersona(Long id) {
 		database.delete(NOMBRE_TABLA_PERSONA, TablaPersona.COLUMNA_ID + " = " + id, null);
 	}
+
+    public void borrarPersonasDeApatxas(List<Long> idsApatxas){
+        String sqlDeletePersonas = "delete from " + TablaPersona.NOMBRE_TABLA + " where "
+                + TablaPersona.COLUMNA_ID_APATXA + " in (" + TextUtils.join(",", idsApatxas)+")";
+        database.execSQL(sqlDeletePersonas);
+    }
 
 	public Long recuperarIdPersonaPorNombre(String nombre, Long idApatxa) {
 		Long idPersona = null;
@@ -90,5 +98,17 @@ public class PersonaDAO {
 				+ TablaPersona.COLUMNA_ID + " = " + idPersona;
 		database.execSQL(sqlActualizar);
 	}
+
+    public void marcarPersonasRepartoPagado(List<Long> idsPersonas) {
+        String sqlActualizar = "update " + TablaPersona.NOMBRE_TABLA + " set " + TablaPersona.COLUMNA_HECHO + " = 1 where "
+                + TablaPersona.COLUMNA_ID + " in (" + TextUtils.join(",",idsPersonas)+")";
+        database.execSQL(sqlActualizar);
+    }
+
+    public void marcarPersonasRepartoPendiente(List<Long> idsPersonas){
+        String sqlActualizar = "update " + TablaPersona.NOMBRE_TABLA + " set " + TablaPersona.COLUMNA_HECHO + " = 0 where "
+                + TablaPersona.COLUMNA_ID + " in (" + TextUtils.join(",",idsPersonas)+")";
+        database.execSQL(sqlActualizar);
+    }
 
 }

@@ -20,6 +20,7 @@ public class ExtraerInformacionPersonaDeCursor {
 		persona.setNombre(tablaPersonaCursor.getNombre());
 		persona.setCantidadPago(tablaPersonaCursor.getCuantiaPago());
 		persona.setPagado(tablaPersonaCursor.getPagado());
+        persona.setRepartoPagado(tablaPersonaCursor.getHecho());
 		return persona;
 	}
 

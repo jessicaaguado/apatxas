@@ -9,6 +9,7 @@ public class CursorTablaPersona {
 	private static final Integer POSICION_ID_APATXA = 2;
 	private static final Integer POSICION_CUANTIA_PAGO = 3;
 	private static final Integer POSICION_PAGADO = 4;
+    private static final Integer POSITION_HECHO = 5;
 
 	private final Cursor cursor;
 
@@ -36,4 +37,7 @@ public class CursorTablaPersona {
 		return cursor.getDouble(POSICION_PAGADO);
 	}
 
+    public Boolean getHecho() {
+        return cursor.getInt(POSITION_HECHO) == 1;
+    }
 }

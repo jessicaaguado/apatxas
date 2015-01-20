@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_persona_apatxa_borrar"
+        android:id="@+id/action_apatxa_borrar"
         android:orderInCategory="2"
         android:icon="@drawable/ic_menu_action_apatxas_borrar"
         android:title="Borrar"/>

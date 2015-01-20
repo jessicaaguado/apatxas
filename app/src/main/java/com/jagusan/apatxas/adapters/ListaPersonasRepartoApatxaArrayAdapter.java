@@ -1,24 +1,31 @@
 package com.jagusan.apatxas.adapters;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.utils.FormatearNumero;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<PersonaListadoReparto> {
 
 	Context context;
 	int rowLayoutId;
 	List<PersonaListadoReparto> personas;
+
+    private List<PersonaListadoReparto> personasSeleccionadas;
 
 	public ListaPersonasRepartoApatxaArrayAdapter(Context context, int rowLayoutId, List<PersonaListadoReparto> personas) {
 
@@ -27,6 +34,8 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
 		this.context = context;
 		this.rowLayoutId = rowLayoutId;
 		this.personas = personas;
+
+        personasSeleccionadas = new ArrayList<PersonaListadoReparto>();
 	}
 
 	@Override
@@ -43,7 +52,47 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
 		nombrePersonaTextView.setText(persona.getNombre());
 		TextView gastoPersonaTextView = (TextView) convertView.findViewById(R.id.totalGastoReparto);
 		gastoPersonaTextView.setText(FormatearNumero.aDinero(context.getResources(), persona.getCantidadPago()));
+        ImageView indicadorRepartoPagadoImageView = (ImageView) convertView.findViewById(R.id.indicadorRepartoPagado);
+        if (persona.getRepartoPagado()){
+            indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pagado);
+        }
+
+        marcarSeleccion(convertView, persona);
+
 		return convertView;
 	}
 
+    private void marcarSeleccion(View convertView, PersonaListadoReparto persona) {
+        int colorFondo = (personasSeleccionadas.contains(persona)) ? context.getResources().getColor(R.color.apatxascolors_gris_claro) : Color.TRANSPARENT;
+        convertView.setBackgroundColor(colorFondo);
+    }
+
+    public void toggleSeleccion(Integer position, boolean checked) {
+        if (checked) {
+            personasSeleccionadas.add(personas.get(position));
+        } else {
+            personasSeleccionadas.remove(personas.get(position));
+        }
+        notifyDataSetChanged();
+    }
+
+    public void resetearSeleccion() {
+        personasSeleccionadas = new ArrayList<PersonaListadoReparto>();
+        notifyDataSetChanged();
+    }
+
+    public List<PersonaListadoReparto> getPersonasSeleccionadas() {
+        return personasSeleccionadas;
+    }
+
+    public int numeroPersonasSeleccionadas(){
+        return personasSeleccionadas.size();
+    }
+
+    public void eliminarPersonasSeleccionadas() {
+        for (PersonaListadoReparto personaEliminar : personasSeleccionadas) {
+            personas.remove(personaEliminar);
+        }
+        resetearSeleccion();
+    }
 }

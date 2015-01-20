@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.text.TextUtils;
 
 import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionGastoDeCursor;
 import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
@@ -87,4 +88,9 @@ public class GastoDAO {
 		return hayGastos;
 	}
 
+    public void borrarGastosDeApatxas(List<Long> idsApatxas) {
+        String sqlDeleteGastos = "delete from " + TablaGasto.NOMBRE_TABLA + " where "
+                + TablaGasto.COLUMNA_ID_APATXA + " in (" + TextUtils.join(",", idsApatxas)+")";
+        database.execSQL(sqlDeleteGastos);
+    }
 }

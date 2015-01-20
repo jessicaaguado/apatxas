@@ -1,11 +1,13 @@
 package com.jagusan.apatxas.adapters;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +16,26 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
+import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
-public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
+public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
 
 	Context context;
 	int rowLayoutId;
 	List<ApatxaListado> apatxas;
 
-	public ListaGastosArrayAdapter(Context context, int rowLayoutId, List<ApatxaListado> apatxas) {
+    private List<ApatxaListado> apatxasSeleccionadas;
+
+	public ListaApatxasArrayAdapter(Context context, int rowLayoutId, List<ApatxaListado> apatxas) {
 
 		super(context, rowLayoutId, apatxas);
 
 		this.context = context;
 		this.rowLayoutId = rowLayoutId;
 		this.apatxas = apatxas;
+
+        apatxasSeleccionadas = new ArrayList<ApatxaListado>();
 	}
 
 	@Override
@@ -54,13 +61,48 @@ public class ListaGastosArrayAdapter extends ArrayAdapter<ApatxaListado> {
 		}
 		// estado
 		TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);
-		// String descripcionEstadoApatxa =
-		// ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(),
-		// apatxa.getGastoTotal(), apatxa.getPagado(), apatxa.getBoteInicial());
 		String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getEstadoApatxa());
 		estadoApatxaTextView.setText(descripcionEstadoApatxa);
 
+        marcarSeleccion(convertView, apatxa);
+
 		return convertView;
 	}
+
+
+    private void marcarSeleccion(View convertView, ApatxaListado apatxa) {
+        int colorFondo = (apatxasSeleccionadas.contains(apatxa)) ? context.getResources().getColor(R.color.apatxascolors_gris_claro) : Color.TRANSPARENT;
+        convertView.setBackgroundColor(colorFondo);
+    }
+
+    public void toggleSeleccion(Integer position, boolean checked) {
+        if (checked) {
+            apatxasSeleccionadas.add(apatxas.get(position));
+        } else {
+            apatxasSeleccionadas.remove(apatxas.get(position));
+        }
+        notifyDataSetChanged();
+    }
+
+    public void resetearSeleccion() {
+        apatxasSeleccionadas = new ArrayList<ApatxaListado>();
+        notifyDataSetChanged();
+    }
+
+    public List<ApatxaListado> getApatxasSeleccionadas() {
+        return apatxasSeleccionadas;
+    }
+
+    public int numeroApatxasSeleccionadas(){
+        return apatxasSeleccionadas.size();
+    }
+
+    public void eliminarApatxasSeleccionadas() {
+        for (ApatxaListado apatxaEliminar : apatxasSeleccionadas) {
+            apatxas.remove(apatxaEliminar);
+        }
+        resetearSeleccion();
+    }
+
 
 }

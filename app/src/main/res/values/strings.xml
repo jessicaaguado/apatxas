@@ -10,6 +10,7 @@
     <string name="action_listo">Listo</string>
     <string name="action_cancelar">Cancelar</string>
     <string name="action_borrar">Borrar</string>
+    <string name="action_aceptar">Aceptar</string>
     <!-- ACCIONES (FIN) -->
 
 
@@ -58,6 +59,12 @@
     <string name="mensaje_aviso_borrar_persona_con_gastos">Esta persona ha pagado gastos. Si la borras esos gastos quedarán sin pagar</string>
     <!-- MENSAJES AVISO (FIN) -->
 
+    <!-- MENSAJES DE CONFIRMACION -->
+    <string name="mensaje_confirmacion_borrado_personas">¿Desea eliminar las personas seleccinadas?</string>
+    <string name="mensaje_confirmacion_borrado_gastos">¿Desea eliminar los gastos seleccionados?</string>
+    <string name="mensaje_confirmacion_borrado_apatxas">¿Desea eliminar las apatxas seleccionadas?</string>
+    <!-- MENSAJES DE CONFIRMACION (FIN) -->
+
 
     <!-- PATRONES FECHAS -->
     <string name="patron_fecha_dia_mes_ano">dd/MM/yyyy</string>
@@ -84,5 +91,7 @@
     <string name="pagado_por">Pagado por</string>
     <string name="reparto">Reparto</string>
     <string name="sin_pagar">Sin pagar</string>
+
+
 
 </resources>

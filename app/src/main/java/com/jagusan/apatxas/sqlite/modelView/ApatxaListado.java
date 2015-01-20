@@ -10,7 +10,6 @@ public class ApatxaListado {
 	private String nombre;
 	private Date fecha;
 	private Double gastoTotal = 0.0;
-	private Double pagado = 0.0;
 	private Double boteInicial = 0.0;
 	private Boolean descontarBoteInicialGastoTotal;
 	private Boolean repartoRealizado;
@@ -38,14 +37,6 @@ public class ApatxaListado {
 
 	public void setGastoTotal(Double gastoTotal) {
 		this.gastoTotal = gastoTotal;
-	}
-
-	public Double getPagado() {
-		return pagado;
-	}
-
-	public void setPagado(Double pagado) {
-		this.pagado = pagado;
 	}
 
 	public Long getId() {

@@ -6,16 +6,11 @@ import com.jagusan.apatxas.R;
 
 public class ObtenerDescripcionEstadoApatxa {
 
-	public static String getDescripcionParaDetalle(Resources res, EstadoApatxa estadoApatxa, Integer numeroPersonasPendientes, Double gastoTotal, Double gastoPagado, Double boteInicial) {
+	public static String getDescripcionParaDetalle(Resources res, EstadoApatxa estadoApatxa, Integer numeroPersonasPendientes) {
 		String descripcion = "";
 		switch (estadoApatxa) {
 		case HECHO:
-			Double bote = calcularBote(gastoTotal, gastoPagado, boteInicial);
-			if (bote > 0) {
-				descripcion = res.getString(R.string.estado_apatxa_hecho_detalle);
-			} else {
-				descripcion = String.format(res.getString(R.string.estado_apatxa_hecho_detalle_sobra_bote), bote);
-			}
+			descripcion = res.getString(R.string.estado_apatxa_hecho_detalle);
 			break;
 		case PENDIENTE:
 			descripcion = res.getQuantityString(R.plurals.estado_apatxa_pendiente_detalle_numero_personas, numeroPersonasPendientes, numeroPersonasPendientes);
@@ -47,8 +42,5 @@ public class ObtenerDescripcionEstadoApatxa {
 		return descripcion;
 	}
 
-	private static double calcularBote(Double gastoTotal, Double gastoPagado, Double boteInicial) {
-		Double bote = (boteInicial + gastoPagado) - gastoTotal;
-		return bote < 0 ? 0 : bote;
-	}
+
 }

@@ -10,17 +10,21 @@
         <item name="colorPrimaryDark">@color/apatxascolors_color_oscuro</item>
         <!-- theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">@color/apatxascolors_color_destacado</item>
+
+        <item name="android:actionModeBackground">@color/apatxascolors_color</item>
     </style>
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     -->
     <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
+
         -->
     </style>
 

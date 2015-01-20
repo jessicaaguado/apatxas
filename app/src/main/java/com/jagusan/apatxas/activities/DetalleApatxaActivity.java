@@ -135,8 +135,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 	}
 
 	private void cargarInformacionEstado() {
-		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxa.getEstadoApatxa(), apatxa.getPersonasPendientesPagarCobrar(), apatxa.getGastoTotal(),
-				apatxa.getPagado(), apatxa.getBoteInicial());
+		String estadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxa.getEstadoApatxa(), apatxa.getPersonasPendientesPagarCobrar());
 		estadoApatxaTextView.setText(estadoApatxa);
 	}
 

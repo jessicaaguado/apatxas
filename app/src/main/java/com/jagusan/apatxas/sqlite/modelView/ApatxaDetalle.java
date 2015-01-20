@@ -7,11 +7,6 @@ public class ApatxaDetalle extends ApatxaListado {
 	private List<PersonaListado> personas;
 	private List<GastoApatxaListado> gastos;
 
-	public Double getBote() {
-		Double gastoLiquidado = this.getBoteInicial() + this.getPagado();
-		Double gastoTotal = this.getGastoTotal();
-		return (gastoTotal - gastoLiquidado) < 0 ? (gastoLiquidado - gastoTotal) : 0.0;
-	}
 
 	public List<PersonaListado> getPersonas() {
 		return personas;
