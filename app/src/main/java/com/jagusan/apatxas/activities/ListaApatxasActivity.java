@@ -18,7 +18,7 @@ import android.widget.ListView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaApatxasArrayAdapter;
 import com.jagusan.apatxas.listeners.OnVerDetalleApatxaClickListener;
-import com.jagusan.apatxas.logicaNegocio.ApatxaService;
+import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.modelView.ApatxaListado;
 
 public class ListaApatxasActivity extends ActionBarActivity {

@@ -19,9 +19,9 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
-import com.jagusan.apatxas.logicaNegocio.ApatxaService;
-import com.jagusan.apatxas.logicaNegocio.GastoService;
-import com.jagusan.apatxas.logicaNegocio.PersonaService;
+import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
+import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
+import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;

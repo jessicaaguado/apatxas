@@ -1,4 +1,4 @@
-package com.jagusan.apatxas.logicaNegocio;
+package com.jagusan.apatxas.logicaNegocio.servicios;
 
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
 

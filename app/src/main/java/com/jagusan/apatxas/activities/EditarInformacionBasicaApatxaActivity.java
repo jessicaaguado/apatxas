@@ -14,7 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.logicaNegocio.ApatxaService;
+import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
 public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {

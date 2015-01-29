@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.logicaNegocio.ApatxaService;
+import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.utils.FormatearNumero;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;

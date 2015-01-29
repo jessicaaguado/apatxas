@@ -1,4 +1,4 @@
-package com.jagusan.apatxas.logicaNegocio;
+package com.jagusan.apatxas.logicaNegocio.servicios;
 
 import android.content.Context;
 import android.database.SQLException;

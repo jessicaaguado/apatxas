@@ -60,10 +60,9 @@ public class ApatxaDAO {
         ApatxaDetalle apatxa = null;
         Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, TablaApatxa.COLUMNA_ID + "= " + id, null, null, null, ORDEN_APATXAS_DEFECTO);
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
+        if (!cursor.isAfterLast()) {
             apatxa = new ApatxaDetalle();
             apatxa = (ApatxaDetalle) ExtraerInformacionApatxaDeCursor.extraer(cursor, apatxa);
-            cursor.moveToNext();
         }
         cursor.close();
         return apatxa;
