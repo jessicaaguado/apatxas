@@ -15,8 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.ApatxaListado;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {

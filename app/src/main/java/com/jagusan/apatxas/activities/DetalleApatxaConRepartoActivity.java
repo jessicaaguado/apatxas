@@ -13,9 +13,9 @@ import android.widget.TextView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasRepartoApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.PersonaService;
-import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
+import com.jagusan.apatxas.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.utils.FormatearNumero;
 
 import java.util.ArrayList;

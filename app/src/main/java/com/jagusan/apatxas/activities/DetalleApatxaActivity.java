@@ -11,12 +11,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
-import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
+import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.utils.FormatearNumero;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 

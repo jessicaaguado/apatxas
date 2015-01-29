@@ -1,6 +1,6 @@
 package com.jagusan.apatxas.logicaNegocio;
 
-import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
+import com.jagusan.apatxas.modelView.ApatxaDetalle;
 
 public class CalcularRepartoService {
 

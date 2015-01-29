@@ -1,4 +1,6 @@
-package com.jagusan.apatxas.sqlite.modelView;
+package com.jagusan.apatxas.modelView;
+
+import com.jagusan.apatxas.modelView.PersonaListado;
 
 public class PersonaListadoReparto extends PersonaListado {
 

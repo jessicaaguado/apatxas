@@ -3,7 +3,6 @@ package com.jagusan.apatxas.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
+import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.utils.FormatearNumero;
 
 import java.util.ArrayList;

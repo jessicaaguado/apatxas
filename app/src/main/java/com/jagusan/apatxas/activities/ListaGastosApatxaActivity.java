@@ -22,8 +22,8 @@ import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
 import com.jagusan.apatxas.logicaNegocio.GastoService;
 import com.jagusan.apatxas.logicaNegocio.PersonaService;
-import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
 
 import java.util.ArrayList;

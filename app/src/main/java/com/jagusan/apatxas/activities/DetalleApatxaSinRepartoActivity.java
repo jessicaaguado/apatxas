@@ -8,14 +8,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ActionMode;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,9 +20,9 @@ import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.GastoService;
 import com.jagusan.apatxas.logicaNegocio.PersonaService;
-import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
-import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.ApatxaDetalle;
+import com.jagusan.apatxas.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
 
 public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {

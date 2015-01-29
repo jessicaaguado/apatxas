@@ -11,9 +11,9 @@ import com.jagusan.apatxas.sqlite.daos.ApatxaDAO;
 import com.jagusan.apatxas.sqlite.daos.GastoDAO;
 import com.jagusan.apatxas.sqlite.daos.PersonaDAO;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
-import com.jagusan.apatxas.sqlite.modelView.ApatxaDetalle;
-import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
+import com.jagusan.apatxas.modelView.ApatxaDetalle;
+import com.jagusan.apatxas.modelView.ApatxaListado;
+import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 
 public class ApatxaService {
 

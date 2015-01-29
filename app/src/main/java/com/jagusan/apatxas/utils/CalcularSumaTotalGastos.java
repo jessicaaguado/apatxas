@@ -1,6 +1,6 @@
 package com.jagusan.apatxas.utils;
 
-import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.modelView.GastoApatxaListado;
 
 import java.util.List;
 

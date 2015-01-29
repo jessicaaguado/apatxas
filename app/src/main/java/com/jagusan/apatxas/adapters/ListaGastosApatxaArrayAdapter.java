@@ -13,8 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.utils.FormatearNumero;
 
 public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaListado> {

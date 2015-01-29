@@ -11,14 +11,12 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,7 +24,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 

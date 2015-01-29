@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.PersonaListado;
 
 import java.util.ArrayList;
 import java.util.List;

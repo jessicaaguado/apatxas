@@ -1,4 +1,4 @@
-package com.jagusan.apatxas.sqlite.modelView;
+package com.jagusan.apatxas.modelView;
 
 import java.util.List;
 

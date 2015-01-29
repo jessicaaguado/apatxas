@@ -2,8 +2,8 @@ package com.jagusan.apatxas.sqlite.daos.cursorReader;
 
 import android.database.Cursor;
 
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
+import com.jagusan.apatxas.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 
 public class ExtraerInformacionPersonaDeCursor {
 

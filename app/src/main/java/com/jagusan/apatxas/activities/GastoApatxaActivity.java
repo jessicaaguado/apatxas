@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
 public abstract class GastoApatxaActivity extends ActionBarActivity {

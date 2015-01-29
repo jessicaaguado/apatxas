@@ -9,9 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
 import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionPersonaDeCursor;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
-import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
+import com.jagusan.apatxas.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
 

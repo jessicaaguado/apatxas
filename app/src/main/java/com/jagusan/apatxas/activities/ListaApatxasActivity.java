@@ -12,7 +12,6 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
@@ -20,7 +19,7 @@ import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaApatxasArrayAdapter;
 import com.jagusan.apatxas.listeners.OnVerDetalleApatxaClickListener;
 import com.jagusan.apatxas.logicaNegocio.ApatxaService;
-import com.jagusan.apatxas.sqlite.modelView.ApatxaListado;
+import com.jagusan.apatxas.modelView.ApatxaListado;
 
 public class ListaApatxasActivity extends ActionBarActivity {
 

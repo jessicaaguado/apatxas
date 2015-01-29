@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import com.jagusan.apatxas.sqlite.daos.GastoDAO;
 import com.jagusan.apatxas.sqlite.daos.PersonaDAO;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListado;
-import com.jagusan.apatxas.sqlite.modelView.PersonaListadoReparto;
+import com.jagusan.apatxas.modelView.PersonaListado;
+import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 
 public class PersonaService {
 

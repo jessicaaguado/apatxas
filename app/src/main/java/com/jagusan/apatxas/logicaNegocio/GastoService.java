@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.jagusan.apatxas.sqlite.daos.GastoDAO;
 import com.jagusan.apatxas.sqlite.daos.PersonaDAO;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
-import com.jagusan.apatxas.sqlite.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.modelView.GastoApatxaListado;
 
 import java.util.List;
 
