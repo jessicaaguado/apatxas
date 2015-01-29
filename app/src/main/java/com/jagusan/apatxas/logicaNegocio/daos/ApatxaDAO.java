@@ -8,7 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
-import com.jagusan.apatxas.sqlite.daos.cursorReader.ExtraerInformacionApatxaDeCursor;
+import com.jagusan.apatxas.logicaNegocio.cursorReader.ExtraerInformacionApatxaDeCursor;
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.modelView.ApatxaListado;
 import com.jagusan.apatxas.sqlite.tables.TablaApatxa;

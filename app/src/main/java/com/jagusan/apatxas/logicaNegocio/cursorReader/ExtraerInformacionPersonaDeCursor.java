@@ -1,7 +1,8 @@
-package com.jagusan.apatxas.sqlite.daos.cursorReader;
+package com.jagusan.apatxas.logicaNegocio.cursorReader;
 
 import android.database.Cursor;
 
+import com.jagusan.apatxas.logicaNegocio.cursorReader.CursorTablaPersona;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 

@@ -1,4 +1,4 @@
-package com.jagusan.apatxas.sqlite.daos.cursorReader;
+package com.jagusan.apatxas.logicaNegocio.cursorReader;
 
 import java.util.Date;
 

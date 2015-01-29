@@ -1,7 +1,8 @@
-package com.jagusan.apatxas.sqlite.daos.cursorReader;
+package com.jagusan.apatxas.logicaNegocio.cursorReader;
 
 import android.database.Cursor;
 
+import com.jagusan.apatxas.logicaNegocio.cursorReader.CursorTablaGasto;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 
 public class ExtraerInformacionGastoDeCursor {
