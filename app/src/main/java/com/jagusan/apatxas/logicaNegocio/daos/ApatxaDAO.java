@@ -1,4 +1,4 @@
-package com.jagusan.apatxas.sqlite.daos;
+package com.jagusan.apatxas.logicaNegocio.daos;
 
 import java.util.ArrayList;
 import java.util.List;
