@@ -73,7 +73,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
     }
 
     private void cargarInformacionGasto() {
-        conceptoGastoEditText.setText(conceptoGasto);
+        conceptoGastoAutoComplete.setText(conceptoGasto);
         totalGastoEditText.setText(importeGasto.toString());
         personasSpinner.setSelection(getPosicionPersonaSeleccionada());
 

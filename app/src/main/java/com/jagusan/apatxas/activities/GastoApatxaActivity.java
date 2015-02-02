@@ -11,11 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
@@ -23,7 +25,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 
 	private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
-	protected EditText conceptoGastoEditText;
+	protected AutoCompleteTextView conceptoGastoAutoComplete;
 	protected EditText totalGastoEditText;
 	private TextView labelPagadoPorTextView;
 
@@ -32,6 +34,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 	protected ArrayAdapter<String> listaPersonasApatxaArrayAdapter;
 
 	protected Resources resources;
+    private GastoService gastoService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 
 	private void inicializarServicios() {
 		resources = getResources();
+        gastoService = new GastoService(this);
 	}
 
 	protected void personalizarActionBar() {
@@ -73,7 +77,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 	}
 
 	protected void cargarElementosLayout() {
-		conceptoGastoEditText = (EditText) findViewById(R.id.concepto);
+		conceptoGastoAutoComplete = (AutoCompleteTextView) findViewById(R.id.concepto);
 		totalGastoEditText = (EditText) findViewById(R.id.totalGasto);
 		labelPagadoPorTextView = (TextView) findViewById(R.id.labelGastoPagadoPor);
 
@@ -91,10 +95,15 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 			personasSpinner.setVisibility(View.GONE);
 		}
 
+        List<String> todosConceptos = gastoService.recuperarTodosConceptos();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, todosConceptos);
+        conceptoGastoAutoComplete.setAdapter(adapter);
+        conceptoGastoAutoComplete.setThreshold(3);
+
 	}
 
 	protected Boolean validacionesCorrectas() {
-		Boolean tituloOk = ValidacionActivity.validarTituloObligatorio(conceptoGastoEditText, resources);
+		Boolean tituloOk = ValidacionActivity.validarTituloObligatorio(conceptoGastoAutoComplete, resources);
 		Boolean fechaOk = ValidacionActivity.validarCantidadObligatoria(totalGastoEditText, resources);
 		return tituloOk && fechaOk;
 	}
@@ -120,7 +129,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 	}
 
 	protected String getConceptoIntroducido() {
-		return conceptoGastoEditText.getText().toString();
+		return conceptoGastoAutoComplete.getText().toString();
 	}
 
 }

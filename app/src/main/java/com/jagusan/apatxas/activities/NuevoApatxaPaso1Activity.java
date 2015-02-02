@@ -11,12 +11,15 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,6 +27,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
+import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.FormatearFecha;
@@ -34,7 +38,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 
     private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
-    private EditText nombreApatxaEditText;
+    private AutoCompleteTextView nombreApatxaAutoComplete;
     private EditText fechaApatxaEditText;
     private EditText boteInicialEditText;
     private CheckBox descontarBoteInicialCheckBox;
@@ -45,6 +49,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
     private Resources resources;
+    private ApatxaService apatxaService;
 
     private int SELECCIONAR_CONTACTOS_REQUEST_CODE = 1;
 
@@ -96,7 +101,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 
     public void seleccionarContactos() {
         Intent intent = new Intent(this, ListaContactosActivity.class);
-        intent.putExtra("idsContactosSeleccionados",(ArrayList<Long>)RecupararInformacionPersonas.obtenerIdsContactos(listaPersonasApatxaArrayAdapter.getPersonas()));
+        intent.putExtra("idsContactosSeleccionados", (ArrayList<Long>) RecupararInformacionPersonas.obtenerIdsContactos(listaPersonasApatxaArrayAdapter.getPersonas()));
         startActivityForResult(intent, SELECCIONAR_CONTACTOS_REQUEST_CODE);
     }
 
@@ -108,9 +113,9 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
         }
     }
 
-    public void anadirContactosSeleccionados(Intent data){
+    public void anadirContactosSeleccionados(Intent data) {
         List<ContactoListado> contactosSeleccionados = (ArrayList<ContactoListado>) data.getSerializableExtra("contactosSeleccionados");
-        for (ContactoListado contacto: contactosSeleccionados){
+        for (ContactoListado contacto : contactosSeleccionados) {
             PersonaListado persona = new PersonaListado();
             persona.nombre = contacto.nombre;
             persona.idContacto = contacto.id;
@@ -127,7 +132,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     }
 
     private void continuarAnadirApatxas() {
-        String titulo = nombreApatxaEditText.getText().toString();
+        String titulo = nombreApatxaAutoComplete.getText().toString();
         Long fecha = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -155,13 +160,14 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     }
 
     private Boolean validacionesCorrectas() {
-        Boolean tituloOk = ValidacionActivity.validarTituloObligatorio(nombreApatxaEditText, resources);
+        Boolean tituloOk = ValidacionActivity.validarTituloObligatorio(nombreApatxaAutoComplete, resources);
         Boolean fechaOk = ValidacionActivity.validarFechaObligatoria(fechaApatxaEditText, resources);
         return tituloOk && fechaOk;
     }
 
     private void inicializarServicios() {
         resources = getResources();
+        apatxaService = new ApatxaService(this);
     }
 
     private void personalizarActionBar() {
@@ -171,7 +177,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     }
 
     private void cargarElementosLayout() {
-        nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
+        nombreApatxaAutoComplete = (AutoCompleteTextView) findViewById(R.id.nombreApatxa);
         fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
         boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
         descontarBoteInicialCheckBox = (CheckBox) findViewById(R.id.descontarBoteInicial);
@@ -186,6 +192,11 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 
     private void inicializarElementosLayout() {
         fechaApatxaEditText.setText(FormatearFecha.formatearHoy(resources));
+
+        List<String> todosTitulos = apatxaService.recuperarTodosTitulos();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, todosTitulos);
+        nombreApatxaAutoComplete.setAdapter(adapter);
+        nombreApatxaAutoComplete.setThreshold(3);
     }
 
     private void asignarContextualActionBar(final ListView personasListView) {

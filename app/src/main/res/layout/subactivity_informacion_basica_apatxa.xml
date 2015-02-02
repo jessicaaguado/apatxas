@@ -8,14 +8,14 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/apatxas_padding_inferior_defecto">
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/nombreApatxa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nombre">
 
             <requestFocus />
-        </EditText>
+        </AutoCompleteTextView>
 
         <EditText
             android:id="@+id/fechaApatxa"

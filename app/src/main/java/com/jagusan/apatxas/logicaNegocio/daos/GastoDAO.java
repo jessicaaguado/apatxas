@@ -93,4 +93,17 @@ public class GastoDAO {
                 + TablaGasto.COLUMNA_ID_APATXA + " in (" + TextUtils.join(",", idsApatxas)+")";
         database.execSQL(sqlDeleteGastos);
     }
+
+    public List<String> recuperarTodosConceptos() {
+        List<String> conceptos = new ArrayList<String>();
+        String[] COLUMNA_NOMBRE = {TablaGasto.COLUMNA_CONCEPTO};
+        Cursor cursor = database.query(true, TablaGasto.NOMBRE_TABLA, COLUMNA_NOMBRE, null, null, null, null, TablaGasto.COLUMNA_CONCEPTO + " ASC", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            conceptos.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return conceptos;
+    }
 }

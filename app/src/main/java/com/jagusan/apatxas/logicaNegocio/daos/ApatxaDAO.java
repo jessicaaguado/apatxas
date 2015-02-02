@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.jagusan.apatxas.logicaNegocio.cursorReader.ExtraerInformacionApatxaDeCursor;
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
@@ -93,8 +94,22 @@ public class ApatxaDAO {
 
     public void borrarApatxas(List<Long> idsApatxasBorrar) {
         String sqlDeleteApatxas = "delete from " + TablaApatxa.NOMBRE_TABLA + " where "
-                + TablaApatxa.COLUMNA_ID + " in (" + TextUtils.join(",", idsApatxasBorrar)+")";
+                + TablaApatxa.COLUMNA_ID + " in (" + TextUtils.join(",", idsApatxasBorrar) + ")";
         database.execSQL(sqlDeleteApatxas);
+    }
+
+    public List<String> recuperarTodosTitulos() {
+        List<String> titulos = new ArrayList<String>();
+        String[] COLUMNA_NOMBRE = {TablaApatxa.COLUMNA_NOMBRE};
+        Cursor cursor = database.query(true,TablaApatxa.NOMBRE_TABLA, COLUMNA_NOMBRE, null, null, null, null, TablaApatxa.COLUMNA_NOMBRE + " ASC", null);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            titulos.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return titulos;
     }
 
 }

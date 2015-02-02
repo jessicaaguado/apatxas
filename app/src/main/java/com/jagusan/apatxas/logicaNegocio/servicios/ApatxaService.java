@@ -112,4 +112,11 @@ public class ApatxaService {
         close();
     }
 
+    public List<String> recuperarTodosTitulos(){
+        open();
+        List<String> titulos = apatxaDAO.recuperarTodosTitulos();
+        close();
+        return titulos;
+    }
+
 }
