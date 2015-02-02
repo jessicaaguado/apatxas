@@ -1,13 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <dimen name="apatxas_margen_vertical_defecto">8dp</dimen>
-
     <dimen name="apatxas_padding_superior_defecto">8dp</dimen>
     <dimen name="apatxas_padding_inferior_defecto">8dp</dimen>
     <dimen name="apatxas_padding_derecho_defecto">16dp</dimen>
     <dimen name="apatxas_padding_izquierdo_defecto">16dp</dimen>
     <dimen name="apatxas_padding_entre_imagen_texto">16dp</dimen>
-
     <dimen name="apatxas_altura_elemento_listado">48dp</dimen>
 
     <!-- LISTADO DE UNA LINEA -->
@@ -16,6 +15,13 @@
     <dimen name="apatxas_padding_izquierdo_row_una_linea">16dp</dimen>
     <dimen name="apatxas_padding_superior_row_una_linea">16dp</dimen>
     <dimen name="apatxas_padding_inferior_row_una_linea">20dp</dimen>
+    <!-- LISTADO DE UNA LINEA CON AVATAR -->
+    <dimen name="apatxas_altura_row_listado_una_linea_con_avatar">48dp</dimen>
+    <dimen name="apatxas_padding_derecho_row_una_linea_con_avatar">16dp</dimen>
+    <dimen name="apatxas_padding_izquierdo_row_una_linea_con_avatar">16dp</dimen>
+    <dimen name="apatxas_padding_superior_row_una_linea_con_avatar">20dp</dimen>
+    <dimen name="apatxas_padding_inferior_row_una_linea_con_avatar">24dp</dimen>
+    <dimen name="apatxas_padding_izquierdo_texto_avatar_row_una_linea_con_avatar">20dp</dimen>
     <!-- LISTADO DE DOS LINEAS -->
     <dimen name="apatxas_altura_row_listado_dos_lineas">72dp</dimen>
     <dimen name="apatxas_padding_derecho_row_dos_lineas">16dp</dimen>
@@ -29,6 +35,7 @@
     <dimen name="apatxas_padding_izquierdo_cabecera_listado">16dp</dimen>
     <dimen name="apatxas_padding_superior_cabecera_listado">16dp</dimen>
     <dimen name="apatxas_padding_inferior_cabecera_listado">20dp</dimen>
-
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
 
 </resources>

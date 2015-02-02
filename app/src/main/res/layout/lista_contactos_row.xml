@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/apatxas_una_linea_con_avatar_row_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/fotoContacto"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_apatxas_contacto_sin_foto" />
+
+
+    <TextView
+        android:id="@+id/nombreContacto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:ellipsize="marquee"
+        android:gravity="left|center_vertical"
+        android:paddingBottom="@dimen/apatxas_padding_inferior_row_una_linea_con_avatar"
+        android:paddingLeft="@dimen/apatxas_padding_izquierdo_texto_avatar_row_una_linea_con_avatar"
+        android:paddingRight="@dimen/apatxas_padding_derecho_row_una_linea_con_avatar"
+        android:paddingTop="@dimen/apatxas_padding_superior_row_una_linea_con_avatar"
+        android:singleLine="true"
+        android:text="tarari"
+        android:textAppearance="@style/texto_principal_lista" />
+
+    <CheckBox
+        android:id="@+id/checkBoxContacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:paddingBottom="@dimen/apatxas_padding_inferior_row_una_linea_con_avatar"
+        android:paddingTop="@dimen/apatxas_padding_superior_row_una_linea_con_avatar" />
+
+
+</LinearLayout>

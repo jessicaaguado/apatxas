@@ -8,6 +8,9 @@
         android:minSdkVersion="15"
         android:targetSdkVersion="21" />
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -31,10 +34,6 @@
             <!--
                  meta-data android:name="android.support.UI_OPTIONS"
             	       android:value="splitActionBarWhenNarrow" /
-
-
-
-
             -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -83,11 +82,13 @@
             android:name=".activities.EditarInformacionBasicaApatxaActivity"
             android:windowSoftInputMode="stateVisible" >
         </activity>
-        <activity
-            android:name=".activities.ListaPersonasApatxaActivity">
+        <activity android:name=".activities.ListaPersonasApatxaActivity" >
+        </activity>
+        <activity android:name=".activities.ListaGastosApatxaActivity" >
         </activity>
         <activity
-            android:name=".activities.ListaGastosApatxaActivity">
+            android:name=".activities.ListaContactosActivity"
+            android:label="@string/title_activity_lista_contactos" >
         </activity>
     </application>
 

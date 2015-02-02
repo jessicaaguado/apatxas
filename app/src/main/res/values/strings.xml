@@ -52,12 +52,14 @@
     <string name="title_activity_nuevo_gasto">Nuevo gasto</string>
     <string name="title_activity_editar_gasto">Cambiar gasto</string>
     <string name="title_activity_detalle_apatxa">Información</string>
+    <string name="title_activity_lista_contactos">Selecciona personas</string>
     <!-- TITULOS (FIN) -->
 
 
     <!-- MENSAJES DE AVISO -->
     <string name="mensaje_aviso_borrar_persona_con_gastos">Esta persona ha pagado gastos. Si la borras esos gastos quedarán sin pagar</string>
     <!-- MENSAJES AVISO (FIN) -->
+
 
     <!-- MENSAJES DE CONFIRMACION -->
     <string name="mensaje_confirmacion_borrado_personas">¿Desea eliminar las personas seleccinadas?</string>
@@ -74,12 +76,12 @@
     <string name="anadir_gasto">Añadir gasto</string>
     <string name="anadir_persona">Añadir persona</string>
     <string name="bote_inicial">Bote inicial</string>
-    <string name="bote_inicial_a_descontar">(descontar en el reparto)</string>    
+    <string name="bote_inicial_a_descontar">(descontar en el reparto)</string>
     <string name="cambiar_informacion_personas_apatxa">Cambiar información de las personas que participan en la apatxa</string>
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f€</string>
     <string name="concepto">Concepto</string>
-    <string name="descontar_bote_inicial_gasto_reparto">Descontar el bote inicial del gasto total al hacer el reparto</string>    
+    <string name="descontar_bote_inicial_gasto_reparto">Descontar el bote inicial del gasto total al hacer el reparto</string>
     <string name="importe">Importe</string>
     <string name="nombre">Nombre</string>
 
@@ -91,7 +93,6 @@
     <string name="pagado_por">Pagado por</string>
     <string name="reparto">Reparto</string>
     <string name="sin_pagar">Sin pagar</string>
-
-
+    <string name="hello_world">Hello world!</string>
 
 </resources>

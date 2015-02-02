@@ -47,7 +47,7 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
 
 		PersonaListadoReparto persona = personas.get(position);
 		TextView nombrePersonaTextView = (TextView) convertView.findViewById(R.id.nombre);
-		nombrePersonaTextView.setText(persona.getNombre());
+		nombrePersonaTextView.setText(persona.nombre);
 		TextView gastoPersonaTextView = (TextView) convertView.findViewById(R.id.totalGastoReparto);
 		gastoPersonaTextView.setText(FormatearNumero.aDinero(context.getResources(), persona.getCantidadPago()));
         ImageView indicadorRepartoPagadoImageView = (ImageView) convertView.findViewById(R.id.indicadorRepartoPagado);

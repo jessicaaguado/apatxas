@@ -37,9 +37,9 @@ public class PersonaService {
         dbHelper.close();
     }
 
-	public Long crearPersona(String nombre, Long idApatxa) {
+	public Long crearPersona(String nombre, Long idApatxa, Long idContacto, String fotoContacto) {
 		open();
-		Long idPersona = personaDAO.crearPersona(nombre, idApatxa);
+		Long idPersona = personaDAO.crearPersona(nombre, idApatxa, idContacto, fotoContacto);
 		close();
 		return idPersona;
 	}
@@ -47,7 +47,7 @@ public class PersonaService {
     public void crearPersonas(List<PersonaListado> personas, Long idApatxa) {
         open();
         for (PersonaListado persona: personas){
-            personaDAO.crearPersona(persona.getNombre(), idApatxa);
+            personaDAO.crearPersona(persona.nombre, idApatxa, persona.idContacto, persona.uriFoto);
         }
         close();
     }
@@ -77,7 +77,7 @@ public class PersonaService {
         open();
         List<Long> idsPersonas = new ArrayList<Long>(listaPersonas.size());
         for (PersonaListadoReparto persona: listaPersonas){
-            idsPersonas.add(persona.getId());
+            idsPersonas.add(persona.id);
         }
         if (estadoPagado){
             personaDAO.marcarPersonasRepartoPagado(idsPersonas);

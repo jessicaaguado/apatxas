@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
+import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.ValidacionActivity;
@@ -45,6 +46,8 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     private Resources resources;
 
     private int numPersonasApatxaAnadidas = 0;
+
+    private int SELECCIONAR_CONTACTOS_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,12 +96,35 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     }
 
     public void anadirPersona() {
-        String nombre = "Apatxero " + ++numPersonasApatxaAnadidas;
+        /*String nombre = "Apatxero " + ++numPersonasApatxaAnadidas;
         PersonaListado persona = new PersonaListado();
         persona.setNombre(nombre);
         listaPersonasApatxaArrayAdapter.add(persona);
+        actualizarTituloCabeceraListaPersonas();*/
+        Intent intent = new Intent(this, ListaContactosActivity.class);
+        startActivityForResult(intent, SELECCIONAR_CONTACTOS_REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SELECCIONAR_CONTACTOS_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                anadirContactosSeleccionados(data);
+            }
+        }
+    }
+
+    public void anadirContactosSeleccionados(Intent data){
+        List<ContactoListado> contactosSeleccionados = (ArrayList<ContactoListado>) data.getSerializableExtra("contactosSeleccionados");
+        for (ContactoListado contacto: contactosSeleccionados){
+            PersonaListado persona = new PersonaListado();
+            persona.nombre = contacto.nombre;
+            persona.idContacto = contacto.id;
+            persona.uriFoto = contacto.fotoURI;
+            listaPersonasApatxaArrayAdapter.add(persona);
+        }
         actualizarTituloCabeceraListaPersonas();
     }
+
 
     public void borrarPersonas() {
         listaPersonasApatxaArrayAdapter.eliminarPersonasSeleccionadas();

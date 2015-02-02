@@ -82,7 +82,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 			List<String> personasApatxaConOpcionSinPagar = new ArrayList<String>();
 			personasApatxaConOpcionSinPagar.add(resources.getString(R.string.sin_pagar));
             for (PersonaListado persona:personasApatxa){
-                personasApatxaConOpcionSinPagar.add(persona.getNombre());
+                personasApatxaConOpcionSinPagar.add(persona.nombre);
             }
 			listaPersonasApatxaArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, personasApatxaConOpcionSinPagar);
 			personasSpinner.setAdapter(listaPersonasApatxaArrayAdapter);
@@ -104,7 +104,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
 		Integer personaSeleccionada = personasSpinner.getSelectedItemPosition() <= 0 ? null : personasSpinner.getSelectedItemPosition() - 1;
 		String pagador = null;
 		if (personaSeleccionada != null) {
-			pagador = personasApatxa.get(personaSeleccionada).getNombre();
+			pagador = personasApatxa.get(personaSeleccionada).nombre;
 		}
 		return pagador;
 	}

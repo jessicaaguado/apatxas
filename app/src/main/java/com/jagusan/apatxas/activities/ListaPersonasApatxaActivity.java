@@ -21,6 +21,7 @@ import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
 import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
+import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 
     private Long idApatxa;
     private List<PersonaListado> personasApatxa;
-    private List<String> nombresPersonasAnadidas = new ArrayList<String>();
+    private List<PersonaListado> personasAnadidas = new ArrayList<PersonaListado>();
     private List<PersonaListado> personasEliminadas = new ArrayList<PersonaListado>();
 
     private ListView personasListView;
@@ -45,6 +46,9 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
     private GastoService gastoService;
 
     private int numPersonasApatxaAnadidas;
+
+
+    private int SELECCIONAR_CONTACTOS_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,15 +91,15 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 
     private void actualizarPersonasAnadidasBorradas() {
         for (PersonaListado persona : personasEliminadas) {
-            Long idPersona = persona.getId();
+            Long idPersona = persona.id;
             if (idPersona == null) {
-                nombresPersonasAnadidas.remove(persona.getNombre());
+                personasAnadidas.remove(persona);
             } else {
-                personaService.borrarPersona(persona.getId());
+                personaService.borrarPersona(persona.id);
             }
         }
-        for (String nombre : nombresPersonasAnadidas) {
-            personaService.crearPersona(nombre, idApatxa);
+        for (PersonaListado persona : personasAnadidas) {
+            personaService.crearPersona(persona.nombre, idApatxa, persona.idContacto, persona.uriFoto);
         }
 
     }
@@ -140,11 +144,34 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
     }
 
     public void anadirPersonaParaGuardar() {
-        String nombre = "Apatxero " + ++numPersonasApatxaAnadidas + " " + (new Date()).getTime();
+        /*String nombre = "Apatxero " + ++numPersonasApatxaAnadidas + " " + (new Date()).getTime();
         PersonaListado nuevaPersona = new PersonaListado();
-        nuevaPersona.setNombre(nombre);
+        nuevaPersona.nombre = nombre;
         nombresPersonasAnadidas.add(nombre);
         listaPersonasApatxaArrayAdapter.add(nuevaPersona);
+        actualizarTituloCabeceraListaPersonas();*/
+        Intent intent = new Intent(this, ListaContactosActivity.class);
+        startActivityForResult(intent, SELECCIONAR_CONTACTOS_REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SELECCIONAR_CONTACTOS_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                anadirContactosSeleccionados(data);
+            }
+        }
+    }
+
+    public void anadirContactosSeleccionados(Intent data){
+        List<ContactoListado> contactosSeleccionados = (ArrayList<ContactoListado>) data.getSerializableExtra("contactosSeleccionados");
+        for (ContactoListado contacto: contactosSeleccionados){
+            PersonaListado persona = new PersonaListado();
+            persona.nombre = contacto.nombre;
+            persona.idContacto = contacto.id;
+            persona.uriFoto = contacto.fotoURI;
+            listaPersonasApatxaArrayAdapter.add(persona);
+            personasAnadidas.add(persona);
+        }
         actualizarTituloCabeceraListaPersonas();
     }
 

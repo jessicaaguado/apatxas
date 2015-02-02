@@ -84,7 +84,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
         // delante #sin pagar#
         List<String> nombresPersonas = new ArrayList<String>();
         for (PersonaListado persona : personasApatxa) {
-            nombresPersonas.add(persona.getNombre());
+            nombresPersonas.add(persona.nombre);
         }
         return nombresPersonas.indexOf(nombrePersonaPagadoGasto) + 1;
     }

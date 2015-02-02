@@ -87,7 +87,7 @@ public class ApatxaService {
 		open();
 		Double gastoProporcional = calcularRepartoService.calcularParteProporcional(apatxaDetalle);
 		for (int i = 0; i < apatxaDetalle.getPersonas().size(); i++) {
-			personaDAO.asociarPagoPersona(apatxaDetalle.getPersonas().get(i).getId(), gastoProporcional);
+			personaDAO.asociarPagoPersona(apatxaDetalle.getPersonas().get(i).id, gastoProporcional);
 		}
 		apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.getId(), true);
 		close();

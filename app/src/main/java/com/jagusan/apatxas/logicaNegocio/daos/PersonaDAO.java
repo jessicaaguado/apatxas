@@ -19,7 +19,7 @@ public class PersonaDAO {
 	private static final String NOMBRE_TABLA_PERSONA = TablaPersona.NOMBRE_TABLA;
 
 	private static final String[] COLUMNAS_PERSONA = { TablaPersona.COLUMNA_ID, TablaPersona.COLUMNA_NOMBRE, TablaPersona.COLUMNA_ID_APATXA, TablaPersona.COLUMNA_CUANTIA_PAGO,
-			TablaPersona.COLUMNA_PAGADO, TablaPersona.COLUMNA_HECHO };
+			TablaPersona.COLUMNA_PAGADO, TablaPersona.COLUMNA_HECHO, TablaPersona.COLUMNA_ID_CONTACTO, TablaPersona.COLUMNA_FOTO_CONTACTO };
 
 	private static final String ORDEN_PERSONAS_DEFECTO = TablaPersona.COLUMNA_NOMBRE + " ASC";
 
@@ -29,10 +29,14 @@ public class PersonaDAO {
 		this.database = database;
 	}
 
-	public Long crearPersona(String nombre, Long idApatxa) {
+	public Long crearPersona(String nombre, Long idApatxa, Long idContacto, String fotoContacto) {
 		ContentValues values = new ContentValues();
 		values.put(TablaPersona.COLUMNA_NOMBRE, nombre);
 		values.put(TablaPersona.COLUMNA_ID_APATXA, idApatxa);
+        if (fotoContacto != null){
+            values.put(TablaPersona.COLUMNA_FOTO_CONTACTO,fotoContacto);
+        }
+        values.put(TablaPersona.COLUMNA_ID_CONTACTO, idContacto);
 
 		long insertId = database.insert(NOMBRE_TABLA_PERSONA, null, values);
 		return insertId;
