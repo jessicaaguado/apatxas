@@ -2,9 +2,11 @@ package com.jagusan.apatxas.activities;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -17,12 +19,16 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
@@ -39,9 +45,13 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
     private AutoCompleteTextView nombreApatxaAutoComplete;
-    private EditText fechaApatxaEditText;
+    private TextView fechaInicioApatxaTextView;
+    private TextView fechaFinApatxaTextView;
+    private DatePickerDialog fechaInicioDatePickerDialog;
+    private DatePickerDialog fechaFinDatePickerDialog;
     private EditText boteInicialEditText;
     private CheckBox descontarBoteInicialCheckBox;
+    private Switch soloUnDiaSwitch;
 
     private ListView personasListView;
     private TextView tituloPersonasListViewHeader;
@@ -133,12 +143,22 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 
     private void continuarAnadirApatxas() {
         String titulo = nombreApatxaAutoComplete.getText().toString();
-        Long fecha = null;
+        Long fechaInicio = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            fecha = sdf.parse(fechaApatxaEditText.getText().toString()).getTime();
+            fechaInicio = sdf.parse(fechaInicioApatxaTextView.getText().toString()).getTime();
         } catch (Exception e) {
             // sin fecha
+        }
+        Boolean soloUnDia = soloUnDiaSwitch.isChecked();
+        Long fechaFin = fechaInicio;
+        if (!soloUnDia){
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                fechaFin = sdf.parse(fechaFinApatxaTextView.getText().toString()).getTime();
+            } catch (Exception e) {
+                // sin fecha
+            }
         }
         Double boteInicial = 0.0;
         try {
@@ -150,7 +170,9 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
         if (validacionesCorrectas()) {
             Intent intent = new Intent(this, NuevoApatxaPaso2Activity.class);
             intent.putExtra("titulo", titulo);
-            intent.putExtra("fecha", fecha);
+            intent.putExtra("fechaInicio", fechaInicio);
+            intent.putExtra("fechaFin", fechaFin);
+            intent.putExtra("soloUnDia", soloUnDia);
             intent.putExtra("boteInicial", boteInicial);
             intent.putExtra("descontarBoteInicial", descontarBoteInicial);
             intent.putExtra("personas", (ArrayList<PersonaListado>) personasApatxa);
@@ -160,9 +182,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     }
 
     private Boolean validacionesCorrectas() {
-        Boolean tituloOk = ValidacionActivity.validarTituloObligatorio(nombreApatxaAutoComplete, resources);
-        Boolean fechaOk = ValidacionActivity.validarFechaObligatoria(fechaApatxaEditText, resources);
-        return tituloOk && fechaOk;
+        return ValidacionActivity.validarTituloObligatorio(nombreApatxaAutoComplete, resources);
     }
 
     private void inicializarServicios() {
@@ -178,7 +198,8 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 
     private void cargarElementosLayout() {
         nombreApatxaAutoComplete = (AutoCompleteTextView) findViewById(R.id.nombreApatxa);
-        fechaApatxaEditText = (EditText) findViewById(R.id.fechaApatxa);
+        fechaInicioApatxaTextView = (TextView) findViewById(R.id.fechaInicioApatxa);
+        fechaFinApatxaTextView = (TextView) findViewById(R.id.fechaFinApatxa);
         boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
         descontarBoteInicialCheckBox = (CheckBox) findViewById(R.id.descontarBoteInicial);
 
@@ -188,16 +209,58 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
         listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
         personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
         asignarContextualActionBar(personasListView);
+
+        soloUnDiaSwitch = (Switch) findViewById(R.id.switchUnSoloDia);
+        soloUnDiaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    fechaFinApatxaTextView.setVisibility(View.GONE);
+                } else {
+                    fechaFinApatxaTextView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void inicializarElementosLayout() {
-        fechaApatxaEditText.setText(FormatearFecha.formatearHoy(resources));
+        Calendar hoy = Calendar.getInstance();
+
+        fechaInicioApatxaTextView.setText(FormatearFecha.formatearFecha(resources, hoy.getTime()));
+        fechaFinApatxaTextView.setText(FormatearFecha.formatearFecha(resources, hoy.getTime()));
+
+        fechaInicioDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar fechaSeleccionada = Calendar.getInstance();
+                fechaSeleccionada.set(year, monthOfYear, dayOfMonth);
+                fechaInicioApatxaTextView.setText(FormatearFecha.formatearFecha(resources, fechaSeleccionada.getTime()));
+            }
+        }, hoy.get(Calendar.YEAR), hoy.get(Calendar.MONTH), hoy.get(Calendar.DAY_OF_MONTH));
+
+        fechaFinDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar fechaSeleccionada = Calendar.getInstance();
+                fechaSeleccionada.set(year, monthOfYear, dayOfMonth);
+                fechaFinApatxaTextView.setText(FormatearFecha.formatearFecha(resources, fechaSeleccionada.getTime()));
+            }
+        }, hoy.get(Calendar.YEAR), hoy.get(Calendar.MONTH), hoy.get(Calendar.DAY_OF_MONTH));
+
 
         List<String> todosTitulos = apatxaService.recuperarTodosTitulos();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, todosTitulos);
         nombreApatxaAutoComplete.setAdapter(adapter);
         nombreApatxaAutoComplete.setThreshold(3);
     }
+
+    public void mostrarDatePicker(View view) {
+        if (view == fechaInicioApatxaTextView){
+            fechaInicioDatePickerDialog.show();
+        }
+        if (view == fechaFinApatxaTextView){
+            fechaFinDatePickerDialog.show();
+        }
+    }
+
 
     private void asignarContextualActionBar(final ListView personasListView) {
         personasListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);

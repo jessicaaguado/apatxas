@@ -6,56 +6,17 @@ import com.jagusan.apatxas.utils.EstadoApatxa;
 
 public class ApatxaListado {
 
-	private Long id;
-	private String nombre;
-	private Date fecha;
-	private Double gastoTotal = 0.0;
-	private Double boteInicial = 0.0;
-	private Boolean descontarBoteInicialGastoTotal;
-	private Boolean repartoRealizado;
-	private Integer personasPendientesPagarCobrar;
+	public Long id;
+	public String nombre;
+	public Date fechaInicio;
+    public Date fechaFin;
+    public Boolean soloUnDia;
+	public Double gastoTotal = 0.0;
+	public Double boteInicial = 0.0;
+	public Boolean descontarBoteInicialGastoTotal;
+	public Boolean repartoRealizado;
+	public Integer personasPendientesPagarCobrar;
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public Date getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-
-	public Double getGastoTotal() {
-		return gastoTotal;
-	}
-
-	public void setGastoTotal(Double gastoTotal) {
-		this.gastoTotal = gastoTotal;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		String apatxaListadoString = "-------------------";
-		apatxaListadoString = apatxaListadoString + "\nID: " + this.getId();
-		apatxaListadoString = apatxaListadoString + "\nNOMBRE: " + this.getNombre();
-		apatxaListadoString = apatxaListadoString + "\nFECHA: " + this.getFecha();
-		apatxaListadoString = apatxaListadoString + "\n-------------------";
-		return apatxaListadoString;
-	}
 
 	public EstadoApatxa getEstadoApatxa() {
 		EstadoApatxa estadoApatxa = EstadoApatxa.HECHO;
@@ -67,36 +28,6 @@ public class ApatxaListado {
 		return estadoApatxa;
 	}
 
-	public Double getBoteInicial() {
-		return boteInicial;
-	}
 
-	public void setBoteInicial(Double boteInicial) {
-		this.boteInicial = boteInicial;
-	}
-
-	public Boolean getRepartoRealizado() {
-		return repartoRealizado;
-	}
-
-	public void setRepartoRealizado(Boolean repartoRealizado) {
-		this.repartoRealizado = repartoRealizado;
-	}
-
-	public Integer getPersonasPendientesPagarCobrar() {
-		return personasPendientesPagarCobrar;
-	}
-
-	public void setPersonasPendientesPagarCobrar(Integer personasPendientesPagarCobrar) {
-		this.personasPendientesPagarCobrar = personasPendientesPagarCobrar;
-	}
-
-	public Boolean getDescontarBoteInicialGastoTotal() {
-		return descontarBoteInicialGastoTotal;
-	}
-
-	public void setDescontarBoteInicialGastoTotal(Boolean descontarBoteInicialGastoTotal) {
-		this.descontarBoteInicialGastoTotal = descontarBoteInicialGastoTotal;
-	}
 
 }

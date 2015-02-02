@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="apatxas_margen_vertical_defecto">8dp</dimen>
+    <dimen name="apatxas_padding_superior_extra">16dp</dimen>
     <dimen name="apatxas_padding_superior_defecto">8dp</dimen>
     <dimen name="apatxas_padding_inferior_defecto">8dp</dimen>
     <dimen name="apatxas_padding_derecho_defecto">16dp</dimen>

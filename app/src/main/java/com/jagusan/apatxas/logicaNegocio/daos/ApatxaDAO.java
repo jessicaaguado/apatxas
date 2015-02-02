@@ -25,32 +25,39 @@ public class ApatxaDAO {
 
     private static final String SQL_GASTO_TOTAL_APATXA = "(select sum(" + TablaGasto.COLUMNA_TOTAL + ") from " + TablaGasto.NOMBRE_TABLA + " where " + TablaGasto.COLUMNA_ID_APATXA + " = " + TablaApatxa.COLUMNA_FULL_ID + ")";
 
-    private static final String[] COLUMNAS_APATXA = {TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE, TablaApatxa.COLUMNA_FECHA, TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_REPARTO_REALIZADO, SQL_NUM_PERSONAS_PTES_APATXA, TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, SQL_GASTO_TOTAL_APATXA};
+    private static final String[] COLUMNAS_APATXA = {TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE,
+            TablaApatxa.COLUMNA_FECHA_INICIO, TablaApatxa.COLUMNA_FECHA_FIN, TablaApatxa.COLUMNA_SOLO_UN_DIA,
+            TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_REPARTO_REALIZADO, SQL_NUM_PERSONAS_PTES_APATXA,
+            TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, SQL_GASTO_TOTAL_APATXA};
 
-    private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA + " DESC";
+    private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA_INICIO + " DESC";
 
     public void setDatabase(SQLiteDatabase database) {
         this.database = database;
     }
 
-    public Long nuevoApatxa(String nombre, Long fecha, Double boteInicial, Integer descontarBoteInicialDeGastoTotal) {
+    public Long nuevoApatxa(String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia, Double boteInicial, Integer descontarBoteInicialDeGastoTotal) {
         ContentValues values = new ContentValues();
         values.put(TablaApatxa.COLUMNA_NOMBRE, nombre);
-        values.put(TablaApatxa.COLUMNA_FECHA, fecha);
+        values.put(TablaApatxa.COLUMNA_FECHA_INICIO, fechaInicio);
+        values.put(TablaApatxa.COLUMNA_FECHA_FIN, fechaFin);
+        values.put(TablaApatxa.COLUMNA_SOLO_UN_DIA, soloUnDia);
         values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
         values.put(TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, descontarBoteInicialDeGastoTotal);
-
+        Log.d("APATXAS-SQL", "NUEVO APATXA " + values);
         long insertId = database.insert(TablaApatxa.NOMBRE_TABLA, null, values);
         return insertId;
     }
 
-    public void actualizarApatxa(Long id, String nombre, Long fecha, Double boteInicial, Integer descontarBoteInicialDeGastoTotal) {
+    public void actualizarApatxa(Long id, String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia, Double boteInicial, Integer descontarBoteInicialDeGastoTotal) {
         ContentValues values = new ContentValues();
         values.put(TablaApatxa.COLUMNA_NOMBRE, nombre);
-        values.put(TablaApatxa.COLUMNA_FECHA, fecha);
+        values.put(TablaApatxa.COLUMNA_FECHA_INICIO, fechaInicio);
+        values.put(TablaApatxa.COLUMNA_FECHA_FIN, fechaFin);
+        values.put(TablaApatxa.COLUMNA_SOLO_UN_DIA, soloUnDia);
         values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
         values.put(TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, descontarBoteInicialDeGastoTotal);
-
+        Log.d("APATXAS-SQL", "ACTUALIZAR APATXA " + values);
         String where = TablaApatxa.COLUMNA_ID + " = ?";
         String[] whereArgs = {String.valueOf(id)};
         database.update(TablaApatxa.NOMBRE_TABLA, values, where, whereArgs);
@@ -101,7 +108,7 @@ public class ApatxaDAO {
     public List<String> recuperarTodosTitulos() {
         List<String> titulos = new ArrayList<String>();
         String[] COLUMNA_NOMBRE = {TablaApatxa.COLUMNA_NOMBRE};
-        Cursor cursor = database.query(true,TablaApatxa.NOMBRE_TABLA, COLUMNA_NOMBRE, null, null, null, null, TablaApatxa.COLUMNA_NOMBRE + " ASC", null);
+        Cursor cursor = database.query(true, TablaApatxa.NOMBRE_TABLA, COLUMNA_NOMBRE, null, null, null, null, TablaApatxa.COLUMNA_NOMBRE + " ASC", null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

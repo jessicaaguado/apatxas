@@ -18,11 +18,11 @@ public class OnVerDetalleApatxaClickListener implements OnItemClickListener {
 
 		Context context = apatxaListadoListView.getContext();
 		Class activityToGo = DetalleApatxaConRepartoActivity.class;
-		if (!apatxaClicked.getRepartoRealizado()) {
+		if (!apatxaClicked.repartoRealizado) {
 			activityToGo = DetalleApatxaSinRepartoActivity.class;
 		}
 		Intent intent = new Intent(context, activityToGo);
-		intent.putExtra("id", apatxaClicked.getId());
+		intent.putExtra("id", apatxaClicked.id);
 		context.startActivity(intent);
 	}
 

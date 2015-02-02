@@ -14,7 +14,7 @@ import com.jagusan.apatxas.utils.LogTags;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String NOMBRE_BASE_DATOS = "apatxas.db";
-    private static final int VERSION_BASE_DATOS = 2;
+    private static final int VERSION_BASE_DATOS = 1;
 
     private static final boolean logearEstadoBD = true;
 

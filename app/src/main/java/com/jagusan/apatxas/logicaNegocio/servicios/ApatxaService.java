@@ -46,18 +46,18 @@ public class ApatxaService {
         dbHelper.close();
 	}
 
-	public Long crearApatxa(String nombre, Long fecha, Double boteInicial, Boolean descontarBoteInicialDeGastoTotal) {
+	public Long crearApatxa(String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia, Double boteInicial, Boolean descontarBoteInicialDeGastoTotal) {
 		open();
 		Integer descontarBoteInicial = descontarBoteInicialDeGastoTotal ? 1 : 0;
-		Long idApatxa = apatxaDAO.nuevoApatxa(nombre, fecha, boteInicial, descontarBoteInicial);
+		Long idApatxa = apatxaDAO.nuevoApatxa(nombre, fechaInicio, fechaFin, soloUnDia, boteInicial, descontarBoteInicial);
 		close();
 		return idApatxa;
 	}
 
-	public void actualizarApatxa(Long id, String nombre, Long fecha, Double boteInicial, Boolean descontarBoteInicialDeGastoTotal) {
+	public void actualizarApatxa(Long id, String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia, Double boteInicial, Boolean descontarBoteInicialDeGastoTotal) {
 		open();
 		Integer descontarBoteInicial = descontarBoteInicialDeGastoTotal ? 1 : 0;
-		apatxaDAO.actualizarApatxa(id, nombre, fecha, boteInicial, descontarBoteInicial);
+		apatxaDAO.actualizarApatxa(id, nombre, fechaInicio, fechaFin, soloUnDia, boteInicial, descontarBoteInicial);
 		close();
 	}
 
@@ -78,7 +78,7 @@ public class ApatxaService {
 	}
 
 	public void realizarRepartoSiNecesario(ApatxaDetalle apatxaDetalle) {
-		if (!apatxaDetalle.getRepartoRealizado()) {
+		if (!apatxaDetalle.repartoRealizado) {
 			realizarReparto(apatxaDetalle);
 		}
 	}
@@ -89,7 +89,7 @@ public class ApatxaService {
 		for (int i = 0; i < apatxaDetalle.getPersonas().size(); i++) {
 			personaDAO.asociarPagoPersona(apatxaDetalle.getPersonas().get(i).id, gastoProporcional);
 		}
-		apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.getId(), true);
+		apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.id, true);
 		close();
 	}
 
@@ -104,7 +104,7 @@ public class ApatxaService {
         open();
         List<Long> idsApatxasBorrar = new ArrayList<Long>(listaApatxas.size());
         for (ApatxaListado apatxa:listaApatxas){
-            idsApatxasBorrar.add(apatxa.getId());
+            idsApatxasBorrar.add(apatxa.id);
         }
         personaDAO.borrarPersonasDeApatxas(idsApatxasBorrar);
         gastoDAO.borrarGastosDeApatxas(idsApatxasBorrar);

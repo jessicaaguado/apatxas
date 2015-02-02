@@ -83,7 +83,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     }
 
     private void cargarInformacionGastos() {
-        resumenGastosApatxaTextView.setText(apatxa.getGastos().size() + " gastos. Total: " + FormatearNumero.aDineroEuros(resources, apatxa.getGastoTotal()));
+        resumenGastosApatxaTextView.setText(apatxa.getGastos().size() + " gastos. Total: " + FormatearNumero.aDineroEuros(resources, apatxa.gastoTotal));
     }
 
     private void cargarInformacionReparto() {
@@ -98,7 +98,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     public void irEditarListaGastosApatxa() {
         Intent intent = new Intent(this, ListaGastosApatxaActivity.class);
         intent.putExtra("personas", new ArrayList<PersonaListado>(apatxa.getPersonas()));
-        intent.putExtra("idApatxa", apatxa.getId());
+        intent.putExtra("idApatxa", apatxa.id);
         intent.putExtra("gastos", new ArrayList<GastoApatxaListado>(apatxa.getGastos()));
         startActivityForResult(intent, EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE);
     }

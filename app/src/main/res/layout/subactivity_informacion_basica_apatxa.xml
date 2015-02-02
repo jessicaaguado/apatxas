@@ -17,12 +17,43 @@
             <requestFocus />
         </AutoCompleteTextView>
 
-        <EditText
-            android:id="@+id/fechaApatxa"
+
+        <Switch
+            android:id="@+id/switchUnSoloDia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/apatxas_valor_defecto"
+            android:paddingTop="@dimen/apatxas_padding_superior_extra"
+            android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
+            android:text="@string/solo_un_dia"
+            android:switchPadding="40dp"
+            android:drawableLeft="@drawable/ic_apatxas_calendario"
+            android:drawablePadding="@dimen/apatxas_padding_izquierdo_defecto"
+            android:textColor="@color/apatxascolors_gris_medio"/>
+
+        <TextView
+            android:id="@+id/fechaInicioApatxa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/patron_fecha_dia_mes_ano_ux"
-            android:inputType="date" />
+            android:onClick="mostrarDatePicker"
+            android:editable="false"
+            style="@style/apatxas_valor_defecto"
+            android:paddingLeft="40dp"
+            android:paddingTop="@dimen/apatxas_padding_superior_defecto"
+            android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"/>
+
+        <TextView
+            android:id="@+id/fechaFinApatxa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/patron_fecha_dia_mes_ano_ux"
+            android:onClick="mostrarDatePicker"
+            android:editable="false"
+            style="@style/apatxas_valor_defecto"
+            android:paddingLeft="40dp"
+            android:paddingTop="@dimen/apatxas_padding_superior_defecto"
+            android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"/>
 
 
         <EditText

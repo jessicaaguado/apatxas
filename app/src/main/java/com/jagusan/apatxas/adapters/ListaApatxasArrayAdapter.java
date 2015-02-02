@@ -50,10 +50,10 @@ public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
 
 		// nombre
 		TextView nombreApatxaTextView = (TextView) convertView.findViewById(R.id.nombre);
-		nombreApatxaTextView.setText(apatxa.getNombre());
+		nombreApatxaTextView.setText(apatxa.nombre);
 		// fecha
 		TextView fechaApatxaTextView = (TextView) convertView.findViewById(R.id.fecha);
-		Date fecha = apatxa.getFecha();
+		Date fecha = apatxa.fechaInicio;
 		if (fecha != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			fechaApatxaTextView.setText(sdf.format(fecha));

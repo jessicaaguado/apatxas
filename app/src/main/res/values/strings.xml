@@ -94,5 +94,6 @@
     <string name="reparto">Reparto</string>
     <string name="sin_pagar">Sin pagar</string>
     <string name="hello_world">Hello world!</string>
+    <string name="solo_un_dia">Solo un día</string>
 
 </resources>
