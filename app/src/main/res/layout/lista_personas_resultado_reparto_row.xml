@@ -5,10 +5,19 @@
     android:orientation="horizontal"
     style="@style/apatxas_dos_lineas_row_style">
 
+    <ImageView
+        android:id="@+id/fotoContacto"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_apatxas_contacto_sin_foto" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.7"
+        android:paddingLeft="@dimen/apatxas_padding_izquierdo_row_una_linea_con_avatar"
         android:orientation="vertical" >
 
         <TextView

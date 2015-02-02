@@ -23,9 +23,9 @@ import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
 import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
 import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
+import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ListaPersonasApatxaActivity extends ActionBarActivity {
@@ -82,7 +82,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
                 finish();
                 return true;
             case R.id.action_anadir_persona:
-                anadirPersonaParaGuardar();
+                seleccionarNuevosContactos();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -143,14 +143,9 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         tituloPersonasListViewHeader.setText(titulo);
     }
 
-    public void anadirPersonaParaGuardar() {
-        /*String nombre = "Apatxero " + ++numPersonasApatxaAnadidas + " " + (new Date()).getTime();
-        PersonaListado nuevaPersona = new PersonaListado();
-        nuevaPersona.nombre = nombre;
-        nombresPersonasAnadidas.add(nombre);
-        listaPersonasApatxaArrayAdapter.add(nuevaPersona);
-        actualizarTituloCabeceraListaPersonas();*/
+    public void seleccionarNuevosContactos() {
         Intent intent = new Intent(this, ListaContactosActivity.class);
+        intent.putExtra("idsContactosSeleccionados",(ArrayList<Long>) RecupararInformacionPersonas.obtenerIdsContactos(listaPersonasApatxaArrayAdapter.getPersonas()));
         startActivityForResult(intent, SELECCIONAR_CONTACTOS_REQUEST_CODE);
     }
 
@@ -162,9 +157,9 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         }
     }
 
-    public void anadirContactosSeleccionados(Intent data){
+    public void anadirContactosSeleccionados(Intent data) {
         List<ContactoListado> contactosSeleccionados = (ArrayList<ContactoListado>) data.getSerializableExtra("contactosSeleccionados");
-        for (ContactoListado contacto: contactosSeleccionados){
+        for (ContactoListado contacto : contactosSeleccionados) {
             PersonaListado persona = new PersonaListado();
             persona.nombre = contacto.nombre;
             persona.idContacto = contacto.id;
@@ -207,7 +202,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 
             @Override
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                if (this.mode == null){
+                if (this.mode == null) {
                     this.mode = mode;
                 }
                 return false;

@@ -3,6 +3,7 @@ package com.jagusan.apatxas.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,13 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         ImageView indicadorRepartoPagadoImageView = (ImageView) convertView.findViewById(R.id.indicadorRepartoPagado);
         if (persona.getRepartoPagado()){
             indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pagado);
+        }
+
+        ImageView fotoContactoImageView = (ImageView) convertView.findViewById(R.id.fotoContacto);
+        if (persona.uriFoto != null) {
+            fotoContactoImageView.setImageURI(Uri.parse(persona.uriFoto));
+        } else {
+            fotoContactoImageView.setImageResource(R.drawable.ic_apatxas_contacto_sin_foto);
         }
 
         marcarSeleccion(convertView, persona);

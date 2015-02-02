@@ -27,6 +27,7 @@ import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
 import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.FormatearFecha;
+import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
 public class NuevoApatxaPaso1Activity extends ActionBarActivity {
@@ -44,8 +45,6 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
     private Resources resources;
-
-    private int numPersonasApatxaAnadidas = 0;
 
     private int SELECCIONAR_CONTACTOS_REQUEST_CODE = 1;
 
@@ -76,7 +75,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
                 continuarAnadirApatxas();
                 return true;
             case R.id.action_anadir_persona:
-                anadirPersona();
+                seleccionarContactos();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -95,13 +94,9 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
         tituloPersonasListViewHeader.setText(titulo);
     }
 
-    public void anadirPersona() {
-        /*String nombre = "Apatxero " + ++numPersonasApatxaAnadidas;
-        PersonaListado persona = new PersonaListado();
-        persona.setNombre(nombre);
-        listaPersonasApatxaArrayAdapter.add(persona);
-        actualizarTituloCabeceraListaPersonas();*/
+    public void seleccionarContactos() {
         Intent intent = new Intent(this, ListaContactosActivity.class);
+        intent.putExtra("idsContactosSeleccionados",(ArrayList<Long>)RecupararInformacionPersonas.obtenerIdsContactos(listaPersonasApatxaArrayAdapter.getPersonas()));
         startActivityForResult(intent, SELECCIONAR_CONTACTOS_REQUEST_CODE);
     }
 

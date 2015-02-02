@@ -94,4 +94,8 @@ public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<PersonaListado
         }
         resetearSeleccion();
     }
+
+    public List<PersonaListado> getPersonas(){
+        return personas;
+    }
 }

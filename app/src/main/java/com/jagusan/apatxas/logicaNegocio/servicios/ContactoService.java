@@ -3,6 +3,7 @@ package com.jagusan.apatxas.logicaNegocio.servicios;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.jagusan.apatxas.logicaNegocio.cursorReader.ExtraerInformacionContactoDeCursor;
@@ -24,9 +25,11 @@ public class ContactoService {
     }
 
 
-    public List<ContactoListado> obtenerTodosContactosTelefono() {
+    public List<ContactoListado> obtenerTodosContactosTelefono(List<Long> idsContactosYaSeleccionados) {
         List<ContactoListado> contactos = new ArrayList<ContactoListado>();
-        Cursor cursor = context.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, COLUMNAS, WHERE_TIENEN_TELEFONO, null, ContactsContract.Contacts.DISPLAY_NAME_PRIMARY+" COLLATE LOCALIZED ASC");
+        String AND_NO_ESTAN_EN_LISTA_SELECCIONADOS = " and "+ContactsContract.Contacts._ID+" not in (" + TextUtils.join(",", idsContactosYaSeleccionados)+")";
+        String WHERE = idsContactosYaSeleccionados.isEmpty() ?  WHERE_TIENEN_TELEFONO : WHERE_TIENEN_TELEFONO+AND_NO_ESTAN_EN_LISTA_SELECCIONADOS;
+        Cursor cursor = context.getContentResolver().query(ContactsContract.Contacts.CONTENT_URI, COLUMNAS, WHERE, null, ContactsContract.Contacts.DISPLAY_NAME_PRIMARY+" COLLATE LOCALIZED ASC");
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             ContactoListado contacto = new ContactoListado();
@@ -35,9 +38,12 @@ public class ContactoService {
             cursor.moveToNext();
         }
         cursor.close();
-        ContactoListado yo = new ContactoListado();
-        yo.nombre = "YO";
-        contactos.add(0,yo);
+        if (!idsContactosYaSeleccionados.contains(Long.MIN_VALUE)){
+            ContactoListado yo = new ContactoListado();
+            yo.nombre = "YO";
+            yo.id = Long.MIN_VALUE;
+            contactos.add(0,yo);
+        }
         return contactos;
     }
 

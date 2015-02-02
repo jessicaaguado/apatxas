@@ -31,6 +31,7 @@ public class ListaContactosActivity extends ActionBarActivity {
 
     ListView contactosListView;
     ListaContactosArrayAdapter listaContactosArrayAdapter;
+    private ArrayList<Long> contactosYaElegidos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,8 @@ public class ListaContactosActivity extends ActionBarActivity {
         inicializarServicios();
 
         personalizarActionBar();
+
+        recuperarDatosPasoAnterior();
 
         cargarElementosLayout();
     }
@@ -84,9 +87,14 @@ public class ListaContactosActivity extends ActionBarActivity {
     }
 
 
+    private void recuperarDatosPasoAnterior() {
+        Intent intent = getIntent();
+        contactosYaElegidos = (ArrayList<Long>) intent.getSerializableExtra("idsContactosSeleccionados");
+    }
+
     private void cargarElementosLayout() {
         contactosListView = (ListView) findViewById(R.id.listaContactos);
-        List<ContactoListado> contactos = contactoService.obtenerTodosContactosTelefono();
+        List<ContactoListado> contactos = contactoService.obtenerTodosContactosTelefono(contactosYaElegidos);
         listaContactosArrayAdapter = new ListaContactosArrayAdapter(this, R.layout.lista_contactos_row, contactos);
         contactosListView.setAdapter(listaContactosArrayAdapter);
     }
