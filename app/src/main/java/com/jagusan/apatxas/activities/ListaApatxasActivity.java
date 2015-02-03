@@ -13,8 +13,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.AbsListView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
+
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.AdRequest;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaApatxasArrayAdapter;
 import com.jagusan.apatxas.listeners.OnVerDetalleApatxaClickListener;
@@ -25,6 +30,7 @@ public class ListaApatxasActivity extends ActionBarActivity {
 
     private ApatxaService apatxaService;
     private ListaApatxasArrayAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,15 @@ public class ListaApatxasActivity extends ActionBarActivity {
 
         OnVerDetalleApatxaClickListener listener = new OnVerDetalleApatxaClickListener();
         listaGastosListView.setOnItemClickListener(listener);
+
+        anadirAdMob();
+    }
+
+    private void anadirAdMob() {
+        AdView adView = (AdView) this.findViewById(R.id.adViewListaApatxasActivity);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        //addTestDevice("B97B1584C555ECA1C4B537F4A54D3E14")
+        adView.loadAd(adRequest);
     }
 
     @Override
@@ -145,4 +160,5 @@ public class ListaApatxasActivity extends ActionBarActivity {
 
         });
     }
+
 }
