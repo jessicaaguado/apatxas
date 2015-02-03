@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
 
+String APK_NAME = "apatxas"
+int VERSION_CODE = 1
+String VERSION_NAME = "0.0.1"
+
+project.archivesBaseName = APK_NAME + "-" + VERSION_NAME;
+
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
