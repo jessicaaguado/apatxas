@@ -6,10 +6,12 @@ import java.util.List;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.jagusan.apatxas.logicaNegocio.daos.ApatxaDAO;
 import com.jagusan.apatxas.logicaNegocio.daos.GastoDAO;
 import com.jagusan.apatxas.logicaNegocio.daos.PersonaDAO;
+import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.modelView.ApatxaListado;
@@ -86,8 +88,9 @@ public class ApatxaService {
 	public void realizarReparto(ApatxaDetalle apatxaDetalle) {
 		open();
 		Double gastoProporcional = calcularRepartoService.calcularParteProporcional(apatxaDetalle);
-		for (int i = 0; i < apatxaDetalle.getPersonas().size(); i++) {
-			personaDAO.asociarPagoPersona(apatxaDetalle.getPersonas().get(i).id, gastoProporcional);
+        Log.d("APATXAS-REPARTO", "Gasto proporcional " + gastoProporcional);
+		for (PersonaListado persona:apatxaDetalle.getPersonas()) {
+			personaDAO.asociarPagoPersona(persona.id, gastoProporcional);
 		}
 		apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.id, true);
 		close();

@@ -80,6 +80,7 @@
     <string name="cambiar_informacion_personas_apatxa">Cambiar información de las personas que participan en la apatxa</string>
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f€</string>
+    <string name="cobrar_cantidad_euros">Cobra %1$.2f€</string>
     <string name="concepto">Concepto</string>
     <string name="descontar_bote_inicial_gasto_reparto">Descontar el bote inicial del gasto total al hacer el reparto</string>
     <string name="importe">Importe</string>
@@ -91,6 +92,7 @@
     </plurals>
 
     <string name="pagado_por">Pagado por</string>
+    <string name="pagar_cantidad_euros">Paga %1$.2f€</string>
     <string name="reparto">Reparto</string>
     <string name="sin_pagar">Sin pagar</string>
     <string name="hello_world">Hello world!</string>

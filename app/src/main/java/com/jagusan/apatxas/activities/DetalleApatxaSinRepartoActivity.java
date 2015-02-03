@@ -178,9 +178,9 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	}
 
 	private void recargarInformacionGastos() {
-		ApatxaDetalle apatxaActualizada = apatxaService.getApatxaDetalle(idApatxa);
+        apatxa = apatxaService.getApatxaDetalle(idApatxa);
 		listaGastosApatxaArrayAdapter.clear();
-        listaGastosApatxaArrayAdapter.addAll(apatxaActualizada.getGastos());
+        listaGastosApatxaArrayAdapter.addAll(apatxa.getGastos());
 		actualizarTituloCabeceraListaGastos();
 	}
 

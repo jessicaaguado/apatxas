@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.jagusan.apatxas.logicaNegocio.cursorReader.ExtraerInformacionPersonaDeCursor;
 import com.jagusan.apatxas.modelView.PersonaListado;
@@ -99,6 +100,7 @@ public class PersonaDAO {
 				+ "),0)";
 		String sqlActualizar = "update " + TablaPersona.NOMBRE_TABLA + " set " + TablaPersona.COLUMNA_CUANTIA_PAGO + " = (" + cuantia + " - " + subselectGastosPagados + ") where "
 				+ TablaPersona.COLUMNA_ID + " = " + idPersona;
+
 		database.execSQL(sqlActualizar);
 	}
 

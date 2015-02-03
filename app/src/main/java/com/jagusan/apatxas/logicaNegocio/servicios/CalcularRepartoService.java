@@ -1,5 +1,7 @@
 package com.jagusan.apatxas.logicaNegocio.servicios;
 
+import android.util.Log;
+
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
 
 public class CalcularRepartoService {
