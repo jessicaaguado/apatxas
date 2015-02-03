@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.modelView.ApatxaListado;
+import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
@@ -53,11 +54,14 @@ public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
 		nombreApatxaTextView.setText(apatxa.nombre);
 		// fecha
 		TextView fechaApatxaTextView = (TextView) convertView.findViewById(R.id.fecha);
-		Date fecha = apatxa.fechaInicio;
-		if (fecha != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			fechaApatxaTextView.setText(sdf.format(fecha));
-		}
+        Date fechaInicio = apatxa.fechaInicio;
+        Date fechaFin = apatxa.fechaFin;
+        boolean soloUnDia = apatxa.soloUnDia;
+        String fechaDescripcion = FormatearFecha.formatearFecha(context.getResources(), fechaInicio);
+        if (!soloUnDia) {
+            fechaDescripcion += " - " + FormatearFecha.formatearFecha(context.getResources(), fechaFin);
+        }
+        fechaApatxaTextView.setText(fechaDescripcion);
 		// estado
 		TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);
 		String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getEstadoApatxa());

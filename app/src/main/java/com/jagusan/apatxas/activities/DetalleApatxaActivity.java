@@ -119,7 +119,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
         boolean soloUnDia = apatxa.soloUnDia;
         String fechaDescripcion = FormatearFecha.formatearFecha(resources, fechaInicio);
         if (!soloUnDia) {
-            fechaDescripcion += " ~ " + FormatearFecha.formatearFecha(resources, fechaFin);
+            fechaDescripcion += " - " + FormatearFecha.formatearFecha(resources, fechaFin);
         }
         fechaApatxaTextView.setText(fechaDescripcion);
     }
