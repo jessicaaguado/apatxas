@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -118,6 +119,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
     private void irListadoApatxasPrincipal() {
         Intent intent = new Intent(this, ListaApatxasActivity.class);
         finish();
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
