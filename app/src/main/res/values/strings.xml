@@ -69,6 +69,14 @@
         <item quantity="one">Apatxa borrada</item>
         <item quantity="other">%d apatxas borradas</item>
     </plurals>
+    <plurals name="mensaje_confirmacion_borrado_personas_realizado">
+        <item quantity="one">Persona borrada</item>
+        <item quantity="other">%d personas borradas</item>
+    </plurals>
+    <plurals name="mensaje_confirmacion_borrado_gastos_realizado">
+        <item quantity="one">Gasto borrado</item>
+        <item quantity="other">%d gastos borrados</item>
+    </plurals>
 
     <!-- MENSAJES DE CONFIRMACION (FIN) -->
 
@@ -95,6 +103,7 @@
         <item quantity="one">1 persona</item>
         <item quantity="other">%d personas</item>
     </plurals>
+
 
     <string name="pagado_por">Pagado por</string>
     <string name="pagar_cantidad_euros">Paga %1$.2f€</string>

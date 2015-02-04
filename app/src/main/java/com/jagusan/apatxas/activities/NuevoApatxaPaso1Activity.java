@@ -312,8 +312,10 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
                 alertDialog.setMessage(R.string.mensaje_confirmacion_borrado_personas);
                 alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        int numeroPersonasBorrar = adapter.numeroPersonasSeleccionadas();
                         borrarPersonas();
                         mode.finish();
+                        MensajesToast.mostrarConfirmacionBorrados(adapter.getContext(), R.plurals.mensaje_confirmacion_borrado_personas_realizado, numeroPersonasBorrar);
                     }
                 });
                 alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
