@@ -133,21 +133,25 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 		if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				cargarInformacionApatxa();
+                MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_apatxa_guardada);
 			}
 		}		
 		if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				guardarNuevoGastoApatxa(data);
+                MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_gasto_anadido);
 			}
 		}
 		if (requestCode == EDITAR_GASTO_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				actualizarGastoApatxa(data);
+                MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_gasto_modificado);
 			}
 		}		
 		if (requestCode == EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				cargarInformacionApatxa();
+                MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_personas_actualizadas);
 			}
 		}
 	}

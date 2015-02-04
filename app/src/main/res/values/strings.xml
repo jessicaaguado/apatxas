@@ -29,8 +29,8 @@
     <string name="estado_apatxa_pendiente">Pendiente</string>
 
     <plurals name="estado_apatxa_pendiente_detalle_numero_personas">
-        <item quantity="one">PENDIENTE. \n Falta 1 persona</item>
-        <item quantity="other">PENDIENTE. \n Faltan %d personas</item>
+        <item quantity="one">PENDIENTE.\nFalta 1 persona</item>
+        <item quantity="other">PENDIENTE.\nFaltan %d personas</item>
     </plurals>
     <!-- ESTADOS APATXA (FIN) -->
 
@@ -77,6 +77,14 @@
         <item quantity="one">Gasto borrado</item>
         <item quantity="other">%d gastos borrados</item>
     </plurals>
+    <string name="mensaje_confirmacion_apatxa_guardada">Apatxa guardada</string>
+    <string name="mensaje_confirmacion_gasto_anadido">Gasto anadido</string>
+    <string name="mensaje_confirmacion_gasto_modificado">Gasto modificado</string>
+    <string name="mensaje_confirmacion_gastos_actualizados">Gastos actualizados</string>
+    <string name="mensaje_confirmacion_gastos_actualizados_reparto_actualizado">Gastos actualizados.\nSe ha realizado de nuevo el reparto</string>
+    <string name="mensaje_confirmacion_personas_actualizadas">Personas actualizadas</string>
+    <string name="mensaje_confirmacion_personas_actualizadas_reparto_actualizado">Personas actualizadas.\nSe ha realizado de nuevo el reparto</string>
+    <string name="mensaje_confirmacion_pagos_actualizados">Pagos actualizados.\nNuevo estado apatxa:%s</string>
 
     <!-- MENSAJES DE CONFIRMACION (FIN) -->
 

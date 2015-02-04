@@ -78,9 +78,12 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_guardar:
-                actualizarGastosAnadidosBorradosActualizados();
                 Intent returnIntent = new Intent();
-                setResult(RESULT_OK, returnIntent);
+                if (actualizarGastosAnadidosBorradosActualizados()){
+                    setResult(RESULT_OK, returnIntent);
+                }else{
+                    setResult(RESULT_CANCELED, returnIntent);
+                }
                 finish();
                 return true;
             case R.id.action_anadir_gasto:
@@ -91,12 +94,14 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
         }
     }
 
-    private void actualizarGastosAnadidosBorradosActualizados() {
+    private boolean actualizarGastosAnadidosBorradosActualizados() {
         gastosAnadidos.removeAll(gastosEliminados);
+        gastosModificados.removeAll(gastosEliminados);
         gastoService.borrarGastos(gastosEliminados);
         gastoService.crearGastos(gastosAnadidos, idApatxa);
         gastoService.actualizarGastos(gastosModificados, idApatxa);
 
+        return gastosEliminados.size() + gastosAnadidos.size() + gastosModificados.size() > 0;
     }
 
 
@@ -189,7 +194,7 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
         gastoActualizado.setTotal(totalGasto);
         gastoActualizado.setPagadoPor(pagadoGasto);
 
-        if (gastoActualizado.getId() !=  null){
+        if (gastoActualizado.getId() != null) {
             gastosModificados.add(gastoActualizado);
         }
         listaGastosApatxaArrayAdapter.actualizarGasto(posicionGastoActualizar, gastoActualizado);
@@ -235,11 +240,12 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
 
             @Override
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                if (this.mode == null){
+                if (this.mode == null) {
                     this.mode = mode;
                 }
                 return false;
             }
+
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {

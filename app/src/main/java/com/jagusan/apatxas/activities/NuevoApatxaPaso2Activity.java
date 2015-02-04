@@ -114,6 +114,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
         personaService.crearPersonas(personasApatxa, idApatxa);
         gastoService.crearGastos(listaGastos, idApatxa);
         irListadoApatxasPrincipal();
+        MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_apatxa_guardada);
     }
 
     private void irListadoApatxasPrincipal() {

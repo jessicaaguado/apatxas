@@ -17,6 +17,7 @@ import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.utils.FormatearNumero;
+import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,16 +108,20 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
         if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 actualizarReparto();
+                MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_apatxa_guardada);
             }
         }
         if (requestCode == EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 actualizarReparto();
+                MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_gastos_actualizados_reparto_actualizado);
             }
         }
         if (requestCode == EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 actualizarReparto();
+                MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_personas_actualizadas_reparto_actualizado);
+
             }
         }
     }
@@ -162,18 +167,21 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_marcar_hecho:
-                        personaService.marcarPersonasEstadoReparto(adapter.getPersonasSeleccionadas(), true);
-                        cargarInformacionApatxa();
-                        mode.finish();
+                        marcarPersonasEstadoReparto(mode, true);
                         return true;
                     case R.id.action_marcar_pendiente:
-                        personaService.marcarPersonasEstadoReparto(adapter.getPersonasSeleccionadas(), false);
-                        cargarInformacionApatxa();
-                        mode.finish();
+                        marcarPersonasEstadoReparto(mode, false);
                         return true;
                     default:
                         return false;
                 }
+            }
+
+            private void marcarPersonasEstadoReparto(ActionMode mode, boolean pagado) {
+                personaService.marcarPersonasEstadoReparto(adapter.getPersonasSeleccionadas(), pagado);
+                cargarInformacionApatxa();
+                MensajesToast.mostrarMensaje(adapter.getContext(), adapter.getContext().getString(R.string.mensaje_confirmacion_pagos_actualizados, ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxa.getEstadoApatxa(), apatxa.personasPendientesPagarCobrar)));
+                mode.finish();
             }
 
             @Override

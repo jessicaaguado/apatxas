@@ -76,9 +76,12 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_guardar_lista_personas_apatxa:
-                actualizarPersonasAnadidasBorradas();
                 Intent returnIntent = new Intent();
-                setResult(RESULT_OK, returnIntent);
+                if (actualizarPersonasAnadidasBorradas()){
+                    setResult(RESULT_OK, returnIntent);
+                }else{
+                    setResult(RESULT_CANCELED, returnIntent);
+                }
                 finish();
                 return true;
             case R.id.action_anadir_persona:
@@ -89,19 +92,21 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         }
     }
 
-    private void actualizarPersonasAnadidasBorradas() {
+    private boolean actualizarPersonasAnadidasBorradas() {
+        boolean hayEliminaciones = false;
         for (PersonaListado persona : personasEliminadas) {
             Long idPersona = persona.id;
             if (idPersona == null) {
                 personasAnadidas.remove(persona);
             } else {
                 personaService.borrarPersona(persona.id);
+                hayEliminaciones = true;
             }
         }
         for (PersonaListado persona : personasAnadidas) {
             personaService.crearPersona(persona.nombre, idApatxa, persona.idContacto, persona.uriFoto);
         }
-
+        return hayEliminaciones || !personasAnadidas.isEmpty();
     }
 
     private void inicializarServicios() {

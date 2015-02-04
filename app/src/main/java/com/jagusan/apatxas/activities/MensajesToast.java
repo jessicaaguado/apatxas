@@ -12,4 +12,14 @@ public class MensajesToast {
         Toast toast = Toast.makeText(contexto, contexto.getResources().getQuantityString(mensajeId, numElementosBorrados, numElementosBorrados), Toast.LENGTH_SHORT);
         toast.show();
     }
+
+    public static void mostrarConfirmacionGuardado(Context contexto, int mensajeId) {
+        Toast toast = Toast.makeText(contexto, contexto.getResources().getString(mensajeId), Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public static void mostrarMensaje(Context contexto, String mensaje){
+        Toast toast = Toast.makeText(contexto, mensaje, Toast.LENGTH_SHORT);
+        toast.show();
+    }
 }
