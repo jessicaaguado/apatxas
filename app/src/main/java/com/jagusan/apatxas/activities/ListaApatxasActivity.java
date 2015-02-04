@@ -1,7 +1,5 @@
 package com.jagusan.apatxas.activities;
 
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,18 +11,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.AbsListView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
-
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaApatxasArrayAdapter;
 import com.jagusan.apatxas.listeners.OnVerDetalleApatxaClickListener;
 import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.modelView.ApatxaListado;
+
+import java.util.List;
 
 public class ListaApatxasActivity extends ActionBarActivity {
 
@@ -145,8 +143,10 @@ public class ListaApatxasActivity extends ActionBarActivity {
                 alertDialog.setMessage(R.string.mensaje_confirmacion_borrado_apatxas);
                 alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        int numeroApatxasBorrar = adapter.numeroApatxasSeleccionadas();
                         borrarApatxas();
                         mode.finish();
+                        MensajesToast.mostrarConfirmacionBorrados(adapter.getContext(), R.plurals.mensaje_confirmacion_borrado_apatxas_realizado, numeroApatxasBorrar);
                     }
                 });
                 alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {

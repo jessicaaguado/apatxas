@@ -65,6 +65,11 @@
     <string name="mensaje_confirmacion_borrado_personas">¿Desea eliminar las personas seleccinadas?</string>
     <string name="mensaje_confirmacion_borrado_gastos">¿Desea eliminar los gastos seleccionados?</string>
     <string name="mensaje_confirmacion_borrado_apatxas">¿Desea eliminar las apatxas seleccionadas?</string>
+    <plurals name="mensaje_confirmacion_borrado_apatxas_realizado">
+        <item quantity="one">Apatxa borrada</item>
+        <item quantity="other">%d apatxas borradas</item>
+    </plurals>
+
     <!-- MENSAJES DE CONFIRMACION (FIN) -->
 
 
