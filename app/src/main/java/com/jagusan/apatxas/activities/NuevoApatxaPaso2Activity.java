@@ -119,7 +119,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
     private void irListadoApatxasPrincipal() {
         Intent intent = new Intent(this, ListaApatxasActivity.class);
         finish();
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
