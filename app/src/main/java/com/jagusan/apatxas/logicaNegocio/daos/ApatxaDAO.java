@@ -30,7 +30,7 @@ public class ApatxaDAO {
             TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_REPARTO_REALIZADO, SQL_NUM_PERSONAS_PTES_APATXA,
             TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, SQL_GASTO_TOTAL_APATXA};
 
-    private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA_INICIO + " DESC";
+    private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA_INICIO + " DESC, "+TablaApatxa.COLUMNA_NOMBRE+" ASC";
 
     public void setDatabase(SQLiteDatabase database) {
         this.database = database;
