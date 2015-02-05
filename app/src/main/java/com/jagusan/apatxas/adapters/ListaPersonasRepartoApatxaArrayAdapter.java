@@ -54,6 +54,8 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         ImageView indicadorRepartoPagadoImageView = (ImageView) convertView.findViewById(R.id.indicadorRepartoPagado);
         if (persona.getRepartoPagado()){
             indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pagado);
+        } else {
+            indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pendiente);
         }
 
         ImageView fotoContactoImageView = (ImageView) convertView.findViewById(R.id.fotoContacto);
