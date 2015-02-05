@@ -118,13 +118,13 @@
     <string name="reparto">Reparto</string>
 
     <plurals name="seleccionados">
-        <item quantity="one">1 seleccionado</item>
-        <item quantity="other">%d seleccionados</item>
+        <item quantity="one">1</item>
+        <item quantity="other">%d</item>
     </plurals>
 
     <plurals name="seleccionadas">
-        <item quantity="one">1 seleccionada</item>
-        <item quantity="other">%d seleccionadas</item>
+        <item quantity="one">1</item>
+        <item quantity="other">%d</item>
     </plurals>
 
 
