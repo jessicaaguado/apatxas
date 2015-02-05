@@ -116,8 +116,19 @@
     <string name="pagado_por">Pagado por</string>
     <string name="pagar_cantidad_euros">Paga %1$.2f€</string>
     <string name="reparto">Reparto</string>
+
+    <plurals name="seleccionados">
+        <item quantity="one">1 seleccionado</item>
+        <item quantity="other">%d seleccionados</item>
+    </plurals>
+
+    <plurals name="seleccionadas">
+        <item quantity="one">1 seleccionada</item>
+        <item quantity="other">%d seleccionadas</item>
+    </plurals>
+
+
     <string name="sin_pagar">Sin pagar</string>
-    <string name="hello_world">Hello world!</string>
     <string name="solo_un_dia">Solo un día</string>
 
 </resources>

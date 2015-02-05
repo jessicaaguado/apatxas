@@ -190,10 +190,8 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-                Log.d("APATXAS", "onItemCheckedStateChanged " + position + " " + checked);
-
                 adapter.toggleSeleccion(position, checked);
-                mode.setTitle("" + adapter.numeroPersonasSeleccionadas());
+                mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
             }
 
 
@@ -215,7 +213,6 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                Log.d("APATXAS", "onActionItemClicked " + mode + " " + item);
                 switch (item.getItemId()) {
                     case R.id.action_persona_apatxa_borrar:
                         confimarBorradoPersonas();

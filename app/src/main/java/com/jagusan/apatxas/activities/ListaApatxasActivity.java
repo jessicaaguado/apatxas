@@ -3,6 +3,7 @@ package com.jagusan.apatxas.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -30,6 +31,7 @@ public class ListaApatxasActivity extends ActionBarActivity {
     private ListaApatxasArrayAdapter adapter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class ListaApatxasActivity extends ActionBarActivity {
         setContentView(R.layout.activity_lista_apatxas);
         personalizarActionBar();
         apatxaService = new ApatxaService(this);
+
 
         List<ApatxaListado> gastos = recuperarApatxas();
         ListView listaGastosListView = (ListView) findViewById(R.id.lista_gastos);
@@ -103,7 +106,7 @@ public class ListaApatxasActivity extends ActionBarActivity {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 adapter.toggleSeleccion(position, checked);
-                mode.setTitle("" + adapter.numeroApatxasSeleccionadas());
+                mode.setTitle(getResources().getQuantityString(R.plurals.seleccionadas, adapter.numeroApatxasSeleccionadas(), adapter.numeroApatxasSeleccionadas()));
             }
 
             @Override

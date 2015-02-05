@@ -199,7 +199,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 adapter.toggleSeleccion(position, checked);
                 int numeroGastosSeleccionados = adapter.numeroGastosSeleccionados();
-                mode.setTitle("" + adapter.numeroGastosSeleccionados());
+                mode.setTitle(resources.getQuantityString(R.plurals.seleccionados, numeroGastosSeleccionados,numeroGastosSeleccionados));
                 if (numeroGastosSeleccionados == 1) {
                     findViewById(R.id.action_gasto_apatxa_cambiar).setVisibility(View.VISIBLE);
                 } else {

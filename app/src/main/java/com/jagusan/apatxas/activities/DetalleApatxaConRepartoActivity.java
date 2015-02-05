@@ -144,7 +144,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 adapter.toggleSeleccion(position, checked);
-                mode.setTitle("" + adapter.numeroPersonasSeleccionadas());
+                mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
             }
 
             @Override

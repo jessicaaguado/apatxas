@@ -272,6 +272,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 adapter.toggleSeleccion(position, checked);
+                mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
             }
 
             @Override
