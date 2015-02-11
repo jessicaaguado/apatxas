@@ -116,11 +116,7 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
         soloUnDiaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    fechaFinApatxaTextView.setVisibility(View.GONE);
-                } else {
-                    fechaFinApatxaTextView.setVisibility(View.VISIBLE);
-                }
+                gestionarSoloUnDiaSwitch(isChecked);
             }
         });
     }
@@ -143,11 +139,7 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
         descontarBoteInicialCheckBox.setChecked(descontarBoteInicial);
 
         soloUnDiaSwitch.setChecked(soloUnDia);
-        if (soloUnDia) {
-            fechaFinApatxaTextView.setVisibility(View.GONE);
-        } else {
-            fechaFinApatxaTextView.setVisibility(View.VISIBLE);
-        }
+        gestionarSoloUnDiaSwitch(soloUnDia);
 
 
         fechaInicioApatxaTextView.setText(FormatearFecha.formatearFecha(resources, new Date(fechaInicio)));
@@ -220,4 +212,15 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
         return ValidacionActivity.validarTituloObligatorio(nombreApatxaEditText, resources);
     }
 
+    private void gestionarSoloUnDiaSwitch(boolean soloUnDia) {
+        if (soloUnDia) {
+            soloUnDiaSwitch.setText(resources.getString(R.string.solo_un_dia));
+            soloUnDiaSwitch.setTextColor(resources.getColor(R.color.apatxascolors_color));
+            fechaFinApatxaTextView.setVisibility(View.GONE);
+        } else {
+            soloUnDiaSwitch.setText(resources.getString(R.string.varios_dias));
+            soloUnDiaSwitch.setTextColor(resources.getColor(R.color.apatxascolors_gris_medio));
+            fechaFinApatxaTextView.setVisibility(View.VISIBLE);
+        }
+    }
 }

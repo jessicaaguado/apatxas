@@ -25,7 +25,7 @@
             style="@style/apatxas_valor_defecto"
             android:paddingTop="@dimen/apatxas_padding_superior_extra"
             android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
-            android:text="@string/solo_un_dia"
+            android:text="@string/varios_dias"
             android:switchPadding="40dp"
             android:drawableLeft="@drawable/ic_apatxas_calendario"
             android:drawablePadding="@dimen/apatxas_padding_izquierdo_defecto"

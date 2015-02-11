@@ -214,11 +214,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
         soloUnDiaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    fechaFinApatxaTextView.setVisibility(View.GONE);
-                } else {
-                    fechaFinApatxaTextView.setVisibility(View.VISIBLE);
-                }
+                gestionarSoloUnDiaSwitch(isChecked);
             }
         });
     }
@@ -328,6 +324,18 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
                 alertDialog.show();
             }
         });
+    }
+
+    private void gestionarSoloUnDiaSwitch(boolean soloUnDia) {
+        if (soloUnDia) {
+            soloUnDiaSwitch.setText(resources.getString(R.string.solo_un_dia));
+            soloUnDiaSwitch.setTextColor(resources.getColor(R.color.apatxascolors_color));
+            fechaFinApatxaTextView.setVisibility(View.GONE);
+        } else {
+            soloUnDiaSwitch.setText(resources.getString(R.string.varios_dias));
+            soloUnDiaSwitch.setTextColor(resources.getColor(R.color.apatxascolors_gris_medio));
+            fechaFinApatxaTextView.setVisibility(View.VISIBLE);
+        }
     }
 
 }
