@@ -19,8 +19,10 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
+import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
 import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
+import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
@@ -33,6 +35,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
     private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
     private Long idApatxa;
+    private ApatxaDetalle apatxa;
     private List<PersonaListado> personasApatxa;
     private List<PersonaListado> personasAnadidas = new ArrayList<PersonaListado>();
     private List<PersonaListado> personasEliminadas = new ArrayList<PersonaListado>();
@@ -44,6 +47,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
     private Resources resources;
     private PersonaService personaService;
     private GastoService gastoService;
+    private ApatxaService apatxaService;
 
     private int numPersonasApatxaAnadidas;
 
@@ -76,13 +80,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_guardar_lista_personas_apatxa:
-                Intent returnIntent = new Intent();
-                if (actualizarPersonasAnadidasBorradas()){
-                    setResult(RESULT_OK, returnIntent);
-                }else{
-                    setResult(RESULT_CANCELED, returnIntent);
-                }
-                finish();
+                actualizarPersonasAnadidasBorradas();
                 return true;
             case R.id.action_anadir_persona:
                 seleccionarNuevosContactos();
@@ -92,27 +90,52 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         }
     }
 
-    private boolean actualizarPersonasAnadidasBorradas() {
-        boolean hayEliminaciones = false;
-        for (PersonaListado persona : personasEliminadas) {
-            Long idPersona = persona.id;
-            if (idPersona == null) {
-                personasAnadidas.remove(persona);
-            } else {
-                personaService.borrarPersona(persona.id);
-                hayEliminaciones = true;
+    private void actualizarPersonasAnadidasBorradas() {
+        boolean hayCambios = personasEliminadas.size() + personasAnadidas.size() > 0;
+        if (hayCambios) {
+            if (apatxa.personasPendientesPagarCobrar != apatxa.getPersonas().size()) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto);
+                alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        continuarConLosCambios();
+                    }
+                });
+                alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+                alertDialog.create();
+                alertDialog.show();
+            }else{
+                continuarConLosCambios();
             }
+
+        } else {
+            volverSinCambios();
         }
-        for (PersonaListado persona : personasAnadidas) {
-            personaService.crearPersona(persona.nombre, idApatxa, persona.idContacto, persona.uriFoto);
-        }
-        return hayEliminaciones || !personasAnadidas.isEmpty();
+    }
+
+    private void continuarConLosCambios() {
+        personaService.borrarPersonas(personasEliminadas);
+        personaService.crearPersonas(personasAnadidas, idApatxa);
+        Intent returnIntent = new Intent();
+        setResult(RESULT_OK, returnIntent);
+        finish();
+    }
+
+    private void volverSinCambios() {
+        Intent returnIntent = new Intent();
+        setResult(RESULT_CANCELED, returnIntent);
+        finish();
+
     }
 
     private void inicializarServicios() {
         resources = getResources();
         personaService = new PersonaService(this);
         gastoService = new GastoService(this);
+        apatxaService = new ApatxaService(this);
     }
 
     private void personalizarActionBar() {
@@ -126,6 +149,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         personasApatxa = (ArrayList<PersonaListado>) intent.getSerializableExtra("personas");
         idApatxa = intent.getLongExtra("idApatxa", -1);
         numPersonasApatxaAnadidas = personasApatxa.size();
+        apatxa = apatxaService.getApatxaDetalle(idApatxa);
     }
 
     private void cargarElementosLayout() {
@@ -150,7 +174,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 
     public void seleccionarNuevosContactos() {
         Intent intent = new Intent(this, ListaContactosActivity.class);
-        intent.putExtra("idsContactosSeleccionados",(ArrayList<Long>) RecupararInformacionPersonas.obtenerIdsContactos(listaPersonasApatxaArrayAdapter.getPersonas()));
+        intent.putExtra("idsContactosSeleccionados", (ArrayList<Long>) RecupararInformacionPersonas.obtenerIdsContactos(listaPersonasApatxaArrayAdapter.getPersonas()));
         startActivityForResult(intent, SELECCIONAR_CONTACTOS_REQUEST_CODE);
     }
 
@@ -176,7 +200,15 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
     }
 
     public void anadirPersonasParaBorrar(List<PersonaListado> personas) {
-        personasEliminadas.addAll(personas);
+        List<PersonaListado> personasBorrarAunSinGuardar = new ArrayList<PersonaListado>();
+        for (PersonaListado persona : personas) {
+            if (persona.id == null) {
+                personasBorrarAunSinGuardar.add(persona);
+            } else {
+                personasEliminadas.add(persona);
+            }
+        }
+        personasAnadidas.removeAll(personasBorrarAunSinGuardar);
         listaPersonasApatxaArrayAdapter.eliminarPersonasSeleccionadas();
         actualizarTituloCabeceraListaPersonas();
     }

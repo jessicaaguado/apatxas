@@ -22,6 +22,7 @@ import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
 import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
+import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
@@ -37,6 +38,7 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
     private int EDITAR_GASTO_REQUEST_CODE = 2;
 
     private Long idApatxa;
+    private ApatxaDetalle apatxa;
     private List<PersonaListado> personasApatxa;
     private List<GastoApatxaListado> gastosAnadidos = new ArrayList<GastoApatxaListado>();
     private List<GastoApatxaListado> gastosEliminados = new ArrayList<GastoApatxaListado>();
@@ -78,13 +80,7 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_guardar:
-                Intent returnIntent = new Intent();
-                if (actualizarGastosAnadidosBorradosActualizados()){
-                    setResult(RESULT_OK, returnIntent);
-                }else{
-                    setResult(RESULT_CANCELED, returnIntent);
-                }
-                finish();
+                actualizarGastosAnadidosBorradosActualizados();
                 return true;
             case R.id.action_anadir_gasto:
                 anadirGasto();
@@ -94,14 +90,46 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
         }
     }
 
-    private boolean actualizarGastosAnadidosBorradosActualizados() {
-        gastosAnadidos.removeAll(gastosEliminados);
-        gastosModificados.removeAll(gastosEliminados);
+    private void actualizarGastosAnadidosBorradosActualizados() {
+        boolean hayCambios = gastosEliminados.size() + gastosAnadidos.size() + gastosModificados.size() > 0;
+        if (hayCambios) {
+            if (apatxa.personasPendientesPagarCobrar != apatxa.getPersonas().size()) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto);
+                alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        continuarConLosCambios();
+                    }
+                });
+                alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+                alertDialog.create();
+                alertDialog.show();
+            }else{
+                continuarConLosCambios();
+            }
+
+        } else {
+            volverSinCambios();
+        }
+    }
+
+    private void continuarConLosCambios() {
         gastoService.borrarGastos(gastosEliminados);
         gastoService.crearGastos(gastosAnadidos, idApatxa);
         gastoService.actualizarGastos(gastosModificados, idApatxa);
+        Intent returnIntent = new Intent();
+        setResult(RESULT_OK, returnIntent);
+        finish();
+    }
 
-        return gastosEliminados.size() + gastosAnadidos.size() + gastosModificados.size() > 0;
+    private void volverSinCambios() {
+        Intent returnIntent = new Intent();
+        setResult(RESULT_CANCELED, returnIntent);
+        finish();
+
     }
 
 
@@ -151,6 +179,7 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
         personasApatxa = (List<PersonaListado>) intent.getSerializableExtra("personas");
         idApatxa = intent.getLongExtra("idApatxa", -1);
         listaGastos = (List<GastoApatxaListado>) intent.getSerializableExtra("gastos");
+        apatxa = apatxaService.getApatxaDetalle(idApatxa);
 
     }
 
@@ -180,6 +209,8 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
 
     private void anadirGastosParaBorrar(List<GastoApatxaListado> gastos) {
         gastosEliminados.addAll(gastos);
+        gastosAnadidos.removeAll(gastos);
+        gastosModificados.removeAll(gastos);
         listaGastosApatxaArrayAdapter.eliminarGastosSeleccionados();
         actualizarTituloCabeceraListaGastos();
     }

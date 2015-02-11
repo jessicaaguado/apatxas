@@ -74,6 +74,7 @@
     <string name="mensaje_confirmacion_borrado_personas">¿Desea eliminar las personas seleccinadas?</string>
     <string name="mensaje_confirmacion_borrado_gastos">¿Desea eliminar los gastos seleccionados?</string>
     <string name="mensaje_confirmacion_borrado_apatxas">¿Desea eliminar las apatxas seleccionadas?</string>
+    <string name="mensaje_confirmacion_resetear_pagos_cobros_del_reparto">Algunas personas ya han pagado/cobrado. Si guardas los cambios se realizará el reparto de nuevo y esta información se perderá. ¿Deseas guardar los cambios?</string>
     <plurals name="mensaje_confirmacion_borrado_apatxas_realizado">
         <item quantity="one">Apatxa borrada</item>
         <item quantity="other">%d apatxas borradas</item>

@@ -66,6 +66,14 @@ public class PersonaService {
 		close();
 	}
 
+    public void borrarPersonas(List<PersonaListado> listaPersonas) {
+        open();
+        for (PersonaListado persona:listaPersonas){
+            borrarPersona(persona.id);
+        }
+        close();
+    }
+
 	public Long recuperarIdPersonaConNombre(String nombre, Long idApatxa) {
 		open();
 		Long idPersona = personaDAO.recuperarIdPersonaPorNombre(nombre, idApatxa);
