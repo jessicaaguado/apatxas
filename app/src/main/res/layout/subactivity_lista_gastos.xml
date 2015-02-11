@@ -4,7 +4,8 @@
         android:id="@+id/listaGastosApatxaCabecera"
         android:layout_width="match_parent"
         android:drawableLeft="@drawable/ic_apatxas_gastos"
-        style="@style/apatxas_cabecera_style"/>
+        style="@style/apatxas_cabecera_style"
+        android:visibility="gone"/>
 
     <ListView
         android:id="@+id/listaGastosApatxa"

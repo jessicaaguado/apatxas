@@ -6,7 +6,10 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,7 +19,7 @@ import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.modelView.PersonaListadoReparto;
-import com.jagusan.apatxas.utils.FormatearNumero;
+import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 import java.util.ArrayList;
@@ -24,12 +27,12 @@ import java.util.List;
 
 public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
-    private TextView resumenGastosApatxaTextView;
     private ListView personasRepartoListView;
 
     private int EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE = 20;
 
     private PersonaService personaService;
+    private TextView tituloRepartoApatxaListViewHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,29 +75,40 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     @Override
     protected void cargarElementosLayout() {
         super.cargarElementosLayout();
-        resumenGastosApatxaTextView = (TextView) findViewById(R.id.resumenGastosApatxaDetalle);
         personasRepartoListView = (ListView) findViewById(R.id.listaDesgloseRepartoApatxa);
+        personasRepartoListView.addHeaderView(headerInformacionDetalle);
+
+        ViewGroup cabeceraTituloReparto = (ViewGroup) getLayoutInflater().inflate(R.layout.detalle_apatxa_lista_resultado_reparto_header, null);
+        personasRepartoListView.addHeaderView(cabeceraTituloReparto);
+        tituloRepartoApatxaListViewHeader = (TextView) cabeceraTituloReparto.findViewById(R.id.listaRepartoApatxaCabecera);
+
+        numeroPersonasTextView.setVisibility(View.GONE);
+        headerInformacionDetalle.findViewById(R.id.separador2DetalleApatxa).setVisibility(View.GONE);
     }
 
     @Override
     protected void cargarInformacionApatxa() {
         super.cargarInformacionApatxa();
-        cargarInformacionGastos();
         cargarInformacionReparto();
     }
 
-    private void cargarInformacionGastos() {
-        resumenGastosApatxaTextView.setText(apatxa.getGastos().size() + " gastos. Total: " + FormatearNumero.aDineroEuros(resources, apatxa.gastoTotal));
-    }
+
 
     private void cargarInformacionReparto() {
         List<PersonaListadoReparto> listaPersonasReparto = apatxaService.getResultadoReparto(idApatxa);
         ListaPersonasRepartoApatxaArrayAdapter listaPersonasRepartoApatxaArrayAdapter = new ListaPersonasRepartoApatxaArrayAdapter(this, R.layout.lista_personas_resultado_reparto_row,
                 listaPersonasReparto);
         personasRepartoListView.setAdapter(listaPersonasRepartoApatxaArrayAdapter);
+        actualizarTituloCabeceraListaReparto();
         asignarContextualActionBar(personasRepartoListView);
     }
 
+
+    private void actualizarTituloCabeceraListaReparto() {
+        List<GastoApatxaListado> gastosApatxa = apatxa.getGastos();
+        String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_reparto_detalle_apatxa,gastosApatxa.size(), gastosApatxa.size(), CalcularSumaTotalGastos.calcular(gastosApatxa));
+        tituloRepartoApatxaListViewHeader.setText(titulo);
+    }
 
     public void irEditarListaGastosApatxa() {
         Intent intent = new Intent(this, ListaGastosApatxaActivity.class);
@@ -138,12 +152,14 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
         personasRepartoListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         personasRepartoListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
-            ListaPersonasRepartoApatxaArrayAdapter adapter = (ListaPersonasRepartoApatxaArrayAdapter) personasRepartoListView.getAdapter();
+            ListaPersonasRepartoApatxaArrayAdapter adapter = (ListaPersonasRepartoApatxaArrayAdapter) ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getWrappedAdapter();
             ActionMode mode;
 
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-                adapter.toggleSeleccion(position, checked);
+                //ponemos -numHeaders porque tenemos header
+                int numHeaders = ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getHeadersCount();
+                adapter.toggleSeleccion(position-numHeaders, checked);
                 mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
             }
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,39 +21,39 @@ import java.util.List;
 
 public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<PersonaListadoReparto> {
 
-	Context context;
-	int rowLayoutId;
-	List<PersonaListadoReparto> personas;
+    Context context;
+    int rowLayoutId;
+    List<PersonaListadoReparto> personas;
 
     private List<PersonaListadoReparto> personasSeleccionadas;
 
-	public ListaPersonasRepartoApatxaArrayAdapter(Context context, int rowLayoutId, List<PersonaListadoReparto> personas) {
+    public ListaPersonasRepartoApatxaArrayAdapter(Context context, int rowLayoutId, List<PersonaListadoReparto> personas) {
 
-		super(context, rowLayoutId, personas);
+        super(context, rowLayoutId, personas);
 
-		this.context = context;
-		this.rowLayoutId = rowLayoutId;
-		this.personas = personas;
+        this.context = context;
+        this.rowLayoutId = rowLayoutId;
+        this.personas = personas;
 
         personasSeleccionadas = new ArrayList<PersonaListadoReparto>();
-	}
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-		if (convertView == null) {
-			// inflate the layout
-			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-			convertView = inflater.inflate(rowLayoutId, parent, false);
-		}
+        if (convertView == null) {
+            // inflate the layout
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+            convertView = inflater.inflate(rowLayoutId, parent, false);
+        }
 
-		PersonaListadoReparto persona = personas.get(position);
-		TextView nombrePersonaTextView = (TextView) convertView.findViewById(R.id.nombre);
-		nombrePersonaTextView.setText(persona.nombre);
-		TextView gastoPersonaTextView = (TextView) convertView.findViewById(R.id.totalGastoReparto);
-		gastoPersonaTextView.setText(FormatearNumero.aDescripcionRepartoDineroEuros(context.getResources(), persona.getCantidadPago()));
+        PersonaListadoReparto persona = personas.get(position);
+        TextView nombrePersonaTextView = (TextView) convertView.findViewById(R.id.nombre);
+        nombrePersonaTextView.setText(persona.nombre);
+        TextView gastoPersonaTextView = (TextView) convertView.findViewById(R.id.totalGastoReparto);
+        gastoPersonaTextView.setText(FormatearNumero.aDescripcionRepartoDineroEuros(context.getResources(), persona.getCantidadPago()));
         ImageView indicadorRepartoPagadoImageView = (ImageView) convertView.findViewById(R.id.indicadorRepartoPagado);
-        if (persona.getRepartoPagado()){
+        if (persona.getRepartoPagado()) {
             indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pagado);
         } else {
             indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pendiente);
@@ -67,8 +68,8 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
 
         marcarSeleccion(convertView, persona);
 
-		return convertView;
-	}
+        return convertView;
+    }
 
     private void marcarSeleccion(View convertView, PersonaListadoReparto persona) {
         int colorFondo = (personasSeleccionadas.contains(persona)) ? context.getResources().getColor(R.color.apatxascolors_gris_claro) : Color.TRANSPARENT;
@@ -93,7 +94,7 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         return personasSeleccionadas;
     }
 
-    public int numeroPersonasSeleccionadas(){
+    public int numeroPersonasSeleccionadas() {
         return personasSeleccionadas.size();
     }
 

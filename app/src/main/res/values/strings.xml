@@ -25,7 +25,7 @@
     <string name="estado_apatxa_sin_repartir_detalle">SIN REPARTIR</string>
     <string name="estado_apatxa_hecho">Hecho</string>
     <string name="estado_apatxa_hecho_detalle">HECHO</string>
-    <string name="estado_apatxa_hecho_detalle_sobra_bote">HECHO.\nBote: %1$.2f€</string>
+    <string name="estado_apatxa_hecho_detalle_sobra_bote">HECHO.\nBote: %1$.2f €</string>
     <string name="estado_apatxa_pendiente">Pendiente</string>
 
     <plurals name="estado_apatxa_pendiente_detalle_numero_personas">
@@ -41,11 +41,20 @@
         <item quantity="other">%d personas</item>
     </plurals>
     <plurals name="titulo_cabecera_lista_gastos">
-        <item quantity="one">%1$d Gasto: %2$.2f€</item>
-        <item quantity="other">%1$d Gastos: %2$.2f€</item>
+        <item quantity="one">%1$d Gasto: %2$.2f €</item>
+        <item quantity="other">%1$d Gastos: %2$.2f €</item>
     </plurals>
 
-    <string name="titulo_cabecera_lista_gastos_detalle_apatxa">Gasto total: %1$.2f€</string>
+    <plurals name="titulo_cabecera_lista_gastos_detalle_apatxa">
+        <item quantity="one">%1$d gasto. Total: %2$.2f €</item>
+        <item quantity="other">%1$d Gastos. Total: %2$.2f €</item>
+    </plurals>
+
+    <plurals name="titulo_cabecera_lista_reparto_detalle_apatxa">
+        <item quantity="one">Reparto de %1$d gasto: %2$.2f €</item>
+        <item quantity="other">Reparto de %1$d gastos: %2$.2f €</item>
+    </plurals>
+
     <string name="titulo_dialog_cambio_nombre_persona">Cambiar nombre</string>
     <string name="title_activity_nuevo_apatxa_paso1">Nuevo</string>
     <string name="title_activity_nuevo_apatxa_paso2">Nuevo</string>
@@ -100,8 +109,8 @@
     <string name="bote_inicial_a_descontar">(descontar en el reparto)</string>
     <string name="cambiar_informacion_personas_apatxa">Cambiar información de las personas que participan en la apatxa</string>
     <string name="cantidad_dinero">%1$.2f</string>
-    <string name="cantidad_dinero_euros">%1$.2f€</string>
-    <string name="cobrar_cantidad_euros">Cobra %1$.2f€</string>
+    <string name="cantidad_dinero_euros">%1$.2f €</string>
+    <string name="cobrar_cantidad_euros">Cobra %1$.2f €</string>
     <string name="concepto">Concepto</string>
     <string name="descontar_bote_inicial_gasto_reparto">Descontar el bote inicial del gasto total al hacer el reparto</string>
     <string name="importe">Importe</string>
@@ -114,7 +123,7 @@
 
 
     <string name="pagado_por">Pagado por</string>
-    <string name="pagar_cantidad_euros">Paga %1$.2f€</string>
+    <string name="pagar_cantidad_euros">Paga %1$.2f €</string>
     <string name="reparto">Reparto</string>
 
     <plurals name="seleccionados">

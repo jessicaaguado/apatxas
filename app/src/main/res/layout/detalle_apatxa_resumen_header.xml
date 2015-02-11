@@ -1,0 +1,34 @@
+<LinearLayout android:id="@+id/subactivityDetalleInformacionBasica"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/estadoApatxaDetalle"
+        style="@style/apatxas_valor_importante"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/apatxas_altura_elemento_listado"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.2"
+        android:layout_marginTop="@dimen/apatxas_margen_vertical_defecto"
+        android:layout_marginBottom="@dimen/apatxas_margen_vertical_defecto"/>
+
+    <View
+        android:id="@+id/separador2DetalleApatxa"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/apatxascolors_color_linea_divisoria" />
+
+    <TextView
+        android:id="@+id/numeroPersonasApatxaDetalle"
+        style="@style/apatxas_valor_defecto"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/apatxas_altura_elemento_listado"
+        android:layout_marginLeft="@dimen/apatxas_padding_izquierdo_defecto"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_apatxas_personas"
+        android:drawablePadding="@dimen/apatxas_padding_entre_imagen_texto"
+        android:gravity="center_vertical"/>
+
+</LinearLayout>

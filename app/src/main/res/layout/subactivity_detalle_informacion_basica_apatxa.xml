@@ -1,8 +1,4 @@
-<LinearLayout android:id="@+id/subactivityDetalleInformacionBasica"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
         android:id="@+id/informacionBasicaApatxaDetalle"
@@ -32,55 +28,7 @@
             android:drawablePadding="@dimen/apatxas_padding_entre_imagen_texto"
             android:paddingTop="@dimen/apatxas_padding_superior_extra" />
 
-        <TextView
-            android:id="@+id/labelBoteInicialApatxaDetalle"
-            style="@style/apatxas_label_destacada"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/fechaApatxaDetalle"
-            android:text="@string/bote_inicial"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/boteInicialApatxaDetalle"
-            style="@style/apatxas_valor_destacado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/labelBoteInicialApatxaDetalle"
-            android:layout_alignParentLeft="@+id/labelBoteInicialApatxaDetalle"
-            android:layout_toRightOf="@+id/labelBoteInicialApatxaDetalle"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/usoBoteInicialApatxaDetalle"
-            style="@style/apatxas_valor_destacado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/boteInicialApatxaDetalle"
-            android:layout_alignParentLeft="@+id/boteInicialApatxaDetalle"
-            android:layout_toRightOf="@+id/boteInicialApatxaDetalle"
-            android:paddingLeft="@dimen/apatxas_padding_izquierdo_defecto"
-            android:visibility="gone" />
-
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/numeroPersonasApatxaDetalle"
-        style="@style/apatxas_valor_defecto"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/apatxas_altura_elemento_listado"
-        android:layout_marginLeft="@dimen/apatxas_padding_izquierdo_defecto"
-        android:clickable="true"
-        android:drawableLeft="@drawable/ic_apatxas_personas"
-        android:drawablePadding="@dimen/apatxas_padding_entre_imagen_texto"
-        android:gravity="center_vertical"/>
-
-    <View
-        android:id="@+id/separador2DetalleApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/apatxascolors_color_linea_divisoria" />
-
-</LinearLayout>
+</merge>

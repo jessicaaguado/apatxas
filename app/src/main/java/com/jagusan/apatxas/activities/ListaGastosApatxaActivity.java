@@ -156,6 +156,7 @@ public class ListaGastosApatxaActivity extends ActionBarActivity {
 
     private void anadirCabeceraListaGastos(LayoutInflater inflater) {
         tituloGastosApatxaListViewHeader = (TextView) findViewById(R.id.listaGastosApatxaCabecera);
+        tituloGastosApatxaListViewHeader.setVisibility(View.VISIBLE);
         actualizarTituloCabeceraListaGastos();
     }
 

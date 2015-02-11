@@ -1,6 +1,5 @@
 package com.jagusan.apatxas.activities;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
@@ -28,12 +28,11 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
     protected Resources resources;
     protected Long idApatxa;
 
+    protected ViewGroup headerInformacionDetalle;
     private TextView nombreApatxaTextView;
     private TextView fechaApatxaTextView;
-    private TextView boteInicialEditText;
-    private TextView numeroPersonasTextView;
+    protected TextView numeroPersonasTextView;
     private TextView estadoApatxaTextView;
-    private TextView usoBoteInicialTextView;
 
     protected ApatxaDetalle apatxa;
 
@@ -94,17 +93,15 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
     protected void cargarElementosLayout() {
         nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaDetalle);
         fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaDetalle);
-        boteInicialEditText = (TextView) findViewById(R.id.boteInicialApatxaDetalle);
-        numeroPersonasTextView = (TextView) findViewById(R.id.numeroPersonasApatxaDetalle);
-        estadoApatxaTextView = (TextView) findViewById(R.id.estadoApatxaDetalle);
-        usoBoteInicialTextView = (TextView) findViewById(R.id.usoBoteInicialApatxaDetalle);
+        headerInformacionDetalle = (ViewGroup) getLayoutInflater().inflate(R.layout.detalle_apatxa_resumen_header, null);
+        numeroPersonasTextView = (TextView) headerInformacionDetalle.findViewById(R.id.numeroPersonasApatxaDetalle);
+        estadoApatxaTextView = (TextView) headerInformacionDetalle.findViewById(R.id.estadoApatxaDetalle);
     }
 
     protected void cargarInformacionApatxa() {
         apatxa = apatxaService.getApatxaDetalle(idApatxa);
         cargarInformacionTitulo();
         cargarInformacionFecha();
-        cargarInformacionBoteInicial();
         cargarInformacionPersonas();
         cargarInformacionEstado();
     }
@@ -124,12 +121,6 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
         fechaApatxaTextView.setText(fechaDescripcion);
     }
 
-    private void cargarInformacionBoteInicial() {
-        Double boteInicial = apatxa.boteInicial;
-        boteInicialEditText.setText(FormatearNumero.aDineroEuros(resources, boteInicial));
-        String usoBoteInicial = apatxa.descontarBoteInicialGastoTotal ? resources.getString(R.string.bote_inicial_a_descontar) : "";
-        usoBoteInicialTextView.setText(usoBoteInicial);
-    }
 
     private void cargarInformacionPersonas() {
         int numPersonas = apatxa.getPersonas().size();

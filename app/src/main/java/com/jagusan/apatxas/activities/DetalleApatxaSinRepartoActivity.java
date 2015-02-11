@@ -7,12 +7,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -96,7 +99,11 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	protected void cargarElementosLayout() {
 		super.cargarElementosLayout();
 		gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
-		tituloGastosApatxaListViewHeader = (TextView) findViewById(R.id.listaGastosApatxaCabecera);
+        gastosApatxaListView.addHeaderView(headerInformacionDetalle);
+
+        ViewGroup cabeceraTituloGastos = (ViewGroup) getLayoutInflater().inflate(R.layout.detalle_apatxa_lista_gastos_header, null);
+        gastosApatxaListView.addHeaderView(cabeceraTituloGastos);
+        tituloGastosApatxaListViewHeader = (TextView) cabeceraTituloGastos.findViewById(R.id.listaGastosApatxaCabecera);
 	}
 
 	@Override
@@ -114,7 +121,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 	}
 
 	private void actualizarTituloCabeceraListaGastos() {
-		String titulo = String.format(resources.getString(R.string.titulo_cabecera_lista_gastos_detalle_apatxa), CalcularSumaTotalGastos.calcular(gastosApatxa));
+		String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_gastos_detalle_apatxa,gastosApatxa.size(), gastosApatxa.size(), CalcularSumaTotalGastos.calcular(gastosApatxa));
 		tituloGastosApatxaListViewHeader.setText(titulo);
 	}
 
@@ -192,12 +199,14 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
         gastosListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         gastosListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
-            ListaGastosApatxaArrayAdapter adapter = (ListaGastosApatxaArrayAdapter) gastosListView.getAdapter();
+            ListaGastosApatxaArrayAdapter adapter = (ListaGastosApatxaArrayAdapter) ((HeaderViewListAdapter) gastosListView.getAdapter()).getWrappedAdapter();
             ActionMode mode;
 
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-                adapter.toggleSeleccion(position, checked);
+                //ponemos -numHeaders porque tenemos header
+                int numHeaders = ((HeaderViewListAdapter) gastosListView.getAdapter()).getHeadersCount();
+                adapter.toggleSeleccion(position-numHeaders, checked);
                 int numeroGastosSeleccionados = adapter.numeroGastosSeleccionados();
                 mode.setTitle(resources.getQuantityString(R.plurals.seleccionados, numeroGastosSeleccionados,numeroGastosSeleccionados));
                 if (numeroGastosSeleccionados == 1) {
