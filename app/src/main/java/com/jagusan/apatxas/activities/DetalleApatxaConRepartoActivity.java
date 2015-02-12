@@ -93,7 +93,6 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     }
 
 
-
     private void cargarInformacionReparto() {
         List<PersonaListadoReparto> listaPersonasReparto = apatxaService.getResultadoReparto(idApatxa);
         ListaPersonasRepartoApatxaArrayAdapter listaPersonasRepartoApatxaArrayAdapter = new ListaPersonasRepartoApatxaArrayAdapter(this, R.layout.lista_personas_resultado_reparto_row,
@@ -106,7 +105,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
     private void actualizarTituloCabeceraListaReparto() {
         List<GastoApatxaListado> gastosApatxa = apatxa.getGastos();
-        String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_reparto_detalle_apatxa,gastosApatxa.size(), gastosApatxa.size(), CalcularSumaTotalGastos.calcular(gastosApatxa));
+        String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_reparto_detalle_apatxa, gastosApatxa.size(), gastosApatxa.size(), CalcularSumaTotalGastos.calcular(gastosApatxa));
         tituloRepartoApatxaListViewHeader.setText(titulo);
     }
 
@@ -159,7 +158,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 //ponemos -numHeaders porque tenemos header
                 int numHeaders = ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getHeadersCount();
-                adapter.toggleSeleccion(position-numHeaders, checked);
+                adapter.toggleSeleccion(position - numHeaders, checked);
                 mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
             }
 
@@ -173,7 +172,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
             @Override
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                if (this.mode == null){
+                if (this.mode == null) {
                     this.mode = mode;
                 }
                 return false;
@@ -196,7 +195,8 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
             private void marcarPersonasEstadoReparto(ActionMode mode, boolean pagado) {
                 personaService.marcarPersonasEstadoReparto(adapter.getPersonasSeleccionadas(), pagado);
                 cargarInformacionApatxa();
-                MensajesToast.mostrarMensaje(adapter.getContext(), adapter.getContext().getString(R.string.mensaje_confirmacion_pagos_actualizados, ObtenerDescripcionEstadoApatxa.getDescripcionParaDetalle(getResources(), apatxa.getEstadoApatxa(), apatxa.personasPendientesPagarCobrar)));
+                String mensaje =apatxa.personasPendientesPagarCobrar == 0 ? getResources().getString(R.string.mensaje_confirmacion_pagos_actualizados_sin_pendientes) : getResources().getQuantityString(R.plurals.mensaje_confirmacion_pagos_actualizados, apatxa.personasPendientesPagarCobrar, apatxa.personasPendientesPagarCobrar);
+                MensajesToast.mostrarMensaje(getApplicationContext(), mensaje);
                 mode.finish();
             }
 
