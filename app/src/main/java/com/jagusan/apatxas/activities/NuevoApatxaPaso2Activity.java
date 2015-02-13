@@ -304,6 +304,12 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
         ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso2);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
         ((TextView)findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2);
+        findViewById(R.id.anadir_elementos_mas_tarde).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guardarApatxa();
+            }
+        });
         findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(visibilidad);
     }
 

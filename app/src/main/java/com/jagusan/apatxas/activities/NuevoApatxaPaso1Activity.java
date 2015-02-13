@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -357,7 +358,13 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
         ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso1);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
-        ((TextView)findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1);
+        ((Button)findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1);
+        findViewById(R.id.anadir_elementos_mas_tarde).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                continuarAnadirApatxas();
+            }
+        });
         findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(visibilidad);
     }
 
