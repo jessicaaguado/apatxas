@@ -17,7 +17,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
     private Long idGasto;
     private String conceptoGasto;
     private Double importeGasto;
-    private String nombrePersonaPagadoGasto;
+    private Long idContactoPersonaPagadoPor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
             if (validacionesCorrectas()) {
                 String concepto = getConceptoIntroducido();
                 Double totalGasto = getImporteIntroducido();
-                String pagador = getPagadorSeleccionado();
+                PersonaListado pagador = getPagadorSeleccionado();
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("concepto", concepto);
@@ -66,7 +66,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
         Intent intent = getIntent();
         conceptoGasto = intent.getStringExtra("conceptoGasto");
         importeGasto = intent.getDoubleExtra("importeGasto", 0.0);
-        nombrePersonaPagadoGasto = intent.getStringExtra("nombrePersonaPagadoGasto");
+        idContactoPersonaPagadoPor = intent.getLongExtra("idContactoPersonaPagadoGasto",-1);
         personasApatxa = (ArrayList<PersonaListado>) intent.getSerializableExtra("personas");
         posicionGastoEditar = intent.getIntExtra("posicionGastoEditar", -1);
         idGasto = intent.getLongExtra("idGasto", -1);
@@ -82,11 +82,15 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
     private int getPosicionPersonaSeleccionada() {
         // anadimos 1 porque hemos forzado un nuevo elemento en la lista por
         // delante #sin pagar#
-        List<String> nombresPersonas = new ArrayList<String>();
+        List<Long> idContactoPersonas = new ArrayList<Long>();
         for (PersonaListado persona : personasApatxa) {
-            nombresPersonas.add(persona.nombre);
+            idContactoPersonas.add(persona.idContacto);
         }
-        return nombresPersonas.indexOf(nombrePersonaPagadoGasto) + 1;
+        if (idContactoPersonaPagadoPor == -1){
+            return 0;
+        } else {
+            return idContactoPersonas.indexOf(idContactoPersonaPagadoPor) + 1;
+        }
     }
 
 }

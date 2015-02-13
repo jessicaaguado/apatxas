@@ -14,6 +14,7 @@ public class ExtraerInformacionGastoDeCursor {
 		gasto.setTotal(tablaGastoCursor.getTotal());
 		gasto.setIdPagadoPor(tablaGastoCursor.getIdPagador());
 		gasto.setPagadoPor(tablaGastoCursor.getNombrePagador());
+        gasto.idContactoPersonaPagadoPor = tablaGastoCursor.getIdContactoPagador();
 		return gasto;
 	}
 

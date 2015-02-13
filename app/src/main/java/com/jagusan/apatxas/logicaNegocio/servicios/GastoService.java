@@ -84,7 +84,9 @@ public class GastoService {
     public void crearGastos(List<GastoApatxaListado> gastosAnadidos, Long idApatxa) {
         open();
         for (GastoApatxaListado gasto : gastosAnadidos) {
-            Long idPersonaPagado = personaDAO.recuperarIdPersonaPorNombre(gasto.getPagadoPor(), idApatxa);
+            //TODO pagadoPor
+            Long idPersonaPagado = gasto.getIdPagadoPor();
+            //Long idPersonaPagado = personaDAO.recuperarIdPersonaPorNombre(gasto.getPagadoPor(), idApatxa);
             gastoDAO.crearGasto(gasto.getConcepto(), gasto.getTotal(), idApatxa, idPersonaPagado);
         }
         close();
@@ -93,7 +95,9 @@ public class GastoService {
     public void actualizarGastos(List<GastoApatxaListado> gastosModificados, Long idApatxa) {
         open();
         for (GastoApatxaListado gasto : gastosModificados) {
-            Long idPersonaPagado = personaDAO.recuperarIdPersonaPorNombre(gasto.getPagadoPor(), idApatxa);
+            //TODO pagadoPor
+            Long idPersonaPagado = gasto.getIdPagadoPor();
+            //Long idPersonaPagado = personaDAO.recuperarIdPersonaPorNombre(gasto.getPagadoPor(), idApatxa);
             gastoDAO.actualizarGasto(gasto.getId(), gasto.getConcepto(), gasto.getTotal(), idPersonaPagado);
         }
         close();

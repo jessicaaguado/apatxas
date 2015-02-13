@@ -18,7 +18,7 @@ public class GastoDAO {
 
 	private static final String NOMBRE_TABLA_GASTO = TablaGasto.NOMBRE_TABLA;
 
-	private static final String[] COLUMNAS_GASTO = { TablaGasto.COLUMNA_FULL_ID, TablaGasto.COLUMNA_CONCEPTO, TablaGasto.COLUMNA_TOTAL, TablaGasto.COLUMNA_ID_PAGADO_POR, TablaPersona.COLUMNA_NOMBRE };
+	private static final String[] COLUMNAS_GASTO = { TablaGasto.COLUMNA_FULL_ID, TablaGasto.COLUMNA_CONCEPTO, TablaGasto.COLUMNA_TOTAL, TablaGasto.COLUMNA_ID_PAGADO_POR, TablaPersona.COLUMNA_NOMBRE, TablaPersona.COLUMNA_ID_CONTACTO };
 
 	private static final String ORDEN_GASTOS_DEFECTO = TablaGasto.COLUMNA_CONCEPTO + " ASC";
 

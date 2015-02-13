@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jagusan.apatxas.R;
+import com.jagusan.apatxas.modelView.PersonaListado;
 
 public class NuevoGastoApatxaActivity extends GastoApatxaActivity {
 
@@ -31,7 +32,7 @@ public class NuevoGastoApatxaActivity extends GastoApatxaActivity {
 			if (validacionesCorrectas()) {
 				String concepto = getConceptoIntroducido();
 				Double totalGasto = getImporteIntroducido();
-				String pagador = getPagadorSeleccionado();
+                PersonaListado pagador = getPagadorSeleccionado();
 
 				Intent returnIntent = new Intent();
 				returnIntent.putExtra("concepto", concepto);

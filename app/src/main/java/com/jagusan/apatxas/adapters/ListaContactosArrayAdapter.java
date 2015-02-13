@@ -48,7 +48,6 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> {
         }
 
         ContactoListado contacto = contactos.get(position);
-        Log.d("APATXAS-CONTACTO", position + contacto.toString());
         // nombre
         TextView nombreContactoTextView = (TextView) convertView.findViewById(R.id.nombreContacto);
         nombreContactoTextView.setText(contacto.nombre);

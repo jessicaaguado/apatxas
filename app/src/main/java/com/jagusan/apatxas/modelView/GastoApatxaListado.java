@@ -11,13 +11,16 @@ public class GastoApatxaListado implements Serializable {
 	private Double total;
 	private Long idPagadoPor;
 	private String pagadoPor;
+    public Long idContactoPersonaPagadoPor;
 
-	public GastoApatxaListado(String concepto, Double total, String pagadoPor) {
-		super();
-		this.concepto = concepto;
-		this.total = total;
-		this.pagadoPor = pagadoPor;
-	}
+    public GastoApatxaListado(String concepto, Double total, PersonaListado pagadoPor) {
+        super();
+        this.concepto = concepto;
+        this.total = total;
+        this.idPagadoPor = pagadoPor != null ? pagadoPor.id : null;
+        this.idContactoPersonaPagadoPor = pagadoPor != null ? pagadoPor.idContacto : null;
+        this.pagadoPor = pagadoPor != null ? pagadoPor.nombre : null;
+    }
 
 	public GastoApatxaListado() {
 		// TODO Auto-generated constructor stub

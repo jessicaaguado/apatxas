@@ -74,7 +74,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
         Intent intent = new Intent(this, EditarGastoApatxaActivity.class);
         intent.putExtra("conceptoGasto", gasto.getConcepto());
         intent.putExtra("importeGasto", gasto.getTotal());
-        intent.putExtra("nombrePersonaPagadoGasto", gasto.getPagadoPor());
+        intent.putExtra("idContactoPersonaPagadoGasto", gasto.idContactoPersonaPagadoPor);
         intent.putExtra("personas", (ArrayList<PersonaListado>) apatxa.getPersonas());
         intent.putExtra("idGasto", gasto.getId());
         startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
@@ -171,8 +171,9 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     private void guardarNuevoGastoApatxa(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        String nombrePersonaPagadoGasto = data.getStringExtra("pagadoPor");
-        Long idPersona = personaService.recuperarIdPersonaConNombre(nombrePersonaPagadoGasto, idApatxa);
+        //TODO pagadoPor
+        PersonaListado personaPagado = ((PersonaListado)data.getSerializableExtra("pagadoPor"));
+        Long idPersona = personaPagado != null ? personaPagado.id : null;
         gastoService.crearGasto(conceptoGasto, totalGasto, idApatxa, idPersona);
         recargarInformacionGastos();
     }
@@ -185,8 +186,9 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     private void actualizarGastoApatxa(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        String nombrePersonaPagadoGasto = data.getStringExtra("pagadoPor");
-        Long idPersona = personaService.recuperarIdPersonaConNombre(nombrePersonaPagadoGasto, idApatxa);
+        //TODO pagadoPor
+        PersonaListado personaPagado = ((PersonaListado)data.getSerializableExtra("pagadoPor"));
+        Long idPersona = personaPagado != null ? personaPagado.id : null;
         Long idGasto = data.getLongExtra("idGasto", -1);
 
         gastoService.actualizarGasto(idGasto, conceptoGasto, totalGasto, idPersona);
