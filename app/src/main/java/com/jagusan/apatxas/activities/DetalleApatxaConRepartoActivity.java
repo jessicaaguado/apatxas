@@ -1,6 +1,7 @@
 package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -33,6 +34,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
     private PersonaService personaService;
     private TextView tituloRepartoApatxaListViewHeader;
+    private ListaPersonasRepartoApatxaArrayAdapter listaPersonasRepartoApatxaArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
         numeroPersonasTextView.setVisibility(View.GONE);
         headerInformacionDetalle.findViewById(R.id.separador2DetalleApatxa).setVisibility(View.GONE);
+
     }
 
     @Override
@@ -95,11 +98,13 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
     private void cargarInformacionReparto() {
         List<PersonaListadoReparto> listaPersonasReparto = apatxaService.getResultadoReparto(idApatxa);
-        ListaPersonasRepartoApatxaArrayAdapter listaPersonasRepartoApatxaArrayAdapter = new ListaPersonasRepartoApatxaArrayAdapter(this, R.layout.lista_personas_resultado_reparto_row,
+        listaPersonasRepartoApatxaArrayAdapter = new ListaPersonasRepartoApatxaArrayAdapter(this, R.layout.lista_personas_resultado_reparto_row,
                 listaPersonasReparto);
         personasRepartoListView.setAdapter(listaPersonasRepartoApatxaArrayAdapter);
         actualizarTituloCabeceraListaReparto();
         asignarContextualActionBar(personasRepartoListView);
+
+        gestionarListaVacia();
     }
 
 
@@ -207,6 +212,24 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
 
         });
+    }
+
+    private void gestionarListaVacia() {
+        listaPersonasRepartoApatxaArrayAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                toggleInformacionListaVacia();
+            }
+        });
+        toggleInformacionListaVacia();
+    }
+
+    private void toggleInformacionListaVacia() {
+        int visibilidad = listaPersonasRepartoApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
+        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
+        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_personas_reparto);
+        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
+        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
     }
 
 }

@@ -1,13 +1,16 @@
 package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaContactosArrayAdapter;
@@ -24,8 +27,6 @@ import java.util.List;
 public class ListaContactosActivity extends ActionBarActivity {
 
     private static final Boolean MOSTRAR_TITULO_PANTALLA = true;
-
-    private SimpleCursorAdapter adapter;
 
     private ContactoService contactoService;
 
@@ -97,5 +98,25 @@ public class ListaContactosActivity extends ActionBarActivity {
         List<ContactoListado> contactos = contactoService.obtenerTodosContactosTelefono(contactosYaElegidos);
         listaContactosArrayAdapter = new ListaContactosArrayAdapter(this, R.layout.lista_contactos_row, contactos);
         contactosListView.setAdapter(listaContactosArrayAdapter);
+
+        gestionarListaVacia();
+    }
+
+    private void gestionarListaVacia() {
+        listaContactosArrayAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                toggleInformacionListaVacia();
+            }
+        });
+        toggleInformacionListaVacia();
+    }
+
+    private void toggleInformacionListaVacia() {
+        int visibilidad = listaContactosArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
+        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
+        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_contactos);
+        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
+        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
     }
 }

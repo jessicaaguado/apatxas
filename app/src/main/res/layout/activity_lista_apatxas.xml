@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context="com.jagusan.apatxas.activities.ListaApatxasActivity">
 
+    <include layout="@layout/subactivity_lista_vacia"/>
+
     <ListView
         android:id="@+id/lista_gastos"
         android:layout_width="match_parent"

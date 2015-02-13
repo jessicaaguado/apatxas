@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -159,6 +161,8 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
         personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
         asignarContextualActionBar(personasListView);
+
+        gestionarListaVacia();
     }
 
     private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
@@ -280,4 +284,21 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         });
     }
 
+    private void gestionarListaVacia() {
+        listaPersonasApatxaArrayAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                toggleInformacionListaVacia();
+            }
+        });
+        toggleInformacionListaVacia();
+    }
+
+    private void toggleInformacionListaVacia() {
+        int visibilidad = listaPersonasApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
+        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
+        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_personas);
+        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
+        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
+    }
 }

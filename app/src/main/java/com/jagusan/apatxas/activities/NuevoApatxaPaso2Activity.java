@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -144,6 +145,8 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
         listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, listaGastos);
         gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
         asignarContextualActionBar(gastosApatxaListView);
+
+        gestionarListaVacia();
     }
 
     private void recuperarDatosPasoAnterior() {
@@ -159,6 +162,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
     private void anadirCabeceraListaGastos(LayoutInflater inflater) {
         tituloGastosApatxaListViewHeader = (TextView) findViewById(R.id.listaGastosApatxaCabecera);
+        tituloGastosApatxaListViewHeader.setVisibility(View.VISIBLE);
         actualizarTituloCabeceraListaGastos();
     }
 
@@ -282,6 +286,25 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
 
         });
+    }
+
+    private void gestionarListaVacia() {
+        listaGastosApatxaArrayAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                toggleInformacionListaVacia();
+            }
+        });
+        toggleInformacionListaVacia();
+    }
+
+    private void toggleInformacionListaVacia() {
+        int visibilidad = listaGastosApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
+        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
+        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso2);
+        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
+        ((TextView)findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2);
+        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(visibilidad);
     }
 
 }

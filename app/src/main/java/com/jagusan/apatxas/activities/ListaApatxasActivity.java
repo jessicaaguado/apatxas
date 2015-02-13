@@ -3,17 +3,18 @@ package com.jagusan.apatxas.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -30,8 +31,6 @@ public class ListaApatxasActivity extends ActionBarActivity {
     private ApatxaService apatxaService;
     private ListaApatxasArrayAdapter adapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,17 +39,40 @@ public class ListaApatxasActivity extends ActionBarActivity {
         personalizarActionBar();
         apatxaService = new ApatxaService(this);
 
+        cargarElementosLayout();
 
+        anadirAdMob();
+    }
+
+
+    private void cargarElementosLayout() {
         List<ApatxaListado> gastos = recuperarApatxas();
         ListView listaGastosListView = (ListView) findViewById(R.id.lista_gastos);
         adapter = new ListaApatxasArrayAdapter(this, R.layout.lista_apatxas_row, gastos);
         listaGastosListView.setAdapter(adapter);
         asignarContextualActionBar(listaGastosListView);
 
+        gestionarListaVacia();
+
         OnVerDetalleApatxaClickListener listener = new OnVerDetalleApatxaClickListener();
         listaGastosListView.setOnItemClickListener(listener);
+    }
 
-        anadirAdMob();
+    private void gestionarListaVacia() {
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                toggleInformacionListaVacia();
+            }
+        });
+        toggleInformacionListaVacia();
+    }
+
+    private void toggleInformacionListaVacia() {
+        int visibilidad = adapter.getCount() == 0 ? View.VISIBLE : View.GONE;
+        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
+        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
+        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
     }
 
     private void anadirAdMob() {

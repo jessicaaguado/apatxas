@@ -1,17 +1,34 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/listaGastosApatxaCabecera"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/listaGastosSubactivity"
         android:layout_width="match_parent"
-        android:drawableLeft="@drawable/ic_apatxas_gastos"
-        style="@style/apatxas_cabecera_style"
-        android:visibility="gone"/>
+        android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/listaGastosApatxa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@color/apatxascolors_color_linea_divisoria_lista"
-        android:dividerHeight="1px" />
+
+
+        <TextView
+            android:id="@+id/listaGastosApatxaCabecera"
+            style="@style/apatxas_cabecera_style"
+            android:layout_width="match_parent"
+            android:drawableLeft="@drawable/ic_apatxas_gastos"
+            android:visibility="gone" />
+
+
+        <ListView
+            android:id="@+id/listaGastosApatxa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/listaGastosApatxaCabecera"
+            android:divider="@color/apatxascolors_color_linea_divisoria_lista"
+            android:dividerHeight="1px" />
+
+        <include layout="@layout/subactivity_lista_vacia"
+            android:layout_below="@id/listaGastosApatxaCabecera"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent" />
+
+    </RelativeLayout>
 
 </merge>

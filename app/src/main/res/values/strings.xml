@@ -101,6 +101,16 @@
     </plurals>
     <!-- MENSAJES DE CONFIRMACION (FIN) -->
 
+    <!-- LISTAS VACIAS -->
+    <string name="lista_vacia_nuevo_apatxas_paso1">Aún no has añadido ninguna persona</string>
+    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1">Añadir personas más tarde</string>
+    <string name="lista_vacia_nuevo_apatxas_paso2">Aún no has añadido ningún gasto</string>
+    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2">Añadir gastos más tarde</string>
+    <string name="lista_vacia_personas">Aún no has añadido ninguna persona</string>
+    <string name="lista_vacia_gastos">Aún no has añadido ningún gasto</string>
+    <string name="lista_vacia_contactos">No tienes contactos</string>
+    <string name="lista_vacia_personas_reparto">Aún no hay personas entre las que hacer el reparto</string>
+    <!-- LISTAS VACIAS (FIN) -->
 
     <!-- PATRONES FECHAS -->
     <string name="patron_fecha_dia_mes_ano">dd/MM/yyyy</string>
@@ -145,6 +155,7 @@
     <string name="solo_un_dia">Solo un día</string>
 
     <string name="varios_dias">Varios días</string>
+
 
 
 </resources>

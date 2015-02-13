@@ -10,6 +10,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -217,6 +218,8 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
                 gestionarSoloUnDiaSwitch(isChecked);
             }
         });
+
+        gestionarListaVacia();
     }
 
     private void inicializarElementosLayout() {
@@ -336,6 +339,26 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
             soloUnDiaSwitch.setTextColor(resources.getColor(R.color.apatxascolors_gris_medio));
             fechaFinApatxaTextView.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void gestionarListaVacia() {
+        listaPersonasApatxaArrayAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                toggleInformacionListaVacia();
+            }
+        });
+        toggleInformacionListaVacia();
+    }
+
+    private void toggleInformacionListaVacia()
+    {
+        int visibilidad = listaPersonasApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
+        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
+        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso1);
+        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
+        ((TextView)findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1);
+        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(visibilidad);
     }
 
 }

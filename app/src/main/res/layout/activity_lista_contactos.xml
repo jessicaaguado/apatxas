@@ -1,18 +1,21 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    android:id="@+id/listaContactosActivity"
     style="@style/apatxas_listado_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jagusan.apatxas.activities.ListaApatxasActivity" >
+    tools:context="com.jagusan.apatxas.activities.ListaContactosActivity" >
+
+    <include layout="@layout/subactivity_lista_vacia"/>
 
     <ListView
         android:id="@+id/listaContactos"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:divider="@color/apatxascolors_color_linea_divisoria_lista"
         android:dividerHeight="1px" >
     </ListView>
 
-</LinearLayout>
+</RelativeLayout>
