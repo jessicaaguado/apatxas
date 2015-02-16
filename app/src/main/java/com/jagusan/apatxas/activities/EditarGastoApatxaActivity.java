@@ -34,30 +34,35 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_actualizar_gasto_apatxa) {
-            if (validacionesCorrectas()) {
-                String concepto = getConceptoIntroducido();
-                Double totalGasto = getImporteIntroducido();
-                PersonaListado pagador = getPagadorSeleccionado();
-
-                Intent returnIntent = new Intent();
-                returnIntent.putExtra("concepto", concepto);
-                returnIntent.putExtra("total", totalGasto);
-                returnIntent.putExtra("pagadoPor", pagador);
-                if (posicionGastoEditar != -1) {
-                    returnIntent.putExtra("posicionGastoEditar", posicionGastoEditar);
-                }
-                if (idGasto != -1) {
-                    returnIntent.putExtra("idGasto", idGasto);
-                }
-                setResult(RESULT_OK, returnIntent);
-
+        switch (item.getItemId()) {
+            case android.R.id.home:
                 finish();
                 return true;
-            }
+            case  R.id.action_actualizar_gasto_apatxa:
+                if (validacionesCorrectas()) {
+                    String concepto = getConceptoIntroducido();
+                    Double totalGasto = getImporteIntroducido();
+                    PersonaListado pagador = getPagadorSeleccionado();
+
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("concepto", concepto);
+                    returnIntent.putExtra("total", totalGasto);
+                    returnIntent.putExtra("pagadoPor", pagador);
+                    if (posicionGastoEditar != -1) {
+                        returnIntent.putExtra("posicionGastoEditar", posicionGastoEditar);
+                    }
+                    if (idGasto != -1) {
+                        returnIntent.putExtra("idGasto", idGasto);
+                    }
+                    setResult(RESULT_OK, returnIntent);
+
+                    finish();
+
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

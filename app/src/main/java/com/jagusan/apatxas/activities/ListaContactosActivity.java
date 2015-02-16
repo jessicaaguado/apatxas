@@ -60,6 +60,9 @@ public class ListaContactosActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
             case R.id.action_guardar_contactos_elegidos:
                 guardarContactosElegidos();
                 return true;

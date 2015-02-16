@@ -69,7 +69,11 @@
         <activity
             android:name=".activities.EditarGastoApatxaActivity"
             android:label="@string/title_activity_editar_gasto"
-            android:windowSoftInputMode="stateVisible" >
+            android:windowSoftInputMode="stateVisible"
+            android:parentActivityName=".activities.ListaGastosApatxaActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.ListaGastosApatxaActivity"/>
         </activity>
         <activity
             android:name=".activities.DetalleApatxaSinRepartoActivity"
@@ -89,15 +93,35 @@
         </activity>
         <activity
             android:name=".activities.EditarInformacionBasicaApatxaActivity"
-            android:windowSoftInputMode="stateVisible" >
+            android:label="@string/title_activity_editar_apatxa"
+            android:windowSoftInputMode="stateVisible"
+            android:parentActivityName=".activities.DetalleApatxaConRepartoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" /> >
         </activity>
-        <activity android:name=".activities.ListaPersonasApatxaActivity" >
+        <activity android:name=".activities.ListaPersonasApatxaActivity"
+            android:label="@string/title_activity_lista_personas"
+            android:parentActivityName=".activities.DetalleApatxaConRepartoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" />
         </activity>
-        <activity android:name=".activities.ListaGastosApatxaActivity" >
+        <activity android:name=".activities.ListaGastosApatxaActivity"
+            android:label="@string/title_activity_lista_gastos"
+            android:parentActivityName=".activities.DetalleApatxaConRepartoActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" />
         </activity>
         <activity
             android:name=".activities.ListaContactosActivity"
-            android:label="@string/title_activity_lista_contactos" >
+            android:label="@string/title_activity_lista_contactos"
+            android:parentActivityName=".activities.ListaPersonasApatxaActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.jagusan.apatxas.activities.ListaPersonasApatxaActivity" />
+
         </activity>
     </application>
 

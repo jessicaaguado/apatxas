@@ -81,6 +81,9 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            case android.R.id.home:
+                finish();
+                return true;
             case R.id.action_guardar_lista_personas_apatxa:
                 actualizarPersonasAnadidasBorradas();
                 return true;

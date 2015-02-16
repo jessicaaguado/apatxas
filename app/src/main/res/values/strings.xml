@@ -56,12 +56,15 @@
     </plurals>
 
     <string name="titulo_dialog_cambio_nombre_persona">Cambiar nombre</string>
-    <string name="title_activity_nuevo_apatxa_paso1">Nuevo</string>
-    <string name="title_activity_nuevo_apatxa_paso2">Nuevo</string>
-    <string name="title_activity_nuevo_gasto">Nuevo gasto</string>
+    <string name="title_activity_nuevo_apatxa_paso1">Nuevo (paso 1)</string>
+    <string name="title_activity_nuevo_apatxa_paso2">Nuevo (paso 2)</string>
+    <string name="title_activity_nuevo_gasto">Añadir gasto</string>
     <string name="title_activity_editar_gasto">Cambiar gasto</string>
-    <string name="title_activity_detalle_apatxa">Información</string>
-    <string name="title_activity_lista_contactos">Selecciona personas</string>
+    <string name="title_activity_detalle_apatxa">Apatxa</string>
+    <string name="title_activity_lista_contactos">Seleccionar contactos</string>
+    <string name="title_activity_editar_apatxa">Cambiar Apatxa</string>
+    <string name="title_activity_lista_personas">Personas</string>
+    <string name="title_activity_lista_gastos">Gastos</string>
     <!-- TITULOS (FIN) -->
 
 
@@ -155,7 +158,6 @@
     <string name="solo_un_dia">Solo un día</string>
 
     <string name="varios_dias">Varios días</string>
-
 
 
 </resources>

@@ -76,22 +76,26 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_guardar_informacion_basica) {
-            if (validacionesCorrectas()) {
-                String nombre = getNombreIntroducido();
-                Long fechaInicio = getFechaInicioIntroducida();
-                Long fechaFin = getFechaFinIntroducida();
-                Boolean soloUnDia = getSoloUnDiaSeleccionado();
-                Double boteInicial = getBoteIntroducido();
-                Boolean descontarBoteInicial = getDescontarBoteInicial();
-                apatxaService.actualizarApatxa(idApatxa, nombre, fechaInicio, fechaFin, soloUnDia, boteInicial, descontarBoteInicial);
-                setResult(RESULT_OK);
+        switch (item.getItemId()) {
+            case android.R.id.home:
                 finish();
-            }
-            return true;
+                return true;
+            case R.id.action_guardar_informacion_basica:
+                if (validacionesCorrectas()) {
+                    String nombre = getNombreIntroducido();
+                    Long fechaInicio = getFechaInicioIntroducida();
+                    Long fechaFin = getFechaFinIntroducida();
+                    Boolean soloUnDia = getSoloUnDiaSeleccionado();
+                    Double boteInicial = getBoteIntroducido();
+                    Boolean descontarBoteInicial = getDescontarBoteInicial();
+                    apatxaService.actualizarApatxa(idApatxa, nombre, fechaInicio, fechaFin, soloUnDia, boteInicial, descontarBoteInicial);
+                    setResult(RESULT_OK);
+                    finish();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void inicializarServicios() {

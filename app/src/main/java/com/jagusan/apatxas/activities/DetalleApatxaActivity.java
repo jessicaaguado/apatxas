@@ -22,7 +22,7 @@ import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 public abstract class DetalleApatxaActivity extends ActionBarActivity {
 
-    private final Boolean MOSTRAR_TITULO_PANTALLA = false;
+    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
     protected ApatxaService apatxaService;
     protected Resources resources;
