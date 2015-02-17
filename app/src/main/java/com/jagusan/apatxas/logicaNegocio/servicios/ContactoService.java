@@ -6,6 +6,7 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.logicaNegocio.cursorReader.ExtraerInformacionContactoDeCursor;
 import com.jagusan.apatxas.modelView.ContactoListado;
 
@@ -40,7 +41,7 @@ public class ContactoService {
         cursor.close();
         if (!idsContactosYaSeleccionados.contains(Long.MIN_VALUE)){
             ContactoListado yo = new ContactoListado();
-            yo.nombre = "YO";
+            yo.nombre = context.getString(R.string.yo_mayusculas);
             yo.id = Long.MIN_VALUE;
             contactos.add(0,yo);
         }

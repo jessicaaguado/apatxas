@@ -11,7 +11,7 @@
     <item
         android:id="@+id/action_configuracion"
         android:icon="@drawable/ic_menu_action_apatxas_configuracion"
-        android:title="@string/action_configuracion"
+        android:title="@string/action_settings"
         app:showAsAction="never|withText"/>
     
 </menu>

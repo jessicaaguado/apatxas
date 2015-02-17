@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="settings_apatxas_idioma">Idioma***</string>
+    <string name="settings_apatxas_idioma_castellano">Castellano***</string>
+    <string name="settings_apatxas_idioma_euskera">Euskera***</string>
+    <string name="settings_apatxas_valor_idioma_castellano">es</string>
+    <string name="settings_apatxas_valor_idioma_euskera">eu</string>
+    <string name="settings_apatxas_valor_idioma_defecto">es</string>
+
+</resources>

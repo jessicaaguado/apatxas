@@ -24,7 +24,7 @@ import com.jagusan.apatxas.modelView.PersonaListado;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaContactosActivity extends ActionBarActivity {
+public class ListaContactosActivity extends ApatxasActionBarActivity {
 
     private static final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
@@ -39,11 +39,9 @@ public class ListaContactosActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_contactos);
 
-        personalizarActionBar();
-
         inicializarServicios();
 
-        personalizarActionBar();
+        personalizarActionBar(R.string.title_activity_lista_contactos,MOSTRAR_TITULO_PANTALLA);
 
         recuperarDatosPasoAnterior();
 
@@ -83,13 +81,6 @@ public class ListaContactosActivity extends ActionBarActivity {
     private void inicializarServicios() {
         contactoService = new ContactoService(this);
     }
-
-    private void personalizarActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setElevation(0);
-        actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
-    }
-
 
     private void recuperarDatosPasoAnterior() {
         Intent intent = getIntent();

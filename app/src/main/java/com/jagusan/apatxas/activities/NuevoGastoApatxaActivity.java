@@ -10,6 +10,8 @@ import com.jagusan.apatxas.modelView.PersonaListado;
 
 public class NuevoGastoApatxaActivity extends GastoApatxaActivity {
 
+    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,5 +49,10 @@ public class NuevoGastoApatxaActivity extends GastoApatxaActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+
+    protected void personalizarActionBar(){
+        super.personalizarActionBar(R.string.title_activity_nuevo_gasto,MOSTRAR_TITULO_PANTALLA);
+    }
 
 }

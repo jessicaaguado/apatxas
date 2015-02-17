@@ -42,7 +42,7 @@ import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
-public class NuevoApatxaPaso1Activity extends ActionBarActivity {
+public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
 
     private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
@@ -72,7 +72,7 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar();
+        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso1,MOSTRAR_TITULO_PANTALLA);
 
         cargarElementosLayout();
         inicializarElementosLayout();
@@ -190,12 +190,6 @@ public class NuevoApatxaPaso1Activity extends ActionBarActivity {
     private void inicializarServicios() {
         resources = getResources();
         apatxaService = new ApatxaService(this);
-    }
-
-    private void personalizarActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setElevation(0);
-        actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
     }
 
     private void cargarElementosLayout() {

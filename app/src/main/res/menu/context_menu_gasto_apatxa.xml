@@ -5,11 +5,11 @@
         android:id="@+id/action_gasto_apatxa_cambiar"
         android:icon="@drawable/ic_menu_action_apatxas_editar"
         android:orderInCategory="1"
-        android:title="Cambiar"/>
+        android:title="@string/action_editar"/>
     <item
         android:id="@+id/action_gasto_apatxa_borrar"
         android:icon="@drawable/ic_menu_action_apatxas_borrar"
         android:orderInCategory="2"
-        android:title="Borrar"/>
+        android:title="@string/action_borrar"/>
 
 </menu>

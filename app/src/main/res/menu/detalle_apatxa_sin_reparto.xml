@@ -7,27 +7,27 @@
         android:id="@+id/action_anadir_gasto"
         android:icon="@drawable/ic_menu_action_apatxas_anadir_gasto"
         android:orderInCategory="1"
-        android:title="Añadir gasto"
+        android:title="@string/action_anadir_gasto"
         app:showAsAction="ifRoom"/>
     
     <item
         android:id="@+id/action_acceso_personas"
         android:icon="@drawable/ic_menu_action_apatxas_acceso_personas"
         android:orderInCategory="2"
-        android:title="Ver personas"
+        android:title="@string/action_personas"
         app:showAsAction="ifRoom"/>
     
     <item
         android:id="@+id/action_editar_detalle_apatxa"
         android:icon="@drawable/ic_menu_action_apatxas_editar"
         android:orderInCategory="3"
-        android:title="Editar"
+        android:title="@string/action_editar"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_repartir_apatxa"
         android:icon="@drawable/ic_menu_action_apatxas_hacer_reparto"
         android:orderInCategory="4"
-        android:title="Repartir"
+        android:title="@string/action_repartir"
         app:showAsAction="withText|ifRoom"/>
 
 </menu>

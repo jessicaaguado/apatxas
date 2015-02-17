@@ -20,7 +20,7 @@ import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.FormatearNumero;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
-public abstract class DetalleApatxaActivity extends ActionBarActivity {
+public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
 
     private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
@@ -49,7 +49,7 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar();
+        personalizarActionBar(R.string.title_activity_detalle_apatxa,MOSTRAR_TITULO_PANTALLA);
 
         cargarElementosLayout();
 
@@ -80,14 +80,6 @@ public abstract class DetalleApatxaActivity extends ActionBarActivity {
     protected void inicializarServicios() {
         apatxaService = new ApatxaService(this);
         resources = getResources();
-    }
-
-    protected void personalizarActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setElevation(0);
-        actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
-        // boton para ir a la actividad anterior
-        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     protected void cargarElementosLayout() {

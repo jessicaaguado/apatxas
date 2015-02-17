@@ -5,6 +5,6 @@
         android:id="@+id/action_apatxa_borrar"
         android:orderInCategory="2"
         android:icon="@drawable/ic_menu_action_apatxas_borrar"
-        android:title="Borrar"/>
+        android:title="@string/action_borrar"/>
 
 </menu>

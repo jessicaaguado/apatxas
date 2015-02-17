@@ -4,13 +4,22 @@
     <string name="app_name">Apatxas</string>
 
     <!-- ACCIONES -->
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Ajustes</string>
     <string name="action_buscar">Buscar</string>
     <string name="action_anadir">Añadir</string>
     <string name="action_listo">Listo</string>
     <string name="action_cancelar">Cancelar</string>
     <string name="action_borrar">Borrar</string>
     <string name="action_aceptar">Aceptar</string>
+    <string name="action_anadir_gasto">Añadir gasto</string>
+    <string name="action_personas">Personas</string>
+    <string name="action_editar">Editar</string>
+    <string name="action_repartir">Repartir</string>
+    <string name="action_gastos">Gastos</string>
+    <string name="action_anadir_persona">Añadir persona</string>
+    <string name="action_siguiente_abr">Sig.</string>
+    <string name="action_pagado">Pagado</string>
+    <string name="action_no_pagado">Pendiente</string>
     <!-- ACCIONES (FIN) -->
 
 
@@ -65,6 +74,7 @@
     <string name="title_activity_editar_apatxa">Cambiar Apatxa</string>
     <string name="title_activity_lista_personas">Personas</string>
     <string name="title_activity_lista_gastos">Gastos</string>
+    <string name="title_activity_settings">Ajustes</string>
     <!-- TITULOS (FIN) -->
 
 
@@ -158,6 +168,7 @@
     <string name="solo_un_dia">Solo un día</string>
 
     <string name="varios_dias">Varios días</string>
+    <string name="yo_mayusculas">YO</string>
 
 
 </resources>

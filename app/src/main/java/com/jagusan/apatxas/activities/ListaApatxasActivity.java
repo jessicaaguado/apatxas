@@ -3,10 +3,10 @@ package com.jagusan.apatxas.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -23,10 +23,11 @@ import com.jagusan.apatxas.adapters.ListaApatxasArrayAdapter;
 import com.jagusan.apatxas.listeners.OnVerDetalleApatxaClickListener;
 import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.modelView.ApatxaListado;
+import com.jagusan.apatxas.utils.SettingsUtils;
 
 import java.util.List;
 
-public class ListaApatxasActivity extends ActionBarActivity {
+public class ListaApatxasActivity extends ApatxasActionBarActivity {
 
     private ApatxaService apatxaService;
     private ListaApatxasArrayAdapter adapter;
@@ -34,9 +35,10 @@ public class ListaApatxasActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SettingsUtils.aplicarSettingsPropios(this);
 
         setContentView(R.layout.activity_lista_apatxas);
-        personalizarActionBar();
+        personalizarActionBar(R.string.app_name,true);
         apatxaService = new ApatxaService(this);
 
         cargarElementosLayout();
@@ -95,15 +97,12 @@ public class ListaApatxasActivity extends ActionBarActivity {
                 irAnadirApatxa();
                 return true;
             case R.id.action_configuracion:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    protected void personalizarActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setElevation(0);
     }
 
     private void irAnadirApatxa() {

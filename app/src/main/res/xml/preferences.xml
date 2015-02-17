@@ -1,0 +1,11 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+     <ListPreference
+        android:key="settings_apatxas_idioma"
+        android:title="@string/settings_apatxas_idioma"
+         android:summary="%s"
+        android:defaultValue="@string/settings_apatxas_valor_idioma_defecto"
+        android:entries="@array/idiomas"
+        android:entryValues="@array/idiomasValores" />
+
+</PreferenceScreen>

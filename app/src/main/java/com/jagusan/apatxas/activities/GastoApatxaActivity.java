@@ -23,9 +23,7 @@ import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
-public abstract class GastoApatxaActivity extends ActionBarActivity {
-
-	private final Boolean MOSTRAR_TITULO_PANTALLA = true;
+public abstract class GastoApatxaActivity extends ApatxasActionBarActivity {
 
 	protected AutoCompleteTextView conceptoGastoAutoComplete;
 	protected EditText totalGastoEditText;
@@ -68,11 +66,7 @@ public abstract class GastoApatxaActivity extends ActionBarActivity {
         gastoService = new GastoService(this);
 	}
 
-	protected void personalizarActionBar() {
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setElevation(0);
-		actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
-	}
+	abstract void personalizarActionBar();
 
 	protected void recuperarDatosPasoAnterior() {
         personasApatxa = getIntent().getSerializableExtra("personas") != null ? (ArrayList<PersonaListado>) getIntent().getSerializableExtra("personas") : new ArrayList<PersonaListado>();

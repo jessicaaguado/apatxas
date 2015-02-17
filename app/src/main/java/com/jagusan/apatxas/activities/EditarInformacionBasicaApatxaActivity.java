@@ -26,7 +26,7 @@ import com.jagusan.apatxas.utils.ConvertirFecha;
 import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
-public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
+public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActivity {
 
     private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
@@ -59,7 +59,7 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar();
+        personalizarActionBar(R.string.title_activity_editar_apatxa,MOSTRAR_TITULO_PANTALLA);
 
         recuperarDatosPasoAnterior();
 
@@ -101,12 +101,6 @@ public class EditarInformacionBasicaApatxaActivity extends ActionBarActivity {
     private void inicializarServicios() {
         resources = getResources();
         apatxaService = new ApatxaService(this);
-    }
-
-    private void personalizarActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setElevation(0);
-        actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
     }
 
     private void cargarElementosLayout() {

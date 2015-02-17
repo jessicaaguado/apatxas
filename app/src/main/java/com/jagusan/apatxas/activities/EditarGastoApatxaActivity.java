@@ -13,6 +13,8 @@ import java.util.List;
 
 public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 
+    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
+
     private Integer posicionGastoEditar;
     private Long idGasto;
     private String conceptoGasto;
@@ -63,6 +65,10 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    protected void personalizarActionBar(){
+        super.personalizarActionBar(R.string.title_activity_editar_gasto,MOSTRAR_TITULO_PANTALLA);
     }
 
     @Override

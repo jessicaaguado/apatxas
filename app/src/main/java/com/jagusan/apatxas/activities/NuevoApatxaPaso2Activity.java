@@ -31,7 +31,7 @@ import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
 
-public class NuevoApatxaPaso2Activity extends ActionBarActivity {
+public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
 
     private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
@@ -63,7 +63,7 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar();
+        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso2,MOSTRAR_TITULO_PANTALLA);
 
         cargarElementosLayout();
 
@@ -132,11 +132,6 @@ public class NuevoApatxaPaso2Activity extends ActionBarActivity {
         resources = getResources();
     }
 
-    private void personalizarActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setElevation(0);
-        actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
-    }
 
     private void cargarElementosLayout() {
         gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);

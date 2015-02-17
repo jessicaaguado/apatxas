@@ -32,7 +32,7 @@ import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaPersonasApatxaActivity extends ActionBarActivity {
+public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
 
     private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
@@ -64,7 +64,7 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar();
+        personalizarActionBar(R.string.title_activity_lista_personas,MOSTRAR_TITULO_PANTALLA);
 
         recuperarDatosPasoAnterior();
 
@@ -143,11 +143,6 @@ public class ListaPersonasApatxaActivity extends ActionBarActivity {
         apatxaService = new ApatxaService(this);
     }
 
-    private void personalizarActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setElevation(0);
-        actionBar.setDisplayShowTitleEnabled(MOSTRAR_TITULO_PANTALLA);
-    }
 
     private void recuperarDatosPasoAnterior() {
         Intent intent = getIntent();
