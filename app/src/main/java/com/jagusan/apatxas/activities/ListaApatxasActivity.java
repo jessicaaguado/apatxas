@@ -94,6 +94,8 @@ public class ListaApatxasActivity extends ActionBarActivity {
             case R.id.action_anadir:
                 irAnadirApatxa();
                 return true;
+            case R.id.action_configuracion:
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

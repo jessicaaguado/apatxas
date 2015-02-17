@@ -8,10 +8,10 @@
         android:icon="@drawable/ic_menu_action_apatxas_anadir_apatxa"
         android:title="@string/action_anadir"
         app:showAsAction="ifRoom"/>
-    <!--item
-        android:id="@+id/action_buscar"
-        android:icon="@drawable/ic_menu_action_apatxas_buscar"
-        android:title="@string/action_buscar"
-        app:showAsAction="ifRoom"/-->
+    <item
+        android:id="@+id/action_configuracion"
+        android:icon="@drawable/ic_menu_action_apatxas_configuracion"
+        android:title="@string/action_configuracion"
+        app:showAsAction="never|withText"/>
     
 </menu>
