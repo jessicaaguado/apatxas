@@ -29,6 +29,6 @@
         android:icon="@drawable/ic_menu_action_apatxas_editar"
         android:orderInCategory="4"
         android:title="@string/action_editar"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="never"/>
 
 </menu>
