@@ -1,13 +1,8 @@
 package com.jagusan.apatxas.activities;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -17,27 +12,27 @@ import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.utils.FormatearFecha;
-import com.jagusan.apatxas.utils.FormatearNumero;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
 
-    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
+    ApatxaService apatxaService;
+    Resources resources;
+    Long idApatxa;
 
-    protected ApatxaService apatxaService;
-    protected Resources resources;
-    protected Long idApatxa;
-
-    protected ViewGroup headerInformacionDetalle;
+    ViewGroup headerInformacionDetalle;
     private TextView nombreApatxaTextView;
     private TextView fechaApatxaTextView;
-    protected TextView numeroPersonasTextView;
+    TextView numeroPersonasTextView;
     private TextView estadoApatxaTextView;
 
-    protected ApatxaDetalle apatxa;
+    ApatxaDetalle apatxa;
 
-    public int EDITAR_INFORMACION_BASICA_REQUEST_CODE = 1;
-    public int EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE = 10;
+    int EDITAR_INFORMACION_BASICA_REQUEST_CODE = 1;
+    int EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +44,7 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_detalle_apatxa,MOSTRAR_TITULO_PANTALLA);
+        personalizarActionBar(R.string.title_activity_detalle_apatxa,MostrarTituloPantalla.DETALLE);
 
         cargarElementosLayout();
 
@@ -77,12 +72,12 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
 
     abstract protected void setContentView();
 
-    protected void inicializarServicios() {
+    void inicializarServicios() {
         apatxaService = new ApatxaService(this);
         resources = getResources();
     }
 
-    protected void cargarElementosLayout() {
+    void cargarElementosLayout() {
         nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaDetalle);
         fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaDetalle);
         headerInformacionDetalle = (ViewGroup) getLayoutInflater().inflate(R.layout.detalle_apatxa_resumen_header, null);
@@ -90,7 +85,7 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
         estadoApatxaTextView = (TextView) headerInformacionDetalle.findViewById(R.id.estadoApatxaDetalle);
     }
 
-    protected void cargarInformacionApatxa() {
+    void cargarInformacionApatxa() {
         apatxa = apatxaService.getApatxaDetalle(idApatxa);
         cargarInformacionTitulo();
         cargarInformacionFecha();
@@ -125,7 +120,7 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
         estadoApatxaTextView.setText(estadoApatxa);
     }
 
-    public void irEditarInformacionBasicaApatxa() {
+    void irEditarInformacionBasicaApatxa() {
         Intent intent = new Intent(this, EditarInformacionBasicaApatxaActivity.class);
         intent.putExtra("idApatxa", apatxa.id);
         intent.putExtra("nombre", apatxa.nombre);
@@ -137,9 +132,9 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
         startActivityForResult(intent, EDITAR_INFORMACION_BASICA_REQUEST_CODE);
     }
 
-    public void irEditarListaPersonasApatxa() {
+    void irEditarListaPersonasApatxa() {
         Intent intent = new Intent(this, ListaPersonasApatxaActivity.class);
-        intent.putExtra("personas", new ArrayList(apatxa.getPersonas()));
+        intent.putExtra("personas", new ArrayList<>(apatxa.getPersonas()));
         intent.putExtra("idApatxa", apatxa.id);
         startActivityForResult(intent, EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE);
     }

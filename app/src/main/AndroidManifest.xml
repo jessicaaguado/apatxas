@@ -39,13 +39,7 @@
             android:name=".activities.NuevoApatxaPaso1Activity"
             android:label="@string/title_activity_nuevo_apatxa_paso1"
             android:launchMode="singleTop"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".activities.ListaApatxasActivity" >
-
-            <!--
-                 meta-data android:name="android.support.UI_OPTIONS"
-            	       android:value="splitActionBarWhenNarrow" /
-            -->
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.ListaApatxasActivity" />
@@ -54,8 +48,7 @@
             android:name=".activities.NuevoApatxaPaso2Activity"
             android:label="@string/title_activity_nuevo_apatxa_paso2"
             android:launchMode="singleTop"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".activities.NuevoApatxaPaso1Activity" >
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.NuevoApatxaPaso1Activity" />
@@ -64,7 +57,6 @@
             android:name=".activities.NuevoGastoApatxaActivity"
             android:label="@string/title_activity_nuevo_gasto"
             android:configChanges="orientation|screenSize"
-            android:parentActivityName=".activities.NuevoApatxaPaso2Activity"
             android:windowSoftInputMode="stateVisible" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -74,8 +66,7 @@
             android:name=".activities.EditarGastoApatxaActivity"
             android:label="@string/title_activity_editar_gasto"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateVisible"
-            android:parentActivityName=".activities.ListaGastosApatxaActivity" >
+            android:windowSoftInputMode="stateVisible">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ListaGastosApatxaActivity"/>
@@ -83,8 +74,7 @@
         <activity
             android:name=".activities.DetalleApatxaSinRepartoActivity"
             android:label="@string/title_activity_detalle_apatxa"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".activities.ListaApatxasActivity" >
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ListaApatxasActivity" />
@@ -92,8 +82,7 @@
         <activity
             android:name=".activities.DetalleApatxaConRepartoActivity"
             android:label="@string/title_activity_detalle_apatxa"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".activities.ListaApatxasActivity" >
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.ListaApatxasActivity" />
@@ -102,24 +91,21 @@
             android:name=".activities.EditarInformacionBasicaApatxaActivity"
             android:label="@string/title_activity_editar_apatxa"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateVisible"
-            android:parentActivityName=".activities.DetalleApatxaConRepartoActivity" >
+            android:windowSoftInputMode="stateVisible">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" /> >
         </activity>
         <activity android:name=".activities.ListaPersonasApatxaActivity"
             android:label="@string/title_activity_lista_personas"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".activities.DetalleApatxaConRepartoActivity" >
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" />
         </activity>
         <activity android:name=".activities.ListaGastosApatxaActivity"
             android:label="@string/title_activity_lista_gastos"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".activities.DetalleApatxaConRepartoActivity" >
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" />
@@ -127,8 +113,7 @@
         <activity
             android:name=".activities.ListaContactosActivity"
             android:label="@string/title_activity_lista_contactos"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".activities.ListaPersonasApatxaActivity" >
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.ListaPersonasApatxaActivity" />
@@ -137,8 +122,7 @@
         <activity
             android:name="com.jagusan.apatxas.activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:configChanges="orientation|screenSize"
-            android:parentActivityName=".activities.ListaApatxasActivity" >
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.ListaApatxasActivity" />

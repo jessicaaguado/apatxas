@@ -13,8 +13,6 @@ import java.util.List;
 
 public class EditarGastoApatxaActivity extends GastoApatxaActivity {
 
-    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
-
     private Integer posicionGastoEditar;
     private Long idGasto;
     private String conceptoGasto;
@@ -68,7 +66,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
     }
 
     protected void personalizarActionBar(){
-        super.personalizarActionBar(R.string.title_activity_editar_gasto,MOSTRAR_TITULO_PANTALLA);
+        super.personalizarActionBar(R.string.title_activity_editar_gasto,MostrarTituloPantalla.EDITAR_GASTO);
     }
 
     @Override
@@ -93,7 +91,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
     private int getPosicionPersonaSeleccionada() {
         // anadimos 1 porque hemos forzado un nuevo elemento en la lista por
         // delante #sin pagar#
-        List<Long> idContactoPersonas = new ArrayList<Long>();
+        List<Long> idContactoPersonas = new ArrayList<>();
         for (PersonaListado persona : personasApatxa) {
             idContactoPersonas.add(persona.idContacto);
         }

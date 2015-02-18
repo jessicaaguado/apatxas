@@ -26,7 +26,6 @@
         android:paddingRight="@dimen/apatxas_padding_derecho_row_una_linea_con_avatar"
         android:paddingTop="@dimen/apatxas_padding_superior_row_una_linea_con_avatar"
         android:singleLine="true"
-        android:text="tarari"
         android:textAppearance="@style/texto_principal_lista" />
 
     <CheckBox

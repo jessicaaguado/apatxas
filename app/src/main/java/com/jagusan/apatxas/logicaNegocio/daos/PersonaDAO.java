@@ -1,19 +1,18 @@
 package com.jagusan.apatxas.logicaNegocio.daos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.jagusan.apatxas.logicaNegocio.cursorReader.ExtraerInformacionPersonaDeCursor;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonaDAO {
 
@@ -30,7 +29,7 @@ public class PersonaDAO {
 		this.database = database;
 	}
 
-	public Long crearPersona(String nombre, Long idApatxa, Long idContacto, String fotoContacto) {
+	public void crearPersona(String nombre, Long idApatxa, Long idContacto, String fotoContacto) {
 		ContentValues values = new ContentValues();
 		values.put(TablaPersona.COLUMNA_NOMBRE, nombre);
 		values.put(TablaPersona.COLUMNA_ID_APATXA, idApatxa);
@@ -39,8 +38,7 @@ public class PersonaDAO {
         }
         values.put(TablaPersona.COLUMNA_ID_CONTACTO, idContacto);
 
-		long insertId = database.insert(NOMBRE_TABLA_PERSONA, null, values);
-		return insertId;
+		database.insert(NOMBRE_TABLA_PERSONA, null, values);
 	}
 
 	public void borrarPersona(Long id) {
@@ -53,19 +51,10 @@ public class PersonaDAO {
         database.execSQL(sqlDeletePersonas);
     }
 
-	public Long recuperarIdPersonaPorNombre(String nombre, Long idApatxa) {
-		Long idPersona = null;
-		Cursor cursor = database.query(NOMBRE_TABLA_PERSONA, new String[] { TablaPersona.COLUMNA_ID }, TablaPersona.COLUMNA_ID_APATXA + " = " + idApatxa + " and " + TablaPersona.COLUMNA_NOMBRE
-				+ " = '" + nombre + "'", null, null, null, ORDEN_PERSONAS_DEFECTO);
-		if (cursor.moveToFirst()) {
-			idPersona = cursor.getLong(0);
-		}
-		cursor.close();
-		return idPersona;
-	}
+
 
 	public List<PersonaListado> recuperarPersonasApatxa(Long idApatxa) {
-		List<PersonaListado> personas = new ArrayList<PersonaListado>();
+		List<PersonaListado> personas = new ArrayList<>();
 		Cursor cursor = database.query(NOMBRE_TABLA_PERSONA, COLUMNAS_PERSONA, TablaPersona.COLUMNA_ID_APATXA + " = " + idApatxa, null, null, null, ORDEN_PERSONAS_DEFECTO);
 
 		cursor.moveToFirst();
@@ -81,7 +70,7 @@ public class PersonaDAO {
 	}
 
 	public List<PersonaListadoReparto> obtenerResultadoRepartoPersonas(Long idApatxa) {
-		List<PersonaListadoReparto> personas = new ArrayList<PersonaListadoReparto>();
+		List<PersonaListadoReparto> personas = new ArrayList<>();
 		Cursor cursor = database.query(NOMBRE_TABLA_PERSONA, COLUMNAS_PERSONA, TablaPersona.COLUMNA_ID_APATXA + " = " + idApatxa, null, null, null, ORDEN_PERSONAS_DEFECTO);
 
 		cursor.moveToFirst();

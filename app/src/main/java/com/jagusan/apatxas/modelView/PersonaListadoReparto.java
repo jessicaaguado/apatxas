@@ -1,12 +1,8 @@
 package com.jagusan.apatxas.modelView;
 
-import com.jagusan.apatxas.modelView.PersonaListado;
-
 public class PersonaListadoReparto extends PersonaListado {
 
     private Double cantidadPago;
-    private Double pagado;
-    private Double gastosPagados;
     private Boolean repartoPagado;
 
     public Double getCantidadPago() {
@@ -17,23 +13,7 @@ public class PersonaListadoReparto extends PersonaListado {
         this.cantidadPago = cantidadPago;
     }
 
-    public Double getPagado() {
-        return pagado;
-    }
-
-    public void setPagado(Double pagado) {
-        this.pagado = pagado;
-    }
-
-    public Double getGastosPagados() {
-        return gastosPagados;
-    }
-
-    public void setGastosPagados(Double gastosPagados) {
-        this.gastosPagados = gastosPagados;
-    }
-
-    public Boolean getRepartoPagado() {
+     public Boolean getRepartoPagado() {
         return repartoPagado;
     }
 

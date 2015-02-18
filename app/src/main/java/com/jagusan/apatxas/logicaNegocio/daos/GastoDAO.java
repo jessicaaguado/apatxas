@@ -1,8 +1,5 @@
 package com.jagusan.apatxas.logicaNegocio.daos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +10,9 @@ import com.jagusan.apatxas.logicaNegocio.cursorReader.ExtraerInformacionGastoDeC
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GastoDAO {
 
@@ -28,15 +28,14 @@ public class GastoDAO {
 		this.database = database;
 	}
 
-	public Long crearGasto(String concepto, Double total, Long idApatxa, Long idPersona) {
+	public void crearGasto(String concepto, Double total, Long idApatxa, Long idPersona) {
 		ContentValues values = new ContentValues();
 		values.put(TablaGasto.COLUMNA_CONCEPTO, concepto);
 		values.put(TablaGasto.COLUMNA_TOTAL, total);
 		values.put(TablaGasto.COLUMNA_ID_PAGADO_POR, idPersona);
 		values.put(TablaGasto.COLUMNA_ID_APATXA, idApatxa);
 
-		long insertId = database.insert(NOMBRE_TABLA_GASTO, null, values);
-		return insertId;
+		database.insert(NOMBRE_TABLA_GASTO, null, values);
 	}
 
 	public void borrarGasto(Long id) {
@@ -44,7 +43,7 @@ public class GastoDAO {
 	}
 
 	public List<GastoApatxaListado> recuperarGastosApatxa(Long idApatxa) {
-		List<GastoApatxaListado> gastos = new ArrayList<GastoApatxaListado>();
+		List<GastoApatxaListado> gastos = new ArrayList<>();
 
 		SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 		queryBuilder.setTables(TablaGasto.NOMBRE_TABLA + " left outer join " + TablaPersona.NOMBRE_TABLA + " on " + TablaGasto.COLUMNA_ID_PAGADO_POR + "=" + TablaPersona.COLUMNA_FULL_ID);
@@ -81,12 +80,6 @@ public class GastoDAO {
 		database.update(TablaGasto.NOMBRE_TABLA, values, where, whereArgs);
 	}
 
-	public Boolean hayGastosPagadosPorIdPersona(Long id) {
-		Cursor cursor = database.query(TablaGasto.NOMBRE_TABLA, new String[] { TablaGasto.COLUMNA_ID }, TablaGasto.COLUMNA_ID_PAGADO_POR + "= " + id, null, null, null, null);
-		boolean hayGastos = cursor.getCount() > 0;
-		cursor.close();
-		return hayGastos;
-	}
 
     public void borrarGastosDeApatxas(List<Long> idsApatxas) {
         String sqlDeleteGastos = "delete from " + TablaGasto.NOMBRE_TABLA + " where "
@@ -95,7 +88,7 @@ public class GastoDAO {
     }
 
     public List<String> recuperarTodosConceptos() {
-        List<String> conceptos = new ArrayList<String>();
+        List<String> conceptos = new ArrayList<>();
         String[] COLUMNA_NOMBRE = {TablaGasto.COLUMNA_CONCEPTO};
         Cursor cursor = database.query(true, TablaGasto.NOMBRE_TABLA, COLUMNA_NOMBRE, null, null, null, null, TablaGasto.COLUMNA_CONCEPTO + " ASC", null);
         cursor.moveToFirst();

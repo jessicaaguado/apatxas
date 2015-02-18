@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ActionMode;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +19,6 @@ import android.widget.TextView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
-import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
 import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.modelView.ContactoListado;
@@ -34,25 +30,21 @@ import java.util.List;
 
 public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
 
-    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
     private Long idApatxa;
     private ApatxaDetalle apatxa;
     private List<PersonaListado> personasApatxa;
-    private List<PersonaListado> personasAnadidas = new ArrayList<PersonaListado>();
-    private List<PersonaListado> personasEliminadas = new ArrayList<PersonaListado>();
+    private List<PersonaListado> personasAnadidas = new ArrayList<>();
+    private List<PersonaListado> personasEliminadas = new ArrayList<>();
 
-    private ListView personasListView;
+
     private TextView tituloPersonasListViewHeader;
     private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
     private Resources resources;
     private PersonaService personaService;
-    private GastoService gastoService;
+
     private ApatxaService apatxaService;
-
-    private int numPersonasApatxaAnadidas;
-
 
     private int SELECCIONAR_CONTACTOS_REQUEST_CODE = 1;
 
@@ -64,7 +56,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_lista_personas,MOSTRAR_TITULO_PANTALLA);
+        personalizarActionBar(R.string.title_activity_lista_personas,MostrarTituloPantalla.LISTA_PERSONAS);
 
         recuperarDatosPasoAnterior();
 
@@ -139,7 +131,6 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
     private void inicializarServicios() {
         resources = getResources();
         personaService = new PersonaService(this);
-        gastoService = new GastoService(this);
         apatxaService = new ApatxaService(this);
     }
 
@@ -148,13 +139,12 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
         Intent intent = getIntent();
         personasApatxa = (ArrayList<PersonaListado>) intent.getSerializableExtra("personas");
         idApatxa = intent.getLongExtra("idApatxa", -1);
-        numPersonasApatxaAnadidas = personasApatxa.size();
         apatxa = apatxaService.getApatxaDetalle(idApatxa);
     }
 
     private void cargarElementosLayout() {
-        personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
-        anadirCabeceraListaPersonas(getLayoutInflater());
+        ListView personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+        anadirCabeceraListaPersonas();
 
         listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
         personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
@@ -163,7 +153,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
         gestionarListaVacia();
     }
 
-    private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
+    private void anadirCabeceraListaPersonas() {
         tituloPersonasListViewHeader = (TextView) findViewById(R.id.listaPersonasApatxaCabecera);
         actualizarTituloCabeceraListaPersonas();
     }
@@ -202,7 +192,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
     }
 
     public void anadirPersonasParaBorrar(List<PersonaListado> personas) {
-        List<PersonaListado> personasBorrarAunSinGuardar = new ArrayList<PersonaListado>();
+        List<PersonaListado> personasBorrarAunSinGuardar = new ArrayList<>();
         for (PersonaListado persona : personas) {
             if (persona.id == null) {
                 personasBorrarAunSinGuardar.add(persona);

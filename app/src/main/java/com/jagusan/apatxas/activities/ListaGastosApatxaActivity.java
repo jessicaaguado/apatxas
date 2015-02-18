@@ -6,10 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.ActionMode;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +19,6 @@ import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
-import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
@@ -33,25 +29,21 @@ import java.util.List;
 
 public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
-    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
-
     private int NUEVO_GASTO_REQUEST_CODE = 1;
     private int EDITAR_GASTO_REQUEST_CODE = 2;
 
     private Long idApatxa;
     private ApatxaDetalle apatxa;
     private List<PersonaListado> personasApatxa;
-    private List<GastoApatxaListado> gastosAnadidos = new ArrayList<GastoApatxaListado>();
-    private List<GastoApatxaListado> gastosEliminados = new ArrayList<GastoApatxaListado>();
-    private List<GastoApatxaListado> gastosModificados = new ArrayList<GastoApatxaListado>();
+    private List<GastoApatxaListado> gastosAnadidos = new ArrayList<>();
+    private List<GastoApatxaListado> gastosEliminados = new ArrayList<>();
+    private List<GastoApatxaListado> gastosModificados = new ArrayList<>();
 
-    private ListView gastosApatxaListView;
     private TextView tituloGastosApatxaListViewHeader;
-    private List<GastoApatxaListado> listaGastos = new ArrayList<GastoApatxaListado>();
+    private List<GastoApatxaListado> listaGastos = new ArrayList<>();
     private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
 
     private ApatxaService apatxaService;
-    private PersonaService personaService;
     private GastoService gastoService;
     private Resources resources;
 
@@ -62,7 +54,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_lista_gastos,MOSTRAR_TITULO_PANTALLA);
+        personalizarActionBar(R.string.title_activity_lista_gastos,MostrarTituloPantalla.LISTA_GASTOS);
 
         recuperarDatosPasoAnterior();
 
@@ -123,7 +115,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private void continuarConLosCambios() {
         gastoService.borrarGastos(gastosEliminados);
         gastoService.crearGastos(gastosAnadidos, idApatxa);
-        gastoService.actualizarGastos(gastosModificados, idApatxa);
+        gastoService.actualizarGastos(gastosModificados);
         Intent returnIntent = new Intent();
         setResult(RESULT_OK, returnIntent);
         finish();
@@ -158,15 +150,14 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
     private void inicializarServicios() {
         apatxaService = new ApatxaService(this);
-        personaService = new PersonaService(this);
         gastoService = new GastoService(this);
         resources = getResources();
     }
 
 
     private void cargarElementosLayout() {
-        gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
-        anadirCabeceraListaGastos(getLayoutInflater());
+        ListView gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
+        anadirCabeceraListaGastos();
 
         listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, listaGastos);
         gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
@@ -184,7 +175,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
     }
 
-    private void anadirCabeceraListaGastos(LayoutInflater inflater) {
+    private void anadirCabeceraListaGastos() {
         tituloGastosApatxaListViewHeader = (TextView) findViewById(R.id.listaGastosApatxaCabecera);
         tituloGastosApatxaListViewHeader.setVisibility(View.VISIBLE);
         actualizarTituloCabeceraListaGastos();

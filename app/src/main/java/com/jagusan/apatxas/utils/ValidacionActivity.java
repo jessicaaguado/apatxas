@@ -1,18 +1,18 @@
 package com.jagusan.apatxas.utils;
 
-import java.util.regex.Pattern;
-
 import android.content.res.Resources;
 import android.widget.EditText;
 
 import com.jagusan.apatxas.R;
+
+import java.util.regex.Pattern;
 
 public class ValidacionActivity {
 
 	private static final String EMPTY = "";
 
 	public static final Integer MENS_OBLIGATORIO = R.string.validacion_mensaje_obligatorio;
-	public static final Integer MENS_FORMATO_FECHA_INCORRECTA = R.string.validacion_mensaje_formato_fecha_incorrecto;
+
 
 	public static final String REGEX_DEFAULT = ".*";
 
@@ -20,13 +20,7 @@ public class ValidacionActivity {
 		return validarCampoObligatorio(editText, resources);
 	}
 
-	public static boolean validarConceptoObligatorio(EditText editText, Resources resources) {
-		return validarCampoObligatorio(editText, resources);
-	}
 
-	public static boolean validarFechaObligatoria(EditText editText, Resources resources) {
-		return validarCampoObligatorio(editText, resources);
-	}
 
 	public static Boolean validarCantidadObligatoria(EditText editText, Resources resources) {
 		return validarCampoObligatorio(editText, resources);

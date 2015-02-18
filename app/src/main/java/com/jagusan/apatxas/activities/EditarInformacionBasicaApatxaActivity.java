@@ -1,15 +1,9 @@
 package com.jagusan.apatxas.activities;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,9 +20,10 @@ import com.jagusan.apatxas.utils.ConvertirFecha;
 import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
-public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActivity {
+import java.util.Calendar;
+import java.util.Date;
 
-    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
+public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActivity {
 
     private EditText nombreApatxaEditText;
     private TextView fechaInicioApatxaTextView;
@@ -59,7 +54,7 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_editar_apatxa,MOSTRAR_TITULO_PANTALLA);
+        personalizarActionBar(R.string.title_activity_editar_apatxa,MostrarTituloPantalla.EDITAR_APATXA);
 
         recuperarDatosPasoAnterior();
 
@@ -175,24 +170,24 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
         }
     }
 
-    protected String getNombreIntroducido() {
+    String getNombreIntroducido() {
         return nombreApatxaEditText.getText().toString();
     }
 
-    protected Long getFechaInicioIntroducida() {
+     Long getFechaInicioIntroducida() {
         return ConvertirFecha.getTime(resources, fechaInicioApatxaTextView.getText().toString());
 
     }
 
-    protected Long getFechaFinIntroducida() {
+     Long getFechaFinIntroducida() {
         return ConvertirFecha.getTime(resources, fechaFinApatxaTextView.getText().toString());
     }
 
-    protected Boolean getSoloUnDiaSeleccionado() {
+     Boolean getSoloUnDiaSeleccionado() {
         return soloUnDiaSwitch.isChecked();
     }
 
-    protected Double getBoteIntroducido() {
+     Double getBoteIntroducido() {
         Double boteInicial = 0.0;
         try {
             boteInicial = Double.parseDouble(boteInicialEditText.getText().toString());
@@ -202,7 +197,7 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
         return boteInicial;
     }
 
-    protected Boolean getDescontarBoteInicial() {
+     Boolean getDescontarBoteInicial() {
         return descontarBoteInicialCheckBox.isChecked();
     }
 

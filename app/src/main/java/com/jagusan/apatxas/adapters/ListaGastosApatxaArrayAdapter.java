@@ -1,8 +1,5 @@
 package com.jagusan.apatxas.adapters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -15,6 +12,9 @@ import android.widget.TextView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.utils.FormatearNumero;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaListado> {
 
@@ -31,7 +31,7 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
 		this.context = context;
 		this.rowLayoutId = rowLayoutId;
 		this.gastos = gastos;
-        gastosSeleccionados = new ArrayList<GastoApatxaListado>();
+        gastosSeleccionados = new ArrayList<>();
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
     }
 
     public void resetearSeleccion() {
-        gastosSeleccionados = new ArrayList<GastoApatxaListado>();
+        gastosSeleccionados = new ArrayList<>();
         notifyDataSetChanged();
     }
 

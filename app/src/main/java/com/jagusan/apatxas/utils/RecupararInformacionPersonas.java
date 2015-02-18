@@ -9,7 +9,7 @@ import java.util.List;
 public class RecupararInformacionPersonas {
 
     public static List<Long> obtenerIdsContactos(List<PersonaListado> listaPersonas) {
-        List<Long> listaIdsContactos = new ArrayList<Long>();
+        List<Long> listaIdsContactos = new ArrayList<>();
         for (PersonaListado persona:listaPersonas){
             if (persona.idContacto != null){
                 listaIdsContactos.add(persona.idContacto);

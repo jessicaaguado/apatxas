@@ -1,8 +1,8 @@
 package com.jagusan.apatxas.modelView;
 
-import java.util.Date;
-
 import com.jagusan.apatxas.utils.EstadoApatxa;
+
+import java.util.Date;
 
 public class ApatxaListado {
 

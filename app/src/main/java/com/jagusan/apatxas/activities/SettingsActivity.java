@@ -17,7 +17,7 @@ public class SettingsActivity extends ApatxasActionBarActivity  implements Share
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        personalizarActionBar(R.string.title_activity_settings,true);
+        personalizarActionBar(R.string.title_activity_settings,MostrarTituloPantalla.SETTINGS);
 		// Display the preferences fragment as the content of the activity
 		getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);

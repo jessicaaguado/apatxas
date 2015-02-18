@@ -1,19 +1,12 @@
 package com.jagusan.apatxas.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ActionMode;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,9 +24,11 @@ import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
 
-    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
     private ApatxaService apatxaService;
     private PersonaService personaService;
@@ -51,9 +46,8 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     private int NUEVO_GASTO_REQUEST_CODE = 1;
     private int EDITAR_GASTO_REQUEST_CODE = 2;
 
-    private ListView gastosApatxaListView;
     private TextView tituloGastosApatxaListViewHeader;
-    private List<GastoApatxaListado> listaGastos = new ArrayList<GastoApatxaListado>();
+    private List<GastoApatxaListado> listaGastos = new ArrayList<>();
     private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
 
     @Override
@@ -63,7 +57,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso2,MOSTRAR_TITULO_PANTALLA);
+        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso2,MostrarTituloPantalla.NUEVO_APATXA_PASO2);
 
         cargarElementosLayout();
 
@@ -134,8 +128,8 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
 
 
     private void cargarElementosLayout() {
-        gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
-        anadirCabeceraListaGastos(getLayoutInflater());
+        ListView gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
+        anadirCabeceraListaGastos();
 
         listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, listaGastos);
         gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
@@ -155,7 +149,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
         personasApatxa = (ArrayList<PersonaListado>) intent.getSerializableExtra("personas");
     }
 
-    private void anadirCabeceraListaGastos(LayoutInflater inflater) {
+    private void anadirCabeceraListaGastos() {
         tituloGastosApatxaListViewHeader = (TextView) findViewById(R.id.listaGastosApatxaCabecera);
         tituloGastosApatxaListViewHeader.setVisibility(View.VISIBLE);
         actualizarTituloCabeceraListaGastos();
@@ -201,7 +195,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
         intent.putExtra("conceptoGasto", gasto.getConcepto());
         intent.putExtra("importeGasto", gasto.getTotal());
         intent.putExtra("idContactoPersonaPagadoGasto", gasto.idContactoPersonaPagadoPor);
-        intent.putExtra("personas", (ArrayList<PersonaListado>) personasApatxa);
+        intent.putExtra("personas",personasApatxa);
         intent.putExtra("posicionGastoEditar", listaGastosApatxaArrayAdapter.getPosition(gasto));
         startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
     }

@@ -1,15 +1,9 @@
 package com.jagusan.apatxas.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.Inflater;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,17 +13,17 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
-import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
-import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
@@ -42,12 +36,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     private final int EDITAR_GASTO_REQUEST_CODE = 21;
 
     private GastoService gastoService;
-    private PersonaService personaService;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -89,7 +78,6 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     protected void inicializarServicios() {
         super.inicializarServicios();
         gastoService = new GastoService(this);
-        personaService = new PersonaService(this);
     }
 
     private void verReparto() {
@@ -133,7 +121,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     }
 
 
-    public void anadirGastoDetalleApatxa() {
+    void anadirGastoDetalleApatxa() {
         Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
         intent.putExtra("personas", (ArrayList<PersonaListado>) apatxa.getPersonas());
         startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);

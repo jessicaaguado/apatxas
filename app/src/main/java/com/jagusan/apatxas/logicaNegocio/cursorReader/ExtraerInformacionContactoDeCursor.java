@@ -2,7 +2,6 @@ package com.jagusan.apatxas.logicaNegocio.cursorReader;
 
 import android.database.Cursor;
 
-import com.jagusan.apatxas.modelView.ApatxaListado;
 import com.jagusan.apatxas.modelView.ContactoListado;
 
 public class ExtraerInformacionContactoDeCursor {

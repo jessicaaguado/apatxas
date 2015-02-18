@@ -1,10 +1,5 @@
 package com.jagusan.apatxas.adapters;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -18,6 +13,10 @@ import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.modelView.ApatxaListado;
 import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
 
@@ -35,7 +34,7 @@ public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
 		this.rowLayoutId = rowLayoutId;
 		this.apatxas = apatxas;
 
-        apatxasSeleccionadas = new ArrayList<ApatxaListado>();
+        apatxasSeleccionadas = new ArrayList<>();
 	}
 
 	@Override
@@ -88,7 +87,7 @@ public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
     }
 
     public void resetearSeleccion() {
-        apatxasSeleccionadas = new ArrayList<ApatxaListado>();
+        apatxasSeleccionadas = new ArrayList<>();
         notifyDataSetChanged();
     }
 

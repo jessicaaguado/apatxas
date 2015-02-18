@@ -1,8 +1,8 @@
 package com.jagusan.apatxas.logicaNegocio.cursorReader;
 
-import java.util.Date;
-
 import android.database.Cursor;
+
+import java.util.Date;
 
 public class CursorTablaApatxa {
 

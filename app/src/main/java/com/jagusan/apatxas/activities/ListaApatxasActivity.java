@@ -3,11 +3,8 @@ package com.jagusan.apatxas.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,7 +35,7 @@ public class ListaApatxasActivity extends ApatxasActionBarActivity {
         SettingsUtils.aplicarSettingsPropios(this);
 
         setContentView(R.layout.activity_lista_apatxas);
-        personalizarActionBar(R.string.app_name,true);
+        personalizarActionBar(R.string.app_name,MostrarTituloPantalla.LISTA_APATXAS);
         apatxaService = new ApatxaService(this);
 
         cargarElementosLayout();

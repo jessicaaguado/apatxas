@@ -1,7 +1,6 @@
 package com.jagusan.apatxas.sqlite.helper;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -16,7 +15,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String NOMBRE_BASE_DATOS = "apatxas.db";
     private static final int VERSION_BASE_DATOS = 1;
 
-    private static final boolean logearEstadoBD = true;
 
     public DatabaseHelper(Context context) {
         super(context, NOMBRE_BASE_DATOS, null, VERSION_BASE_DATOS);

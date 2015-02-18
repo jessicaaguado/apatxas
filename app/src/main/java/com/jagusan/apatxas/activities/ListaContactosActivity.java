@@ -2,31 +2,23 @@ package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaContactosArrayAdapter;
-import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.servicios.ContactoService;
-import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
-import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
 import com.jagusan.apatxas.modelView.ContactoListado;
-import com.jagusan.apatxas.modelView.PersonaListado;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListaContactosActivity extends ApatxasActionBarActivity {
 
-    private static final Boolean MOSTRAR_TITULO_PANTALLA = true;
 
     private ContactoService contactoService;
 
@@ -41,7 +33,7 @@ public class ListaContactosActivity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_lista_contactos,MOSTRAR_TITULO_PANTALLA);
+        personalizarActionBar(R.string.title_activity_lista_contactos,MostrarTituloPantalla.LISTA_CONTACTOS);
 
         recuperarDatosPasoAnterior();
 

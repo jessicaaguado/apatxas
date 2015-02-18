@@ -1,8 +1,5 @@
 package com.jagusan.apatxas.logicaNegocio.daos;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,6 +12,9 @@ import com.jagusan.apatxas.modelView.ApatxaListado;
 import com.jagusan.apatxas.sqlite.tables.TablaApatxa;
 import com.jagusan.apatxas.sqlite.tables.TablaGasto;
 import com.jagusan.apatxas.sqlite.tables.TablaPersona;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ApatxaDAO {
 
@@ -45,8 +45,7 @@ public class ApatxaDAO {
         values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
         values.put(TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, descontarBoteInicialDeGastoTotal);
         Log.d("APATXAS-SQL", "NUEVO APATXA " + values);
-        long insertId = database.insert(TablaApatxa.NOMBRE_TABLA, null, values);
-        return insertId;
+        return database.insert(TablaApatxa.NOMBRE_TABLA, null, values);
     }
 
     public void actualizarApatxa(Long id, String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia, Double boteInicial, Integer descontarBoteInicialDeGastoTotal) {
@@ -77,7 +76,7 @@ public class ApatxaDAO {
     }
 
     public List<ApatxaListado> getTodosApatxas() {
-        List<ApatxaListado> apatxas = new ArrayList<ApatxaListado>();
+        List<ApatxaListado> apatxas = new ArrayList<>();
         Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, null, null, null, null, ORDEN_APATXAS_DEFECTO);
 
         cursor.moveToFirst();
@@ -106,7 +105,7 @@ public class ApatxaDAO {
     }
 
     public List<String> recuperarTodosTitulos() {
-        List<String> titulos = new ArrayList<String>();
+        List<String> titulos = new ArrayList<>();
         String[] COLUMNA_NOMBRE = {TablaApatxa.COLUMNA_NOMBRE};
         Cursor cursor = database.query(true, TablaApatxa.NOMBRE_TABLA, COLUMNA_NOMBRE, null, null, null, null, TablaApatxa.COLUMNA_NOMBRE + " ASC", null);
 

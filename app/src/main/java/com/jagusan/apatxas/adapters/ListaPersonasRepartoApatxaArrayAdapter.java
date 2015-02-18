@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +34,7 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         this.rowLayoutId = rowLayoutId;
         this.personas = personas;
 
-        personasSeleccionadas = new ArrayList<PersonaListadoReparto>();
+        personasSeleccionadas = new ArrayList<>();
     }
 
     @Override
@@ -86,7 +85,7 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
     }
 
     public void resetearSeleccion() {
-        personasSeleccionadas = new ArrayList<PersonaListadoReparto>();
+        personasSeleccionadas = new ArrayList<>();
         notifyDataSetChanged();
     }
 
@@ -98,10 +97,5 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         return personasSeleccionadas.size();
     }
 
-    public void eliminarPersonasSeleccionadas() {
-        for (PersonaListadoReparto personaEliminar : personasSeleccionadas) {
-            personas.remove(personaEliminar);
-        }
-        resetearSeleccion();
-    }
+
 }

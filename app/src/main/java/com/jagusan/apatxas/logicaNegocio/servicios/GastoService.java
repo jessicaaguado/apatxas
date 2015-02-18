@@ -6,15 +6,14 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.jagusan.apatxas.logicaNegocio.daos.GastoDAO;
 import com.jagusan.apatxas.logicaNegocio.daos.PersonaDAO;
-import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 
 import java.util.List;
 
 public class GastoService {
 
     private DatabaseHelper dbHelper;
-    private SQLiteDatabase database;
 
     private GastoDAO gastoDAO;
     private PersonaDAO personaDAO;
@@ -28,7 +27,7 @@ public class GastoService {
     }
 
     public void open() throws SQLException {
-        database = dbHelper.getWritableDatabase();
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
         gastoDAO.setDatabase(database);
         personaDAO.setDatabase(database);
     }
@@ -37,18 +36,10 @@ public class GastoService {
         dbHelper.close();
     }
 
-    public Long crearGasto(String concepto, Double total, Long idApatxa, Long idPersona) {
+    public void crearGasto(String concepto, Double total, Long idApatxa, Long idPersona) {
         open();
-        Long idGasto = gastoDAO.crearGasto(concepto, total, idApatxa, idPersona);
+        gastoDAO.crearGasto(concepto, total, idApatxa, idPersona);
         close();
-        return idGasto;
-    }
-
-    public List<GastoApatxaListado> getTodosGastosApatxa(Long idApatxa) {
-        open();
-        List<GastoApatxaListado> listaGastos = gastoDAO.recuperarGastosApatxa(idApatxa);
-        close();
-        return listaGastos;
     }
 
     public void actualizarGasto(Long idGasto, String conceptoGasto, Double totalGasto, Long idPersona) {
@@ -68,36 +59,20 @@ public class GastoService {
         close();
     }
 
-    public void borrarGasto(Long idGasto) {
-        open();
-        gastoDAO.borrarGasto(idGasto);
-        close();
-    }
-
-    public boolean hayGastosAsociadosA(Long id) {
-        open();
-        Boolean hayGastos = gastoDAO.hayGastosPagadosPorIdPersona(id);
-        close();
-        return hayGastos;
-    }
 
     public void crearGastos(List<GastoApatxaListado> gastosAnadidos, Long idApatxa) {
         open();
         for (GastoApatxaListado gasto : gastosAnadidos) {
-            //TODO pagadoPor
             Long idPersonaPagado = gasto.getIdPagadoPor();
-            //Long idPersonaPagado = personaDAO.recuperarIdPersonaPorNombre(gasto.getPagadoPor(), idApatxa);
             gastoDAO.crearGasto(gasto.getConcepto(), gasto.getTotal(), idApatxa, idPersonaPagado);
         }
         close();
     }
 
-    public void actualizarGastos(List<GastoApatxaListado> gastosModificados, Long idApatxa) {
+    public void actualizarGastos(List<GastoApatxaListado> gastosModificados) {
         open();
         for (GastoApatxaListado gasto : gastosModificados) {
-            //TODO pagadoPor
             Long idPersonaPagado = gasto.getIdPagadoPor();
-            //Long idPersonaPagado = personaDAO.recuperarIdPersonaPorNombre(gasto.getPagadoPor(), idApatxa);
             gastoDAO.actualizarGasto(gasto.getId(), gasto.getConcepto(), gasto.getTotal(), idPersonaPagado);
         }
         close();

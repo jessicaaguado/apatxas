@@ -2,8 +2,6 @@ package com.jagusan.apatxas.logicaNegocio.cursorReader;
 
 import android.database.Cursor;
 
-import java.util.Date;
-
 public class CursorContacto {
 
     private static final Integer POSICION_ID = 0;

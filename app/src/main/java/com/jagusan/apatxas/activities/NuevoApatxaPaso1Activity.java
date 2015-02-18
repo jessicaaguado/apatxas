@@ -1,10 +1,5 @@
 package com.jagusan.apatxas.activities;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -12,11 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ActionMode;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,9 +33,12 @@ import com.jagusan.apatxas.utils.FormatearFecha;
 import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
-public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-    private final Boolean MOSTRAR_TITULO_PANTALLA = true;
+public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
 
     private AutoCompleteTextView nombreApatxaAutoComplete;
     private TextView fechaInicioApatxaTextView;
@@ -55,9 +49,8 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
     private CheckBox descontarBoteInicialCheckBox;
     private Switch soloUnDiaSwitch;
 
-    private ListView personasListView;
     private TextView tituloPersonasListViewHeader;
-    private List<PersonaListado> personasApatxa = new ArrayList<PersonaListado>();
+    private List<PersonaListado> personasApatxa = new ArrayList<>();
     private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
     private Resources resources;
@@ -72,7 +65,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso1,MOSTRAR_TITULO_PANTALLA);
+        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso1,MostrarTituloPantalla.NUEVO_APATXA_PASO1);
 
         cargarElementosLayout();
         inicializarElementosLayout();
@@ -100,7 +93,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
 
     }
 
-    private void anadirCabeceraListaPersonas(LayoutInflater inflater) {
+    private void anadirCabeceraListaPersonas() {
         tituloPersonasListViewHeader = (TextView) findViewById(R.id.listaPersonasApatxaCabecera);
         actualizarTituloCabeceraListaPersonas();
     }
@@ -199,8 +192,8 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
         descontarBoteInicialCheckBox = (CheckBox) findViewById(R.id.descontarBoteInicial);
 
-        personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
-        anadirCabeceraListaPersonas(getLayoutInflater());
+        ListView personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+        anadirCabeceraListaPersonas();
 
         listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
         personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
@@ -241,7 +234,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
 
 
         List<String> todosTitulos = apatxaService.recuperarTodosTitulos();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, todosTitulos);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, todosTitulos);
         nombreApatxaAutoComplete.setAdapter(adapter);
         nombreApatxaAutoComplete.setThreshold(3);
     }

@@ -1,8 +1,5 @@
 package com.jagusan.apatxas.logicaNegocio.servicios;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,40 +8,38 @@ import android.util.Log;
 import com.jagusan.apatxas.logicaNegocio.daos.ApatxaDAO;
 import com.jagusan.apatxas.logicaNegocio.daos.GastoDAO;
 import com.jagusan.apatxas.logicaNegocio.daos.PersonaDAO;
-import com.jagusan.apatxas.modelView.PersonaListado;
-import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.modelView.ApatxaListado;
+import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.modelView.PersonaListadoReparto;
+import com.jagusan.apatxas.sqlite.helper.DatabaseHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ApatxaService {
 
 	private DatabaseHelper dbHelper;
-	private SQLiteDatabase database;
 
 	private ApatxaDAO apatxaDAO;
 	private PersonaDAO personaDAO;
 	private GastoDAO gastoDAO;
-
-	private CalcularRepartoService calcularRepartoService;
-
 
 	public ApatxaService(Context context) {
 		dbHelper = new DatabaseHelper(context);
 		apatxaDAO = new ApatxaDAO();
 		personaDAO = new PersonaDAO();
 		gastoDAO = new GastoDAO();
-		calcularRepartoService = new CalcularRepartoService();
 	}
 
-	public void open() throws SQLException {
-		database = dbHelper.getWritableDatabase();
+	private void open() throws SQLException {
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
         apatxaDAO.setDatabase(database);
 		personaDAO.setDatabase(database);
 		gastoDAO.setDatabase(database);
 	}
 
-	public void close() {
+	private void close() {
         dbHelper.close();
 	}
 
@@ -87,7 +82,7 @@ public class ApatxaService {
 
 	public void realizarReparto(ApatxaDetalle apatxaDetalle) {
 		open();
-		Double gastoProporcional = calcularRepartoService.calcularParteProporcional(apatxaDetalle);
+		Double gastoProporcional = CalcularRepartoService.calcularParteProporcional(apatxaDetalle);
         Log.d("APATXAS-REPARTO", "Gasto proporcional " + gastoProporcional);
 		for (PersonaListado persona:apatxaDetalle.getPersonas()) {
 			personaDAO.asociarPagoPersona(persona.id, gastoProporcional);
@@ -105,7 +100,7 @@ public class ApatxaService {
 
     public void borrarApatxas(List<ApatxaListado> listaApatxas){
         open();
-        List<Long> idsApatxasBorrar = new ArrayList<Long>(listaApatxas.size());
+        List<Long> idsApatxasBorrar = new ArrayList<>(listaApatxas.size());
         for (ApatxaListado apatxa:listaApatxas){
             idsApatxasBorrar.add(apatxa.id);
         }

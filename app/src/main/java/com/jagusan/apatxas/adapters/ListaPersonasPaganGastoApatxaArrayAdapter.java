@@ -2,7 +2,6 @@ package com.jagusan.apatxas.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.modelView.PersonaListado;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListaPersonasPaganGastoApatxaArrayAdapter extends ArrayAdapter<PersonaListado> {
@@ -60,7 +58,5 @@ public class ListaPersonasPaganGastoApatxaArrayAdapter extends ArrayAdapter<Pers
         return convertView;
     }
 
-    public List<PersonaListado> getPersonas() {
-        return personas;
-    }
+
 }

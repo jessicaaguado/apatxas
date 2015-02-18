@@ -2,7 +2,6 @@ package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
 import android.database.DataSetObserver;
-import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,10 +17,8 @@ import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasRepartoApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
-import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
-import com.jagusan.apatxas.utils.ObtenerDescripcionEstadoApatxa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +33,6 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     private TextView tituloRepartoApatxaListViewHeader;
     private ListaPersonasRepartoApatxaArrayAdapter listaPersonasRepartoApatxaArrayAdapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -114,11 +107,11 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
         tituloRepartoApatxaListViewHeader.setText(titulo);
     }
 
-    public void irEditarListaGastosApatxa() {
+    void irEditarListaGastosApatxa() {
         Intent intent = new Intent(this, ListaGastosApatxaActivity.class);
-        intent.putExtra("personas", new ArrayList<PersonaListado>(apatxa.getPersonas()));
+        intent.putExtra("personas", new ArrayList<>(apatxa.getPersonas()));
         intent.putExtra("idApatxa", apatxa.id);
-        intent.putExtra("gastos", new ArrayList<GastoApatxaListado>(apatxa.getGastos()));
+        intent.putExtra("gastos", new ArrayList<>(apatxa.getGastos()));
         startActivityForResult(intent, EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE);
     }
 

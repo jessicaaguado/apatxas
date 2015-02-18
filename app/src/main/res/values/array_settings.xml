@@ -4,7 +4,7 @@
         <item>@string/settings_apatxas_idioma_euskera</item>
     </string-array>
     <string-array name="idiomasValores">
-        <item>es</item>
-        <item>eu</item>
+        <item>@string/settings_apatxas_valor_idioma_castellano</item>
+        <item>@string/settings_apatxas_valor_idioma_euskera</item>
     </string-array>
 </resources>

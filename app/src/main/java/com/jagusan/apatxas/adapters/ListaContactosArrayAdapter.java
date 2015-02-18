@@ -2,21 +2,17 @@ package com.jagusan.apatxas.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.modelView.ContactoListado;
-import com.jagusan.apatxas.modelView.PersonaListado;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +32,7 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> {
         this.context = context;
         this.rowLayoutId = rowLayoutId;
         this.contactos = contactos;
-        this.contactosSeleccionados = new ArrayList<ContactoListado>();
+        this.contactosSeleccionados = new ArrayList<>();
     }
 
     @Override

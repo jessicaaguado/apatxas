@@ -2,7 +2,6 @@ package com.jagusan.apatxas.logicaNegocio.cursorReader;
 
 import android.database.Cursor;
 
-import com.jagusan.apatxas.logicaNegocio.cursorReader.CursorTablaPersona;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 
@@ -24,7 +23,6 @@ public class ExtraerInformacionPersonaDeCursor {
         persona.idContacto = tablaPersonaCursor.getIdContacto();
         persona.uriFoto = tablaPersonaCursor.getFotoContacto();
         persona.setCantidadPago(tablaPersonaCursor.getCuantiaPago());
-        persona.setPagado(tablaPersonaCursor.getPagado());
         persona.setRepartoPagado(tablaPersonaCursor.getHecho());
         return persona;
     }

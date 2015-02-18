@@ -1,8 +1,5 @@
 package com.jagusan.apatxas.adapters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -16,6 +13,9 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.modelView.PersonaListado;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<PersonaListado> {
 
@@ -32,7 +32,7 @@ public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<PersonaListado
         this.context = context;
         this.rowLayoutId = rowLayoutId;
         this.personas = personas;
-        personasSeleccionadas = new ArrayList<PersonaListado>();
+        personasSeleccionadas = new ArrayList<>();
     }
 
     @Override
@@ -76,7 +76,7 @@ public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<PersonaListado
     }
 
     public void resetearSeleccion() {
-        personasSeleccionadas = new ArrayList<PersonaListado>();
+        personasSeleccionadas = new ArrayList<>();
         notifyDataSetChanged();
     }
 
