@@ -3,7 +3,6 @@ package com.jagusan.apatxas.logicaNegocio.servicios;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.jagusan.apatxas.logicaNegocio.daos.ApatxaDAO;
 import com.jagusan.apatxas.logicaNegocio.daos.GastoDAO;
@@ -61,8 +60,8 @@ public class ApatxaService {
 	public ApatxaDetalle getApatxaDetalle(Long id) {
 		open();
 		ApatxaDetalle apatxa = apatxaDAO.getApatxa(id);
-		apatxa.setPersonas(personaDAO.recuperarPersonasApatxa(id));
-		apatxa.setGastos(gastoDAO.recuperarGastosApatxa(id));
+		apatxa.personas = personaDAO.recuperarPersonasApatxa(id);
+		apatxa.gastos = gastoDAO.recuperarGastosApatxa(id);
 		close();
 		return apatxa;
 	}
@@ -83,8 +82,7 @@ public class ApatxaService {
 	public void realizarReparto(ApatxaDetalle apatxaDetalle) {
 		open();
 		Double gastoProporcional = CalcularRepartoService.calcularParteProporcional(apatxaDetalle);
-        Log.d("APATXAS-REPARTO", "Gasto proporcional " + gastoProporcional);
-		for (PersonaListado persona:apatxaDetalle.getPersonas()) {
+		for (PersonaListado persona:apatxaDetalle.personas) {
 			personaDAO.asociarPagoPersona(persona.id, gastoProporcional);
 		}
 		apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.id, true);

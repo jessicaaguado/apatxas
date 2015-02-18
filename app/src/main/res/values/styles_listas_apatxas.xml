@@ -24,8 +24,6 @@
 
     <style name="apatxas_cabecera_style">
         <item name="android:background">@color/apatxascolors_color_cabecera_lista</item>
-        <!--item name="android:paddingTop">@dimen/apatxas_padding_superior_cabecera_listado</item>
-        <item name="android:paddingBottom">@dimen/apatxas_padding_inferior_cabecera_listado</item-->
         <item name="android:drawablePadding">@dimen/apatxas_padding_entre_imagen_texto</item>
         <item name="android:layout_height">@dimen/apatxas_altura_elemento_listado</item>
         <item name="android:gravity">left|center_vertical</item>
@@ -35,7 +33,6 @@
     </style>
 
     <style name="apatxas_una_linea_row_style">
-        <!--item name="android:layout_height">@dimen/apatxas_altura_row_listado_una_linea</item-->
         <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_row_una_linea</item>
         <item name="android:paddingRight">@dimen/apatxas_padding_derecho_row_una_linea</item>
         <item name="android:paddingTop">@dimen/apatxas_padding_superior_row_una_linea</item>
@@ -46,13 +43,10 @@
         <item name="android:layout_height">@dimen/apatxas_altura_row_listado_una_linea_con_avatar</item>
         <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_row_una_linea_con_avatar</item>
         <item name="android:paddingRight">@dimen/apatxas_padding_derecho_row_una_linea_con_avatar</item>
-        <!--item name="android:paddingTop">@dimen/apatxas_padding_superior_row_una_linea_con_avatar</item>
-        <item name="android:paddingBottom">@dimen/apatxas_padding_inferior_row_una_linea_con_avatar</item-->
-    </style>
+       </style>
 
 
     <style name="apatxas_dos_lineas_row_style">
-        <!--item name="android:layout_height">@dimen/apatxas_altura_row_listado_dos_lineas</item-->
         <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_row_dos_lineas</item>
         <item name="android:paddingRight">@dimen/apatxas_padding_derecho_row_dos_lineas</item>
         <item name="android:paddingTop">@dimen/apatxas_padding_superior_row_dos_lineas</item>

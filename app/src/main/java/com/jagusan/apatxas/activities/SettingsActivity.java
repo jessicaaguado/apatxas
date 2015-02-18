@@ -9,16 +9,13 @@ import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.fragments.SettingsFragment;
 import com.jagusan.apatxas.utils.SettingsUtils;
 
-/**
- * Settings activity that contains a fragment displaying the preferences.
- */
+
 public class SettingsActivity extends ApatxasActionBarActivity  implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         personalizarActionBar(R.string.title_activity_settings,MostrarTituloPantalla.SETTINGS);
-		// Display the preferences fragment as the content of the activity
 		getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
 	}

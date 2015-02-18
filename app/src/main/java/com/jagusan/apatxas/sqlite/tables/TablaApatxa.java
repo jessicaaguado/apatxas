@@ -14,11 +14,6 @@ public class TablaApatxa implements BaseColumns {
     public static final String COLUMNA_BOTE_INICIAL = "boteInicial";
     public static final String COLUMNA_DESCONTAR_BOTE_INICIAL = "descontarBoteInicial";
     public static final String COLUMNA_REPARTO_REALIZADO = "estaRealizadoReparto";
-    // TODO hay que calcular estos campos
-    // TODO siempre que se anada un gasto, se guarde apatxa
-    //public static final String COLUMNA_GASTO_TOTAL = "gastoTotal";
-    // TODO siempre que se anada un pago, se guarde apatxa
-    //public static final String COLUMNA_GASTO_PAGADO = "gastoPagado";
 
     public static final String CREATE_TABLE = "CREATE TABLE " + NOMBRE_TABLA + "(" + COLUMNA_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMNA_NOMBRE + " TEXT,"
             + COLUMNA_FECHA_INICIO + " INTEGER,"+ COLUMNA_FECHA_FIN + " INTEGER,"+ COLUMNA_SOLO_UN_DIA + " INTEGER DEFAULT 0,"

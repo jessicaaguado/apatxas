@@ -61,11 +61,11 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
     private void irPantallaEdicionGasto(GastoApatxaListado gasto) {
         Intent intent = new Intent(this, EditarGastoApatxaActivity.class);
-        intent.putExtra("conceptoGasto", gasto.getConcepto());
-        intent.putExtra("importeGasto", gasto.getTotal());
+        intent.putExtra("conceptoGasto", gasto.concepto);
+        intent.putExtra("importeGasto", gasto.total);
         intent.putExtra("idContactoPersonaPagadoGasto", gasto.idContactoPersonaPagadoPor);
-        intent.putExtra("personas", (ArrayList<PersonaListado>) apatxa.getPersonas());
-        intent.putExtra("idGasto", gasto.getId());
+        intent.putExtra("personas", (ArrayList<PersonaListado>) apatxa.personas);
+        intent.putExtra("idGasto", gasto.id);
         startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
     }
 
@@ -107,7 +107,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     }
 
     private void cargarInformacionGastos() {
-        gastosApatxa = apatxa.getGastos();
+        gastosApatxa = apatxa.gastos;
         listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, gastosApatxa);
         gestionarListaVacia();
         gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
@@ -123,7 +123,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
     void anadirGastoDetalleApatxa() {
         Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
-        intent.putExtra("personas", (ArrayList<PersonaListado>) apatxa.getPersonas());
+        intent.putExtra("personas", (ArrayList<PersonaListado>) apatxa.personas);
         startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);
     }
 
@@ -159,7 +159,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     private void guardarNuevoGastoApatxa(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        //TODO pagadoPor
+
         PersonaListado personaPagado = ((PersonaListado)data.getSerializableExtra("pagadoPor"));
         Long idPersona = personaPagado != null ? personaPagado.id : null;
         gastoService.crearGasto(conceptoGasto, totalGasto, idApatxa, idPersona);
@@ -174,7 +174,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     private void actualizarGastoApatxa(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        //TODO pagadoPor
+
         PersonaListado personaPagado = ((PersonaListado)data.getSerializableExtra("pagadoPor"));
         Long idPersona = personaPagado != null ? personaPagado.id : null;
         Long idGasto = data.getLongExtra("idGasto", -1);
@@ -186,7 +186,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     private void recargarInformacionGastos() {
         apatxa = apatxaService.getApatxaDetalle(idApatxa);
         listaGastosApatxaArrayAdapter.clear();
-        listaGastosApatxaArrayAdapter.addAll(apatxa.getGastos());
+        listaGastosApatxaArrayAdapter.addAll(apatxa.gastos);
         actualizarTituloCabeceraListaGastos();
     }
 

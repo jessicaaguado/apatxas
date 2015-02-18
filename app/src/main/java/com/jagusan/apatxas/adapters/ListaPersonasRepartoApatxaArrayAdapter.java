@@ -41,7 +41,6 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            // inflate the layout
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(rowLayoutId, parent, false);
         }

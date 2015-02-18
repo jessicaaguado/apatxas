@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.jagusan.apatxas.logicaNegocio.cursorReader.ExtraerInformacionApatxaDeCursor;
 import com.jagusan.apatxas.modelView.ApatxaDetalle;
@@ -44,7 +43,6 @@ public class ApatxaDAO {
         values.put(TablaApatxa.COLUMNA_SOLO_UN_DIA, soloUnDia);
         values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
         values.put(TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, descontarBoteInicialDeGastoTotal);
-        Log.d("APATXAS-SQL", "NUEVO APATXA " + values);
         return database.insert(TablaApatxa.NOMBRE_TABLA, null, values);
     }
 
@@ -56,15 +54,13 @@ public class ApatxaDAO {
         values.put(TablaApatxa.COLUMNA_SOLO_UN_DIA, soloUnDia);
         values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
         values.put(TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, descontarBoteInicialDeGastoTotal);
-        Log.d("APATXAS-SQL", "ACTUALIZAR APATXA " + values);
         String where = TablaApatxa.COLUMNA_ID + " = ?";
         String[] whereArgs = {String.valueOf(id)};
         database.update(TablaApatxa.NOMBRE_TABLA, values, where, whereArgs);
     }
 
     public ApatxaDetalle getApatxa(Long id) {
-        //TODO
-        ApatxaDetalle apatxa = null;
+       ApatxaDetalle apatxa = null;
         Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, TablaApatxa.COLUMNA_ID + "= " + id, null, null, null, ORDEN_APATXAS_DEFECTO);
         cursor.moveToFirst();
         if (!cursor.isAfterLast()) {

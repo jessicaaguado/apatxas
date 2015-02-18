@@ -89,7 +89,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private void actualizarGastosAnadidosBorradosActualizados() {
         boolean hayCambios = gastosEliminados.size() + gastosAnadidos.size() + gastosModificados.size() > 0;
         if (hayCambios) {
-            if (apatxa.personasPendientesPagarCobrar != apatxa.getPersonas().size()) {
+            if (apatxa.personasPendientesPagarCobrar != apatxa.personas.size()) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                 alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto);
                 alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
@@ -115,7 +115,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private void continuarConLosCambios() {
         gastoService.borrarGastos(gastosEliminados);
         gastoService.crearGastos(gastosAnadidos, idApatxa);
-        gastoService.actualizarGastos(gastosModificados);
+        gastoService.actualizarGastos(gastosModificados, idApatxa);
         Intent returnIntent = new Intent();
         setResult(RESULT_OK, returnIntent);
         finish();
@@ -191,7 +191,6 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private void anadirGastoAListaDeGastos(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        //TODO pagadoPor
         PersonaListado pagadoGasto = (PersonaListado) data.getSerializableExtra("pagadoPor");
 
         GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
@@ -211,17 +210,16 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private void actualizarGastoListaDeGastos(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        //TODO pagadoPor
         PersonaListado pagadoGasto = (PersonaListado)data.getSerializableExtra("pagadoPor");
         Integer posicionGastoActualizar = data.getIntExtra("posicionGastoEditar", -1);
 
         GastoApatxaListado gastoActualizado = listaGastosApatxaArrayAdapter.getItem(posicionGastoActualizar);
-        gastoActualizado.setConcepto(conceptoGasto);
-        gastoActualizado.setTotal(totalGasto);
-        gastoActualizado.setPagadoPor(pagadoGasto != null ? pagadoGasto.nombre : null);
-        gastoActualizado.setIdPagadoPor(pagadoGasto != null ? pagadoGasto.id : null);
+        gastoActualizado.concepto=conceptoGasto;
+        gastoActualizado.total=totalGasto;
+        gastoActualizado.pagadoPor=pagadoGasto != null ? pagadoGasto.nombre : null;
+        gastoActualizado.idPagadoPor=pagadoGasto != null ? pagadoGasto.id : null;
 
-        if (gastoActualizado.getId() != null) {
+        if (gastoActualizado.id != null) {
             gastosModificados.add(gastoActualizado);
         }
         listaGastosApatxaArrayAdapter.actualizarGasto(posicionGastoActualizar, gastoActualizado);
@@ -230,8 +228,8 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
     private void irPantallaEdicionGasto(GastoApatxaListado gasto) {
         Intent intent = new Intent(this, EditarGastoApatxaActivity.class);
-        intent.putExtra("conceptoGasto", gasto.getConcepto());
-        intent.putExtra("importeGasto", gasto.getTotal());
+        intent.putExtra("conceptoGasto", gasto.concepto);
+        intent.putExtra("importeGasto", gasto.total);
         intent.putExtra("idContactoPersonaPagadoGasto", gasto.idContactoPersonaPagadoPor);
         intent.putExtra("personas", (ArrayList<PersonaListado>) personasApatxa);
         intent.putExtra("posicionGastoEditar", listaGastosApatxaArrayAdapter.getPosition(gasto));

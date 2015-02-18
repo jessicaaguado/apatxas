@@ -38,7 +38,6 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		if (convertView == null) {
-			// inflate the layout
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 			convertView = inflater.inflate(rowLayoutId, parent, false);
 		}
@@ -46,14 +45,14 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
 		GastoApatxaListado gasto = gastos.get(position);
 		// titulo
 		TextView conceptoGastoTextView = (TextView) convertView.findViewById(R.id.concepto);
-		conceptoGastoTextView.setText(gasto.getConcepto());
+		conceptoGastoTextView.setText(gasto.concepto);
 		// total
 		TextView totalGastoTextView = (TextView) convertView.findViewById(R.id.total);
-		totalGastoTextView.setText(FormatearNumero.aDineroEuros(context.getResources(), gasto.getTotal()));
+		totalGastoTextView.setText(FormatearNumero.aDineroEuros(context.getResources(), gasto.total));
 		// quien lo ha pagado
 		TextView pagadorGastoTextView = (TextView) convertView.findViewById(R.id.pagadoPor);
 		if (pagadorGastoTextView != null) {
-			String pagador = gasto.getPagadoPor() != null ? gasto.getPagadoPor() : context.getResources().getString(R.string.sin_pagar);
+			String pagador = gasto.pagadoPor != null ? gasto.pagadoPor : context.getResources().getString(R.string.sin_pagar);
 			pagadorGastoTextView.setText(pagador);
 		}
 

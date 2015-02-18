@@ -35,13 +35,10 @@ public class ValidacionActivity {
 		Boolean valido = true;
 		String text = editText.getText().toString().trim();
 
-		// editText.setError(null);
-
-		if (obligatorio && EMPTY.equals(text)) {
+        if (obligatorio && EMPTY.equals(text)) {
 			editText.setError(mensaje);
 			valido = false;
 		}
-		// pattern doesn't match so returning false
 		if (obligatorio && !Pattern.matches(regex, text)) {
 			editText.setError(mensaje);
 			valido = false;

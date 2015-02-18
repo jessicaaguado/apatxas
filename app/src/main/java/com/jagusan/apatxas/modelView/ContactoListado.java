@@ -10,12 +10,4 @@ public class ContactoListado implements Serializable {
     public String nombre;
     public String fotoURI;
 
-    @Override
-    public String toString() {
-        return "ContactoListado{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", fotoURI='" + fotoURI + '\'' +
-                '}';
-    }
 }

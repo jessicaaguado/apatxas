@@ -8,11 +8,11 @@ public class ExtraerInformacionGastoDeCursor {
 
 	public static GastoApatxaListado extraer(Cursor cursor, GastoApatxaListado gasto) {
 		CursorTablaGasto tablaGastoCursor = new CursorTablaGasto(cursor);
-		gasto.setId(tablaGastoCursor.getId());
-		gasto.setConcepto(tablaGastoCursor.getConcepto());
-		gasto.setTotal(tablaGastoCursor.getTotal());
-		gasto.setIdPagadoPor(tablaGastoCursor.getIdPagador());
-		gasto.setPagadoPor(tablaGastoCursor.getNombrePagador());
+		gasto.id=tablaGastoCursor.getId();
+		gasto.concepto=tablaGastoCursor.getConcepto();
+		gasto.total=tablaGastoCursor.getTotal();
+		gasto.idPagadoPor=tablaGastoCursor.getIdPagador();
+		gasto.pagadoPor=tablaGastoCursor.getNombrePagador();
         gasto.idContactoPersonaPagadoPor = tablaGastoCursor.getIdContactoPagador();
 		return gasto;
 	}

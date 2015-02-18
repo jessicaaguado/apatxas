@@ -38,7 +38,6 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            // inflate the layout
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(rowLayoutId, parent, false);
         }

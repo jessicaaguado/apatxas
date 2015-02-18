@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -90,7 +89,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
     private void actualizarPersonasAnadidasBorradas() {
         boolean hayCambios = personasEliminadas.size() + personasAnadidas.size() > 0;
         if (hayCambios) {
-            if (apatxa.personasPendientesPagarCobrar != apatxa.getPersonas().size()) {
+            if (apatxa.personasPendientesPagarCobrar != apatxa.personas.size()) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
                 alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto);
                 alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
@@ -248,7 +247,6 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
 
             @Override
             public void onDestroyActionMode(ActionMode mode) {
-                Log.d("APATXAS", "onDestroyActionMode " + mode);
                 adapter.resetearSeleccion();
             }
 

@@ -2,7 +2,6 @@ package com.jagusan.apatxas.activities;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -99,16 +98,7 @@ public abstract class GastoApatxaActivity extends ApatxasActionBarActivity {
     }
 
     protected PersonaListado getPagadorSeleccionado() {
-        /* Integer personaSeleccionada = personasSpinner.getSelectedItemPosition() <= 0 ? null : personasSpinner.getSelectedItemPosition() - 1;
-
-        PersonaListado pagador = null;
-		if (personaSeleccionada != null) {
-			pagador = personasApatxa.get(personasSpinner.getSelectedItemPosition());
-		}
-        Log.d("APATXAS", "Posicion seleccionada " + personaSeleccionada+" "+(pagador == null ? "null" : pagador.nombre)+" "+(pagador == null ? "null" : pagador.idContacto));*/
-        PersonaListado pagador = (PersonaListado) personasSpinner.getSelectedItem();
-        Log.d("APATXAS", "Posicion seleccionada " + personasSpinner.getSelectedItemPosition() + " " + (pagador == null ? "null" : pagador.nombre) + " " + (pagador == null ? "null" : pagador.idContacto));
-        return pagador;
+        return(PersonaListado) personasSpinner.getSelectedItem();
     }
 
     protected Double getImporteIntroducido() {

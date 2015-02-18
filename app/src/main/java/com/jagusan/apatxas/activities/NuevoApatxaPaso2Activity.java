@@ -165,7 +165,6 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     private void anadirGastoAListaDeGastos(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        //TODO pagadoPor
         PersonaListado pagadoGasto = (PersonaListado) data.getSerializableExtra("pagadoPor");
 
         GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
@@ -181,7 +180,6 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     private void actualizarGastoListaDeGastos(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        //TODO pagadoPor
         PersonaListado pagadoGasto = (PersonaListado)data.getSerializableExtra("pagadoPor");
         Integer posicionGastoActualizar = data.getIntExtra("posicionGastoEditar", -1);
 
@@ -192,8 +190,8 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
 
     private void irPantallaEdicionGasto(GastoApatxaListado gasto) {
         Intent intent = new Intent(this, EditarGastoApatxaActivity.class);
-        intent.putExtra("conceptoGasto", gasto.getConcepto());
-        intent.putExtra("importeGasto", gasto.getTotal());
+        intent.putExtra("conceptoGasto", gasto.concepto);
+        intent.putExtra("importeGasto", gasto.total);
         intent.putExtra("idContactoPersonaPagadoGasto", gasto.idContactoPersonaPagadoPor);
         intent.putExtra("personas",personasApatxa);
         intent.putExtra("posicionGastoEditar", listaGastosApatxaArrayAdapter.getPosition(gasto));

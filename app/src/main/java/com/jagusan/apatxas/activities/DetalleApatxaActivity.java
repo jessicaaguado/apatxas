@@ -110,7 +110,7 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
 
 
     private void cargarInformacionPersonas() {
-        int numPersonas = apatxa.getPersonas().size();
+        int numPersonas = apatxa.personas.size();
         String titulo = resources.getQuantityString(R.plurals.numero_personas_apatxa, numPersonas, numPersonas);
         numeroPersonasTextView.setText(titulo);
     }
@@ -134,7 +134,7 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
 
     void irEditarListaPersonasApatxa() {
         Intent intent = new Intent(this, ListaPersonasApatxaActivity.class);
-        intent.putExtra("personas", new ArrayList<>(apatxa.getPersonas()));
+        intent.putExtra("personas", new ArrayList<>(apatxa.personas));
         intent.putExtra("idApatxa", apatxa.id);
         startActivityForResult(intent, EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE);
     }

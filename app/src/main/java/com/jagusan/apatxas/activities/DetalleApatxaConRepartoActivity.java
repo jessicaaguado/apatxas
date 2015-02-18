@@ -102,16 +102,16 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
 
     private void actualizarTituloCabeceraListaReparto() {
-        List<GastoApatxaListado> gastosApatxa = apatxa.getGastos();
+        List<GastoApatxaListado> gastosApatxa = apatxa.gastos;
         String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_reparto_detalle_apatxa, gastosApatxa.size(), gastosApatxa.size(), CalcularSumaTotalGastos.calcular(gastosApatxa));
         tituloRepartoApatxaListViewHeader.setText(titulo);
     }
 
     void irEditarListaGastosApatxa() {
         Intent intent = new Intent(this, ListaGastosApatxaActivity.class);
-        intent.putExtra("personas", new ArrayList<>(apatxa.getPersonas()));
+        intent.putExtra("personas", new ArrayList<>(apatxa.personas));
         intent.putExtra("idApatxa", apatxa.id);
-        intent.putExtra("gastos", new ArrayList<>(apatxa.getGastos()));
+        intent.putExtra("gastos", new ArrayList<>(apatxa.gastos));
         startActivityForResult(intent, EDITAR_INFORMACION_LISTA_GASTOS_REQUEST_CODE);
     }
 

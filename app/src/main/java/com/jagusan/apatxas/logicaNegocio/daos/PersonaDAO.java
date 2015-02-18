@@ -105,4 +105,14 @@ public class PersonaDAO {
         database.execSQL(sqlActualizar);
     }
 
+    public Long recuperarIdPersonaPorIdContacto(Long idContacto, Long idApatxa) {
+        Long idPersona = null;
+        Cursor cursor = database.query(NOMBRE_TABLA_PERSONA, new String[] { TablaPersona.COLUMNA_ID }, TablaPersona.COLUMNA_ID_APATXA + " = " + idApatxa + " and " + TablaPersona.COLUMNA_ID_CONTACTO
+                + " = " + idContacto + "", null, null, null, ORDEN_PERSONAS_DEFECTO);
+        if (cursor.moveToFirst()) {
+            idPersona = cursor.getLong(0);
+        }
+        cursor.close();
+        return idPersona;
+    }
 }

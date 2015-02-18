@@ -14,7 +14,6 @@ public class SettingsUtils {
     public static void aplicarSettingsPropios(Context context){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
-        //idiom
         String idiomaDefecto = context.getResources().getString(R.string.settings_apatxas_valor_idioma_defecto);
         String idioma = preferences.getString("settings_apatxas_idioma", idiomaDefecto);
 

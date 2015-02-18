@@ -9,7 +9,7 @@ public class CalcularRepartoService {
 		if (apatxaDetalle.descontarBoteInicialGastoTotal){
 			gastoTotal = gastoTotal - apatxaDetalle.boteInicial;
 		}
-		Integer numeroPersonas = apatxaDetalle.getPersonas().size();
+		Integer numeroPersonas = apatxaDetalle.personas.size();
 		return gastoTotal / numeroPersonas;
 	}
 
