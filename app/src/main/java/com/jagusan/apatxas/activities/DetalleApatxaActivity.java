@@ -127,8 +127,6 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
         intent.putExtra("fechaInicio", apatxa.fechaInicio.getTime());
         intent.putExtra("fechaFin", apatxa.fechaFin.getTime());
         intent.putExtra("soloUnDia", apatxa.soloUnDia);
-        intent.putExtra("boteInicial", apatxa.boteInicial);
-        intent.putExtra("descontarBoteInicial", apatxa.descontarBoteInicialGastoTotal);
         startActivityForResult(intent, EDITAR_INFORMACION_BASICA_REQUEST_CODE);
     }
 

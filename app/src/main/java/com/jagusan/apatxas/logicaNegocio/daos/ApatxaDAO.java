@@ -26,8 +26,8 @@ public class ApatxaDAO {
 
     private static final String[] COLUMNAS_APATXA = {TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE,
             TablaApatxa.COLUMNA_FECHA_INICIO, TablaApatxa.COLUMNA_FECHA_FIN, TablaApatxa.COLUMNA_SOLO_UN_DIA,
-            TablaApatxa.COLUMNA_BOTE_INICIAL, TablaApatxa.COLUMNA_REPARTO_REALIZADO, SQL_NUM_PERSONAS_PTES_APATXA,
-            TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, SQL_GASTO_TOTAL_APATXA};
+            TablaApatxa.COLUMNA_REPARTO_REALIZADO, SQL_NUM_PERSONAS_PTES_APATXA,
+            SQL_GASTO_TOTAL_APATXA};
 
     private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA_INICIO + " DESC, "+TablaApatxa.COLUMNA_NOMBRE+" ASC";
 
@@ -35,25 +35,21 @@ public class ApatxaDAO {
         this.database = database;
     }
 
-    public Long nuevoApatxa(String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia, Double boteInicial, Integer descontarBoteInicialDeGastoTotal) {
+    public Long nuevoApatxa(String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia) {
         ContentValues values = new ContentValues();
         values.put(TablaApatxa.COLUMNA_NOMBRE, nombre);
         values.put(TablaApatxa.COLUMNA_FECHA_INICIO, fechaInicio);
         values.put(TablaApatxa.COLUMNA_FECHA_FIN, fechaFin);
         values.put(TablaApatxa.COLUMNA_SOLO_UN_DIA, soloUnDia);
-        values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
-        values.put(TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, descontarBoteInicialDeGastoTotal);
         return database.insert(TablaApatxa.NOMBRE_TABLA, null, values);
     }
 
-    public void actualizarApatxa(Long id, String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia, Double boteInicial, Integer descontarBoteInicialDeGastoTotal) {
+    public void actualizarApatxa(Long id, String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia) {
         ContentValues values = new ContentValues();
         values.put(TablaApatxa.COLUMNA_NOMBRE, nombre);
         values.put(TablaApatxa.COLUMNA_FECHA_INICIO, fechaInicio);
         values.put(TablaApatxa.COLUMNA_FECHA_FIN, fechaFin);
         values.put(TablaApatxa.COLUMNA_SOLO_UN_DIA, soloUnDia);
-        values.put(TablaApatxa.COLUMNA_BOTE_INICIAL, boteInicial);
-        values.put(TablaApatxa.COLUMNA_DESCONTAR_BOTE_INICIAL, descontarBoteInicialDeGastoTotal);
         String where = TablaApatxa.COLUMNA_ID + " = ?";
         String[] whereArgs = {String.valueOf(id)};
         database.update(TablaApatxa.NOMBRE_TABLA, values, where, whereArgs);

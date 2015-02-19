@@ -30,8 +30,6 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
     private TextView fechaFinApatxaTextView;
     private DatePickerDialog fechaInicioDatePickerDialog;
     private DatePickerDialog fechaFinDatePickerDialog;
-    private EditText boteInicialEditText;
-    private CheckBox descontarBoteInicialCheckBox;
     private Switch soloUnDiaSwitch;
 
     private long idApatxa;
@@ -39,8 +37,6 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
     private Long fechaInicio;
     private Long fechaFin;
     private Boolean soloUnDia;
-    private Double boteInicial;
-    private Boolean descontarBoteInicial;
 
     private Resources resources;
     private ApatxaService apatxaService;
@@ -81,9 +77,7 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
                     Long fechaInicio = getFechaInicioIntroducida();
                     Long fechaFin = getFechaFinIntroducida();
                     Boolean soloUnDia = getSoloUnDiaSeleccionado();
-                    Double boteInicial = getBoteIntroducido();
-                    Boolean descontarBoteInicial = getDescontarBoteInicial();
-                    apatxaService.actualizarApatxa(idApatxa, nombre, fechaInicio, fechaFin, soloUnDia, boteInicial, descontarBoteInicial);
+                    apatxaService.actualizarApatxa(idApatxa, nombre, fechaInicio, fechaFin, soloUnDia);
                     setResult(RESULT_OK);
                     finish();
                 }
@@ -102,8 +96,6 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
         nombreApatxaEditText = (EditText) findViewById(R.id.nombreApatxa);
         fechaInicioApatxaTextView = (TextView) findViewById(R.id.fechaInicioApatxa);
         fechaFinApatxaTextView = (TextView) findViewById(R.id.fechaFinApatxa);
-        boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
-        descontarBoteInicialCheckBox = (CheckBox) findViewById(R.id.descontarBoteInicial);
 
         soloUnDiaSwitch = (Switch) findViewById(R.id.switchUnSoloDia);
         soloUnDiaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -121,15 +113,10 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
         fechaInicio = intent.getLongExtra("fechaInicio", -1);
         fechaFin = intent.getLongExtra("fechaFin", -1);
         soloUnDia = intent.getBooleanExtra("soloUnDia", false);
-        boteInicial = intent.getDoubleExtra("boteInicial", 0.0);
-        descontarBoteInicial = intent.getBooleanExtra("descontarBoteInicial", false);
     }
 
     private void cargarInformacionApatxa() {
         nombreApatxaEditText.setText(nombre);
-
-        boteInicialEditText.setText(boteInicial.toString());
-        descontarBoteInicialCheckBox.setChecked(descontarBoteInicial);
 
         soloUnDiaSwitch.setChecked(soloUnDia);
         gestionarSoloUnDiaSwitch(soloUnDia);
@@ -185,20 +172,6 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
 
      Boolean getSoloUnDiaSeleccionado() {
         return soloUnDiaSwitch.isChecked();
-    }
-
-     Double getBoteIntroducido() {
-        Double boteInicial = 0.0;
-        try {
-            boteInicial = Double.parseDouble(boteInicialEditText.getText().toString());
-        } catch (Exception e) {
-            // mantenemos bote inicial a 0
-        }
-        return boteInicial;
-    }
-
-     Boolean getDescontarBoteInicial() {
-        return descontarBoteInicialCheckBox.isChecked();
     }
 
     private Boolean validacionesCorrectas() {

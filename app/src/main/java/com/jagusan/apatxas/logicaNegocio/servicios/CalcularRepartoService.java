@@ -6,9 +6,6 @@ public class CalcularRepartoService {
 
 	public static Double calcularParteProporcional(ApatxaDetalle apatxaDetalle) {
 		Double gastoTotal = apatxaDetalle.gastoTotal;
-		if (apatxaDetalle.descontarBoteInicialGastoTotal){
-			gastoTotal = gastoTotal - apatxaDetalle.boteInicial;
-		}
 		Integer numeroPersonas = apatxaDetalle.personas.size();
 		return gastoTotal / numeroPersonas;
 	}

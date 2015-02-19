@@ -12,8 +12,6 @@ public class ApatxaListado {
     public Date fechaFin;
     public Boolean soloUnDia;
 	public Double gastoTotal = 0.0;
-	public Double boteInicial = 0.0;
-	public Boolean descontarBoteInicialGastoTotal;
 	public Boolean repartoRealizado;
 	public Integer personasPendientesPagarCobrar;
 

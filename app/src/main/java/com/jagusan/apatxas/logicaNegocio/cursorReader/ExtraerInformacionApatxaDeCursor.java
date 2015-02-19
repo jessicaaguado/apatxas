@@ -13,11 +13,9 @@ public class ExtraerInformacionApatxaDeCursor {
 		apatxaListado.fechaInicio = tablaApatxaCursor.getFechaInicio();
         apatxaListado.fechaFin = tablaApatxaCursor.getFechaFin();
         apatxaListado.soloUnDia = tablaApatxaCursor.getSoloUnDia();
-		apatxaListado.boteInicial = tablaApatxaCursor.getBoteInicial();
 		apatxaListado.gastoTotal = tablaApatxaCursor.getGastoTotal();
 		apatxaListado.repartoRealizado = tablaApatxaCursor.getRepartoHecho();
 		apatxaListado.personasPendientesPagarCobrar = tablaApatxaCursor.getNumeroPersonasPendientesPagarCobrar();
-		apatxaListado.descontarBoteInicialGastoTotal = tablaApatxaCursor.getDescontarBoteInicial();
 		return apatxaListado;
 	}
 

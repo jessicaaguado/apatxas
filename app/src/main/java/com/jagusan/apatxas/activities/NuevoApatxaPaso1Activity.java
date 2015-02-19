@@ -45,8 +45,6 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
     private TextView fechaFinApatxaTextView;
     private DatePickerDialog fechaInicioDatePickerDialog;
     private DatePickerDialog fechaFinDatePickerDialog;
-    private EditText boteInicialEditText;
-    private CheckBox descontarBoteInicialCheckBox;
     private Switch soloUnDiaSwitch;
 
     private TextView tituloPersonasListViewHeader;
@@ -155,21 +153,13 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
                 // sin fecha
             }
         }
-        Double boteInicial = 0.0;
-        try {
-            boteInicial = Double.parseDouble(boteInicialEditText.getText().toString());
-        } catch (Exception e) {
-            // mantenemos bote inicial a 0
-        }
-        Boolean descontarBoteInicial = descontarBoteInicialCheckBox.isChecked();
+
         if (validacionesCorrectas()) {
             Intent intent = new Intent(this, NuevoApatxaPaso2Activity.class);
             intent.putExtra("titulo", titulo);
             intent.putExtra("fechaInicio", fechaInicio);
             intent.putExtra("fechaFin", fechaFin);
             intent.putExtra("soloUnDia", soloUnDia);
-            intent.putExtra("boteInicial", boteInicial);
-            intent.putExtra("descontarBoteInicial", descontarBoteInicial);
             intent.putExtra("personas", (ArrayList<PersonaListado>) personasApatxa);
 
             startActivity(intent);
@@ -189,8 +179,6 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         nombreApatxaAutoComplete = (AutoCompleteTextView) findViewById(R.id.nombreApatxa);
         fechaInicioApatxaTextView = (TextView) findViewById(R.id.fechaInicioApatxa);
         fechaFinApatxaTextView = (TextView) findViewById(R.id.fechaFinApatxa);
-        boteInicialEditText = (EditText) findViewById(R.id.boteInicialApatxa);
-        descontarBoteInicialCheckBox = (CheckBox) findViewById(R.id.descontarBoteInicial);
 
         ListView personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
         anadirCabeceraListaPersonas();

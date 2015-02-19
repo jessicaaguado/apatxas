@@ -53,21 +53,6 @@
             android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"/>
 
 
-        <EditText
-            android:id="@+id/boteInicialApatxa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/bote_inicial"
-            android:inputType="numberDecimal|numberSigned"
-            android:visibility="gone" />
-
-        <CheckBox
-            android:id="@+id/descontarBoteInicial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/descontar_bote_inicial_gasto_reparto"
-            android:visibility="gone" />
-
     </LinearLayout>
 
 </merge>

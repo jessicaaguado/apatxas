@@ -39,9 +39,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     private Long fechaInicioApatxa;
     private Long fechaFinApatxa;
     private Boolean soloUnDiaApatxa;
-    private Double boteInicialApatxa;
     private ArrayList<PersonaListado> personasApatxa;
-    private Boolean descontarBoteInicial;
 
     private int NUEVO_GASTO_REQUEST_CODE = 1;
     private int EDITAR_GASTO_REQUEST_CODE = 2;
@@ -105,7 +103,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     }
 
     public void guardarApatxa() {
-        Long idApatxa = apatxaService.crearApatxa(tituloApatxa, fechaInicioApatxa, fechaFinApatxa, soloUnDiaApatxa, boteInicialApatxa, descontarBoteInicial);
+        Long idApatxa = apatxaService.crearApatxa(tituloApatxa, fechaInicioApatxa, fechaFinApatxa, soloUnDiaApatxa);
         personaService.crearPersonas(personasApatxa, idApatxa);
         gastoService.crearGastos(listaGastos, idApatxa);
         irListadoApatxasPrincipal();
@@ -144,8 +142,6 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
         fechaInicioApatxa = intent.getLongExtra("fechaInicio", -1);
         fechaFinApatxa = intent.getLongExtra("fechaFin", -1);
         soloUnDiaApatxa = intent.getBooleanExtra("soloUnDia", false);
-        boteInicialApatxa = intent.getDoubleExtra("boteInicial", 0);
-        descontarBoteInicial = intent.getBooleanExtra("descontarBoteInicial", false);
         personasApatxa = (ArrayList<PersonaListado>) intent.getSerializableExtra("personas");
     }
 
