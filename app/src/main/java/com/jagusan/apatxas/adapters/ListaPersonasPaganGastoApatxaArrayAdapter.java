@@ -39,7 +39,7 @@ public class ListaPersonasPaganGastoApatxaArrayAdapter extends ArrayAdapter<Pers
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-           LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(rowLayoutId, parent, false);
         }
 

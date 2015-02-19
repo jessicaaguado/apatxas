@@ -20,10 +20,9 @@ import java.util.List;
 public class ListaContactosActivity extends ApatxasActionBarActivity {
 
 
-    private ContactoService contactoService;
-
     ListView contactosListView;
     ListaContactosArrayAdapter listaContactosArrayAdapter;
+    private ContactoService contactoService;
     private ArrayList<Long> contactosYaElegidos;
 
     @Override
@@ -33,7 +32,7 @@ public class ListaContactosActivity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_lista_contactos,MostrarTituloPantalla.LISTA_CONTACTOS);
+        personalizarActionBar(R.string.title_activity_lista_contactos, MostrarTituloPantalla.LISTA_CONTACTOS);
 
         recuperarDatosPasoAnterior();
 
@@ -101,7 +100,7 @@ public class ListaContactosActivity extends ApatxasActionBarActivity {
     private void toggleInformacionListaVacia() {
         int visibilidad = listaContactosArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_contactos);
+        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_contactos);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
         findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
     }

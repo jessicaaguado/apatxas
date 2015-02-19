@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -50,7 +49,7 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_editar_apatxa,MostrarTituloPantalla.EDITAR_APATXA);
+        personalizarActionBar(R.string.title_activity_editar_apatxa, MostrarTituloPantalla.EDITAR_APATXA);
 
         recuperarDatosPasoAnterior();
 
@@ -149,10 +148,10 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
     }
 
     public void mostrarDatePicker(View view) {
-        if (view == fechaInicioApatxaTextView){
+        if (view == fechaInicioApatxaTextView) {
             fechaInicioDatePickerDialog.show();
         }
-        if (view == fechaFinApatxaTextView){
+        if (view == fechaFinApatxaTextView) {
             fechaFinDatePickerDialog.show();
         }
     }
@@ -161,16 +160,16 @@ public class EditarInformacionBasicaApatxaActivity extends ApatxasActionBarActiv
         return nombreApatxaEditText.getText().toString();
     }
 
-     Long getFechaInicioIntroducida() {
+    Long getFechaInicioIntroducida() {
         return ConvertirFecha.getTime(resources, fechaInicioApatxaTextView.getText().toString());
 
     }
 
-     Long getFechaFinIntroducida() {
+    Long getFechaFinIntroducida() {
         return ConvertirFecha.getTime(resources, fechaFinApatxaTextView.getText().toString());
     }
 
-     Boolean getSoloUnDiaSeleccionado() {
+    Boolean getSoloUnDiaSeleccionado() {
         return soloUnDiaSwitch.isChecked();
     }
 

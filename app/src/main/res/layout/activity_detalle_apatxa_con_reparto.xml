@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/subactivity_detalle_informacion_basica_apatxa"/>
+    <include layout="@layout/subactivity_detalle_informacion_basica_apatxa" />
 
     <include layout="@layout/subactivity_lista_resultado_reparto" />
 

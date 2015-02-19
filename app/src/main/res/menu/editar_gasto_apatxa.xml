@@ -1,13 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.jagusan.apatxas.MainActivity" >
+    tools:context="com.jagusan.apatxas.MainActivity">
 
     <item
         android:id="@+id/action_actualizar_gasto_apatxa"
         android:icon="@drawable/ic_menu_action_apatxas_listo"
         android:orderInCategory="1"
         android:title="@string/action_listo"
-        app:showAsAction="withText|ifRoom"/>
+        app:showAsAction="withText|ifRoom" />
 
 </menu>

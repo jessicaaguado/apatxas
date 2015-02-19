@@ -83,7 +83,7 @@ public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<PersonaListado
         return personasSeleccionadas;
     }
 
-    public int numeroPersonasSeleccionadas(){
+    public int numeroPersonasSeleccionadas() {
         return personasSeleccionadas.size();
     }
 
@@ -94,7 +94,7 @@ public class ListaPersonasApatxaArrayAdapter extends ArrayAdapter<PersonaListado
         resetearSeleccion();
     }
 
-    public List<PersonaListado> getPersonas(){
+    public List<PersonaListado> getPersonas() {
         return personas;
     }
 }

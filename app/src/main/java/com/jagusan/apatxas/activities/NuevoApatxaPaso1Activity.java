@@ -16,10 +16,8 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -63,7 +61,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso1,MostrarTituloPantalla.NUEVO_APATXA_PASO1);
+        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso1, MostrarTituloPantalla.NUEVO_APATXA_PASO1);
 
         cargarElementosLayout();
         inicializarElementosLayout();
@@ -145,7 +143,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         }
         Boolean soloUnDia = soloUnDiaSwitch.isChecked();
         Long fechaFin = fechaInicio;
-        if (!soloUnDia){
+        if (!soloUnDia) {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 fechaFin = sdf.parse(fechaFinApatxaTextView.getText().toString()).getTime();
@@ -228,10 +226,10 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
     }
 
     public void mostrarDatePicker(View view) {
-        if (view == fechaInicioApatxaTextView){
+        if (view == fechaInicioApatxaTextView) {
             fechaInicioDatePickerDialog.show();
         }
-        if (view == fechaFinApatxaTextView){
+        if (view == fechaFinApatxaTextView) {
             fechaFinDatePickerDialog.show();
         }
     }
@@ -327,13 +325,12 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         toggleInformacionListaVacia();
     }
 
-    private void toggleInformacionListaVacia()
-    {
+    private void toggleInformacionListaVacia() {
         int visibilidad = listaPersonasApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso1);
+        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso1);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
-        ((Button)findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1);
+        ((Button) findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1);
         findViewById(R.id.anadir_elementos_mas_tarde).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -27,14 +27,12 @@ import java.util.List;
 
 public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
+    private final int NUEVO_GASTO_REQUEST_CODE = 20;
+    private final int EDITAR_GASTO_REQUEST_CODE = 21;
     private ListView gastosApatxaListView;
     private TextView tituloGastosApatxaListViewHeader;
     private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
     private List<GastoApatxaListado> gastosApatxa;
-
-    private final int NUEVO_GASTO_REQUEST_CODE = 20;
-    private final int EDITAR_GASTO_REQUEST_CODE = 21;
-
     private GastoService gastoService;
 
 
@@ -160,7 +158,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
 
-        PersonaListado personaPagado = ((PersonaListado)data.getSerializableExtra("pagadoPor"));
+        PersonaListado personaPagado = ((PersonaListado) data.getSerializableExtra("pagadoPor"));
         Long idPersona = personaPagado != null ? personaPagado.id : null;
         gastoService.crearGasto(conceptoGasto, totalGasto, idApatxa, idPersona);
         recargarInformacionGastos();
@@ -175,7 +173,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
 
-        PersonaListado personaPagado = ((PersonaListado)data.getSerializableExtra("pagadoPor"));
+        PersonaListado personaPagado = ((PersonaListado) data.getSerializableExtra("pagadoPor"));
         Long idPersona = personaPagado != null ? personaPagado.id : null;
         Long idGasto = data.getLongExtra("idGasto", -1);
 

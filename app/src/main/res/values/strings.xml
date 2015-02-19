@@ -76,9 +76,6 @@
     <!-- TITULOS (FIN) -->
 
 
-
-
-
     <!-- MENSAJES DE CONFIRMACION -->
     <string name="mensaje_confirmacion_borrado_personas">¿Desea eliminar las personas seleccinadas?</string>
     <string name="mensaje_confirmacion_borrado_gastos">¿Desea eliminar los gastos seleccionados?</string>
@@ -125,8 +122,6 @@
     <string name="patron_fecha_dia_mes_ano">dd/MM/yyyy</string>
     <string name="patron_fecha_dia_mes_ano_ux">dd/mm/aaaa</string>
     <!-- PATRONES FECHAS (FIN) -->
-
-
 
 
     <string name="cantidad_dinero">%1$.2f</string>

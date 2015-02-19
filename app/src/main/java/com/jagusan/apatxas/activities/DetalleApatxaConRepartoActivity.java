@@ -193,7 +193,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
             private void marcarPersonasEstadoReparto(ActionMode mode, boolean pagado) {
                 personaService.marcarPersonasEstadoReparto(adapter.getPersonasSeleccionadas(), pagado);
                 cargarInformacionApatxa();
-                String mensaje =apatxa.personasPendientesPagarCobrar == 0 ? getResources().getString(R.string.mensaje_confirmacion_pagos_actualizados_sin_pendientes) : getResources().getQuantityString(R.plurals.mensaje_confirmacion_pagos_actualizados, apatxa.personasPendientesPagarCobrar, apatxa.personasPendientesPagarCobrar);
+                String mensaje = apatxa.personasPendientesPagarCobrar == 0 ? getResources().getString(R.string.mensaje_confirmacion_pagos_actualizados_sin_pendientes) : getResources().getQuantityString(R.plurals.mensaje_confirmacion_pagos_actualizados, apatxa.personasPendientesPagarCobrar, apatxa.personasPendientesPagarCobrar);
                 MensajesToast.mostrarMensaje(getApplicationContext(), mensaje);
                 mode.finish();
             }
@@ -220,7 +220,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     private void toggleInformacionListaVacia() {
         int visibilidad = listaPersonasRepartoApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_personas_reparto);
+        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_personas_reparto);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
         findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
     }

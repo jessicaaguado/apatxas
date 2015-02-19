@@ -14,7 +14,7 @@ public class ApatxasActionBarActivity extends ActionBarActivity {
         SettingsUtils.aplicarSettingsPropios(this);
     }
 
-    void personalizarActionBar(int idTituloString, boolean mostrar){
+    void personalizarActionBar(int idTituloString, boolean mostrar) {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setElevation(0);
         actionBar.setDisplayShowTitleEnabled(mostrar);

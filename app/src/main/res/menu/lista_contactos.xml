@@ -7,6 +7,6 @@
         android:icon="@drawable/ic_menu_action_apatxas_listo"
         android:orderInCategory="100"
         android:title="@string/action_listo"
-        app:showAsAction="withText|ifRoom"/>
+        app:showAsAction="withText|ifRoom" />
 
 </menu>

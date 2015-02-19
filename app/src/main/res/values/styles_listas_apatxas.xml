@@ -40,10 +40,13 @@
     </style>
 
     <style name="apatxas_una_linea_con_avatar_row_style">
-        <item name="android:layout_height">@dimen/apatxas_altura_row_listado_una_linea_con_avatar</item>
-        <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_row_una_linea_con_avatar</item>
-        <item name="android:paddingRight">@dimen/apatxas_padding_derecho_row_una_linea_con_avatar</item>
-       </style>
+        <item name="android:layout_height">@dimen/apatxas_altura_row_listado_una_linea_con_avatar
+        </item>
+        <item name="android:paddingLeft">@dimen/apatxas_padding_izquierdo_row_una_linea_con_avatar
+        </item>
+        <item name="android:paddingRight">@dimen/apatxas_padding_derecho_row_una_linea_con_avatar
+        </item>
+    </style>
 
 
     <style name="apatxas_dos_lineas_row_style">

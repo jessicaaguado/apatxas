@@ -55,7 +55,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_lista_personas,MostrarTituloPantalla.LISTA_PERSONAS);
+        personalizarActionBar(R.string.title_activity_lista_personas, MostrarTituloPantalla.LISTA_PERSONAS);
 
         recuperarDatosPasoAnterior();
 
@@ -103,7 +103,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
                 });
                 alertDialog.create();
                 alertDialog.show();
-            }else{
+            } else {
                 continuarConLosCambios();
             }
 
@@ -283,7 +283,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
     private void toggleInformacionListaVacia() {
         int visibilidad = listaPersonasApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_personas);
+        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_personas);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
         findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
     }

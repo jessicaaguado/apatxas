@@ -55,7 +55,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso2,MostrarTituloPantalla.NUEVO_APATXA_PASO2);
+        personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso2, MostrarTituloPantalla.NUEVO_APATXA_PASO2);
 
         cargarElementosLayout();
 
@@ -113,7 +113,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     private void irListadoApatxasPrincipal() {
         Intent intent = new Intent(this, ListaApatxasActivity.class);
         finish();
-        intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -176,7 +176,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     private void actualizarGastoListaDeGastos(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        PersonaListado pagadoGasto = (PersonaListado)data.getSerializableExtra("pagadoPor");
+        PersonaListado pagadoGasto = (PersonaListado) data.getSerializableExtra("pagadoPor");
         Integer posicionGastoActualizar = data.getIntExtra("posicionGastoEditar", -1);
 
         GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
@@ -189,7 +189,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
         intent.putExtra("conceptoGasto", gasto.concepto);
         intent.putExtra("importeGasto", gasto.total);
         intent.putExtra("idContactoPersonaPagadoGasto", gasto.idContactoPersonaPagadoPor);
-        intent.putExtra("personas",personasApatxa);
+        intent.putExtra("personas", personasApatxa);
         intent.putExtra("posicionGastoEditar", listaGastosApatxaArrayAdapter.getPosition(gasto));
         startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
     }
@@ -205,7 +205,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 adapter.toggleSeleccion(position, checked);
                 int numeroGastosSeleccionados = adapter.numeroGastosSeleccionados();
-                mode.setTitle(resources.getQuantityString(R.plurals.seleccionados, numeroGastosSeleccionados,numeroGastosSeleccionados));
+                mode.setTitle(resources.getQuantityString(R.plurals.seleccionados, numeroGastosSeleccionados, numeroGastosSeleccionados));
                 if (numeroGastosSeleccionados == 1) {
                     findViewById(R.id.action_gasto_apatxa_cambiar).setVisibility(View.VISIBLE);
                 } else {
@@ -223,7 +223,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
 
             @Override
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                if (this.mode == null){
+                if (this.mode == null) {
                     this.mode = mode;
                 }
                 return false;
@@ -286,9 +286,9 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     private void toggleInformacionListaVacia() {
         int visibilidad = listaGastosApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso2);
+        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso2);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
-        ((TextView)findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2);
+        ((TextView) findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2);
         findViewById(R.id.anadir_elementos_mas_tarde).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

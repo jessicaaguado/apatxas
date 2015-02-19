@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/action_gasto_apatxa_cambiar"
         android:icon="@drawable/ic_menu_action_apatxas_editar"
         android:orderInCategory="1"
-        android:title="@string/action_editar"/>
+        android:title="@string/action_editar" />
     <item
         android:id="@+id/action_gasto_apatxa_borrar"
         android:icon="@drawable/ic_menu_action_apatxas_borrar"
         android:orderInCategory="2"
-        android:title="@string/action_borrar"/>
+        android:title="@string/action_borrar" />
 
 </menu>

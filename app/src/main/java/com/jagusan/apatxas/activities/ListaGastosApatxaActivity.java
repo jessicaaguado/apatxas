@@ -54,7 +54,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_lista_gastos,MostrarTituloPantalla.LISTA_GASTOS);
+        personalizarActionBar(R.string.title_activity_lista_gastos, MostrarTituloPantalla.LISTA_GASTOS);
 
         recuperarDatosPasoAnterior();
 
@@ -103,7 +103,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
                 });
                 alertDialog.create();
                 alertDialog.show();
-            }else{
+            } else {
                 continuarConLosCambios();
             }
 
@@ -210,14 +210,14 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private void actualizarGastoListaDeGastos(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        PersonaListado pagadoGasto = (PersonaListado)data.getSerializableExtra("pagadoPor");
+        PersonaListado pagadoGasto = (PersonaListado) data.getSerializableExtra("pagadoPor");
         Integer posicionGastoActualizar = data.getIntExtra("posicionGastoEditar", -1);
 
         GastoApatxaListado gastoActualizado = listaGastosApatxaArrayAdapter.getItem(posicionGastoActualizar);
-        gastoActualizado.concepto=conceptoGasto;
-        gastoActualizado.total=totalGasto;
-        gastoActualizado.pagadoPor=pagadoGasto != null ? pagadoGasto.nombre : null;
-        gastoActualizado.idPagadoPor=pagadoGasto != null ? pagadoGasto.id : null;
+        gastoActualizado.concepto = conceptoGasto;
+        gastoActualizado.total = totalGasto;
+        gastoActualizado.pagadoPor = pagadoGasto != null ? pagadoGasto.nombre : null;
+        gastoActualizado.idPagadoPor = pagadoGasto != null ? pagadoGasto.id : null;
 
         if (gastoActualizado.id != null) {
             gastosModificados.add(gastoActualizado);
@@ -325,7 +325,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private void toggleInformacionListaVacia() {
         int visibilidad = listaGastosApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView)findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_gastos);
+        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_gastos);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
         findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
     }

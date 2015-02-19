@@ -38,7 +38,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
             case android.R.id.home:
                 finish();
                 return true;
-            case  R.id.action_actualizar_gasto_apatxa:
+            case R.id.action_actualizar_gasto_apatxa:
                 if (validacionesCorrectas()) {
                     String concepto = getConceptoIntroducido();
                     Double totalGasto = getImporteIntroducido();
@@ -65,8 +65,8 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
         }
     }
 
-    protected void personalizarActionBar(){
-        super.personalizarActionBar(R.string.title_activity_editar_gasto,MostrarTituloPantalla.EDITAR_GASTO);
+    protected void personalizarActionBar() {
+        super.personalizarActionBar(R.string.title_activity_editar_gasto, MostrarTituloPantalla.EDITAR_GASTO);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
         Intent intent = getIntent();
         conceptoGasto = intent.getStringExtra("conceptoGasto");
         importeGasto = intent.getDoubleExtra("importeGasto", 0.0);
-        idContactoPersonaPagadoPor = intent.getLongExtra("idContactoPersonaPagadoGasto",-1);
+        idContactoPersonaPagadoPor = intent.getLongExtra("idContactoPersonaPagadoGasto", -1);
         personasApatxa = (ArrayList<PersonaListado>) intent.getSerializableExtra("personas");
         posicionGastoEditar = intent.getIntExtra("posicionGastoEditar", -1);
         idGasto = intent.getLongExtra("idGasto", -1);
@@ -95,7 +95,7 @@ public class EditarGastoApatxaActivity extends GastoApatxaActivity {
         for (PersonaListado persona : personasApatxa) {
             idContactoPersonas.add(persona.idContacto);
         }
-        if (idContactoPersonaPagadoPor == -1){
+        if (idContactoPersonaPagadoPor == -1) {
             return 0;
         } else {
             return idContactoPersonas.indexOf(idContactoPersonaPagadoPor) + 1;

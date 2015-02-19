@@ -11,7 +11,7 @@ import java.util.Locale;
 
 public class SettingsUtils {
 
-    public static void aplicarSettingsPropios(Context context){
+    public static void aplicarSettingsPropios(Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         String idiomaDefecto = context.getResources().getString(R.string.settings_apatxas_valor_idioma_defecto);

@@ -76,8 +76,6 @@
     <!-- TITULOS (FIN) -->
 
 
-
-
     <!-- MENSAJES DE CONFIRMACION -->
     <string name="mensaje_confirmacion_borrado_personas">¿Desea eliminar las personas seleccinadas?***</string>
     <string name="mensaje_confirmacion_borrado_gastos">¿Desea eliminar los gastos seleccionados?***</string>

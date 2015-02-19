@@ -12,18 +12,18 @@ import com.jagusan.apatxas.modelView.ApatxaListado;
 
 public class OnVerDetalleApatxaClickListener implements OnItemClickListener {
 
-	@Override
-	public void onItemClick(AdapterView<?> apatxaListadoListView, View apatxaListadoRow, int position, long id) {
-		ApatxaListado apatxaClicked = (ApatxaListado) apatxaListadoListView.getItemAtPosition(position);
+    @Override
+    public void onItemClick(AdapterView<?> apatxaListadoListView, View apatxaListadoRow, int position, long id) {
+        ApatxaListado apatxaClicked = (ApatxaListado) apatxaListadoListView.getItemAtPosition(position);
 
-		Context context = apatxaListadoListView.getContext();
-		Class activityToGo = DetalleApatxaConRepartoActivity.class;
-		if (!apatxaClicked.repartoRealizado) {
-			activityToGo = DetalleApatxaSinRepartoActivity.class;
-		}
-		Intent intent = new Intent(context, activityToGo);
-		intent.putExtra("id", apatxaClicked.id);
-		context.startActivity(intent);
-	}
+        Context context = apatxaListadoListView.getContext();
+        Class activityToGo = DetalleApatxaConRepartoActivity.class;
+        if (!apatxaClicked.repartoRealizado) {
+            activityToGo = DetalleApatxaSinRepartoActivity.class;
+        }
+        Intent intent = new Intent(context, activityToGo);
+        intent.putExtra("id", apatxaClicked.id);
+        context.startActivity(intent);
+    }
 
 }

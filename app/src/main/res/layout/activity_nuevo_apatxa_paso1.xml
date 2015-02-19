@@ -5,11 +5,11 @@
 
     <include
         android:id="@+id/include_informacion_basica_apatxa"
-        layout="@layout/subactivity_informacion_basica_apatxa"/>
+        layout="@layout/subactivity_informacion_basica_apatxa" />
 
     <include
         layout="@layout/subactivity_lista_personas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

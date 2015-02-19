@@ -35,12 +35,12 @@
         android:layout_below="@id/informacion_lista_vacia"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="@dimen/apatxas_padding_superior_extra"
         android:drawablePadding="0dp"
         android:drawableRight="@drawable/ic_apatxas_siguiente"
-        android:layout_marginTop="@dimen/apatxas_padding_superior_extra"
-        android:text="@string/anadir_elementos_mas_tarde"
         android:padding="@dimen/apatxas_padding_superior_extra"
-        android:textColor="@color/apatxascolors_color"
-        android:textAllCaps="false"/>
+        android:text="@string/anadir_elementos_mas_tarde"
+        android:textAllCaps="false"
+        android:textColor="@color/apatxascolors_color" />
 
 </RelativeLayout>

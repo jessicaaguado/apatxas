@@ -78,7 +78,7 @@ public class GastoService {
         close();
     }
 
-    public List<String> recuperarTodosConceptos(){
+    public List<String> recuperarTodosConceptos() {
         open();
         List<String> conceptos = gastoDAO.recuperarTodosConceptos();
         close();

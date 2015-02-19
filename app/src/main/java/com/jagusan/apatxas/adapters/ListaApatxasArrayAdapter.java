@@ -20,38 +20,38 @@ import java.util.List;
 
 public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
 
-	Context context;
-	int rowLayoutId;
-	List<ApatxaListado> apatxas;
+    Context context;
+    int rowLayoutId;
+    List<ApatxaListado> apatxas;
 
     private List<ApatxaListado> apatxasSeleccionadas;
 
-	public ListaApatxasArrayAdapter(Context context, int rowLayoutId, List<ApatxaListado> apatxas) {
+    public ListaApatxasArrayAdapter(Context context, int rowLayoutId, List<ApatxaListado> apatxas) {
 
-		super(context, rowLayoutId, apatxas);
+        super(context, rowLayoutId, apatxas);
 
-		this.context = context;
-		this.rowLayoutId = rowLayoutId;
-		this.apatxas = apatxas;
+        this.context = context;
+        this.rowLayoutId = rowLayoutId;
+        this.apatxas = apatxas;
 
         apatxasSeleccionadas = new ArrayList<>();
-	}
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-		if (convertView == null) {
-			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-			convertView = inflater.inflate(rowLayoutId, parent, false);
-		}
+        if (convertView == null) {
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+            convertView = inflater.inflate(rowLayoutId, parent, false);
+        }
 
-		ApatxaListado apatxa = apatxas.get(position);
+        ApatxaListado apatxa = apatxas.get(position);
 
-		// nombre
-		TextView nombreApatxaTextView = (TextView) convertView.findViewById(R.id.nombre);
-		nombreApatxaTextView.setText(apatxa.nombre);
-		// fecha
-		TextView fechaApatxaTextView = (TextView) convertView.findViewById(R.id.fecha);
+        // nombre
+        TextView nombreApatxaTextView = (TextView) convertView.findViewById(R.id.nombre);
+        nombreApatxaTextView.setText(apatxa.nombre);
+        // fecha
+        TextView fechaApatxaTextView = (TextView) convertView.findViewById(R.id.fecha);
         Date fechaInicio = apatxa.fechaInicio;
         Date fechaFin = apatxa.fechaFin;
         boolean soloUnDia = apatxa.soloUnDia;
@@ -60,15 +60,15 @@ public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
             fechaDescripcion += " - " + FormatearFecha.formatearFecha(context.getResources(), fechaFin);
         }
         fechaApatxaTextView.setText(fechaDescripcion);
-		// estado
-		TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);
-		String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getEstadoApatxa());
-		estadoApatxaTextView.setText(descripcionEstadoApatxa);
+        // estado
+        TextView estadoApatxaTextView = (TextView) convertView.findViewById(R.id.estado);
+        String descripcionEstadoApatxa = ObtenerDescripcionEstadoApatxa.getDescripcionParaListado(context.getResources(), apatxa.getEstadoApatxa());
+        estadoApatxaTextView.setText(descripcionEstadoApatxa);
 
         marcarSeleccion(convertView, apatxa);
 
-		return convertView;
-	}
+        return convertView;
+    }
 
 
     private void marcarSeleccion(View convertView, ApatxaListado apatxa) {
@@ -94,7 +94,7 @@ public class ListaApatxasArrayAdapter extends ArrayAdapter<ApatxaListado> {
         return apatxasSeleccionadas;
     }
 
-    public int numeroApatxasSeleccionadas(){
+    public int numeroApatxasSeleccionadas() {
         return apatxasSeleccionadas.size();
     }
 

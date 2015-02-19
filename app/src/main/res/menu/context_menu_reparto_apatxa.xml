@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/action_marcar_hecho"
         android:icon="@drawable/ic_menu_action_apatxas_listo"
         android:orderInCategory="1"
-        android:title="@string/action_pagado"/>
+        android:title="@string/action_pagado" />
 
     <item
         android:id="@+id/action_marcar_pendiente"
         android:icon="@drawable/ic_menu_action_apatxas_deshacer_listo"
         android:orderInCategory="1"
-        android:title="@string/action_no_pagado"/>
+        android:title="@string/action_no_pagado" />
 
 </menu>

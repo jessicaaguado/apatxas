@@ -1,17 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.jagusan.apatxas.ListaGastosActivity" >
+    tools:context="com.jagusan.apatxas.ListaGastosActivity">
 
     <item
         android:id="@+id/action_anadir"
         android:icon="@drawable/ic_menu_action_apatxas_anadir_apatxa"
         android:title="@string/action_anadir"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_configuracion"
         android:icon="@drawable/ic_menu_action_apatxas_configuracion"
         android:title="@string/action_settings"
-        app:showAsAction="never|withText"/>
-    
+        app:showAsAction="never|withText" />
+
 </menu>

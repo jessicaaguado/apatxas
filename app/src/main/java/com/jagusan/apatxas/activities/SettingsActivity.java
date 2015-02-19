@@ -10,15 +10,15 @@ import com.jagusan.apatxas.fragments.SettingsFragment;
 import com.jagusan.apatxas.utils.SettingsUtils;
 
 
-public class SettingsActivity extends ApatxasActionBarActivity  implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsActivity extends ApatxasActionBarActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        personalizarActionBar(R.string.title_activity_settings,MostrarTituloPantalla.SETTINGS);
-		getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+        personalizarActionBar(R.string.title_activity_settings, MostrarTituloPantalla.SETTINGS);
+        getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
-	}
+    }
 
     @Override
     protected void onStop() {

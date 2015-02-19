@@ -24,15 +24,13 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
     Long idApatxa;
 
     ViewGroup headerInformacionDetalle;
-    private TextView nombreApatxaTextView;
-    private TextView fechaApatxaTextView;
     TextView numeroPersonasTextView;
-    private TextView estadoApatxaTextView;
-
     ApatxaDetalle apatxa;
-
     int EDITAR_INFORMACION_BASICA_REQUEST_CODE = 1;
     int EDITAR_INFORMACION_LISTA_PERSONAS_REQUEST_CODE = 10;
+    private TextView nombreApatxaTextView;
+    private TextView fechaApatxaTextView;
+    private TextView estadoApatxaTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,7 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
 
         inicializarServicios();
 
-        personalizarActionBar(R.string.title_activity_detalle_apatxa,MostrarTituloPantalla.DETALLE);
+        personalizarActionBar(R.string.title_activity_detalle_apatxa, MostrarTituloPantalla.DETALLE);
 
         cargarElementosLayout();
 

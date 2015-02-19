@@ -18,86 +18,86 @@ import java.util.List;
 
 public class ApatxaService {
 
-	private DatabaseHelper dbHelper;
+    private DatabaseHelper dbHelper;
 
-	private ApatxaDAO apatxaDAO;
-	private PersonaDAO personaDAO;
-	private GastoDAO gastoDAO;
+    private ApatxaDAO apatxaDAO;
+    private PersonaDAO personaDAO;
+    private GastoDAO gastoDAO;
 
-	public ApatxaService(Context context) {
-		dbHelper = new DatabaseHelper(context);
-		apatxaDAO = new ApatxaDAO();
-		personaDAO = new PersonaDAO();
-		gastoDAO = new GastoDAO();
-	}
+    public ApatxaService(Context context) {
+        dbHelper = new DatabaseHelper(context);
+        apatxaDAO = new ApatxaDAO();
+        personaDAO = new PersonaDAO();
+        gastoDAO = new GastoDAO();
+    }
 
-	private void open() throws SQLException {
+    private void open() throws SQLException {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         apatxaDAO.setDatabase(database);
-		personaDAO.setDatabase(database);
-		gastoDAO.setDatabase(database);
-	}
+        personaDAO.setDatabase(database);
+        gastoDAO.setDatabase(database);
+    }
 
-	private void close() {
+    private void close() {
         dbHelper.close();
-	}
+    }
 
-	public Long crearApatxa(String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia) {
-		open();
-		Long idApatxa = apatxaDAO.nuevoApatxa(nombre, fechaInicio, fechaFin, soloUnDia);
-		close();
-		return idApatxa;
-	}
+    public Long crearApatxa(String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia) {
+        open();
+        Long idApatxa = apatxaDAO.nuevoApatxa(nombre, fechaInicio, fechaFin, soloUnDia);
+        close();
+        return idApatxa;
+    }
 
-	public void actualizarApatxa(Long id, String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia) {
-		open();
-		apatxaDAO.actualizarApatxa(id, nombre, fechaInicio, fechaFin, soloUnDia);
-		close();
-	}
+    public void actualizarApatxa(Long id, String nombre, Long fechaInicio, Long fechaFin, Boolean soloUnDia) {
+        open();
+        apatxaDAO.actualizarApatxa(id, nombre, fechaInicio, fechaFin, soloUnDia);
+        close();
+    }
 
-	public ApatxaDetalle getApatxaDetalle(Long id) {
-		open();
-		ApatxaDetalle apatxa = apatxaDAO.getApatxa(id);
-		apatxa.personas = personaDAO.recuperarPersonasApatxa(id);
-		apatxa.gastos = gastoDAO.recuperarGastosApatxa(id);
-		close();
-		return apatxa;
-	}
+    public ApatxaDetalle getApatxaDetalle(Long id) {
+        open();
+        ApatxaDetalle apatxa = apatxaDAO.getApatxa(id);
+        apatxa.personas = personaDAO.recuperarPersonasApatxa(id);
+        apatxa.gastos = gastoDAO.recuperarGastosApatxa(id);
+        close();
+        return apatxa;
+    }
 
-	public List<ApatxaListado> getTodosApatxasListado() {
-		open();
-		List<ApatxaListado> listaApatxas = apatxaDAO.getTodosApatxas();
-		close();
-		return listaApatxas;
-	}
+    public List<ApatxaListado> getTodosApatxasListado() {
+        open();
+        List<ApatxaListado> listaApatxas = apatxaDAO.getTodosApatxas();
+        close();
+        return listaApatxas;
+    }
 
-	public void realizarRepartoSiNecesario(ApatxaDetalle apatxaDetalle) {
-		if (!apatxaDetalle.repartoRealizado) {
-			realizarReparto(apatxaDetalle);
-		}
-	}
+    public void realizarRepartoSiNecesario(ApatxaDetalle apatxaDetalle) {
+        if (!apatxaDetalle.repartoRealizado) {
+            realizarReparto(apatxaDetalle);
+        }
+    }
 
-	public void realizarReparto(ApatxaDetalle apatxaDetalle) {
-		open();
-		Double gastoProporcional = CalcularRepartoService.calcularParteProporcional(apatxaDetalle);
-		for (PersonaListado persona:apatxaDetalle.personas) {
-			personaDAO.asociarPagoPersona(persona.id, gastoProporcional);
-		}
-		apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.id, true);
-		close();
-	}
+    public void realizarReparto(ApatxaDetalle apatxaDetalle) {
+        open();
+        Double gastoProporcional = CalcularRepartoService.calcularParteProporcional(apatxaDetalle);
+        for (PersonaListado persona : apatxaDetalle.personas) {
+            personaDAO.asociarPagoPersona(persona.id, gastoProporcional);
+        }
+        apatxaDAO.cambiarEstadoRepartoApatxa(apatxaDetalle.id, true);
+        close();
+    }
 
-	public List<PersonaListadoReparto> getResultadoReparto(Long idApatxa) {
-		open();
-		List<PersonaListadoReparto> resultadoReparto = personaDAO.obtenerResultadoRepartoPersonas(idApatxa);
-		close();
-		return resultadoReparto;
-	}
+    public List<PersonaListadoReparto> getResultadoReparto(Long idApatxa) {
+        open();
+        List<PersonaListadoReparto> resultadoReparto = personaDAO.obtenerResultadoRepartoPersonas(idApatxa);
+        close();
+        return resultadoReparto;
+    }
 
-    public void borrarApatxas(List<ApatxaListado> listaApatxas){
+    public void borrarApatxas(List<ApatxaListado> listaApatxas) {
         open();
         List<Long> idsApatxasBorrar = new ArrayList<>(listaApatxas.size());
-        for (ApatxaListado apatxa:listaApatxas){
+        for (ApatxaListado apatxa : listaApatxas) {
             idsApatxasBorrar.add(apatxa.id);
         }
         personaDAO.borrarPersonasDeApatxas(idsApatxasBorrar);
@@ -106,7 +106,7 @@ public class ApatxaService {
         close();
     }
 
-    public List<String> recuperarTodosTitulos(){
+    public List<String> recuperarTodosTitulos() {
         open();
         List<String> titulos = apatxaDAO.recuperarTodosTitulos();
         close();

@@ -16,7 +16,7 @@ public class MensajesToast {
         toast.show();
     }
 
-    public static void mostrarMensaje(Context contexto, String mensaje){
+    public static void mostrarMensaje(Context contexto, String mensaje) {
         Toast toast = Toast.makeText(contexto, mensaje, Toast.LENGTH_SHORT);
         toast.show();
     }

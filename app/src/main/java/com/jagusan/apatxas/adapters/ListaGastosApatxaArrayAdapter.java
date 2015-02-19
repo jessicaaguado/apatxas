@@ -18,48 +18,48 @@ import java.util.List;
 
 public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaListado> {
 
-	Context context;
-	int rowLayoutId;
-	List<GastoApatxaListado> gastos;
+    Context context;
+    int rowLayoutId;
+    List<GastoApatxaListado> gastos;
 
     private List<GastoApatxaListado> gastosSeleccionados;
 
-	public ListaGastosApatxaArrayAdapter(Context context, int rowLayoutId, List<GastoApatxaListado> gastos) {
+    public ListaGastosApatxaArrayAdapter(Context context, int rowLayoutId, List<GastoApatxaListado> gastos) {
 
-		super(context, rowLayoutId, gastos);
+        super(context, rowLayoutId, gastos);
 
-		this.context = context;
-		this.rowLayoutId = rowLayoutId;
-		this.gastos = gastos;
+        this.context = context;
+        this.rowLayoutId = rowLayoutId;
+        this.gastos = gastos;
         gastosSeleccionados = new ArrayList<>();
-	}
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-		if (convertView == null) {
-			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-			convertView = inflater.inflate(rowLayoutId, parent, false);
-		}
+        if (convertView == null) {
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+            convertView = inflater.inflate(rowLayoutId, parent, false);
+        }
 
-		GastoApatxaListado gasto = gastos.get(position);
-		// titulo
-		TextView conceptoGastoTextView = (TextView) convertView.findViewById(R.id.concepto);
-		conceptoGastoTextView.setText(gasto.concepto);
-		// total
-		TextView totalGastoTextView = (TextView) convertView.findViewById(R.id.total);
-		totalGastoTextView.setText(FormatearNumero.aDineroEuros(context.getResources(), gasto.total));
-		// quien lo ha pagado
-		TextView pagadorGastoTextView = (TextView) convertView.findViewById(R.id.pagadoPor);
-		if (pagadorGastoTextView != null) {
-			String pagador = gasto.pagadoPor != null ? gasto.pagadoPor : context.getResources().getString(R.string.sin_pagar);
-			pagadorGastoTextView.setText(pagador);
-		}
+        GastoApatxaListado gasto = gastos.get(position);
+        // titulo
+        TextView conceptoGastoTextView = (TextView) convertView.findViewById(R.id.concepto);
+        conceptoGastoTextView.setText(gasto.concepto);
+        // total
+        TextView totalGastoTextView = (TextView) convertView.findViewById(R.id.total);
+        totalGastoTextView.setText(FormatearNumero.aDineroEuros(context.getResources(), gasto.total));
+        // quien lo ha pagado
+        TextView pagadorGastoTextView = (TextView) convertView.findViewById(R.id.pagadoPor);
+        if (pagadorGastoTextView != null) {
+            String pagador = gasto.pagadoPor != null ? gasto.pagadoPor : context.getResources().getString(R.string.sin_pagar);
+            pagadorGastoTextView.setText(pagador);
+        }
 
         marcarSeleccion(convertView, gasto);
 
-		return convertView;
-	}
+        return convertView;
+    }
 
     private void marcarSeleccion(View convertView, GastoApatxaListado gasto) {
         int colorFondo = (gastosSeleccionados.contains(gasto)) ? context.getResources().getColor(R.color.apatxascolors_gris_claro) : Color.TRANSPARENT;
@@ -90,7 +90,7 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
     }
 
 
-    public int numeroGastosSeleccionados(){
+    public int numeroGastosSeleccionados() {
         return gastosSeleccionados.size();
     }
 
@@ -102,5 +102,5 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
         resetearSeleccion();
     }
 
-    
+
 }

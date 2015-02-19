@@ -21,13 +21,11 @@ import java.util.List;
 
 public abstract class GastoApatxaActivity extends ApatxasActionBarActivity {
 
+    protected ListaPersonasPaganGastoApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
     AutoCompleteTextView conceptoGastoAutoComplete;
     EditText totalGastoEditText;
-
     Spinner personasSpinner;
     List<PersonaListado> personasApatxa;
-    protected ListaPersonasPaganGastoApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
-
     private Resources resources;
     private GastoService gastoService;
 
@@ -50,7 +48,6 @@ public abstract class GastoApatxaActivity extends ApatxasActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         return false;
     }
-
 
 
     private void inicializarServicios() {
@@ -98,7 +95,7 @@ public abstract class GastoApatxaActivity extends ApatxasActionBarActivity {
     }
 
     protected PersonaListado getPagadorSeleccionado() {
-        return(PersonaListado) personasSpinner.getSelectedItem();
+        return (PersonaListado) personasSpinner.getSelectedItem();
     }
 
     protected Double getImporteIntroducido() {

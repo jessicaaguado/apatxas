@@ -6,7 +6,6 @@
         android:layout_height="match_parent">
 
 
-
         <TextView
             android:id="@+id/listaGastosApatxaCabecera"
             style="@style/apatxas_cabecera_style"
@@ -23,10 +22,11 @@
             android:divider="@color/apatxascolors_color_linea_divisoria_lista"
             android:dividerHeight="1px" />
 
-        <include layout="@layout/subactivity_lista_vacia"
-            android:layout_below="@id/listaGastosApatxaCabecera"
+        <include
+            layout="@layout/subactivity_lista_vacia"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width="match_parent" />
+            android:layout_below="@id/listaGastosApatxaCabecera" />
 
     </RelativeLayout>
 

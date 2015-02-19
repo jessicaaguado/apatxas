@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/listaApatxasActivity"
     style="@style/apatxas_listado_activity"
     android:layout_width="match_parent"
@@ -9,25 +9,24 @@
     tools:context="com.jagusan.apatxas.activities.ListaApatxasActivity">
 
 
-    <include layout="@layout/subactivity_lista_vacia"/>
+    <include layout="@layout/subactivity_lista_vacia" />
 
     <ListView
         android:id="@+id/lista_gastos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_above="@+id/adViewListaApatxasActivity"
+        android:layout_alignParentTop="true"
         android:divider="@color/apatxascolors_color_linea_divisoria_lista"
-        android:dividerHeight="1px" >
-    </ListView>
+        android:dividerHeight="1px"></ListView>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewListaApatxasActivity"
+        style="@android:style/Theme.Translucent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        style="@android:style/Theme.Translucent"
-        ads:adUnitId="ca-app-pub-9514083595861499/1751906701"
-        ads:adSize="BANNER"/>
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9514083595861499/1751906701" />
 
 </RelativeLayout>

@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/apatxas_default_activity"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/apatxas_default_activity"
     android:orientation="vertical">
 
 
@@ -9,7 +9,7 @@
         android:id="@+id/concepto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/concepto" >
+        android:hint="@string/concepto">
 
         <requestFocus />
     </AutoCompleteTextView>
@@ -32,6 +32,6 @@
     <Spinner
         android:id="@+id/listaPersonasApatxaPagadoGasto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

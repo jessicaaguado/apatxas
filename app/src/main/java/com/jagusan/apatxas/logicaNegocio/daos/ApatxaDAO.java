@@ -17,19 +17,15 @@ import java.util.List;
 
 public class ApatxaDAO {
 
-    private SQLiteDatabase database;
-
     private static final String SQL_NUM_PERSONAS_PTES_APATXA = "(select count(*) from " + TablaPersona.NOMBRE_TABLA + " where " + TablaPersona.COLUMNA_ID_APATXA + " = " + TablaApatxa.COLUMNA_FULL_ID
             + " and (" + TablaPersona.COLUMNA_HECHO + " = 0 or " + TablaPersona.COLUMNA_HECHO + " is null))";
-
     private static final String SQL_GASTO_TOTAL_APATXA = "(select sum(" + TablaGasto.COLUMNA_TOTAL + ") from " + TablaGasto.NOMBRE_TABLA + " where " + TablaGasto.COLUMNA_ID_APATXA + " = " + TablaApatxa.COLUMNA_FULL_ID + ")";
-
     private static final String[] COLUMNAS_APATXA = {TablaApatxa.COLUMNA_ID, TablaApatxa.COLUMNA_NOMBRE,
             TablaApatxa.COLUMNA_FECHA_INICIO, TablaApatxa.COLUMNA_FECHA_FIN, TablaApatxa.COLUMNA_SOLO_UN_DIA,
             TablaApatxa.COLUMNA_REPARTO_REALIZADO, SQL_NUM_PERSONAS_PTES_APATXA,
             SQL_GASTO_TOTAL_APATXA};
-
-    private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA_INICIO + " DESC, "+TablaApatxa.COLUMNA_NOMBRE+" ASC";
+    private static final String ORDEN_APATXAS_DEFECTO = TablaApatxa.COLUMNA_FECHA_INICIO + " DESC, " + TablaApatxa.COLUMNA_NOMBRE + " ASC";
+    private SQLiteDatabase database;
 
     public void setDatabase(SQLiteDatabase database) {
         this.database = database;
@@ -56,7 +52,7 @@ public class ApatxaDAO {
     }
 
     public ApatxaDetalle getApatxa(Long id) {
-       ApatxaDetalle apatxa = null;
+        ApatxaDetalle apatxa = null;
         Cursor cursor = database.query(TablaApatxa.NOMBRE_TABLA, COLUMNAS_APATXA, TablaApatxa.COLUMNA_ID + "= " + id, null, null, null, ORDEN_APATXAS_DEFECTO);
         cursor.moveToFirst();
         if (!cursor.isAfterLast()) {
