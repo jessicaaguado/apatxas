@@ -19,15 +19,9 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/action_actualizar_reparto_apatxa"
-        android:icon="@drawable/ic_menu_action_apatxas_actualizar_reparto"
-        android:orderInCategory="3"
-        android:title="@string/action_repartir"
-        app:showAsAction="withText|ifRoom" />
-    <item
         android:id="@+id/action_editar_detalle_apatxa"
         android:icon="@drawable/ic_menu_action_apatxas_editar"
-        android:orderInCategory="4"
+        android:orderInCategory="3"
         android:title="@string/action_editar"
         app:showAsAction="never" />
 

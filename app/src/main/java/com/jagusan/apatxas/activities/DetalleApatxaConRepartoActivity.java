@@ -43,10 +43,6 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_actualizar_reparto_apatxa:
-                apatxaService.realizarReparto(apatxa);
-                cargarInformacionApatxa();
-                return true;
             case R.id.action_acceso_gastos:
                 irEditarListaGastosApatxa();
                 return true;
@@ -118,7 +114,6 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                actualizarReparto();
                 MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_apatxa_guardada);
             }
         }
