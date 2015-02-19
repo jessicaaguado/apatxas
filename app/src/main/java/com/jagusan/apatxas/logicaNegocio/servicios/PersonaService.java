@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.logicaNegocio.daos.GastoDAO;
 import com.jagusan.apatxas.logicaNegocio.daos.PersonaDAO;
 import com.jagusan.apatxas.modelView.PersonaListado;
@@ -19,11 +20,13 @@ public class PersonaService {
 
     private PersonaDAO personaDAO;
     private GastoDAO gastoDAO;
+    private Context context;
 
     public PersonaService(Context context) {
         dbHelper = new DatabaseHelper(context);
         personaDAO = new PersonaDAO();
         gastoDAO = new GastoDAO();
+        this.context = context;
     }
 
     public void open() throws SQLException {
@@ -73,6 +76,12 @@ public class PersonaService {
         } else {
             personaDAO.marcarPersonasRepartoPendiente(idsPersonas);
         }
+        close();
+    }
+
+    public void actualizarMiNombre() {
+        open();
+        personaDAO.actualizarMiNombre(context.getResources().getString(R.string.yo_mayusculas));
         close();
     }
 

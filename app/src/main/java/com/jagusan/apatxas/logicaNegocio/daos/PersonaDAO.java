@@ -113,4 +113,9 @@ public class PersonaDAO {
         cursor.close();
         return idPersona;
     }
+
+    public void actualizarMiNombre(String nuevoNombre) {
+        String sqlActualizar = "update " + TablaPersona.NOMBRE_TABLA + " set " + TablaPersona.COLUMNA_NOMBRE + " = '" + nuevoNombre + "' where " + TablaPersona.COLUMNA_ID_CONTACTO + " = " + Long.MIN_VALUE;
+        database.execSQL(sqlActualizar);
+    }
 }

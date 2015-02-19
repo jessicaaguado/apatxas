@@ -11,11 +11,13 @@ import java.util.Locale;
 
 public class SettingsUtils {
 
+    public static final String SETTINGS_APATXAS_IDIOMA = "settings_apatxas_idioma";
+
     public static void aplicarSettingsPropios(Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         String idiomaDefecto = context.getResources().getString(R.string.settings_apatxas_valor_idioma_defecto);
-        String idioma = preferences.getString("settings_apatxas_idioma", idiomaDefecto);
+        String idioma = preferences.getString(SETTINGS_APATXAS_IDIOMA, idiomaDefecto);
 
         Locale locale = new Locale(idioma);
         Locale.setDefault(locale);

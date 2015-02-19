@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.fragments.SettingsFragment;
+import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
 import com.jagusan.apatxas.utils.SettingsUtils;
 
 
@@ -29,6 +30,9 @@ public class SettingsActivity extends ApatxasActionBarActivity implements Shared
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         SettingsUtils.aplicarSettingsPropios(this);
+        if (SettingsUtils.SETTINGS_APATXAS_IDIOMA.equals(key)) {
+            new PersonaService(this).actualizarMiNombre();
+        }
         restartActivity();
     }
 
