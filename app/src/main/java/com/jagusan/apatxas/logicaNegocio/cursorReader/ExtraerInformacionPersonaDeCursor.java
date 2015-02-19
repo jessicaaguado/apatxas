@@ -22,8 +22,8 @@ public class ExtraerInformacionPersonaDeCursor {
         persona.nombre = tablaPersonaCursor.getNombre();
         persona.idContacto = tablaPersonaCursor.getIdContacto();
         persona.uriFoto = tablaPersonaCursor.getFotoContacto();
-        persona.setCantidadPago(tablaPersonaCursor.getCuantiaPago());
-        persona.setRepartoPagado(tablaPersonaCursor.getHecho());
+        persona.cantidadPago = tablaPersonaCursor.getCuantiaPago();
+        persona.repartoPagado = tablaPersonaCursor.getHecho();
         return persona;
     }
 

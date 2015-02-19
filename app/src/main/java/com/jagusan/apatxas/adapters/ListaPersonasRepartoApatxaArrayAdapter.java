@@ -49,9 +49,9 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         TextView nombrePersonaTextView = (TextView) convertView.findViewById(R.id.nombre);
         nombrePersonaTextView.setText(persona.nombre);
         TextView gastoPersonaTextView = (TextView) convertView.findViewById(R.id.totalGastoReparto);
-        gastoPersonaTextView.setText(FormatearNumero.aDescripcionRepartoDineroEuros(context.getResources(), persona.getCantidadPago()));
+        gastoPersonaTextView.setText(FormatearNumero.aDescripcionRepartoDineroEuros(context.getResources(), persona.cantidadPago));
         ImageView indicadorRepartoPagadoImageView = (ImageView) convertView.findViewById(R.id.indicadorRepartoPagado);
-        if (persona.getRepartoPagado()) {
+        if (persona.repartoPagado) {
             indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pagado);
         } else {
             indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pendiente);

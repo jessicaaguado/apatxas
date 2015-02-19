@@ -8,10 +8,9 @@ public class CursorTablaPersona {
 	private static final Integer POSICION_NOMBRE = 1;
 	private static final Integer POSICION_ID_APATXA = 2;
 	private static final Integer POSICION_CUANTIA_PAGO = 3;
-	private static final Integer POSICION_PAGADO = 4;
-    private static final Integer POSICION_HECHO = 5;
-    private static final Integer POSICION_ID_CONTACTO = 6;
-    private static final Integer POSICION_FOTO_CONTACTO = 7;
+    private static final Integer POSICION_HECHO = 4;
+    private static final Integer POSICION_ID_CONTACTO = 5;
+    private static final Integer POSICION_FOTO_CONTACTO = 6;
 
 
 	private final Cursor cursor;
@@ -34,10 +33,6 @@ public class CursorTablaPersona {
 
 	public Double getCuantiaPago() {
 		return cursor.getDouble(POSICION_CUANTIA_PAGO);
-	}
-
-	public Double getPagado() {
-		return cursor.getDouble(POSICION_PAGADO);
 	}
 
     public Boolean getHecho() {
