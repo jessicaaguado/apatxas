@@ -11,7 +11,8 @@
             android:id="@+id/nombreApatxa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/nombre">
+            android:hint="@string/nombre"
+            android:imeOptions="actionDone">
 
             <requestFocus />
         </AutoCompleteTextView>

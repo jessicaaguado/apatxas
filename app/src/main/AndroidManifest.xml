@@ -2,33 +2,36 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jagusan.apatxas"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="15"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
-        <meta-data android:name="com.google.android.gms.version"  android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
-        <activity android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 
 
         <activity
             android:name=".activities.ListaApatxasActivity"
-            android:label="@string/app_name"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,83 +40,87 @@
         </activity>
         <activity
             android:name=".activities.NuevoApatxaPaso1Activity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_nuevo_apatxa_paso1"
             android:launchMode="singleTop"
-            android:configChanges="orientation|screenSize">
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.ListaApatxasActivity" />
         </activity>
         <activity
             android:name=".activities.NuevoApatxaPaso2Activity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_nuevo_apatxa_paso2"
-            android:launchMode="singleTop"
-            android:configChanges="orientation|screenSize">
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.NuevoApatxaPaso1Activity" />
         </activity>
         <activity
             android:name=".activities.NuevoGastoApatxaActivity"
-            android:label="@string/title_activity_nuevo_gasto"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateVisible" >
+            android:label="@string/title_activity_nuevo_gasto"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.NuevoApatxaPaso2Activity" />
         </activity>
         <activity
             android:name=".activities.EditarGastoApatxaActivity"
-            android:label="@string/title_activity_editar_gasto"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateVisible">
+            android:label="@string/title_activity_editar_gasto"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.ListaGastosApatxaActivity"/>
+                android:value=".activities.ListaGastosApatxaActivity" />
         </activity>
         <activity
             android:name=".activities.DetalleApatxaSinRepartoActivity"
-            android:label="@string/title_activity_detalle_apatxa"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_detalle_apatxa">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.ListaApatxasActivity" />
         </activity>
         <activity
             android:name=".activities.DetalleApatxaConRepartoActivity"
-            android:label="@string/title_activity_detalle_apatxa"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_detalle_apatxa">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.ListaApatxasActivity" />
         </activity>
         <activity
             android:name=".activities.EditarInformacionBasicaApatxaActivity"
-            android:label="@string/title_activity_editar_apatxa"
             android:configChanges="orientation|screenSize"
-            android:windowSoftInputMode="stateVisible">
+            android:label="@string/title_activity_editar_apatxa"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" /> >
+                android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" />
+            >
         </activity>
-        <activity android:name=".activities.ListaPersonasApatxaActivity"
-            android:label="@string/title_activity_lista_personas"
-            android:configChanges="orientation|screenSize">
+        <activity
+            android:name=".activities.ListaPersonasApatxaActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_lista_personas">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" />
         </activity>
-        <activity android:name=".activities.ListaGastosApatxaActivity"
-            android:label="@string/title_activity_lista_gastos"
-            android:configChanges="orientation|screenSize">
+        <activity
+            android:name=".activities.ListaGastosApatxaActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_lista_gastos">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.DetalleApatxaConRepartoActivity" />
         </activity>
         <activity
             android:name=".activities.ListaContactosActivity"
-            android:label="@string/title_activity_lista_contactos"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_lista_contactos">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.ListaPersonasApatxaActivity" />
@@ -121,8 +128,8 @@
         </activity>
         <activity
             android:name="com.jagusan.apatxas.activities.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jagusan.apatxas.activities.ListaApatxasActivity" />
