@@ -1,8 +1,10 @@
 package com.jagusan.apatxas.logicaNegocio.servicios;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.logicaNegocio.daos.GastoDAO;
@@ -81,7 +83,12 @@ public class PersonaService {
 
     public void actualizarMiNombre() {
         open();
-        personaDAO.actualizarMiNombre(context.getResources().getString(R.string.yo_mayusculas));
+        String[] columnasPerfil = new String[]{ContactsContract.Profile.DISPLAY_NAME_PRIMARY};
+        Cursor perfilCursor = context.getContentResolver().query(ContactsContract.Profile.CONTENT_URI, columnasPerfil, null, null, null);
+        perfilCursor.moveToFirst();
+        String nombre = context.getString(R.string.yo_mayusculas, perfilCursor.getString(0));
+        perfilCursor.close();
+        personaDAO.actualizarMiNombre(nombre);
         close();
     }
 
