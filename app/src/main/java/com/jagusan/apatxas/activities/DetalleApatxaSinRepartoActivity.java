@@ -3,8 +3,6 @@ package com.jagusan.apatxas.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.DataSetObserver;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,7 +20,6 @@ import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
-import com.jagusan.apatxas.utils.LogTags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +106,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     private void cargarInformacionGastos() {
         gastosApatxa = apatxa.gastos;
         listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, gastosApatxa);
-        gestionarListaVacia();
+        gestionarListaVacia(listaGastosApatxaArrayAdapter, false, R.string.lista_vacia_gastos, null);
         gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
         asignarContextualActionBar(gastosApatxaListView);
         actualizarTituloCabeceraListaGastos();
@@ -268,25 +265,6 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
             }
 
         });
-    }
-
-    private void gestionarListaVacia() {
-
-        listaGastosApatxaArrayAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                toggleInformacionListaVacia();
-            }
-        });
-        toggleInformacionListaVacia();
-    }
-
-    private void toggleInformacionListaVacia() {
-        int visibilidad = listaGastosApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
-        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_gastos);
-        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
-        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
     }
 
 }

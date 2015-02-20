@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -163,7 +162,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
         gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
         asignarContextualActionBar(gastosApatxaListView);
 
-        gestionarListaVacia();
+        gestionarListaVacia(listaGastosApatxaArrayAdapter, false, R.string.lista_vacia_gastos, null);
     }
 
     private void recuperarDatosPasoAnterior() {
@@ -312,21 +311,5 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
         });
     }
 
-    private void gestionarListaVacia() {
-        listaGastosApatxaArrayAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                toggleInformacionListaVacia();
-            }
-        });
-        toggleInformacionListaVacia();
-    }
 
-    private void toggleInformacionListaVacia() {
-        int visibilidad = listaGastosApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
-        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_gastos);
-        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
-        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
-    }
 }

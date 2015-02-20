@@ -5,9 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.HeaderViewListAdapter;
@@ -32,7 +29,6 @@ import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.FormatearFecha;
-import com.jagusan.apatxas.utils.LogTags;
 import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
@@ -211,7 +207,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         asignarContextualActionBar(personasListView);
 
         actualizarTituloCabeceraListaPersonas();
-        gestionarListaVacia();
+        gestionarListaVacia(listaPersonasApatxaArrayAdapter, true, R.string.lista_vacia_nuevo_apatxas_paso1, R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1);
     }
 
     private void inicializarElementosLayout() {
@@ -335,30 +331,9 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         }
     }
 
-    private void gestionarListaVacia() {
-        listaPersonasApatxaArrayAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                toggleInformacionListaVacia();
-            }
-        });
-        toggleInformacionListaVacia();
-    }
-
-    private void toggleInformacionListaVacia() {
-
-        int visibilidad = listaPersonasApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
-        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso1);
-        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
-        ((Button) findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1);
-        findViewById(R.id.anadir_elementos_mas_tarde).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                continuarAnadirApatxas();
-            }
-        });
-        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(visibilidad);
+    @Override
+    protected void continuarSinAnadirElementos() {
+        continuarAnadirApatxas();
     }
 
 }

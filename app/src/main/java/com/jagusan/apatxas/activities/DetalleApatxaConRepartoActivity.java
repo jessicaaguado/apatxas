@@ -1,7 +1,6 @@
 package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -95,7 +94,8 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
         actualizarTituloCabeceraListaReparto();
         asignarContextualActionBar(personasRepartoListView);
 
-        gestionarListaVacia();
+        gestionarListaVacia(listaPersonasRepartoApatxaArrayAdapter, false, R.string.lista_vacia_personas_reparto, null);
+
     }
 
 
@@ -202,24 +202,6 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
 
         });
-    }
-
-    private void gestionarListaVacia() {
-        listaPersonasRepartoApatxaArrayAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                toggleInformacionListaVacia();
-            }
-        });
-        toggleInformacionListaVacia();
-    }
-
-    private void toggleInformacionListaVacia() {
-        int visibilidad = listaPersonasRepartoApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
-        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_personas_reparto);
-        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
-        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
     }
 
 }

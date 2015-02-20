@@ -1,13 +1,10 @@
 package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaContactosArrayAdapter;
@@ -84,24 +81,8 @@ public class ListaContactosActivity extends ApatxasActionBarActivity {
         listaContactosArrayAdapter = new ListaContactosArrayAdapter(this, R.layout.lista_contactos_row, contactos);
         contactosListView.setAdapter(listaContactosArrayAdapter);
 
-        gestionarListaVacia();
+        gestionarListaVacia(listaContactosArrayAdapter, false, R.string.lista_vacia_contactos, null);
+
     }
 
-    private void gestionarListaVacia() {
-        listaContactosArrayAdapter.registerDataSetObserver(new DataSetObserver() {
-            @Override
-            public void onChanged() {
-                toggleInformacionListaVacia();
-            }
-        });
-        toggleInformacionListaVacia();
-    }
-
-    private void toggleInformacionListaVacia() {
-        int visibilidad = listaContactosArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
-        findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_contactos);
-        findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
-        findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);
-    }
 }
