@@ -7,6 +7,6 @@
         android:id="@+id/listaPersonasApatxaCabecera"
         style="@style/apatxas_cabecera_style"
         android:layout_width="match_parent"
-        android:drawableLeft="@drawable/ic_apatxas_personas"/>
+        android:drawableLeft="@drawable/ic_apatxas_personas" />
 
 </LinearLayout>

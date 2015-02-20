@@ -101,7 +101,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
     private void actualizarTituloCabeceraListaPersonas() {
         int numPersonas = personasApatxa.size();
         String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_personas, numPersonas, numPersonas);
-        ((TextView)tituloPersonasListViewHeader.findViewById(R.id.listaPersonasApatxaCabecera)).setText(titulo);
+        ((TextView) tituloPersonasListViewHeader.findViewById(R.id.listaPersonasApatxaCabecera)).setText(titulo);
     }
 
     public void seleccionarContactos() {
@@ -192,7 +192,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
 
 
         View listaVacia = findViewById(R.id.listaVaciaInfoSubactivity);
-        ((RelativeLayout)listaVacia.getParent()).removeView(listaVacia);
+        ((RelativeLayout) listaVacia.getParent()).removeView(listaVacia);
         personasListView.addHeaderView(getLayoutInflater().inflate(R.layout.subactivity_lista_vacia, null));
 
         soloUnDiaSwitch = (Switch) findViewById(R.id.switchUnSoloDia);
@@ -206,7 +206,6 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
     }
 
     private void cargarInformacionPersonas() {
-        Log.d(LogTags.DEFAULT, "cargar informacion personas");
         listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
         personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
         asignarContextualActionBar(personasListView);
@@ -258,7 +257,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         personasListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         personasListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
-            ListaPersonasApatxaArrayAdapter adapter = (ListaPersonasApatxaArrayAdapter)((HeaderViewListAdapter) personasListView.getAdapter()).getWrappedAdapter();
+            ListaPersonasApatxaArrayAdapter adapter = (ListaPersonasApatxaArrayAdapter) ((HeaderViewListAdapter) personasListView.getAdapter()).getWrappedAdapter();
             ActionMode mode;
 
             @Override
@@ -349,11 +348,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
     private void toggleInformacionListaVacia() {
 
         int visibilidad = listaPersonasApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
-        Log.d(LogTags.DEFAULT, "Visible "+View.VISIBLE+" - Gone "+View.GONE);
-        Log.d(LogTags.DEFAULT," Toggle "+listaPersonasApatxaArrayAdapter.getCount()+" "+visibilidad);
-        Log.d(LogTags.DEFAULT, "Antes "+findViewById(R.id.imagen_lista_vacia).getVisibility());
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        Log.d(LogTags.DEFAULT, "Despues "+findViewById(R.id.imagen_lista_vacia).getVisibility());
         ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso1);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
         ((Button) findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1);

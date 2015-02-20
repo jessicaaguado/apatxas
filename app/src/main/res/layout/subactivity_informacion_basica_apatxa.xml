@@ -1,58 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/informacion_basica_apatxa"
+    style="@style/apatxas_detalle_activity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/apatxas_padding_inferior_defecto">
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        style="@style/apatxas_detalle_activity"
-        android:id="@+id/informacion_basica_apatxa"
+    <AutoCompleteTextView
+        android:id="@+id/nombreApatxa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/apatxas_padding_inferior_defecto">
+        android:hint="@string/nombre"
+        android:imeOptions="actionDone">
 
-        <AutoCompleteTextView
-            android:id="@+id/nombreApatxa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/nombre"
-            android:imeOptions="actionDone">
-
-            <requestFocus />
-        </AutoCompleteTextView>
+        <requestFocus />
+    </AutoCompleteTextView>
 
 
-        <Switch
-            android:id="@+id/switchUnSoloDia"
-            style="@style/apatxas_valor_defecto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_apatxas_calendario"
-            android:drawablePadding="@dimen/apatxas_padding_izquierdo_defecto"
-            android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
-            android:paddingTop="@dimen/apatxas_padding_superior_extra"
-            android:switchPadding="40dp"
-            android:text="@string/varios_dias"
-            android:textColor="@color/apatxascolors_gris_medio" />
+    <Switch
+        android:id="@+id/switchUnSoloDia"
+        style="@style/apatxas_valor_defecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_apatxas_calendario"
+        android:drawablePadding="@dimen/apatxas_padding_izquierdo_defecto"
+        android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
+        android:paddingTop="@dimen/apatxas_padding_superior_extra"
+        android:switchPadding="40dp"
+        android:text="@string/varios_dias"
+        android:textColor="@color/apatxascolors_gris_medio" />
 
-        <TextView
-            android:id="@+id/fechaInicioApatxa"
-            style="@style/apatxas_valor_defecto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/patron_fecha_dia_mes_ano_ux"
-            android:onClick="mostrarDatePicker"
-            android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
-            android:paddingLeft="40dp"
-            android:paddingTop="@dimen/apatxas_padding_superior_defecto" />
+    <TextView
+        android:id="@+id/fechaInicioApatxa"
+        style="@style/apatxas_valor_defecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/patron_fecha_dia_mes_ano_ux"
+        android:onClick="mostrarDatePicker"
+        android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
+        android:paddingLeft="40dp"
+        android:paddingTop="@dimen/apatxas_padding_superior_defecto" />
 
-        <TextView
-            android:id="@+id/fechaFinApatxa"
-            style="@style/apatxas_valor_defecto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/patron_fecha_dia_mes_ano_ux"
-            android:onClick="mostrarDatePicker"
-            android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
-            android:paddingLeft="40dp"
-            android:paddingTop="@dimen/apatxas_padding_superior_defecto" />
+    <TextView
+        android:id="@+id/fechaFinApatxa"
+        style="@style/apatxas_valor_defecto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/patron_fecha_dia_mes_ano_ux"
+        android:onClick="mostrarDatePicker"
+        android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
+        android:paddingLeft="40dp"
+        android:paddingTop="@dimen/apatxas_padding_superior_defecto" />
 
 
-    </LinearLayout>
+</LinearLayout>

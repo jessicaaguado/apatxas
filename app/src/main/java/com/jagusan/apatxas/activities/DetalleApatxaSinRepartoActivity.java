@@ -283,9 +283,7 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
     private void toggleInformacionListaVacia() {
         int visibilidad = listaGastosApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
-        Log.d(LogTags.DEFAULT, "Antes " + findViewById(R.id.imagen_lista_vacia).getVisibility());
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
-        Log.d(LogTags.DEFAULT, "Despues " + findViewById(R.id.imagen_lista_vacia).getVisibility());
         ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_gastos);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
         findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);

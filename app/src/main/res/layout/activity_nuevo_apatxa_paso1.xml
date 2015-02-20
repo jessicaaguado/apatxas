@@ -4,7 +4,6 @@
     android:orientation="vertical">
 
 
-
     <include
         layout="@layout/subactivity_lista_personas"
         android:layout_width="match_parent"

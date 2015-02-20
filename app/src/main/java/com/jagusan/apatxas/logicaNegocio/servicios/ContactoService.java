@@ -4,12 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.logicaNegocio.cursorReader.ExtraerInformacionContactoDeCursor;
 import com.jagusan.apatxas.modelView.ContactoListado;
-import com.jagusan.apatxas.utils.LogTags;
 
 import java.util.ArrayList;
 import java.util.List;

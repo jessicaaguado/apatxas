@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:drawableLeft="@drawable/ic_apatxas_reparto"
             android:text="@string/reparto"
-            android:visibility="gone"  />
+            android:visibility="gone" />
 
         <ListView
             android:id="@+id/listaDesgloseRepartoApatxa"
@@ -21,7 +21,8 @@
             android:divider="@color/apatxascolors_color_linea_divisoria_lista"
             android:dividerHeight="1px" />
 
-        <include layout="@layout/subactivity_lista_vacia"
+        <include
+            layout="@layout/subactivity_lista_vacia"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/listaRepartoApatxaCabecera" />

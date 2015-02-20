@@ -9,6 +9,6 @@
         style="@style/apatxas_detalle_activity"
         layout="@layout/subactivity_lista_resultado_reparto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"  />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
