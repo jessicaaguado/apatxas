@@ -5,13 +5,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/subactivity_lista_vacia" />
 
         <TextView
             android:id="@+id/listaPersonasApatxaCabecera"
             style="@style/apatxas_cabecera_style"
             android:layout_width="match_parent"
-            android:drawableLeft="@drawable/ic_apatxas_personas" />
+            android:drawableLeft="@drawable/ic_apatxas_personas"
+            android:visibility="gone"/>
 
         <ListView
             android:id="@+id/listaPersonasApatxa"
@@ -20,5 +20,7 @@
             android:layout_below="@+id/listaPersonasApatxaCabecera"
             android:divider="@color/apatxascolors_color_linea_divisoria_lista"
             android:dividerHeight="1px" />
+
+        <include layout="@layout/subactivity_lista_vacia" />
     </RelativeLayout>
 </merge>

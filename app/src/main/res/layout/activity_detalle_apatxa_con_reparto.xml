@@ -5,6 +5,10 @@
 
     <include layout="@layout/subactivity_detalle_informacion_basica_apatxa" />
 
-    <include layout="@layout/subactivity_lista_resultado_reparto" />
+    <include
+        style="@style/apatxas_detalle_activity"
+        layout="@layout/subactivity_lista_resultado_reparto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"  />
 
 </LinearLayout>

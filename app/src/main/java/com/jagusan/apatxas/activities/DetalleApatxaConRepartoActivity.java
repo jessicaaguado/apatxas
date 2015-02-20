@@ -75,6 +75,8 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
         numeroPersonasTextView.setVisibility(View.GONE);
         headerInformacionDetalle.findViewById(R.id.separador2DetalleApatxa).setVisibility(View.GONE);
+        findViewById(R.id.listaVaciaInfoSubactivity).setVisibility(View.GONE);
+        personasRepartoListView.addHeaderView(getLayoutInflater().inflate(R.layout.subactivity_lista_vacia, null));
 
     }
 

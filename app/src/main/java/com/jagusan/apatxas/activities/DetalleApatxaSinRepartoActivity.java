@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,7 @@ import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
+import com.jagusan.apatxas.utils.LogTags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -281,7 +283,9 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
 
     private void toggleInformacionListaVacia() {
         int visibilidad = listaGastosApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
+        Log.d(LogTags.DEFAULT, "Antes " + findViewById(R.id.imagen_lista_vacia).getVisibility());
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
+        Log.d(LogTags.DEFAULT, "Despues " + findViewById(R.id.imagen_lista_vacia).getVisibility());
         ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_gastos);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
         findViewById(R.id.anadir_elementos_mas_tarde).setVisibility(View.GONE);

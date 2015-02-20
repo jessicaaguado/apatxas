@@ -5,14 +5,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/subactivity_lista_vacia" />
+        <TextView
+            android:id="@+id/listaRepartoApatxaCabecera"
+            style="@style/apatxas_cabecera_style"
+            android:layout_width="match_parent"
+            android:drawableLeft="@drawable/ic_apatxas_reparto"
+            android:text="@string/reparto"
+            android:visibility="gone"  />
 
         <ListView
             android:id="@+id/listaDesgloseRepartoApatxa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/listaRepartoApatxaCabecera"
             android:divider="@color/apatxascolors_color_linea_divisoria_lista"
             android:dividerHeight="1px" />
+
+        <include layout="@layout/subactivity_lista_vacia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/listaRepartoApatxaCabecera" />
 
     </RelativeLayout>
 

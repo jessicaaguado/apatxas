@@ -1,7 +1,8 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         style="@style/apatxas_detalle_activity"
+        android:id="@+id/informacion_basica_apatxa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -55,5 +56,3 @@
 
 
     </LinearLayout>
-
-</merge>

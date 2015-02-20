@@ -7,18 +7,22 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -28,6 +32,7 @@ import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.FormatearFecha;
+import com.jagusan.apatxas.utils.LogTags;
 import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
 import com.jagusan.apatxas.utils.ValidacionActivity;
 
@@ -45,7 +50,8 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
     private DatePickerDialog fechaFinDatePickerDialog;
     private Switch soloUnDiaSwitch;
 
-    private TextView tituloPersonasListViewHeader;
+    private ListView personasListView;
+    private ViewGroup tituloPersonasListViewHeader;
     private List<PersonaListado> personasApatxa = new ArrayList<>();
     private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
@@ -64,7 +70,10 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         personalizarActionBar(R.string.title_activity_nuevo_apatxa_paso1, MostrarTituloPantalla.NUEVO_APATXA_PASO1);
 
         cargarElementosLayout();
+
         inicializarElementosLayout();
+
+        cargarInformacionPersonas();
     }
 
     @Override
@@ -89,15 +98,10 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
 
     }
 
-    private void anadirCabeceraListaPersonas() {
-        tituloPersonasListViewHeader = (TextView) findViewById(R.id.listaPersonasApatxaCabecera);
-        actualizarTituloCabeceraListaPersonas();
-    }
-
     private void actualizarTituloCabeceraListaPersonas() {
         int numPersonas = personasApatxa.size();
         String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_personas, numPersonas, numPersonas);
-        tituloPersonasListViewHeader.setText(titulo);
+        ((TextView)tituloPersonasListViewHeader.findViewById(R.id.listaPersonasApatxaCabecera)).setText(titulo);
     }
 
     public void seleccionarContactos() {
@@ -116,20 +120,22 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
 
     public void anadirContactosSeleccionados(Intent data) {
         List<ContactoListado> contactosSeleccionados = (ArrayList<ContactoListado>) data.getSerializableExtra("contactosSeleccionados");
+        List<PersonaListado> personasAnadir = new ArrayList<>();
         for (ContactoListado contacto : contactosSeleccionados) {
             PersonaListado persona = new PersonaListado();
             persona.nombre = contacto.nombre;
             persona.idContacto = contacto.id;
             persona.uriFoto = contacto.fotoURI;
-            listaPersonasApatxaArrayAdapter.add(persona);
+            personasAnadir.add(persona);
         }
-        actualizarTituloCabeceraListaPersonas();
+        listaPersonasApatxaArrayAdapter.addAll(personasAnadir);
+        cargarInformacionPersonas();
     }
 
 
     public void borrarPersonas() {
         listaPersonasApatxaArrayAdapter.eliminarPersonasSeleccionadas();
-        actualizarTituloCabeceraListaPersonas();
+        cargarInformacionPersonas();
     }
 
     private void continuarAnadirApatxas() {
@@ -174,16 +180,20 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
     }
 
     private void cargarElementosLayout() {
-        nombreApatxaAutoComplete = (AutoCompleteTextView) findViewById(R.id.nombreApatxa);
-        fechaInicioApatxaTextView = (TextView) findViewById(R.id.fechaInicioApatxa);
-        fechaFinApatxaTextView = (TextView) findViewById(R.id.fechaFinApatxa);
+        ViewGroup informacionBasica = (ViewGroup) getLayoutInflater().inflate(R.layout.subactivity_informacion_basica_apatxa, null);
+        nombreApatxaAutoComplete = (AutoCompleteTextView) informacionBasica.findViewById(R.id.nombreApatxa);
+        fechaInicioApatxaTextView = (TextView) informacionBasica.findViewById(R.id.fechaInicioApatxa);
+        fechaFinApatxaTextView = (TextView) informacionBasica.findViewById(R.id.fechaFinApatxa);
 
-        ListView personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
-        anadirCabeceraListaPersonas();
+        personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+        personasListView.addHeaderView(informacionBasica);
+        tituloPersonasListViewHeader = (ViewGroup) getLayoutInflater().inflate(R.layout.nuevo_apatxa_paso1_lista_personas_header, null);
+        personasListView.addHeaderView(tituloPersonasListViewHeader);
 
-        listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
-        personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
-        asignarContextualActionBar(personasListView);
+
+        View listaVacia = findViewById(R.id.listaVaciaInfoSubactivity);
+        ((RelativeLayout)listaVacia.getParent()).removeView(listaVacia);
+        personasListView.addHeaderView(getLayoutInflater().inflate(R.layout.subactivity_lista_vacia, null));
 
         soloUnDiaSwitch = (Switch) findViewById(R.id.switchUnSoloDia);
         soloUnDiaSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -193,6 +203,15 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
             }
         });
 
+    }
+
+    private void cargarInformacionPersonas() {
+        Log.d(LogTags.DEFAULT, "cargar informacion personas");
+        listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
+        personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
+        asignarContextualActionBar(personasListView);
+
+        actualizarTituloCabeceraListaPersonas();
         gestionarListaVacia();
     }
 
@@ -239,12 +258,14 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         personasListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         personasListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
-            ListaPersonasApatxaArrayAdapter adapter = (ListaPersonasApatxaArrayAdapter) personasListView.getAdapter();
+            ListaPersonasApatxaArrayAdapter adapter = (ListaPersonasApatxaArrayAdapter)((HeaderViewListAdapter) personasListView.getAdapter()).getWrappedAdapter();
             ActionMode mode;
 
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-                adapter.toggleSeleccion(position, checked);
+                //ponemos -numHeaders porque tenemos header
+                int numHeaders = ((HeaderViewListAdapter) personasListView.getAdapter()).getHeadersCount();
+                adapter.toggleSeleccion(position - numHeaders, checked);
                 mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
             }
 
@@ -326,8 +347,13 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
     }
 
     private void toggleInformacionListaVacia() {
+
         int visibilidad = listaPersonasApatxaArrayAdapter.getCount() == 0 ? View.VISIBLE : View.GONE;
+        Log.d(LogTags.DEFAULT, "Visible "+View.VISIBLE+" - Gone "+View.GONE);
+        Log.d(LogTags.DEFAULT," Toggle "+listaPersonasApatxaArrayAdapter.getCount()+" "+visibilidad);
+        Log.d(LogTags.DEFAULT, "Antes "+findViewById(R.id.imagen_lista_vacia).getVisibility());
         findViewById(R.id.imagen_lista_vacia).setVisibility(visibilidad);
+        Log.d(LogTags.DEFAULT, "Despues "+findViewById(R.id.imagen_lista_vacia).getVisibility());
         ((TextView) findViewById(R.id.informacion_lista_vacia)).setText(R.string.lista_vacia_nuevo_apatxas_paso1);
         findViewById(R.id.informacion_lista_vacia).setVisibility(visibilidad);
         ((Button) findViewById(R.id.anadir_elementos_mas_tarde)).setText(R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1);

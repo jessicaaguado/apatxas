@@ -154,6 +154,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
 
     private void anadirCabeceraListaPersonas() {
         tituloPersonasListViewHeader = (TextView) findViewById(R.id.listaPersonasApatxaCabecera);
+        tituloPersonasListViewHeader.setVisibility(View.VISIBLE);
         actualizarTituloCabeceraListaPersonas();
     }
 
