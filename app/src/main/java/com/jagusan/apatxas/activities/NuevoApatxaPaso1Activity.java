@@ -138,7 +138,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         String titulo = nombreApatxaAutoComplete.getText().toString();
         Long fechaInicio = null;
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat(resources.getString(R.string.patron_fecha_dia_mes_ano));
             fechaInicio = sdf.parse(fechaInicioApatxaTextView.getText().toString()).getTime();
         } catch (Exception e) {
             // sin fecha
@@ -147,7 +147,7 @@ public class NuevoApatxaPaso1Activity extends ApatxasActionBarActivity {
         Long fechaFin = fechaInicio;
         if (!soloUnDia) {
             try {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat(resources.getString(R.string.patron_fecha_dia_mes_ano));
                 fechaFin = sdf.parse(fechaFinApatxaTextView.getText().toString()).getTime();
             } catch (Exception e) {
                 // sin fecha
