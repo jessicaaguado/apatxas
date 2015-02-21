@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Apatxas</string>
+    <string name="app_name">Apatxa</string>
 
     <!-- ACCIONES -->
     <string name="action_settings">Ezarpenak</string>
@@ -79,7 +79,7 @@
     <!-- MENSAJES DE CONFIRMACION -->
     <string name="mensaje_confirmacion_borrado_personas">Aukeratutako lagunak ezabatu nahi dituzu?</string>
     <string name="mensaje_confirmacion_borrado_gastos">Aukeratutako gastuak ezabatu nahi dituzu?</string>
-    <string name="mensaje_confirmacion_borrado_apatxas">Aukeratutako Apatxas ezabatu nahi dituzu?</string>
+    <string name="mensaje_confirmacion_borrado_apatxas">Aukeratutako Apatxak ezabatu nahi dituzu?</string>
     <string name="mensaje_confirmacion_resetear_pagos_cobros_del_reparto">Dagoeneko lagun batzuk ordaindu/kobratu dute. Aldaketak gordez gero banaketa berriro egingo da eta informazio hori galduko da. Aldaketak gorde nahi dituzu?</string>
     <plurals name="mensaje_confirmacion_borrado_apatxas_realizado">
         <item quantity="one">Apatxa ezabatu da</item>
@@ -127,7 +127,7 @@
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f €</string>
     <string name="cobrar_cantidad_euros">%1$.2f € kobratu</string>
-    <string name="concepto">Kontzeptu</string>
+    <string name="concepto">Kontzeptua</string>
 
     <string name="importe">Zenbatekoa</string>
     <string name="nombre">Izena</string>
