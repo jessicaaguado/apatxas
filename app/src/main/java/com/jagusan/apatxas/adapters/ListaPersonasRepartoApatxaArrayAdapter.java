@@ -2,6 +2,7 @@ package com.jagusan.apatxas.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.modelView.PersonaListadoReparto;
+import com.jagusan.apatxas.utils.CrearAvatarConLetra;
 import com.jagusan.apatxas.utils.FormatearNumero;
 
 import java.util.ArrayList;
@@ -61,7 +63,13 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         if (persona.uriFoto != null) {
             fotoContactoImageView.setImageURI(Uri.parse(persona.uriFoto));
         } else {
-            fotoContactoImageView.setImageResource(R.drawable.ic_apatxas_contacto_sin_foto);
+            final int tamanoAvatar = context.getResources().getDimensionPixelSize(R.dimen.apatxas_persona_avatar_tamano);
+            final Bitmap avatar = CrearAvatarConLetra.crearAvatarConLetra(context, persona.nombre, tamanoAvatar, tamanoAvatar);
+            if (avatar != null) {
+                fotoContactoImageView.setImageBitmap(avatar);
+            } else {
+                fotoContactoImageView.setVisibility(View.INVISIBLE);
+            }
         }
 
         marcarSeleccion(convertView, persona);

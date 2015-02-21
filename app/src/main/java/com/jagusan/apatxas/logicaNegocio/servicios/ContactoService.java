@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ContactoService {
 
-    private final static String[] COLUMNAS = {ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME_PRIMARY, ContactsContract.Contacts.PHOTO_URI};
+    private final static String[] COLUMNAS = {ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME_PRIMARY, ContactsContract.Contacts.PHOTO_THUMBNAIL_URI};
     private final static String WHERE_TIENEN_TELEFONO = ContactsContract.Contacts.HAS_PHONE_NUMBER + "= 1";
     private Context context;
 

@@ -39,4 +39,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- AVATARES -->
+    <dimen name="apatxas_persona_avatar_tamano">40dp</dimen>
+    <dimen name="apatxas_persona_avatar_letra_tamano">30sp</dimen>
+
 </resources>

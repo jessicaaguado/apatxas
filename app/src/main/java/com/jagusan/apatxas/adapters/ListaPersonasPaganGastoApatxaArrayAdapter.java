@@ -2,6 +2,7 @@ package com.jagusan.apatxas.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.modelView.PersonaListado;
+import com.jagusan.apatxas.utils.CrearAvatarConLetra;
 
 import java.util.List;
 
@@ -52,7 +54,13 @@ public class ListaPersonasPaganGastoApatxaArrayAdapter extends ArrayAdapter<Pers
         if (persona.uriFoto != null) {
             fotoContactoImageView.setImageURI(Uri.parse(persona.uriFoto));
         } else {
-            fotoContactoImageView.setImageResource(R.drawable.ic_apatxas_contacto_sin_foto);
+            final int tamanoAvatar = context.getResources().getDimensionPixelSize(R.dimen.apatxas_persona_avatar_tamano);
+            final Bitmap avatar = CrearAvatarConLetra.crearAvatarConLetra(context, persona.nombre, tamanoAvatar, tamanoAvatar);
+            if (avatar != null) {
+                fotoContactoImageView.setImageBitmap(avatar);
+            } else {
+                fotoContactoImageView.setVisibility(View.INVISIBLE);
+            }
         }
         return convertView;
     }

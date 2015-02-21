@@ -2,6 +2,7 @@ package com.jagusan.apatxas.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.modelView.ContactoListado;
+import com.jagusan.apatxas.utils.CrearAvatarConLetra;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +54,13 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> {
         if (contacto.fotoURI != null) {
             fotoContactoImageView.setImageURI(Uri.parse(contacto.fotoURI));
         } else {
-            fotoContactoImageView.setImageResource(R.drawable.ic_apatxas_contacto_sin_foto);
+            final int tamanoAvatar = context.getResources().getDimensionPixelSize(R.dimen.apatxas_persona_avatar_tamano);
+            final Bitmap avatar = CrearAvatarConLetra.crearAvatarConLetra(context, contacto.nombre, tamanoAvatar, tamanoAvatar);
+            if (avatar != null) {
+                fotoContactoImageView.setImageBitmap(avatar);
+            } else {
+                fotoContactoImageView.setVisibility(View.INVISIBLE);
+            }
         }
 
         CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBoxContacto);
@@ -77,5 +85,6 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> {
     public List<ContactoListado> getContactosSeleccionados() {
         return contactosSeleccionados;
     }
+
 
 }
