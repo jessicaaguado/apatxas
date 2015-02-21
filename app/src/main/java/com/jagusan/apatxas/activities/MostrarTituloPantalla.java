@@ -6,6 +6,7 @@ public class MostrarTituloPantalla {
     public static final boolean LISTA_APATXAS = true;
     public static final boolean NUEVO_APATXA_PASO1 = true;
     public static final boolean NUEVO_APATXA_PASO2 = true;
+    public static final boolean NUEVO_APATXA_PASO3 = true;
     public static final boolean LISTA_CONTACTOS = true;
     public static final boolean NUEVO_GASTO = true;
     public static final boolean EDITAR_GASTO = true;

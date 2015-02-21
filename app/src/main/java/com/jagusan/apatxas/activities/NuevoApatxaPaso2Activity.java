@@ -15,37 +15,31 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
-import com.jagusan.apatxas.adapters.ListaGastosApatxaArrayAdapter;
+import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
 import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
-import com.jagusan.apatxas.logicaNegocio.servicios.GastoService;
-import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
-import com.jagusan.apatxas.modelView.GastoApatxaListado;
+import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
-import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
+import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
 
-
-    private ApatxaService apatxaService;
-    private PersonaService personaService;
-    private GastoService gastoService;
-    private Resources resources;
-
     private String tituloApatxa;
     private Long fechaInicioApatxa;
     private Long fechaFinApatxa;
     private Boolean soloUnDiaApatxa;
-    private ArrayList<PersonaListado> personasApatxa;
 
-    private int NUEVO_GASTO_REQUEST_CODE = 1;
-    private int EDITAR_GASTO_REQUEST_CODE = 2;
+    private ListView personasListView;
+    private List<PersonaListado> personasApatxa = new ArrayList<>();
+    private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
+    private TextView tituloPersonasListViewHeader;
 
-    private TextView tituloGastosApatxaListViewHeader;
-    private List<GastoApatxaListado> listaGastos = new ArrayList<>();
-    private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
+    private Resources resources;
+    private ApatxaService apatxaService;
+
+    private int SELECCIONAR_CONTACTOS_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,69 +65,94 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_guardar:
-                guardarApatxa();
+            case R.id.action_anadir_persona:
+                seleccionarContactos();
                 return true;
-            case R.id.action_anadir_gasto:
-                anadirGasto();
+            case R.id.action_siguiente_paso:
+                continuarAnadirApatxas();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+
+    }
+
+    public void seleccionarContactos() {
+        Intent intent = new Intent(this, ListaContactosActivity.class);
+        intent.putExtra("idsContactosSeleccionados", (ArrayList<Long>) RecupararInformacionPersonas.obtenerIdsContactos(listaPersonasApatxaArrayAdapter.getPersonas()));
+        startActivityForResult(intent, SELECCIONAR_CONTACTOS_REQUEST_CODE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
+        if (requestCode == SELECCIONAR_CONTACTOS_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                anadirGastoAListaDeGastos(data);
-            }
-        }
-        if (requestCode == EDITAR_GASTO_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                actualizarGastoListaDeGastos(data);
+                anadirContactosSeleccionados(data);
             }
         }
     }
 
-    public void anadirGasto() {
-        Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
-        intent.putExtra("personas", personasApatxa);
-        startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);
+    public void anadirContactosSeleccionados(Intent data) {
+        List<ContactoListado> contactosSeleccionados = (ArrayList<ContactoListado>) data.getSerializableExtra("contactosSeleccionados");
+        List<PersonaListado> personasAnadir = new ArrayList<>();
+        for (ContactoListado contacto : contactosSeleccionados) {
+            PersonaListado persona = new PersonaListado();
+            persona.nombre = contacto.nombre;
+            persona.idContacto = contacto.id;
+            persona.uriFoto = contacto.fotoURI;
+            personasAnadir.add(persona);
+        }
+        listaPersonasApatxaArrayAdapter.addAll(personasAnadir);
+        actualizarTituloCabeceraListaPersonas();
     }
 
-    public void guardarApatxa() {
-        Long idApatxa = apatxaService.crearApatxa(tituloApatxa, fechaInicioApatxa, fechaFinApatxa, soloUnDiaApatxa);
-        personaService.crearPersonas(personasApatxa, idApatxa);
-        gastoService.crearGastos(listaGastos, idApatxa);
-        irListadoApatxasPrincipal();
-        MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_apatxa_guardada);
+
+    public void borrarPersonas() {
+        listaPersonasApatxaArrayAdapter.eliminarPersonasSeleccionadas();
+        actualizarTituloCabeceraListaPersonas();
     }
 
-    private void irListadoApatxasPrincipal() {
-        Intent intent = new Intent(this, ListaApatxasActivity.class);
-        finish();
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    private void anadirCabeceraListaPersonas() {
+        tituloPersonasListViewHeader = (TextView) findViewById(R.id.listaPersonasApatxaCabecera);
+        tituloPersonasListViewHeader.setVisibility(View.VISIBLE);
+        actualizarTituloCabeceraListaPersonas();
+    }
+
+    private void actualizarTituloCabeceraListaPersonas() {
+        int numPersonas = personasApatxa.size();
+        String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_personas, numPersonas, numPersonas);
+        tituloPersonasListViewHeader.setText(titulo);
+    }
+
+
+    private void continuarAnadirApatxas() {
+        Intent intent = new Intent(this, NuevoApatxaPaso3Activity.class);
+        intent.putExtra("titulo", tituloApatxa);
+        intent.putExtra("fechaInicio", fechaInicioApatxa);
+        intent.putExtra("fechaFin", fechaFinApatxa);
+        intent.putExtra("soloUnDia", soloUnDiaApatxa);
+        intent.putExtra("personas", (ArrayList<PersonaListado>) listaPersonasApatxaArrayAdapter.getPersonas());
         startActivity(intent);
+
     }
+
 
     private void inicializarServicios() {
-        apatxaService = new ApatxaService(this);
-        personaService = new PersonaService(this);
-        gastoService = new GastoService(this);
         resources = getResources();
+        apatxaService = new ApatxaService(this);
     }
-
 
     private void cargarElementosLayout() {
-        ListView gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
-        anadirCabeceraListaGastos();
+        personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+        anadirCabeceraListaPersonas();
 
-        listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, listaGastos);
-        gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
-        asignarContextualActionBar(gastosApatxaListView);
+        listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
+        personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
+        asignarContextualActionBar(personasListView);
 
-        gestionarListaVacia(listaGastosApatxaArrayAdapter, true, R.string.lista_vacia_nuevo_apatxas_paso2, R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2);
+        gestionarListaVacia(listaPersonasApatxaArrayAdapter, false, R.string.lista_vacia_personas, null);
     }
+
+
 
     private void recuperarDatosPasoAnterior() {
         Intent intent = getIntent();
@@ -141,82 +160,27 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
         fechaInicioApatxa = intent.getLongExtra("fechaInicio", -1);
         fechaFinApatxa = intent.getLongExtra("fechaFin", -1);
         soloUnDiaApatxa = intent.getBooleanExtra("soloUnDia", false);
-        personasApatxa = (ArrayList<PersonaListado>) intent.getSerializableExtra("personas");
-    }
-
-    private void anadirCabeceraListaGastos() {
-        tituloGastosApatxaListViewHeader = (TextView) findViewById(R.id.listaGastosApatxaCabecera);
-        tituloGastosApatxaListViewHeader.setVisibility(View.VISIBLE);
-        actualizarTituloCabeceraListaGastos();
-    }
-
-    private void actualizarTituloCabeceraListaGastos() {
-        int numGastos = listaGastos.size();
-        String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_gastos, numGastos, numGastos, CalcularSumaTotalGastos.calcular(listaGastos));
-        tituloGastosApatxaListViewHeader.setText(titulo);
     }
 
 
-    private void anadirGastoAListaDeGastos(Intent data) {
-        String conceptoGasto = data.getStringExtra("concepto");
-        Double totalGasto = data.getDoubleExtra("total", 0);
-        PersonaListado pagadoGasto = (PersonaListado) data.getSerializableExtra("pagadoPor");
+    private void asignarContextualActionBar(final ListView personasListView) {
+        personasListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        personasListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
-        GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
-        listaGastosApatxaArrayAdapter.add(gastoListado);
-        actualizarTituloCabeceraListaGastos();
-    }
-
-    private void borrarGastos() {
-        listaGastosApatxaArrayAdapter.eliminarGastosSeleccionados();
-        actualizarTituloCabeceraListaGastos();
-    }
-
-    private void actualizarGastoListaDeGastos(Intent data) {
-        String conceptoGasto = data.getStringExtra("concepto");
-        Double totalGasto = data.getDoubleExtra("total", 0);
-        PersonaListado pagadoGasto = (PersonaListado) data.getSerializableExtra("pagadoPor");
-        Integer posicionGastoActualizar = data.getIntExtra("posicionGastoEditar", -1);
-
-        GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
-        listaGastosApatxaArrayAdapter.actualizarGasto(posicionGastoActualizar, gastoListado);
-        actualizarTituloCabeceraListaGastos();
-    }
-
-    private void irPantallaEdicionGasto(GastoApatxaListado gasto) {
-        Intent intent = new Intent(this, EditarGastoApatxaActivity.class);
-        intent.putExtra("conceptoGasto", gasto.concepto);
-        intent.putExtra("importeGasto", gasto.total);
-        intent.putExtra("idContactoPersonaPagadoGasto", gasto.idContactoPersonaPagadoPor);
-        intent.putExtra("personas", personasApatxa);
-        intent.putExtra("posicionGastoEditar", listaGastosApatxaArrayAdapter.getPosition(gasto));
-        startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
-    }
-
-    private void asignarContextualActionBar(final ListView gastosListView) {
-        gastosListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        gastosListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
-
-            ListaGastosApatxaArrayAdapter adapter = (ListaGastosApatxaArrayAdapter) gastosListView.getAdapter();
+            ListaPersonasApatxaArrayAdapter adapter = (ListaPersonasApatxaArrayAdapter) personasListView.getAdapter();
             ActionMode mode;
 
             @Override
             public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
                 adapter.toggleSeleccion(position, checked);
-                int numeroGastosSeleccionados = adapter.numeroGastosSeleccionados();
-                mode.setTitle(resources.getQuantityString(R.plurals.seleccionados, numeroGastosSeleccionados, numeroGastosSeleccionados));
-                if (numeroGastosSeleccionados == 1) {
-                    findViewById(R.id.action_gasto_apatxa_cambiar).setVisibility(View.VISIBLE);
-                } else {
-                    findViewById(R.id.action_gasto_apatxa_cambiar).setVisibility(View.GONE);
-                }
+                mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
             }
 
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 this.mode = mode;
                 MenuInflater inflater = mode.getMenuInflater();
-                inflater.inflate(R.menu.context_menu_gasto_apatxa, menu);
+                inflater.inflate(R.menu.context_menu_persona_apatxa, menu);
                 return true;
             }
 
@@ -228,15 +192,12 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
                 return false;
             }
 
+
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.action_gasto_apatxa_cambiar:
-                        irPantallaEdicionGasto(listaGastosApatxaArrayAdapter.getGastosSeleccionados().get(0));
-                        mode.finish();
-                        return true;
-                    case R.id.action_gasto_apatxa_borrar:
-                        confimarBorradoGastos();
+                    case R.id.action_persona_apatxa_borrar:
+                        confimarBorradoPersonas();
                         return true;
                     default:
                         return false;
@@ -248,15 +209,15 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
                 adapter.resetearSeleccion();
             }
 
-            private void confimarBorradoGastos() {
+            private void confimarBorradoPersonas() {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(adapter.getContext());
-                alertDialog.setMessage(R.string.mensaje_confirmacion_borrado_gastos);
+                alertDialog.setMessage(R.string.mensaje_confirmacion_borrado_personas);
                 alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        int numGastosBorrar = adapter.numeroGastosSeleccionados();
-                        borrarGastos();
+                        int numeroPersonasBorrar = adapter.numeroPersonasSeleccionadas();
+                        borrarPersonas();
                         mode.finish();
-                        MensajesToast.mostrarConfirmacionBorrados(adapter.getContext(), R.plurals.mensaje_confirmacion_borrado_gastos_realizado, numGastosBorrar);
+                        MensajesToast.mostrarConfirmacionBorrados(adapter.getContext(), R.plurals.mensaje_confirmacion_borrado_personas_realizado, numeroPersonasBorrar);
                     }
                 });
                 alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
@@ -267,14 +228,12 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
                 alertDialog.create();
                 alertDialog.show();
             }
-
-
         });
     }
 
     @Override
     protected void continuarSinAnadirElementos() {
-        guardarApatxa();
+        continuarAnadirApatxas();
     }
 
 }

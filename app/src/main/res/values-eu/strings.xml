@@ -63,8 +63,9 @@
     </plurals>
 
 
-    <string name="title_activity_nuevo_apatxa_paso1">Berria (1/2)</string>
-    <string name="title_activity_nuevo_apatxa_paso2">Berria (2/2)</string>
+    <string name="title_activity_nuevo_apatxa_paso1">Berria (1/3)</string>
+    <string name="title_activity_nuevo_apatxa_paso2">Berria (2/3)</string>
+    <string name="title_activity_nuevo_apatxa_paso3">Berria (3/3)</string>
     <string name="title_activity_nuevo_gasto">Gastu berria</string>
     <string name="title_activity_editar_gasto">Gastua aldatu</string>
     <string name="title_activity_detalle_apatxa">Apatxa</string>
@@ -110,8 +111,8 @@
     <!-- LISTAS VACIAS -->
     <string name="lista_vacia_nuevo_apatxas_paso1">Oraindik ez duzu lagunik gehitu</string>
     <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1">Jarraitu eta beranduago gehitu</string>
-    <string name="lista_vacia_nuevo_apatxas_paso2">Oraindik ez duzu gasturik gehitu</string>
-    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2">Jarraitu eta beranduago gehitu</string>
+    <string name="lista_vacia_nuevo_apatxas_paso3">Oraindik ez duzu gasturik gehitu</string>
+    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso3">Jarraitu eta beranduago gehitu</string>
     <string name="lista_vacia_personas">Oraindik ez duzu lagunik gehitu</string>
     <string name="lista_vacia_gastos">Oraindik ez duzu gasturik gehitu</string>
     <string name="lista_vacia_contactos">Ez daukazu kontakturik</string>
@@ -160,6 +161,7 @@
     <string name="yo_mayusculas">NI - %s</string>
     <string name="lista_vacia">Zerrenda hutsik dago</string>
     <string name="anadir_elementos_mas_tarde">Beranduago gehitu elementuak</string>
+
 
 
 </resources>

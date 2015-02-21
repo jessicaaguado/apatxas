@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.jagusan.apatxas.NuevoApatxaPaso3Activity">
+
+    <item
+        android:id="@+id/action_anadir_gasto"
+        android:icon="@drawable/ic_menu_action_apatxas_anadir_gasto"
+        android:orderInCategory="1"
+        android:title="@string/action_anadir_gasto"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_guardar"
+        android:icon="@drawable/ic_menu_action_apatxas_listo"
+        android:orderInCategory="100"
+        android:title="@string/action_listo"
+        app:showAsAction="withText|ifRoom" />
+
+</menu>
