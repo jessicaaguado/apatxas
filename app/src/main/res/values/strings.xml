@@ -13,7 +13,7 @@
     <string name="action_aceptar">Aceptar</string>
     <string name="action_anadir_gasto">Añadir gasto</string>
     <string name="action_personas">Personas</string>
-    <string name="action_editar">Editar</string>
+    <string name="action_editar">Cambiar</string>
     <string name="action_repartir">Repartir</string>
     <string name="action_gastos">Gastos</string>
     <string name="action_anadir_persona">Añadir persona</string>
@@ -48,13 +48,13 @@
         <item quantity="other">%d personas</item>
     </plurals>
     <plurals name="titulo_cabecera_lista_gastos">
-        <item quantity="one">%1$d Gasto: %2$.2f €</item>
-        <item quantity="other">%1$d Gastos: %2$.2f €</item>
+        <item quantity="one">%1$d gasto: %2$.2f €</item>
+        <item quantity="other">%1$d gastos: %2$.2f €</item>
     </plurals>
 
     <plurals name="titulo_cabecera_lista_gastos_detalle_apatxa">
         <item quantity="one">%1$d gasto. Total: %2$.2f €</item>
-        <item quantity="other">%1$d Gastos. Total: %2$.2f €</item>
+        <item quantity="other">%1$d gastos. Total: %2$.2f €</item>
     </plurals>
 
     <plurals name="titulo_cabecera_lista_reparto_detalle_apatxa">
@@ -63,9 +63,9 @@
     </plurals>
 
 
-    <string name="title_activity_nuevo_apatxa_paso1">Nuevo (paso 1)</string>
-    <string name="title_activity_nuevo_apatxa_paso2">Nuevo (paso 2)</string>
-    <string name="title_activity_nuevo_gasto">Añadir gasto</string>
+    <string name="title_activity_nuevo_apatxa_paso1">Nuevo (1/2)</string>
+    <string name="title_activity_nuevo_apatxa_paso2">Nuevo (2/2)</string>
+    <string name="title_activity_nuevo_gasto">Gasto nuevo</string>
     <string name="title_activity_editar_gasto">Cambiar gasto</string>
     <string name="title_activity_detalle_apatxa">Apatxa</string>
     <string name="title_activity_lista_contactos">Seleccionar contactos</string>
@@ -79,11 +79,11 @@
     <!-- MENSAJES DE CONFIRMACION -->
     <string name="mensaje_confirmacion_borrado_personas">¿Desea eliminar las personas seleccinadas?</string>
     <string name="mensaje_confirmacion_borrado_gastos">¿Desea eliminar los gastos seleccionados?</string>
-    <string name="mensaje_confirmacion_borrado_apatxas">¿Desea eliminar las apatxas seleccionadas?</string>
+    <string name="mensaje_confirmacion_borrado_apatxas">¿Desea eliminar las Apatxas seleccionadas?</string>
     <string name="mensaje_confirmacion_resetear_pagos_cobros_del_reparto">Algunas personas ya han pagado/cobrado. Si guardas los cambios se realizará el reparto de nuevo y esta información se perderá. ¿Deseas guardar los cambios?</string>
     <plurals name="mensaje_confirmacion_borrado_apatxas_realizado">
         <item quantity="one">Apatxa borrada</item>
-        <item quantity="other">%d apatxas borradas</item>
+        <item quantity="other">%d Apatxas borradas</item>
     </plurals>
     <plurals name="mensaje_confirmacion_borrado_personas_realizado">
         <item quantity="one">Persona borrada</item>
@@ -138,7 +138,7 @@
     </plurals>
 
 
-    <string name="pagado_por">Pagado por</string>
+    <string name="pagado_por">Quien ha pagado</string>
     <string name="pagar_cantidad_euros">Paga %1$.2f €</string>
     <string name="reparto">Reparto</string>
 

@@ -1,164 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Apatxas***</string>
+    <string name="app_name">Apatxas</string>
 
     <!-- ACCIONES -->
-    <string name="action_settings">Ajustes***</string>
-    <string name="action_buscar">Buscar***</string>
-    <string name="action_anadir">Añadir***</string>
-    <string name="action_listo">Listo***</string>
-    <string name="action_cancelar">Cancelar***</string>
-    <string name="action_borrar">Borrar***</string>
-    <string name="action_aceptar">Aceptar***</string>
-    <string name="action_anadir_gasto">Añadir gasto***</string>
-    <string name="action_personas">Personas***</string>
-    <string name="action_editar">Editar***</string>
-    <string name="action_repartir">Repartir***</string>
-    <string name="action_gastos">Gastos***</string>
-    <string name="action_anadir_persona">Añadir persona***</string>
-    <string name="action_siguiente_abr">Sig.***</string>
-    <string name="action_pagado">Pagado***</string>
-    <string name="action_no_pagado">Pendiente***</string>
+    <string name="action_settings">Ezarpenak</string>
+    <string name="action_buscar">Bilatu</string>
+    <string name="action_anadir">Gehitu</string>
+    <string name="action_listo">Eginda</string>
+    <string name="action_cancelar">Ezeztatu</string>
+    <string name="action_borrar">Ezabatu</string>
+    <string name="action_aceptar">Onartu</string>
+    <string name="action_anadir_gasto">Gastu bat gehitu</string>
+    <string name="action_personas">Lagunak</string>
+    <string name="action_editar">Aldatu</string>
+    <string name="action_repartir">Banatu</string>
+    <string name="action_gastos">Gastuak</string>
+    <string name="action_anadir_persona">Lagun bat gehitu</string>
+    <string name="action_siguiente_abr">Jar.</string>
+    <string name="action_pagado">Ordainduta</string>
+    <string name="action_no_pagado">Ordaindu gabe</string>
     <!-- ACCIONES (FIN) -->
 
 
     <!-- VALIDACIONES -->
-    <string name="validacion_mensaje_obligatorio">Obligatorio***</string>
+    <string name="validacion_mensaje_obligatorio">Bete beharrekoa</string>
     <!-- VALIDACIONES (FIN) -->
 
 
     <!-- ESTADOS APATXA -->
-    <string name="estado_apatxa_sin_repartir">Sin repartir***</string>
-    <string name="estado_apatxa_sin_repartir_detalle">SIN REPARTIR***</string>
-    <string name="estado_apatxa_hecho">Hecho***</string>
-    <string name="estado_apatxa_hecho_detalle">HECHO***</string>
-    <string name="estado_apatxa_pendiente">Pendiente***</string>
+    <string name="estado_apatxa_sin_repartir">Banatu gabe</string>
+    <string name="estado_apatxa_sin_repartir_detalle">BANATU GABE</string>
+    <string name="estado_apatxa_hecho">Eginda</string>
+    <string name="estado_apatxa_hecho_detalle">EGINDA</string>
+    <string name="estado_apatxa_pendiente">Zain</string>
 
     <plurals name="estado_apatxa_pendiente_detalle_numero_personas">
-        <item quantity="one">PENDIENTE.\nFalta 1 persona***</item>
-        <item quantity="other">PENDIENTE.\nFaltan %d personas***</item>
+        <item quantity="one">ZAIN.\nLagun 1 falta da</item>
+        <item quantity="other">ZAIN.\n%d lagun falta dira</item>
     </plurals>
     <!-- ESTADOS APATXA (FIN) -->
 
 
     <!-- TITULOS -->
     <plurals name="titulo_cabecera_lista_personas">
-        <item quantity="one">%d persona***</item>
-        <item quantity="other">%d personas***</item>
+        <item quantity="one">Lagun %d</item>
+        <item quantity="other">%d lagun</item>
     </plurals>
     <plurals name="titulo_cabecera_lista_gastos">
-        <item quantity="one">%1$d Gasto: %2$.2f €***</item>
-        <item quantity="other">%1$d Gastos: %2$.2f €***</item>
+        <item quantity="one">Gastu %1$d: %2$.2f €</item>
+        <item quantity="other">%1$d gastu: %2$.2f €</item>
     </plurals>
 
     <plurals name="titulo_cabecera_lista_gastos_detalle_apatxa">
-        <item quantity="one">%1$d gasto. Total: %2$.2f €***</item>
-        <item quantity="other">%1$d Gastos. Total: %2$.2f €***</item>
+        <item quantity="one">Gastu %1$d. Guztira: %2$.2f €</item>
+        <item quantity="other">%1$d gastu. Guztira: %2$.2f €</item>
     </plurals>
 
     <plurals name="titulo_cabecera_lista_reparto_detalle_apatxa">
-        <item quantity="one">Reparto de %1$d gasto: %2$.2f €***</item>
-        <item quantity="other">Reparto de %1$d gastos: %2$.2f €***</item>
+        <item quantity="one">Gastu %1$d banaketa: %2$.2f €</item>
+        <item quantity="other">%1$d gastuen banaketa: %2$.2f €</item>
     </plurals>
 
 
-    <string name="title_activity_nuevo_apatxa_paso1">Nuevo (paso 1)***</string>
-    <string name="title_activity_nuevo_apatxa_paso2">Nuevo (paso 2)***</string>
-    <string name="title_activity_nuevo_gasto">Añadir gasto***</string>
-    <string name="title_activity_editar_gasto">Cambiar gasto***</string>
-    <string name="title_activity_detalle_apatxa">Apatxa***</string>
-    <string name="title_activity_lista_contactos">Seleccionar contactos***</string>
-    <string name="title_activity_editar_apatxa">Cambiar Apatxa***</string>
-    <string name="title_activity_lista_personas">Personas***</string>
-    <string name="title_activity_lista_gastos">Gastos***</string>
-    <string name="title_activity_settings">Ajustes***</string>
+    <string name="title_activity_nuevo_apatxa_paso1">Berria (1/2)</string>
+    <string name="title_activity_nuevo_apatxa_paso2">Berria (2/2)</string>
+    <string name="title_activity_nuevo_gasto">Gastu berria</string>
+    <string name="title_activity_editar_gasto">Gastua aldatu</string>
+    <string name="title_activity_detalle_apatxa">Apatxa</string>
+    <string name="title_activity_lista_contactos">Lagunak aukeratu</string>
+    <string name="title_activity_editar_apatxa">Apatxa aldatu</string>
+    <string name="title_activity_lista_personas">Lagunak</string>
+    <string name="title_activity_lista_gastos">Gastuak</string>
+    <string name="title_activity_settings">Ezarpenak</string>
     <!-- TITULOS (FIN) -->
 
 
     <!-- MENSAJES DE CONFIRMACION -->
-    <string name="mensaje_confirmacion_borrado_personas">¿Desea eliminar las personas seleccinadas?***</string>
-    <string name="mensaje_confirmacion_borrado_gastos">¿Desea eliminar los gastos seleccionados?***</string>
-    <string name="mensaje_confirmacion_borrado_apatxas">¿Desea eliminar las apatxas seleccionadas?***</string>
-    <string name="mensaje_confirmacion_resetear_pagos_cobros_del_reparto">Algunas personas ya han pagado/cobrado. Si guardas los cambios se realizará el reparto de nuevo y esta información se perderá. ¿Deseas guardar los cambios?***</string>
+    <string name="mensaje_confirmacion_borrado_personas">Aukeratutako lagunak ezabatu nahi dituzu?</string>
+    <string name="mensaje_confirmacion_borrado_gastos">Aukeratutako gastuak ezabatu nahi dituzu?</string>
+    <string name="mensaje_confirmacion_borrado_apatxas">Aukeratutako Apatxas ezabatu nahi dituzu?</string>
+    <string name="mensaje_confirmacion_resetear_pagos_cobros_del_reparto">Dagoeneko lagun batzuk ordaindu/kobratu dute. Aldaketak gordez gero banaketa berriro egingo da eta informazio hori galduko da. Aldaketak gorde nahi dituzu?</string>
     <plurals name="mensaje_confirmacion_borrado_apatxas_realizado">
-        <item quantity="one">Apatxa borrada***</item>
-        <item quantity="other">%d apatxas borradas***</item>
+        <item quantity="one">Apatxa ezabatu da</item>
+        <item quantity="other">%d Apatxa ezabatu dira</item>
     </plurals>
     <plurals name="mensaje_confirmacion_borrado_personas_realizado">
-        <item quantity="one">Persona borrada***</item>
-        <item quantity="other">%d personas borradas***</item>
+        <item quantity="one">Laguna ezabatu da</item>
+        <item quantity="other">%d lagun ezabatu dira</item>
     </plurals>
     <plurals name="mensaje_confirmacion_borrado_gastos_realizado">
-        <item quantity="one">Gasto borrado***</item>
-        <item quantity="other">%d gastos borrados***</item>
+        <item quantity="one">Gastua ezabatu da</item>
+        <item quantity="other">%d gastu ezabatu dira</item>
     </plurals>
-    <string name="mensaje_confirmacion_apatxa_guardada">Apatxa guardada***</string>
-    <string name="mensaje_confirmacion_gasto_anadido">Gasto anadido***</string>
-    <string name="mensaje_confirmacion_gasto_modificado">Gasto modificado***</string>
-    <string name="mensaje_confirmacion_gastos_actualizados">Gastos actualizados***</string>
-    <string name="mensaje_confirmacion_gastos_actualizados_reparto_actualizado">Gastos actualizados.\nSe ha realizado de nuevo el reparto***</string>
-    <string name="mensaje_confirmacion_personas_actualizadas">Personas actualizadas***</string>
-    <string name="mensaje_confirmacion_personas_actualizadas_reparto_actualizado">Personas actualizadas.\nSe ha realizado de nuevo el reparto***</string>
-    <string name="mensaje_confirmacion_pagos_actualizados_sin_pendientes">Pagos actualizados.\nNo hay nadie pendiente.***</string>
+    <string name="mensaje_confirmacion_apatxa_guardada">Apatxa gorde da</string>
+    <string name="mensaje_confirmacion_gasto_anadido">Gastua gehitu da</string>
+    <string name="mensaje_confirmacion_gasto_modificado">Gastua aldatu da</string>
+    <string name="mensaje_confirmacion_gastos_actualizados">Gastuak eguneratu dira</string>
+    <string name="mensaje_confirmacion_gastos_actualizados_reparto_actualizado">Gastuak eguneratu dira.\nBanaketa berriro egin da</string>
+    <string name="mensaje_confirmacion_personas_actualizadas">Lagunak eguneratu dira</string>
+    <string name="mensaje_confirmacion_personas_actualizadas_reparto_actualizado">Lagunak eguneratu dira.\nBanaketa berriro egin da</string>
+    <string name="mensaje_confirmacion_pagos_actualizados_sin_pendientes">Ordainketak eguneratu dira.\nEz da inor falta.</string>
     <plurals name="mensaje_confirmacion_pagos_actualizados">
-        <item quantity="one">Pagos actualizados.\nFalta 1 persona.***</item>
-        <item quantity="other">Pagos actualizados.\nFaltan %1d personas.***</item>
+        <item quantity="one">Ordainketak eguneratu dira.\nLagun 1 falta da.</item>
+        <item quantity="other">Ordainketak eguneratu dira.\n%1d lagun falta dira.</item>
     </plurals>
     <!-- MENSAJES DE CONFIRMACION (FIN) -->
 
     <!-- LISTAS VACIAS -->
-    <string name="lista_vacia_nuevo_apatxas_paso1">Aún no has añadido ninguna persona***</string>
-    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1">Continuar y añadir más tarde***</string>
-    <string name="lista_vacia_nuevo_apatxas_paso2">Aún no has añadido ningún gasto***</string>
-    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2">Continuar y añadir más tarde***</string>
-    <string name="lista_vacia_personas">Aún no has añadido ninguna persona***</string>
-    <string name="lista_vacia_gastos">Aún no has añadido ningún gasto***</string>
-    <string name="lista_vacia_contactos">No tienes contactos***</string>
-    <string name="lista_vacia_personas_reparto">Aún no hay personas entre las que hacer el reparto***</string>
+    <string name="lista_vacia_nuevo_apatxas_paso1">Oraindik ez duzu lagunik gehitu</string>
+    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1">Jarraitu eta beranduago gehitu</string>
+    <string name="lista_vacia_nuevo_apatxas_paso2">Oraindik ez duzu gasturik gehitu</string>
+    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2">Jarraitu eta beranduago gehitu</string>
+    <string name="lista_vacia_personas">Oraindik ez duzu lagunik gehitu</string>
+    <string name="lista_vacia_gastos">Oraindik ez duzu gasturik gehitu</string>
+    <string name="lista_vacia_contactos">Ez daukazu kontakturik</string>
+    <string name="lista_vacia_personas_reparto">Oraindik ez daude lagunik banaketa egiteko</string>
     <!-- LISTAS VACIAS (FIN) -->
 
     <!-- PATRONES FECHAS -->
-    <string name="patron_fecha_dia_mes_ano">dd/MM/yyyy***</string>
-    <string name="patron_fecha_dia_mes_ano_ux">dd/mm/aaaa***</string>
+    <string name="patron_fecha_dia_mes_ano">yyyy/MM/dd</string>
+    <string name="patron_fecha_dia_mes_ano_ux">aaaa/mm/dd</string>
     <!-- PATRONES FECHAS (FIN) -->
 
 
-    <string name="cantidad_dinero">%1$.2f***</string>
-    <string name="cantidad_dinero_euros">%1$.2f €***</string>
-    <string name="cobrar_cantidad_euros">Cobra %1$.2f €***</string>
-    <string name="concepto">Concepto***</string>
-    <string name="importe">Importe***</string>
-    <string name="nombre">Nombre***</string>
+    <string name="cantidad_dinero">%1$.2f</string>
+    <string name="cantidad_dinero_euros">%1$.2f €</string>
+    <string name="cobrar_cantidad_euros">%1$.2f € kobratu</string>
+    <string name="concepto">Kontzeptu</string>
+
+    <string name="importe">Zenbatekoa</string>
+    <string name="nombre">Izena</string>
 
     <plurals name="numero_personas_apatxa">
-        <item quantity="one">1 persona***</item>
-        <item quantity="other">%d personas***</item>
+        <item quantity="one">Lagun 1</item>
+        <item quantity="other">%d lagun</item>
     </plurals>
 
 
-    <string name="pagado_por">Pagado por***</string>
-    <string name="pagar_cantidad_euros">Paga %1$.2f €***</string>
-    <string name="reparto">Reparto***</string>
+    <string name="pagado_por">Zein ordaindu du</string>
+    <string name="pagar_cantidad_euros">%1$.2f € ordaindu</string>
+    <string name="reparto">Banaketa</string>
 
     <plurals name="seleccionados">
-        <item quantity="one">1***</item>
-        <item quantity="other">%d***</item>
+        <item quantity="one">1</item>
+        <item quantity="other">%d</item>
     </plurals>
 
     <plurals name="seleccionadas">
-        <item quantity="one">1***</item>
-        <item quantity="other">%d***</item>
+        <item quantity="one">1</item>
+        <item quantity="other">%d</item>
     </plurals>
 
 
-    <string name="sin_pagar">Sin pagar***</string>
-    <string name="solo_un_dia">Solo un día***</string>
+    <string name="sin_pagar">Ordaindu gabe</string>
+    <string name="solo_un_dia">Egun bakarra</string>
 
-    <string name="varios_dias">Varios días***</string>
+    <string name="varios_dias">Egun batzuk</string>
     <string name="yo_mayusculas">NI - %s</string>
-    <string name="lista_vacia">La lista está vacía</string>
-    <string name="anadir_elementos_mas_tarde">Añadir elementos más tarde</string>
+    <string name="lista_vacia">Zerrenda hutsik dago</string>
+    <string name="anadir_elementos_mas_tarde">Beranduago gehitu elementuak</string>
 
 
 </resources>
