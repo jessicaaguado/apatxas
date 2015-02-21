@@ -149,7 +149,7 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
         personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
         asignarContextualActionBar(personasListView);
 
-        gestionarListaVacia(listaPersonasApatxaArrayAdapter, false, R.string.lista_vacia_personas, null);
+        gestionarListaVacia(listaPersonasApatxaArrayAdapter, true, R.string.lista_vacia_nuevo_apatxas_paso2, R.string.lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2);
     }
 
 
