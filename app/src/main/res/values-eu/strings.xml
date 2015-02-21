@@ -109,8 +109,8 @@
     <!-- MENSAJES DE CONFIRMACION (FIN) -->
 
     <!-- LISTAS VACIAS -->
-    <string name="lista_vacia_nuevo_apatxas_paso1">Oraindik ez duzu lagunik gehitu</string>
-    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso1">Jarraitu eta beranduago gehitu</string>
+    <string name="lista_vacia_nuevo_apatxas_paso2">Oraindik ez duzu lagunik gehitu</string>
+    <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso2">Jarraitu eta beranduago gehitu</string>
     <string name="lista_vacia_nuevo_apatxas_paso3">Oraindik ez duzu gasturik gehitu</string>
     <string name="lista_vacia_anadir_mas_tarde_nuevo_apatxas_paso3">Jarraitu eta beranduago gehitu</string>
     <string name="lista_vacia_personas">Oraindik ez duzu lagunik gehitu</string>
