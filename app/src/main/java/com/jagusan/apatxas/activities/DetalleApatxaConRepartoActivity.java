@@ -116,6 +116,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == EDITAR_INFORMACION_BASICA_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
+                cargarInformacionApatxa();
                 MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_apatxa_guardada);
             }
         }
