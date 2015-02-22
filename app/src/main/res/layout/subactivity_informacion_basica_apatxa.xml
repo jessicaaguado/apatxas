@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/patron_fecha_dia_mes_ano_ux"
         android:onClick="mostrarDatePicker"
+        android:clickable="true"
         android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
         android:paddingLeft="40dp"
         android:paddingTop="@dimen/apatxas_padding_superior_defecto" />
@@ -48,6 +49,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/patron_fecha_dia_mes_ano_ux"
         android:onClick="mostrarDatePicker"
+        android:clickable="true"
         android:paddingBottom="@dimen/apatxas_padding_inferior_defecto"
         android:paddingLeft="40dp"
         android:paddingTop="@dimen/apatxas_padding_superior_defecto" />
