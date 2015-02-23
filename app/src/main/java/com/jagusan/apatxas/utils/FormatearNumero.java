@@ -14,12 +14,20 @@ public class FormatearNumero {
         return res.getString(R.string.cantidad_dinero_euros, cantidad);
     }
 
-    public static String aDescripcionRepartoDineroEuros(Resources res, Double cantidad) {
+    public static String aDescripcionRepartoDineroEurosEnFuncionEstado(Resources res, Double cantidad, boolean pagado) {
         String texto = "";
         if (cantidad > 0) {
-            texto = res.getString(R.string.pagar_cantidad_euros, cantidad);
+            if (pagado) {
+                texto = res.getString(R.string.pagado_cantidad_euros, cantidad);
+            } else {
+                texto = res.getString(R.string.pagar_cantidad_euros, cantidad);
+            }
         } else if (cantidad < 0) {
-            texto = res.getString(R.string.cobrar_cantidad_euros, cantidad * -1);
+            if (pagado) {
+                texto = res.getString(R.string.cobrado_cantidad_euros, cantidad * -1);
+            } else {
+                texto = res.getString(R.string.cobrar_cantidad_euros, cantidad * -1);
+            }
         }
         return texto;
     }

@@ -1,11 +1,15 @@
 package com.jagusan.apatxas.activities;
 
 import android.database.DataSetObserver;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
@@ -33,6 +37,15 @@ public class ApatxasActionBarActivity extends ActionBarActivity {
     protected void gestionarListaVacia(final ArrayAdapter adapter, final boolean mostrarAnadirElementosPosteriori, Integer idStringListaVacia, Integer idStringAnadirElementosPosteriori) {
         final int idStringTextoListaVacia = idStringListaVacia != null ? idStringListaVacia : R.string.lista_vacia;
         final int idStringTextoAnadirElementosPosteriori = idStringAnadirElementosPosteriori != null ? idStringAnadirElementosPosteriori : R.string.anadir_elementos_mas_tarde;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            Drawable iconoListaVacia = getResources().getDrawable(R.drawable.ic_apatxas_aviso_lista_vacia);
+            iconoListaVacia.setColorFilter(getResources().getColor(R.color.apatxascolors_color_claro), PorterDuff.Mode.MULTIPLY);
+            ((ImageView) findViewById(R.id.imagen_lista_vacia)).setImageDrawable(iconoListaVacia);
+
+            Drawable iconoContinuar = getResources().getDrawable(R.drawable.ic_menu_action_apatxas_siguiente);
+            iconoContinuar.setColorFilter(getResources().getColor(R.color.apatxascolors_color), PorterDuff.Mode.MULTIPLY);
+            ((TextView) findViewById(R.id.anadir_elementos_mas_tarde)).setCompoundDrawablesWithIntrinsicBounds(null, null, iconoContinuar, null);
+        }
         adapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {
@@ -65,5 +78,5 @@ public class ApatxasActionBarActivity extends ActionBarActivity {
     protected void continuarSinAnadirElementos() {
     }
 
-    ;
+
 }

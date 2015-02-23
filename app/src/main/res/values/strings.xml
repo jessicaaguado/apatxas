@@ -125,9 +125,12 @@
     <!-- PATRONES FECHAS (FIN) -->
 
 
+    <string name="anadir_elementos_mas_tarde">Añadir elementos más tarde</string>
+
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f €</string>
-    <string name="cobrar_cantidad_euros">Cobra %1$.2f €</string>
+    <string name="cobrar_cantidad_euros">Recibe %1$.2f €</string>
+    <string name="cobrado_cantidad_euros">Ha recibido (%1$.2f €)</string>
     <string name="concepto">Concepto</string>
 
     <string name="importe">Importe</string>
@@ -140,7 +143,8 @@
 
 
     <string name="pagado_por">Quien ha pagado</string>
-    <string name="pagar_cantidad_euros">Paga %1$.2f €</string>
+    <string name="pagar_cantidad_euros">Debe %1$.2f €</string>
+    <string name="pagado_cantidad_euros">Ha pagado (%1$.2f €)</string>
     <string name="reparto">Reparto</string>
 
     <plurals name="seleccionados">
@@ -160,7 +164,6 @@
     <string name="varios_dias">Varios días</string>
     <string name="yo_mayusculas">YO - %s</string>
     <string name="lista_vacia">La lista está vacía</string>
-    <string name="anadir_elementos_mas_tarde">Añadir elementos más tarde</string>
 
 
 

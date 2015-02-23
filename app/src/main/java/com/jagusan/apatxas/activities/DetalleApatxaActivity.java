@@ -2,6 +2,9 @@ package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -78,6 +81,11 @@ public abstract class DetalleApatxaActivity extends ApatxasActionBarActivity {
     void cargarElementosLayout() {
         nombreApatxaTextView = (TextView) findViewById(R.id.nombreApatxaDetalle);
         fechaApatxaTextView = (TextView) findViewById(R.id.fechaApatxaDetalle);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            Drawable iconoCalendario = getResources().getDrawable(R.drawable.ic_apatxas_calendario_blanco);
+            iconoCalendario.setColorFilter(resources.getColor(R.color.apatxascolors_color_claro), PorterDuff.Mode.MULTIPLY);
+            fechaApatxaTextView.setCompoundDrawablesWithIntrinsicBounds(iconoCalendario, null, null, null);
+        }
         headerInformacionDetalle = (ViewGroup) getLayoutInflater().inflate(R.layout.detalle_apatxa_resumen_header, null);
         numeroPersonasTextView = (TextView) headerInformacionDetalle.findViewById(R.id.numeroPersonasApatxaDetalle);
         estadoApatxaTextView = (TextView) headerInformacionDetalle.findViewById(R.id.estadoApatxaDetalle);

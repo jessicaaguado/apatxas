@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +55,18 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         TextView nombrePersonaTextView = (TextView) convertView.findViewById(R.id.nombre);
         nombrePersonaTextView.setText(persona.nombre);
         TextView gastoPersonaTextView = (TextView) convertView.findViewById(R.id.totalGastoReparto);
-        gastoPersonaTextView.setText(FormatearNumero.aDescripcionRepartoDineroEuros(context.getResources(), persona.cantidadPago));
+        gastoPersonaTextView.setText(FormatearNumero.aDescripcionRepartoDineroEurosEnFuncionEstado(context.getResources(), persona.cantidadPago, persona.repartoPagado));
         ImageView indicadorRepartoPagadoImageView = (ImageView) convertView.findViewById(R.id.indicadorRepartoPagado);
         if (persona.repartoPagado) {
+            gastoPersonaTextView.setPaintFlags(gastoPersonaTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pagado);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                Drawable iconoEstado = context.getResources().getDrawable(R.drawable.ic_apatxas_estado_persona_reparto_sin_estado);
+                iconoEstado.setColorFilter(context.getResources().getColor(R.color.apatxascolors_color_reparto_pagado), PorterDuff.Mode.MULTIPLY);
+                indicadorRepartoPagadoImageView.setImageDrawable(iconoEstado);
+            }
         } else {
+            gastoPersonaTextView.setPaintFlags(0);
             indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pendiente);
         }
 
