@@ -18,32 +18,39 @@
         app:riv_oval="true"
         app:riv_tile_mode="clamp" />
 
+
+    <TextView
+        android:id="@+id/nombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_weight="0.7"
+        android:paddingLeft="@dimen/apatxas_padding_izquierdo_row_una_linea_con_avatar"
+        android:textAppearance="@style/texto_principal_lista"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.7"
+        android:layout_gravity="center_vertical|right"
+        android:layout_weight="0.3"
         android:orientation="vertical"
         android:paddingLeft="@dimen/apatxas_padding_izquierdo_row_una_linea_con_avatar">
 
         <TextView
-            android:id="@+id/nombre"
+            android:id="@+id/totalGastoRepartoTexto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/texto_principal_lista" />
+            android:gravity="right"
+            android:textAppearance="@style/texto_secundario_lista" />
 
         <TextView
-            android:id="@+id/totalGastoReparto"
+            android:id="@+id/totalGastoRepartoCantidad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:textAppearance="@style/texto_secundario_lista" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/indicadorRepartoPagado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right|center_vertical"
-        android:src="@drawable/ic_apatxas_estado_persona_reparto_pendiente" />
 
 
 </LinearLayout>

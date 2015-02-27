@@ -4,11 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
+import android.graphics.Typeface;
 import android.net.Uri;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +40,7 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         personasSeleccionadas = new ArrayList<>();
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -54,20 +52,18 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         PersonaListadoReparto persona = personas.get(position);
         TextView nombrePersonaTextView = (TextView) convertView.findViewById(R.id.nombre);
         nombrePersonaTextView.setText(persona.nombre);
-        TextView gastoPersonaTextView = (TextView) convertView.findViewById(R.id.totalGastoReparto);
+        TextView gastoPersonaTextView = (TextView) convertView.findViewById(R.id.totalGastoRepartoTexto);
         gastoPersonaTextView.setText(FormatearNumero.aDescripcionRepartoDineroEurosEnFuncionEstado(context.getResources(), persona.cantidadPago, persona.repartoPagado));
-        ImageView indicadorRepartoPagadoImageView = (ImageView) convertView.findViewById(R.id.indicadorRepartoPagado);
+
+        TextView gastoPersonaCantidadTextView = (TextView) convertView.findViewById(R.id.totalGastoRepartoCantidad);
+        gastoPersonaCantidadTextView.setText(FormatearNumero.aDineroEuros(context.getResources(), persona.cantidadPago));
+
         if (persona.repartoPagado) {
-            gastoPersonaTextView.setPaintFlags(gastoPersonaTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pagado);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                Drawable iconoEstado = context.getResources().getDrawable(R.drawable.ic_apatxas_estado_persona_reparto_sin_estado);
-                iconoEstado.setColorFilter(context.getResources().getColor(R.color.apatxascolors_color_reparto_pagado), PorterDuff.Mode.MULTIPLY);
-                indicadorRepartoPagadoImageView.setImageDrawable(iconoEstado);
-            }
+            nombrePersonaTextView.setTypeface(null, Typeface.NORMAL);
+            gastoPersonaTextView.setTextColor(context.getResources().getColor(R.color.apatxascolors_color_reparto_pagado));
         } else {
-            gastoPersonaTextView.setPaintFlags(0);
-            indicadorRepartoPagadoImageView.setImageResource(R.drawable.ic_apatxas_estado_persona_reparto_pendiente);
+            nombrePersonaTextView.setTypeface(null, Typeface.BOLD);
+            gastoPersonaTextView.setTextColor(context.getResources().getColor(R.color.secondary_text_default_material_light));
         }
 
         ImageView fotoContactoImageView = (ImageView) convertView.findViewById(R.id.fotoContacto);
@@ -91,6 +87,11 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
     private void marcarSeleccion(View convertView, PersonaListadoReparto persona) {
         int colorFondo = (personasSeleccionadas.contains(persona)) ? context.getResources().getColor(R.color.apatxascolors_gris_claro) : Color.TRANSPARENT;
         convertView.setBackgroundColor(colorFondo);
+        if (personasSeleccionadas.contains(persona)) {
+            ImageView fotoContactoImageView = (ImageView) convertView.findViewById(R.id.fotoContacto);
+            // fotoContactoImageView.setImageResource(R.drawable.ic_check_white_48dp);
+        }
+
     }
 
     public void toggleSeleccion(Integer position, boolean checked) {

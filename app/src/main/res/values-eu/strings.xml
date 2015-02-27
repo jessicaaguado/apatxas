@@ -163,7 +163,10 @@
     <string name="varios_dias">Egun batzuk</string>
     <string name="yo_mayusculas">NI - %s</string>
     <string name="lista_vacia">Zerrenda hutsik dago</string>
-
+    <string name="pagado">Ordainduta</string>
+    <string name="debe">Ordaintzeko</string>
+    <string name="recibido">Jasota</string>
+    <string name="recibe">Jasotzeko</string>
 
 
 </resources>

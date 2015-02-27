@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="colores_posibles_avatar_letra">
-        <item>#F44336</item>
-        <item>#E91E63</item>
-        <item>#9C27B0</item>
-        <item>#3F51B5</item>
-        <item>#2196F3</item>
-        <item>#009688</item>
-        <item>#4CAF50</item>
-        <item>#FFC107</item>
-        <item>#FF9800</item>
+        <item>#E57373</item>
+        <item>#BA68C8</item>
+        <item>#7986CB</item>
+        <item>#4FC3F7</item>
+        <item>#4DB6AC</item>
+        <item>#AED581</item>
+        <item>#FFB74D</item>
+        <item>#A1887F</item>
+        <item>#90A4AE</item>
     </array>
 </resources>

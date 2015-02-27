@@ -18,15 +18,15 @@ public class FormatearNumero {
         String texto = "";
         if (cantidad > 0) {
             if (pagado) {
-                texto = res.getString(R.string.pagado_cantidad_euros, cantidad);
+                texto = res.getString(R.string.pagado);
             } else {
-                texto = res.getString(R.string.pagar_cantidad_euros, cantidad);
+                texto = res.getString(R.string.debe);
             }
         } else if (cantidad < 0) {
             if (pagado) {
-                texto = res.getString(R.string.cobrado_cantidad_euros, cantidad * -1);
+                texto = res.getString(R.string.recibido);
             } else {
-                texto = res.getString(R.string.cobrar_cantidad_euros, cantidad * -1);
+                texto = res.getString(R.string.recibe);
             }
         }
         return texto;

@@ -1,6 +1,7 @@
 package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,7 +24,7 @@ import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
+public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity implements AdapterView.OnItemClickListener {
 
     private ListView personasRepartoListView;
 
@@ -32,6 +34,8 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     private TextView tituloRepartoApatxaListViewHeader;
     private ListaPersonasRepartoApatxaArrayAdapter listaPersonasRepartoApatxaArrayAdapter;
 
+    private ModeCallback modeCallback;
+    private ActionMode actionMode;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,6 +97,8 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
                 listaPersonasReparto);
         personasRepartoListView.setAdapter(listaPersonasRepartoApatxaArrayAdapter);
         actualizarTituloCabeceraListaReparto();
+
+        modeCallback = new ModeCallback();
         asignarContextualActionBar(personasRepartoListView);
 
         gestionarListaVacia(listaPersonasRepartoApatxaArrayAdapter, false, R.string.lista_vacia_personas_reparto, null);
@@ -146,64 +152,77 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
 
     private void asignarContextualActionBar(final ListView personasRepartoListView) {
         personasRepartoListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        personasRepartoListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+        personasRepartoListView.setMultiChoiceModeListener(modeCallback);
+        personasRepartoListView.setOnItemClickListener(this);
+    }
 
-            ListaPersonasRepartoApatxaArrayAdapter adapter = (ListaPersonasRepartoApatxaArrayAdapter) ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getWrappedAdapter();
-            ActionMode mode;
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ListaPersonasRepartoApatxaArrayAdapter adapter = (ListaPersonasRepartoApatxaArrayAdapter) ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getWrappedAdapter();
 
-            @Override
-            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-                //ponemos -numHeaders porque tenemos header
-                int numHeaders = ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getHeadersCount();
-                adapter.toggleSeleccion(position - numHeaders, checked);
-                mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
+        int numHeaders = ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getHeadersCount();
+        boolean seleccionadoAnteriormente = adapter.getPersonasSeleccionadas().contains(adapter.getItem(position - numHeaders));
+        Log.d("APATXAS", "   itemchecked " + (position - numHeaders) + " " + seleccionadoAnteriormente);
+        personasRepartoListView.setItemChecked(position, !seleccionadoAnteriormente);
+    }
+
+    private final class ModeCallback implements AbsListView.MultiChoiceModeListener {
+
+        ListaPersonasRepartoApatxaArrayAdapter adapter = (ListaPersonasRepartoApatxaArrayAdapter) ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getWrappedAdapter();
+
+
+        @Override
+        public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+            //ponemos -numHeaders porque tenemos header
+            Log.d("APATXAS", "      onItemCheckedStateChanged " + position + " " + checked);
+            int numHeaders = ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getHeadersCount();
+            adapter.toggleSeleccion(position - numHeaders, checked);
+            mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
+        }
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            actionMode = mode;
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.context_menu_reparto_apatxa, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            if (actionMode == null) {
+                actionMode = mode;
             }
+            return false;
+        }
 
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                this.mode = mode;
-                MenuInflater inflater = mode.getMenuInflater();
-                inflater.inflate(R.menu.context_menu_reparto_apatxa, menu);
-                return true;
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_marcar_hecho:
+                    marcarPersonasEstadoReparto(mode, true);
+                    return true;
+                case R.id.action_marcar_pendiente:
+                    marcarPersonasEstadoReparto(mode, false);
+                    return true;
+                default:
+                    return false;
             }
+        }
 
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                if (this.mode == null) {
-                    this.mode = mode;
-                }
-                return false;
-            }
+        private void marcarPersonasEstadoReparto(ActionMode mode, boolean pagado) {
+            personaService.marcarPersonasEstadoReparto(adapter.getPersonasSeleccionadas(), pagado);
+            cargarInformacionApatxa();
+            String mensaje = apatxa.personasPendientesPagarCobrar == 0 ? getResources().getString(R.string.mensaje_confirmacion_pagos_actualizados_sin_pendientes) : getResources().getQuantityString(R.plurals.mensaje_confirmacion_pagos_actualizados, apatxa.personasPendientesPagarCobrar, apatxa.personasPendientesPagarCobrar);
+            MensajesToast.mostrarMensaje(getApplicationContext(), mensaje);
+            mode.finish();
+        }
 
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_marcar_hecho:
-                        marcarPersonasEstadoReparto(mode, true);
-                        return true;
-                    case R.id.action_marcar_pendiente:
-                        marcarPersonasEstadoReparto(mode, false);
-                        return true;
-                    default:
-                        return false;
-                }
-            }
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            adapter.resetearSeleccion();
+        }
 
-            private void marcarPersonasEstadoReparto(ActionMode mode, boolean pagado) {
-                personaService.marcarPersonasEstadoReparto(adapter.getPersonasSeleccionadas(), pagado);
-                cargarInformacionApatxa();
-                String mensaje = apatxa.personasPendientesPagarCobrar == 0 ? getResources().getString(R.string.mensaje_confirmacion_pagos_actualizados_sin_pendientes) : getResources().getQuantityString(R.plurals.mensaje_confirmacion_pagos_actualizados, apatxa.personasPendientesPagarCobrar, apatxa.personasPendientesPagarCobrar);
-                MensajesToast.mostrarMensaje(getApplicationContext(), mensaje);
-                mode.finish();
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-                adapter.resetearSeleccion();
-            }
-
-
-        });
     }
 
 }
