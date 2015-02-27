@@ -87,14 +87,14 @@ public class DetalleApatxaSinRepartoActivity extends DetalleApatxaActivity {
     protected void cargarElementosLayout() {
         super.cargarElementosLayout();
         gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
-        gastosApatxaListView.addHeaderView(headerInformacionDetalle);
+        gastosApatxaListView.addHeaderView(headerInformacionDetalle, null, false);
 
         ViewGroup cabeceraTituloGastos = (ViewGroup) getLayoutInflater().inflate(R.layout.detalle_apatxa_lista_gastos_header, null);
-        gastosApatxaListView.addHeaderView(cabeceraTituloGastos);
+        gastosApatxaListView.addHeaderView(cabeceraTituloGastos, null, false);
         tituloGastosApatxaListViewHeader = (TextView) cabeceraTituloGastos.findViewById(R.id.listaGastosApatxaCabecera);
 
         findViewById(R.id.listaVaciaInfoSubactivity).setVisibility(View.GONE);
-        gastosApatxaListView.addHeaderView(getLayoutInflater().inflate(R.layout.subactivity_lista_vacia, null));
+        gastosApatxaListView.addHeaderView(getLayoutInflater().inflate(R.layout.subactivity_lista_vacia, null), null, false);
     }
 
     @Override

@@ -66,16 +66,17 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity {
     protected void cargarElementosLayout() {
         super.cargarElementosLayout();
         personasRepartoListView = (ListView) findViewById(R.id.listaDesgloseRepartoApatxa);
-        personasRepartoListView.addHeaderView(headerInformacionDetalle);
+        personasRepartoListView.addHeaderView(headerInformacionDetalle, null, false);
 
         ViewGroup cabeceraTituloReparto = (ViewGroup) getLayoutInflater().inflate(R.layout.detalle_apatxa_lista_resultado_reparto_header, null);
-        personasRepartoListView.addHeaderView(cabeceraTituloReparto);
+        personasRepartoListView.addHeaderView(cabeceraTituloReparto, null, false);
         tituloRepartoApatxaListViewHeader = (TextView) cabeceraTituloReparto.findViewById(R.id.listaRepartoApatxaCabecera);
 
         numeroPersonasTextView.setVisibility(View.GONE);
         headerInformacionDetalle.findViewById(R.id.separador2DetalleApatxa).setVisibility(View.GONE);
         findViewById(R.id.listaVaciaInfoSubactivity).setVisibility(View.GONE);
-        personasRepartoListView.addHeaderView(getLayoutInflater().inflate(R.layout.subactivity_lista_vacia, null));
+        personasRepartoListView.addHeaderView(getLayoutInflater().inflate(R.layout.subactivity_lista_vacia, null), null, false);
+
 
     }
 
