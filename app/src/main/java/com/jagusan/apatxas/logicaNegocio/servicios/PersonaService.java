@@ -50,6 +50,13 @@ public class PersonaService {
         close();
     }
 
+    public Long crearPersona(String nombre, Long idContacto, String uriFoto, Long idApatxa) {
+        open();
+        Long idPersona = personaDAO.crearPersona(nombre, idApatxa, idContacto, uriFoto);
+        close();
+        return idPersona;
+    }
+
 
     public void borrarPersona(Long idPersona) {
         open();

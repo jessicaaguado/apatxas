@@ -91,6 +91,10 @@
         <item quantity="one">Laguna ezabatu da</item>
         <item quantity="other">%d lagun ezabatu dira</item>
     </plurals>
+    <plurals name="mensaje_confimacion_personas_anadidas_realizado">
+        <item quantity="one">Laguna gehit da</item>
+        <item quantity="other">%d lagun gehitu dira</item>
+    </plurals>
     <plurals name="mensaje_confirmacion_borrado_gastos_realizado">
         <item quantity="one">Gastua ezabatu da</item>
         <item quantity="other">%d gastu ezabatu dira</item>

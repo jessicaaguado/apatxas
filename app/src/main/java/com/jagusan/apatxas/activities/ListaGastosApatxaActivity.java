@@ -253,7 +253,6 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
         intent.putExtra("idContactoPersonaPagadoGasto", gastoSeleccionadoEdicion.idContactoPersonaPagadoPor);
         intent.putExtra("personas", (ArrayList<PersonaListado>) personasApatxa);
         intent.putExtra("posicionGastoEditar", listaGastosApatxaArrayAdapter.getPosition(gastoSeleccionadoEdicion));
-        gastoSeleccionadoEdicion = null;
         startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
     }
 
@@ -268,12 +267,11 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     }
 
     private final class ModeCallback implements AbsListView.MultiChoiceModeListener {
-        ListaGastosApatxaArrayAdapter adapter = (ListaGastosApatxaArrayAdapter) gastosApatxaListView.getAdapter();
 
         @Override
         public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-            adapter.toggleSeleccion(position, checked);
-            int numeroGastosSeleccionados = adapter.numeroGastosSeleccionados();
+            listaGastosApatxaArrayAdapter.toggleSeleccion(position, checked);
+            int numeroGastosSeleccionados = listaGastosApatxaArrayAdapter.numeroGastosSeleccionados();
             mode.setTitle(resources.getQuantityString(R.plurals.seleccionados, numeroGastosSeleccionados, numeroGastosSeleccionados));
             if (numeroGastosSeleccionados == 1) {
                 findViewById(R.id.action_gasto_apatxa_cambiar).setVisibility(View.VISIBLE);
@@ -302,11 +300,11 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_gasto_apatxa_cambiar:
-                    continuarMostrandoAvisoSiNecesario(R.id.action_gasto_apatxa_cambiar, adapter.getGastosSeleccionados());
+                    continuarMostrandoAvisoSiNecesario(R.id.action_gasto_apatxa_cambiar, listaGastosApatxaArrayAdapter.getGastosSeleccionados());
                     mode.finish();
                     return true;
                 case R.id.action_gasto_apatxa_borrar:
-                    continuarMostrandoAvisoSiNecesario(R.id.action_gasto_apatxa_borrar, adapter.getGastosSeleccionados());
+                    continuarMostrandoAvisoSiNecesario(R.id.action_gasto_apatxa_borrar, listaGastosApatxaArrayAdapter.getGastosSeleccionados());
                     return true;
                 default:
                     return false;
@@ -315,7 +313,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            adapter.resetearSeleccion();
+            listaGastosApatxaArrayAdapter.resetearSeleccion();
         }
 
 

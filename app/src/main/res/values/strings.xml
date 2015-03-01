@@ -91,6 +91,10 @@
         <item quantity="one">Persona borrada</item>
         <item quantity="other">%d personas borradas</item>
     </plurals>
+    <plurals name="mensaje_confimacion_personas_anadidas_realizado">
+        <item quantity="one">Persona añadida</item>
+        <item quantity="other">%d personas añadidas</item>
+    </plurals>
     <plurals name="mensaje_confirmacion_borrado_gastos_realizado">
         <item quantity="one">Gasto borrado</item>
         <item quantity="other">%d gastos borrados</item>

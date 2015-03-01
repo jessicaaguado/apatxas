@@ -28,21 +28,20 @@ import java.util.List;
 
 public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
 
-
-    private Long idApatxa;
     private ApatxaDetalle apatxa;
+    private Long idApatxa;
     private List<PersonaListado> personasApatxa;
-    private List<PersonaListado> personasAnadidas = new ArrayList<>();
-    private List<PersonaListado> personasEliminadas = new ArrayList<>();
 
-
+    private ListView personasListView;
     private TextView tituloPersonasListViewHeader;
     private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
     private Resources resources;
     private PersonaService personaService;
-
     private ApatxaService apatxaService;
+
+    private ActionMode actionMode;
+    private boolean hayModificacionesEnPersonas;
 
     private int SELECCIONAR_CONTACTOS_REQUEST_CODE = 1;
 
@@ -59,6 +58,8 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
         recuperarDatosPasoAnterior();
 
         cargarElementosLayout();
+
+        hayModificacionesEnPersonas = false;
     }
 
     @Override
@@ -72,58 +73,25 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
+                volverPantallaAnterior();
                 finish();
                 return true;
-            case R.id.action_guardar_lista_personas_apatxa:
-                actualizarPersonasAnadidasBorradas();
-                return true;
             case R.id.action_anadir_persona:
-                seleccionarNuevosContactos();
+                continuarMostrandoAvisoSiNecesario(id, null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    private void actualizarPersonasAnadidasBorradas() {
-        boolean hayCambios = personasEliminadas.size() + personasAnadidas.size() > 0;
-        if (hayCambios) {
-            if (apatxa.personasPendientesPagarCobrar != apatxa.personas.size()) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto_personas);
-                alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        continuarConLosCambios();
-                    }
-                });
-                alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-                alertDialog.create();
-                alertDialog.show();
-            } else {
-                continuarConLosCambios();
-            }
-
+    private void volverPantallaAnterior() {
+        Intent returnIntent = new Intent();
+        if (hayModificacionesEnPersonas) {
+            setResult(RESULT_OK, returnIntent);
         } else {
-            volverSinCambios();
+            setResult(RESULT_CANCELED, returnIntent);
         }
-    }
-
-    private void continuarConLosCambios() {
-        personaService.borrarPersonas(personasEliminadas);
-        personaService.crearPersonas(personasAnadidas, idApatxa);
-        Intent returnIntent = new Intent();
-        setResult(RESULT_OK, returnIntent);
         finish();
-    }
-
-    private void volverSinCambios() {
-        Intent returnIntent = new Intent();
-        setResult(RESULT_CANCELED, returnIntent);
-        finish();
-
     }
 
     private void inicializarServicios() {
@@ -141,12 +109,13 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
     }
 
     private void cargarElementosLayout() {
-        ListView personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+        personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
         anadirCabeceraListaPersonas();
 
         listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);
         personasListView.setAdapter(listaPersonasApatxaArrayAdapter);
-        asignarContextualActionBar(personasListView);
+        personasListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        personasListView.setMultiChoiceModeListener(new ModeCallback());
 
         gestionarListaVacia(listaPersonasApatxaArrayAdapter, false, R.string.lista_vacia_personas, null);
     }
@@ -163,6 +132,41 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
         tituloPersonasListViewHeader.setText(titulo);
     }
 
+
+    private void continuarMostrandoAvisoSiNecesario(final int accionSobrePersonas, final List<PersonaListado> personas) {
+        if (!hayModificacionesEnPersonas && apatxa.personasPendientesPagarCobrar != apatxa.personas.size()) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto_personas);
+            alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    continuarAccionSobrePersonas(accionSobrePersonas, personas);
+                }
+            });
+            alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                }
+            });
+            alertDialog.create();
+            alertDialog.show();
+        } else {
+            continuarAccionSobrePersonas(accionSobrePersonas, personas);
+        }
+    }
+
+
+    private void continuarAccionSobrePersonas(int accionSobrePersonas, List<PersonaListado> personas) {
+        switch (accionSobrePersonas) {
+            case R.id.action_anadir_persona:
+                seleccionarNuevosContactos();
+                break;
+            case R.id.action_persona_apatxa_borrar:
+                confirmarBorradoPersonas(personas);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void seleccionarNuevosContactos() {
         Intent intent = new Intent(this, ListaContactosActivity.class);
         intent.putExtra("idsContactosSeleccionados", (ArrayList<Long>) RecupararInformacionPersonas.obtenerIdsContactos(listaPersonasApatxaArrayAdapter.getPersonas()));
@@ -173,6 +177,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
         if (requestCode == SELECCIONAR_CONTACTOS_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 anadirContactosSeleccionados(data);
+                MensajesToast.mostrarConfirmacionAnadidos(getApplicationContext(), R.plurals.mensaje_confimacion_personas_anadidas_realizado, ((ArrayList<ContactoListado>) data.getSerializableExtra("contactosSeleccionados")).size());
             }
         }
     }
@@ -180,94 +185,81 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
     public void anadirContactosSeleccionados(Intent data) {
         List<ContactoListado> contactosSeleccionados = (ArrayList<ContactoListado>) data.getSerializableExtra("contactosSeleccionados");
         for (ContactoListado contacto : contactosSeleccionados) {
-            PersonaListado persona = new PersonaListado();
-            persona.nombre = contacto.nombre;
-            persona.idContacto = contacto.id;
-            persona.uriFoto = contacto.fotoURI;
+            Long idPersona = personaService.crearPersona(contacto.nombre, contacto.id, contacto.fotoURI, idApatxa);
+            PersonaListado persona = new PersonaListado(idPersona, contacto.nombre, contacto.id, contacto.fotoURI);
             listaPersonasApatxaArrayAdapter.add(persona);
-            personasAnadidas.add(persona);
         }
+        hayModificacionesEnPersonas = true;
         actualizarTituloCabeceraListaPersonas();
     }
 
-    public void anadirPersonasParaBorrar(List<PersonaListado> personas) {
-        List<PersonaListado> personasBorrarAunSinGuardar = new ArrayList<>();
-        for (PersonaListado persona : personas) {
-            if (persona.id == null) {
-                personasBorrarAunSinGuardar.add(persona);
-            } else {
-                personasEliminadas.add(persona);
+    private void confirmarBorradoPersonas(final List<PersonaListado> personas) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage(R.string.mensaje_confirmacion_borrado_personas);
+        alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                borrarPersonas(personas);
+                actionMode.finish();
+                MensajesToast.mostrarConfirmacionBorrados(getApplicationContext(), R.plurals.mensaje_confirmacion_borrado_personas_realizado, personas.size());
             }
-        }
-        personasAnadidas.removeAll(personasBorrarAunSinGuardar);
+        });
+        alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        alertDialog.create();
+        alertDialog.show();
+    }
+
+    private void borrarPersonas(List<PersonaListado> personas) {
+        personaService.borrarPersonas(personas);
+        hayModificacionesEnPersonas = true;
         listaPersonasApatxaArrayAdapter.eliminarPersonasSeleccionadas();
         actualizarTituloCabeceraListaPersonas();
     }
 
-    private void asignarContextualActionBar(final ListView personasListView) {
-        personasListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        personasListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
-            ListaPersonasApatxaArrayAdapter adapter = (ListaPersonasApatxaArrayAdapter) personasListView.getAdapter();
-            ActionMode mode;
+    private final class ModeCallback implements AbsListView.MultiChoiceModeListener {
 
-            @Override
-            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-                adapter.toggleSeleccion(position, checked);
-                mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
+        @Override
+        public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+            listaPersonasApatxaArrayAdapter.toggleSeleccion(position, checked);
+            mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, listaPersonasApatxaArrayAdapter.numeroPersonasSeleccionadas(), listaPersonasApatxaArrayAdapter.numeroPersonasSeleccionadas()));
+        }
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            actionMode = mode;
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.context_menu_persona_apatxa, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            if (actionMode == null) {
+                actionMode = mode;
             }
+            return false;
+        }
 
-
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                this.mode = mode;
-                MenuInflater inflater = mode.getMenuInflater();
-                inflater.inflate(R.menu.context_menu_persona_apatxa, menu);
-                return true;
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_persona_apatxa_borrar:
+                    continuarMostrandoAvisoSiNecesario(item.getItemId(), listaPersonasApatxaArrayAdapter.getPersonasSeleccionadas());
+                    return true;
+                default:
+                    return false;
             }
+        }
 
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                if (this.mode == null) {
-                    this.mode = mode;
-                }
-                return false;
-            }
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            listaPersonasApatxaArrayAdapter.resetearSeleccion();
+        }
 
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_persona_apatxa_borrar:
-                        confimarBorradoPersonas();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-                adapter.resetearSeleccion();
-            }
-
-            private void confimarBorradoPersonas() {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(adapter.getContext());
-                alertDialog.setMessage(R.string.mensaje_confirmacion_borrado_personas);
-                alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        anadirPersonasParaBorrar(adapter.getPersonasSeleccionadas());
-                        mode.finish();
-                    }
-                });
-                alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                    }
-                });
-                alertDialog.create();
-                alertDialog.show();
-            }
-        });
     }
 
 }
