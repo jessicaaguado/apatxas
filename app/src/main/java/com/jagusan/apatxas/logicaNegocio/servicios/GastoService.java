@@ -36,10 +36,11 @@ public class GastoService {
         dbHelper.close();
     }
 
-    public void crearGasto(String concepto, Double total, Long idApatxa, Long idPersona) {
+    public Long crearGasto(String concepto, Double total, Long idApatxa, Long idPersona) {
         open();
-        gastoDAO.crearGasto(concepto, total, idApatxa, idPersona);
+        Long idGasto = gastoDAO.crearGasto(concepto, total, idApatxa, idPersona);
         close();
+        return idGasto;
     }
 
     public void actualizarGasto(Long idGasto, String conceptoGasto, Double totalGasto, Long idPersona) {
@@ -59,21 +60,11 @@ public class GastoService {
         close();
     }
 
-
     public void crearGastos(List<GastoApatxaListado> gastosAnadidos, Long idApatxa) {
         open();
         for (GastoApatxaListado gasto : gastosAnadidos) {
             Long idPersonaPagado = personaDAO.recuperarIdPersonaPorIdContacto(gasto.idContactoPersonaPagadoPor, idApatxa);
             gastoDAO.crearGasto(gasto.concepto, gasto.total, idApatxa, idPersonaPagado);
-        }
-        close();
-    }
-
-    public void actualizarGastos(List<GastoApatxaListado> gastosModificados, Long idApatxa) {
-        open();
-        for (GastoApatxaListado gasto : gastosModificados) {
-            Long idPersonaPagado = personaDAO.recuperarIdPersonaPorIdContacto(gasto.idContactoPersonaPagadoPor, idApatxa);
-            gastoDAO.actualizarGasto(gasto.id, gasto.concepto, gasto.total, idPersonaPagado);
         }
         close();
     }
@@ -84,4 +75,6 @@ public class GastoService {
         close();
         return conceptos;
     }
+
+
 }

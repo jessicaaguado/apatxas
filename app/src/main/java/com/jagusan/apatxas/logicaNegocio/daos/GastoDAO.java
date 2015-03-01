@@ -28,14 +28,14 @@ public class GastoDAO {
         this.database = database;
     }
 
-    public void crearGasto(String concepto, Double total, Long idApatxa, Long idPersona) {
+    public Long crearGasto(String concepto, Double total, Long idApatxa, Long idPersona) {
         ContentValues values = new ContentValues();
         values.put(TablaGasto.COLUMNA_CONCEPTO, concepto);
         values.put(TablaGasto.COLUMNA_TOTAL, total);
         values.put(TablaGasto.COLUMNA_ID_PAGADO_POR, idPersona);
         values.put(TablaGasto.COLUMNA_ID_APATXA, idApatxa);
 
-        database.insert(NOMBRE_TABLA_GASTO, null, values);
+        return database.insert(NOMBRE_TABLA_GASTO, null, values);
     }
 
     public void borrarGasto(Long id) {

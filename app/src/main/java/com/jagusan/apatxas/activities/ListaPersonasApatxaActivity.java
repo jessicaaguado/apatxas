@@ -90,7 +90,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
         if (hayCambios) {
             if (apatxa.personasPendientesPagarCobrar != apatxa.personas.size()) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto);
+                alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto_personas);
                 alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         continuarConLosCambios();

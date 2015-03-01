@@ -1,7 +1,6 @@
 package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -159,10 +158,8 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity imple
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ListaPersonasRepartoApatxaArrayAdapter adapter = (ListaPersonasRepartoApatxaArrayAdapter) ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getWrappedAdapter();
-
         int numHeaders = ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getHeadersCount();
         boolean seleccionadoAnteriormente = adapter.getPersonasSeleccionadas().contains(adapter.getItem(position - numHeaders));
-        Log.d("APATXAS", "   itemchecked " + (position - numHeaders) + " " + seleccionadoAnteriormente);
         personasRepartoListView.setItemChecked(position, !seleccionadoAnteriormente);
     }
 
@@ -174,7 +171,6 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity imple
         @Override
         public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
             //ponemos -numHeaders porque tenemos header
-            Log.d("APATXAS", "      onItemCheckedStateChanged " + position + " " + checked);
             int numHeaders = ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getHeadersCount();
             adapter.toggleSeleccion(position - numHeaders, checked);
             mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));

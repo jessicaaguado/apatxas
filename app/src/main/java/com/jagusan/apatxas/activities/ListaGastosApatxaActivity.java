@@ -34,17 +34,19 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private Long idApatxa;
     private ApatxaDetalle apatxa;
     private List<PersonaListado> personasApatxa;
-    private List<GastoApatxaListado> gastosAnadidos = new ArrayList<>();
-    private List<GastoApatxaListado> gastosEliminados = new ArrayList<>();
-    private List<GastoApatxaListado> gastosModificados = new ArrayList<>();
 
     private TextView tituloGastosApatxaListViewHeader;
     private List<GastoApatxaListado> listaGastos = new ArrayList<>();
     private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
+    private ListView gastosApatxaListView;
 
     private ApatxaService apatxaService;
     private GastoService gastoService;
     private Resources resources;
+
+    private ActionMode actionMode;
+    private boolean hayModificacionesEnGastos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
         cargarElementosLayout();
 
+        hayModificacionesEnGastos = false;
+
     }
 
     @Override
@@ -72,79 +76,15 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
+                volverPantallaAnterior();
                 finish();
                 return true;
-            case R.id.action_guardar:
-                actualizarGastosAnadidosBorradosActualizados();
-                return true;
             case R.id.action_anadir_gasto:
-                anadirGasto();
+                continuarMostrandoAvisoSiNecesario(R.id.action_anadir_gasto, null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void actualizarGastosAnadidosBorradosActualizados() {
-        boolean hayCambios = gastosEliminados.size() + gastosAnadidos.size() + gastosModificados.size() > 0;
-        if (hayCambios) {
-            if (apatxa.personasPendientesPagarCobrar != apatxa.personas.size()) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto);
-                alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        continuarConLosCambios();
-                    }
-                });
-                alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-                alertDialog.create();
-                alertDialog.show();
-            } else {
-                continuarConLosCambios();
-            }
-
-        } else {
-            volverSinCambios();
-        }
-    }
-
-    private void continuarConLosCambios() {
-        gastoService.borrarGastos(gastosEliminados);
-        gastoService.crearGastos(gastosAnadidos, idApatxa);
-        gastoService.actualizarGastos(gastosModificados, idApatxa);
-        Intent returnIntent = new Intent();
-        setResult(RESULT_OK, returnIntent);
-        finish();
-    }
-
-    private void volverSinCambios() {
-        Intent returnIntent = new Intent();
-        setResult(RESULT_CANCELED, returnIntent);
-        finish();
-
-    }
-
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                anadirGastoAListaDeGastos(data);
-            }
-        }
-        if (requestCode == EDITAR_GASTO_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                actualizarGastoListaDeGastos(data);
-            }
-        }
-    }
-
-    public void anadirGasto() {
-        Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
-        intent.putExtra("personas", (ArrayList<PersonaListado>) personasApatxa);
-        startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);
     }
 
     private void inicializarServicios() {
@@ -155,12 +95,13 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
 
     private void cargarElementosLayout() {
-        ListView gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
+        gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
         anadirCabeceraListaGastos();
 
         listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, listaGastos);
         gastosApatxaListView.setAdapter(listaGastosApatxaArrayAdapter);
-        asignarContextualActionBar(gastosApatxaListView);
+        gastosApatxaListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        gastosApatxaListView.setMultiChoiceModeListener(new ModeCallback());
 
         gestionarListaVacia(listaGastosApatxaArrayAdapter, false, R.string.lista_vacia_gastos, null);
     }
@@ -187,22 +128,101 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     }
 
 
-    private void anadirGastoAListaDeGastos(Intent data) {
+    private void continuarMostrandoAvisoSiNecesario(final int accionSobreGastos, final List<GastoApatxaListado> gastos) {
+        if (!hayModificacionesEnGastos && apatxa.personasPendientesPagarCobrar != apatxa.personas.size()) {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setMessage(R.string.mensaje_confirmacion_resetear_pagos_cobros_del_reparto_gastos);
+            alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    continuarAccionSobreGastos(accionSobreGastos, gastos);
+                }
+            });
+            alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                }
+            });
+            alertDialog.create();
+            alertDialog.show();
+        } else {
+            continuarAccionSobreGastos(accionSobreGastos, gastos);
+        }
+    }
+
+
+    private void continuarAccionSobreGastos(int accionSobreGastos, List<GastoApatxaListado> gastos) {
+        switch (accionSobreGastos) {
+            case R.id.action_anadir_gasto:
+                anadirGasto();
+                break;
+            case R.id.action_gasto_apatxa_cambiar:
+                irPantallaEdicionGasto(gastos);
+                break;
+            case R.id.action_gasto_apatxa_borrar:
+                confirmarBorradoGastos(gastos);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void confirmarBorradoGastos(final List<GastoApatxaListado> gastos) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage(R.string.mensaje_confirmacion_borrado_gastos);
+        alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                borrarGastos(gastos);
+                actionMode.finish();
+                MensajesToast.mostrarConfirmacionBorrados(getApplicationContext(), R.plurals.mensaje_confirmacion_borrado_gastos_realizado, gastos.size());
+            }
+        });
+        alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        alertDialog.create();
+        alertDialog.show();
+    }
+
+    public void anadirGasto() {
+        Intent intent = new Intent(this, NuevoGastoApatxaActivity.class);
+        intent.putExtra("personas", (ArrayList<PersonaListado>) personasApatxa);
+        startActivityForResult(intent, NUEVO_GASTO_REQUEST_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == NUEVO_GASTO_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                crearGastoNuevo(data);
+                MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_gasto_anadido);
+            }
+        }
+        if (requestCode == EDITAR_GASTO_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                actualizarGastoListaDeGastos(data);
+                MensajesToast.mostrarConfirmacionGuardado(this.getApplicationContext(), R.string.mensaje_confirmacion_gasto_modificado);
+            }
+        }
+    }
+
+
+    private void borrarGastos(List<GastoApatxaListado> gastos) {
+        gastoService.borrarGastos(gastos);
+        hayModificacionesEnGastos = true;
+        listaGastosApatxaArrayAdapter.eliminarGastosSeleccionados();
+        actualizarTituloCabeceraListaGastos();
+    }
+
+    private void crearGastoNuevo(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
         PersonaListado pagadoGasto = (PersonaListado) data.getSerializableExtra("pagadoPor");
 
+        Long idGasto = gastoService.crearGasto(conceptoGasto, totalGasto, idApatxa, pagadoGasto.id);
+        hayModificacionesEnGastos = true;
         GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
-        gastosAnadidos.add(gastoListado);
+        gastoListado.id = idGasto;
         listaGastosApatxaArrayAdapter.add(gastoListado);
-        actualizarTituloCabeceraListaGastos();
-    }
-
-    private void anadirGastosParaBorrar(List<GastoApatxaListado> gastos) {
-        gastosEliminados.addAll(gastos);
-        gastosAnadidos.removeAll(gastos);
-        gastosModificados.removeAll(gastos);
-        listaGastosApatxaArrayAdapter.eliminarGastosSeleccionados();
         actualizarTituloCabeceraListaGastos();
     }
 
@@ -218,98 +238,86 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
         gastoActualizado.pagadoPor = pagadoGasto != null ? pagadoGasto.nombre : null;
         gastoActualizado.idPagadoPor = pagadoGasto != null ? pagadoGasto.id : null;
 
-        if (gastoActualizado.id != null) {
-            gastosModificados.add(gastoActualizado);
-        }
+        gastoService.actualizarGasto(gastoActualizado.id, conceptoGasto, totalGasto, pagadoGasto.id);
+        hayModificacionesEnGastos = true;
         listaGastosApatxaArrayAdapter.actualizarGasto(posicionGastoActualizar, gastoActualizado);
         actualizarTituloCabeceraListaGastos();
     }
 
-    private void irPantallaEdicionGasto(GastoApatxaListado gasto) {
+
+    private void irPantallaEdicionGasto(List<GastoApatxaListado> gastos) {
+        GastoApatxaListado gastoSeleccionadoEdicion = gastos.get(0);
         Intent intent = new Intent(this, EditarGastoApatxaActivity.class);
-        intent.putExtra("conceptoGasto", gasto.concepto);
-        intent.putExtra("importeGasto", gasto.total);
-        intent.putExtra("idContactoPersonaPagadoGasto", gasto.idContactoPersonaPagadoPor);
+        intent.putExtra("conceptoGasto", gastoSeleccionadoEdicion.concepto);
+        intent.putExtra("importeGasto", gastoSeleccionadoEdicion.total);
+        intent.putExtra("idContactoPersonaPagadoGasto", gastoSeleccionadoEdicion.idContactoPersonaPagadoPor);
         intent.putExtra("personas", (ArrayList<PersonaListado>) personasApatxa);
-        intent.putExtra("posicionGastoEditar", listaGastosApatxaArrayAdapter.getPosition(gasto));
+        intent.putExtra("posicionGastoEditar", listaGastosApatxaArrayAdapter.getPosition(gastoSeleccionadoEdicion));
+        gastoSeleccionadoEdicion = null;
         startActivityForResult(intent, EDITAR_GASTO_REQUEST_CODE);
     }
 
-    private void asignarContextualActionBar(final ListView gastosListView) {
-        gastosListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        gastosListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
-
-            ListaGastosApatxaArrayAdapter adapter = (ListaGastosApatxaArrayAdapter) gastosListView.getAdapter();
-            ActionMode mode;
-
-            @Override
-            public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
-                adapter.toggleSeleccion(position, checked);
-                int numeroGastosSeleccionados = adapter.numeroGastosSeleccionados();
-                mode.setTitle(resources.getQuantityString(R.plurals.seleccionados, numeroGastosSeleccionados, numeroGastosSeleccionados));
-                if (numeroGastosSeleccionados == 1) {
-                    findViewById(R.id.action_gasto_apatxa_cambiar).setVisibility(View.VISIBLE);
-                } else {
-                    findViewById(R.id.action_gasto_apatxa_cambiar).setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                this.mode = mode;
-                MenuInflater inflater = mode.getMenuInflater();
-                inflater.inflate(R.menu.context_menu_gasto_apatxa, menu);
-                return true;
-            }
-
-            @Override
-            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                if (this.mode == null) {
-                    this.mode = mode;
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_gasto_apatxa_cambiar:
-                        irPantallaEdicionGasto(listaGastosApatxaArrayAdapter.getGastosSeleccionados().get(0));
-                        mode.finish();
-                        return true;
-                    case R.id.action_gasto_apatxa_borrar:
-                        confimarBorradoGastos();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-
-            @Override
-            public void onDestroyActionMode(ActionMode mode) {
-                adapter.resetearSeleccion();
-            }
-
-            private void confimarBorradoGastos() {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(adapter.getContext());
-                alertDialog.setMessage(R.string.mensaje_confirmacion_borrado_gastos);
-                alertDialog.setPositiveButton(R.string.action_aceptar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        anadirGastosParaBorrar(adapter.getGastosSeleccionados());
-                        mode.finish();
-                    }
-                });
-                alertDialog.setNegativeButton(R.string.action_cancelar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                    }
-                });
-                alertDialog.create();
-                alertDialog.show();
-            }
-
-        });
+    private void volverPantallaAnterior() {
+        Intent returnIntent = new Intent();
+        if (hayModificacionesEnGastos) {
+            setResult(RESULT_OK, returnIntent);
+        } else {
+            setResult(RESULT_CANCELED, returnIntent);
+        }
+        finish();
     }
 
+    private final class ModeCallback implements AbsListView.MultiChoiceModeListener {
+        ListaGastosApatxaArrayAdapter adapter = (ListaGastosApatxaArrayAdapter) gastosApatxaListView.getAdapter();
 
+        @Override
+        public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+            adapter.toggleSeleccion(position, checked);
+            int numeroGastosSeleccionados = adapter.numeroGastosSeleccionados();
+            mode.setTitle(resources.getQuantityString(R.plurals.seleccionados, numeroGastosSeleccionados, numeroGastosSeleccionados));
+            if (numeroGastosSeleccionados == 1) {
+                findViewById(R.id.action_gasto_apatxa_cambiar).setVisibility(View.VISIBLE);
+            } else {
+                findViewById(R.id.action_gasto_apatxa_cambiar).setVisibility(View.GONE);
+            }
+        }
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            actionMode = mode;
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.context_menu_gasto_apatxa, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            if (actionMode == null) {
+                actionMode = mode;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_gasto_apatxa_cambiar:
+                    continuarMostrandoAvisoSiNecesario(R.id.action_gasto_apatxa_cambiar, adapter.getGastosSeleccionados());
+                    mode.finish();
+                    return true;
+                case R.id.action_gasto_apatxa_borrar:
+                    continuarMostrandoAvisoSiNecesario(R.id.action_gasto_apatxa_borrar, adapter.getGastosSeleccionados());
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            adapter.resetearSeleccion();
+        }
+
+
+    }
 }

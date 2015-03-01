@@ -81,7 +81,8 @@
     <string name="mensaje_confirmacion_borrado_personas">Aukeratutako lagunak ezabatu nahi dituzu?</string>
     <string name="mensaje_confirmacion_borrado_gastos">Aukeratutako gastuak ezabatu nahi dituzu?</string>
     <string name="mensaje_confirmacion_borrado_apatxas">Aukeratutako Apatxak ezabatu nahi dituzu?</string>
-    <string name="mensaje_confirmacion_resetear_pagos_cobros_del_reparto">Dagoeneko lagun batzuk ordaindu/kobratu dute. Aldaketak gordez gero banaketa berriro egingo da eta informazio hori galduko da. Aldaketak gorde nahi dituzu?</string>
+    <string name="mensaje_confirmacion_resetear_pagos_cobros_del_reparto_gastos">Dagoeneko lagun batzuk ordaindu/kobratu dute. Gastuen zerrendan aldaketak eginez gero banaketa berriro egingo da eta informazio hori galduko da.\nJarraitu nahi duzu?</string>
+    <string name="mensaje_confirmacion_resetear_pagos_cobros_del_reparto_personas">Dagoeneko lagun batzuk ordaindu/kobratu dute. Lagunen zerrendan aldaketak eginez gero banaketa berriro egingo da eta informazio hori galduko da.\nJarraitu nahi duzu?</string>
     <plurals name="mensaje_confirmacion_borrado_apatxas_realizado">
         <item quantity="one">Apatxa ezabatu da</item>
         <item quantity="other">%d Apatxa ezabatu dira</item>
