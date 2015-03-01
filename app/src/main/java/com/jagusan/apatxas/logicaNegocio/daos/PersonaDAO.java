@@ -28,7 +28,7 @@ public class PersonaDAO {
         this.database = database;
     }
 
-    public void crearPersona(String nombre, Long idApatxa, Long idContacto, String fotoContacto) {
+    public Long crearPersona(String nombre, Long idApatxa, Long idContacto, String fotoContacto) {
         ContentValues values = new ContentValues();
         values.put(TablaPersona.COLUMNA_NOMBRE, nombre);
         values.put(TablaPersona.COLUMNA_ID_APATXA, idApatxa);
@@ -37,7 +37,7 @@ public class PersonaDAO {
         }
         values.put(TablaPersona.COLUMNA_ID_CONTACTO, idContacto);
 
-        database.insert(NOMBRE_TABLA_PERSONA, null, values);
+        return database.insert(NOMBRE_TABLA_PERSONA, null, values);
     }
 
     public void borrarPersona(Long id) {

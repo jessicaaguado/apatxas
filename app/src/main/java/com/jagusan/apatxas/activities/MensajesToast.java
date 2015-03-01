@@ -11,6 +11,11 @@ public class MensajesToast {
         toast.show();
     }
 
+    public static void mostrarConfirmacionAnadidos(Context contexto, int mensajeId, int numElementosAnadidoss) {
+        Toast toast = Toast.makeText(contexto, contexto.getResources().getQuantityString(mensajeId, numElementosAnadidoss, numElementosAnadidoss), Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
     public static void mostrarConfirmacionGuardado(Context contexto, int mensajeId) {
         Toast toast = Toast.makeText(contexto, contexto.getResources().getString(mensajeId), Toast.LENGTH_SHORT);
         toast.show();

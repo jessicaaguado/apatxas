@@ -42,7 +42,7 @@ public class ApatxasActionBarActivity extends ActionBarActivity {
             iconoListaVacia.setColorFilter(getResources().getColor(R.color.apatxascolors_color_claro), PorterDuff.Mode.MULTIPLY);
             ((ImageView) findViewById(R.id.imagen_lista_vacia)).setImageDrawable(iconoListaVacia);
 
-            Drawable iconoContinuar = getResources().getDrawable(R.drawable.ic_menu_action_apatxas_siguiente);
+            Drawable iconoContinuar = getResources().getDrawable(R.drawable.ic_apatxas_siguiente);
             iconoContinuar.setColorFilter(getResources().getColor(R.color.apatxascolors_color), PorterDuff.Mode.MULTIPLY);
             ((TextView) findViewById(R.id.anadir_elementos_mas_tarde)).setCompoundDrawablesWithIntrinsicBounds(null, null, iconoContinuar, null);
         }

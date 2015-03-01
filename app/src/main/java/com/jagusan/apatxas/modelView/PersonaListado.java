@@ -11,5 +11,16 @@ public class PersonaListado implements Serializable {
     public Long idContacto;
     public String uriFoto;
 
+    public PersonaListado() {
+
+    }
+
+    public PersonaListado(Long id, String nombre, Long idContacto, String uriFoto) {
+        this.id = id;
+        this.nombre = nombre;
+        this.idContacto = idContacto;
+        this.uriFoto = uriFoto;
+    }
+
 
 }
