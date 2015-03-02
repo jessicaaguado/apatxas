@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
@@ -17,15 +18,20 @@ import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.utils.CrearAvatarConLetra;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
-public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> {
+public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> implements SectionIndexer {
 
     Context context;
     int rowLayoutId;
     List<ContactoListado> contactos;
 
     List<ContactoListado> contactosSeleccionados;
+
+    HashMap<String, Integer> alphaIndexer;
+    String[] sections;
 
     public ListaContactosArrayAdapter(Context context, int rowLayoutId, List<ContactoListado> contactos) {
 
@@ -35,6 +41,31 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> {
         this.rowLayoutId = rowLayoutId;
         this.contactos = contactos;
         this.contactosSeleccionados = new ArrayList<>();
+
+
+        String indiceYo = this.getContext().getResources().getString(R.string.yo_mayusculas);
+        int posicionYo = 0;
+        alphaIndexer = new HashMap<String, Integer>();
+        for (ContactoListado contacto : contactos) {
+            if (contacto.id != Long.MIN_VALUE) {
+                String inicial = contacto.nombre.substring(0, 1).toUpperCase();
+                int posicionActual = contactos.indexOf(contacto);
+                int posicionAnterior = alphaIndexer.get(inicial) != null ? alphaIndexer.get(inicial) : Integer.MAX_VALUE;
+                if (posicionActual < posicionAnterior) {
+                    alphaIndexer.put(inicial, posicionActual);
+                }
+            } else {
+                posicionYo = contactos.indexOf(contacto);
+            }
+        }
+
+        ArrayList<String> sectionList = new ArrayList<String>(alphaIndexer.keySet());
+        Collections.sort(sectionList);
+        sectionList.add(0, indiceYo);
+        alphaIndexer.put(indiceYo, posicionYo);
+
+        sections = new String[sectionList.size()];
+        sections = sectionList.toArray(sections);
     }
 
     @Override
@@ -87,4 +118,27 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> {
     }
 
 
+    public void toggleCheckBox(int position){
+        if (contactosSeleccionados.contains(contactos.get(position))){
+            contactosSeleccionados.remove(contactos.get(position));
+        }else{
+            contactosSeleccionados.add(contactos.get(position));
+        }
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public Object[] getSections() {
+        return sections;
+    }
+
+    @Override
+    public int getPositionForSection(int sectionIndex) {
+        return alphaIndexer.get(sections[sectionIndex]);
+    }
+
+    @Override
+    public int getSectionForPosition(int position) {
+        return 0;
+    }
 }

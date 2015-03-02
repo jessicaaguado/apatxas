@@ -167,7 +167,8 @@
     <string name="solo_un_dia">Solo un día</string>
 
     <string name="varios_dias">Varios días</string>
-    <string name="yo_mayusculas">YO - %s</string>
+    <string name="yo_mayusculas">YO</string>
+    <string name="yo_mayusculas_nombre">YO - %s</string>
     <string name="lista_vacia">La lista está vacía</string>
     <string name="pagado">Pagado</string>
     <string name="debe">Debe</string>

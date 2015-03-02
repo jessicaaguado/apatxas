@@ -2,8 +2,12 @@ package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import com.jagusan.apatxas.R;
@@ -14,7 +18,7 @@ import com.jagusan.apatxas.modelView.ContactoListado;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaContactosActivity extends ApatxasActionBarActivity {
+public class ListaContactosActivity extends ApatxasActionBarActivity implements AdapterView.OnItemClickListener {
 
 
     ListView contactosListView;
@@ -80,9 +84,17 @@ public class ListaContactosActivity extends ApatxasActionBarActivity {
         List<ContactoListado> contactos = contactoService.obtenerTodosContactosTelefono(contactosYaElegidos);
         listaContactosArrayAdapter = new ListaContactosArrayAdapter(this, R.layout.lista_contactos_row, contactos);
         contactosListView.setAdapter(listaContactosArrayAdapter);
+        contactosListView.setOnItemClickListener(this);
 
         gestionarListaVacia(listaContactosArrayAdapter, false, R.string.lista_vacia_contactos, null);
 
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("APATXAS", "posicion " + position);
+        CheckBox cb = (CheckBox) view.findViewById(R.id.checkBoxContacto);
+        Log.d("APATXAS", " "+position+" "+cb.isChecked());
+        listaContactosArrayAdapter.toggleCheckBox(position);
+    }
 }

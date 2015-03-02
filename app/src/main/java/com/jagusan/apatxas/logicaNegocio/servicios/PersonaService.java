@@ -93,7 +93,7 @@ public class PersonaService {
         String[] columnasPerfil = new String[]{ContactsContract.Profile.DISPLAY_NAME_PRIMARY};
         Cursor perfilCursor = context.getContentResolver().query(ContactsContract.Profile.CONTENT_URI, columnasPerfil, null, null, null);
         perfilCursor.moveToFirst();
-        String nombre = context.getString(R.string.yo_mayusculas, perfilCursor.getString(0));
+        String nombre = context.getString(R.string.yo_mayusculas_nombre, perfilCursor.getString(0));
         perfilCursor.close();
         personaDAO.actualizarMiNombre(nombre);
         close();
