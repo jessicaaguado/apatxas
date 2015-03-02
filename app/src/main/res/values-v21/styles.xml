@@ -3,8 +3,10 @@
     <!--
         Base application theme for API 21+. This theme completely replaces
         AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v14/styles.xml on API 21+ devices.
+        res/values-v14/styles.xml on API 21+ devices.
+
+
     -->
-    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar"></style>
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar"/>
 
 </resources>

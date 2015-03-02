@@ -17,9 +17,6 @@ import com.jagusan.apatxas.utils.SettingsUtils;
 
 public class ApatxasActionBarActivity extends ActionBarActivity {
 
-
-    private int stringIdAnadirElementosPosterior;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

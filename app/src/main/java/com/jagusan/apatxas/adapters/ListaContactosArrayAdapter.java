@@ -45,7 +45,7 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> im
 
         String indiceYo = this.getContext().getResources().getString(R.string.yo_mayusculas);
         int posicionYo = 0;
-        alphaIndexer = new HashMap<String, Integer>();
+        alphaIndexer = new HashMap<>();
         for (ContactoListado contacto : contactos) {
             if (contacto.id != Long.MIN_VALUE) {
                 String inicial = contacto.nombre.substring(0, 1).toUpperCase();
@@ -59,7 +59,7 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> im
             }
         }
 
-        ArrayList<String> sectionList = new ArrayList<String>(alphaIndexer.keySet());
+        ArrayList<String> sectionList = new ArrayList<>(alphaIndexer.keySet());
         Collections.sort(sectionList);
         sectionList.add(0, indiceYo);
         alphaIndexer.put(indiceYo, posicionYo);

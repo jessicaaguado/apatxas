@@ -16,6 +16,6 @@
         <item name="android:background">@color/apatxascolors_color</item>
     </style>
 
-    <style name="apatxas_dialog_texto" parent="@style/apatxas_dialog"></style>
+    <style name="apatxas_dialog_texto" parent="@style/apatxas_dialog"/>
 
 </resources>

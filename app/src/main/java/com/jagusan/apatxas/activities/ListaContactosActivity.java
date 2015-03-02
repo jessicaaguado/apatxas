@@ -2,12 +2,10 @@ package com.jagusan.apatxas.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ListView;
 
 import com.jagusan.apatxas.R;
@@ -92,9 +90,6 @@ public class ListaContactosActivity extends ApatxasActionBarActivity implements 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d("APATXAS", "posicion " + position);
-        CheckBox cb = (CheckBox) view.findViewById(R.id.checkBoxContacto);
-        Log.d("APATXAS", " "+position+" "+cb.isChecked());
         listaContactosArrayAdapter.toggleCheckBox(position);
     }
 }

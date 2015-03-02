@@ -102,7 +102,6 @@
     <string name="mensaje_confirmacion_apatxa_guardada">Apatxa guardada</string>
     <string name="mensaje_confirmacion_gasto_anadido">Gasto anadido</string>
     <string name="mensaje_confirmacion_gasto_modificado">Gasto modificado</string>
-    <string name="mensaje_confirmacion_gastos_actualizados">Gastos actualizados</string>
     <string name="mensaje_confirmacion_gastos_actualizados_reparto_actualizado">Gastos actualizados.\nSe ha realizado de nuevo el reparto</string>
     <string name="mensaje_confirmacion_personas_actualizadas">Personas actualizadas</string>
     <string name="mensaje_confirmacion_personas_actualizadas_reparto_actualizado">Personas actualizadas.\nSe ha realizado de nuevo el reparto</string>
@@ -134,8 +133,6 @@
 
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f €</string>
-    <string name="cobrar_cantidad_euros">Recibe %1$.2f €</string>
-    <string name="cobrado_cantidad_euros">Ha recibido (%1$.2f €)</string>
     <string name="concepto">Concepto</string>
 
     <string name="importe">Importe</string>
@@ -148,8 +145,6 @@
 
 
     <string name="pagado_por">Quien ha pagado</string>
-    <string name="pagar_cantidad_euros">Debe %1$.2f €</string>
-    <string name="pagado_cantidad_euros">Ha pagado (%1$.2f €)</string>
     <string name="reparto">Reparto</string>
 
     <plurals name="seleccionados">

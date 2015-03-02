@@ -32,7 +32,6 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
     private Long idApatxa;
     private List<PersonaListado> personasApatxa;
 
-    private ListView personasListView;
     private TextView tituloPersonasListViewHeader;
     private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
 
@@ -109,7 +108,7 @@ public class ListaPersonasApatxaActivity extends ApatxasActionBarActivity {
     }
 
     private void cargarElementosLayout() {
-        personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+        ListView personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
         anadirCabeceraListaPersonas();
 
         listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);

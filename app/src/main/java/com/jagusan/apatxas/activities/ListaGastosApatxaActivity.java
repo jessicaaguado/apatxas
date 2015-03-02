@@ -38,7 +38,6 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private TextView tituloGastosApatxaListViewHeader;
     private List<GastoApatxaListado> listaGastos = new ArrayList<>();
     private ListaGastosApatxaArrayAdapter listaGastosApatxaArrayAdapter;
-    private ListView gastosApatxaListView;
 
     private ApatxaService apatxaService;
     private GastoService gastoService;
@@ -95,7 +94,7 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
 
     private void cargarElementosLayout() {
-        gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
+        ListView gastosApatxaListView = (ListView) findViewById(R.id.listaGastosApatxa);
         anadirCabeceraListaGastos();
 
         listaGastosApatxaArrayAdapter = new ListaGastosApatxaArrayAdapter(this, R.layout.lista_gastos_apatxa_row, listaGastos);

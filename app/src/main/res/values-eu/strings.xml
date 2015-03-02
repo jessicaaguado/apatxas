@@ -102,7 +102,6 @@
     <string name="mensaje_confirmacion_apatxa_guardada">Apatxa gorde da</string>
     <string name="mensaje_confirmacion_gasto_anadido">Gastua gehitu da</string>
     <string name="mensaje_confirmacion_gasto_modificado">Gastua aldatu da</string>
-    <string name="mensaje_confirmacion_gastos_actualizados">Gastuak eguneratu dira</string>
     <string name="mensaje_confirmacion_gastos_actualizados_reparto_actualizado">Gastuak eguneratu dira.\nBanaketa berriro egin da</string>
     <string name="mensaje_confirmacion_personas_actualizadas">Lagunak eguneratu dira</string>
     <string name="mensaje_confirmacion_personas_actualizadas_reparto_actualizado">Lagunak eguneratu dira.\nBanaketa berriro egin da</string>
@@ -133,9 +132,7 @@
 
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f €</string>
-    <string name="cobrar_cantidad_euros">%1$.2f € jaso</string>
-    <string name="cobrado_cantidad_euros">Jaso du (%1$.2f €)</string>
-    <string name="concepto">Kontzeptua</string>
+   <string name="concepto">Kontzeptua</string>
 
     <string name="importe">Zenbatekoa</string>
     <string name="nombre">Izena</string>
@@ -147,8 +144,6 @@
 
 
     <string name="pagado_por">Zein ordaindu du</string>
-    <string name="pagar_cantidad_euros">%1$.2f € zor</string>
-    <string name="pagado_cantidad_euros">Ordaindu du (%1$.2f €)</string>
     <string name="reparto">Banaketa</string>
 
     <plurals name="seleccionados">

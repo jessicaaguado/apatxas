@@ -87,11 +87,6 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
     private void marcarSeleccion(View convertView, PersonaListadoReparto persona) {
         int colorFondo = (personasSeleccionadas.contains(persona)) ? context.getResources().getColor(R.color.apatxascolors_gris_claro) : Color.TRANSPARENT;
         convertView.setBackgroundColor(colorFondo);
-        if (personasSeleccionadas.contains(persona)) {
-            ImageView fotoContactoImageView = (ImageView) convertView.findViewById(R.id.fotoContacto);
-            // fotoContactoImageView.setImageResource(R.drawable.ic_check_white_48dp);
-        }
-
     }
 
     public void toggleSeleccion(Integer position, boolean checked) {

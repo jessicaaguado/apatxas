@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.jagusan.apatxas.R;
 import com.jagusan.apatxas.adapters.ListaPersonasApatxaArrayAdapter;
-import com.jagusan.apatxas.logicaNegocio.servicios.ApatxaService;
 import com.jagusan.apatxas.modelView.ContactoListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.RecupararInformacionPersonas;
@@ -31,13 +30,11 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     private Long fechaFinApatxa;
     private Boolean soloUnDiaApatxa;
 
-    private ListView personasListView;
     private List<PersonaListado> personasApatxa = new ArrayList<>();
     private ListaPersonasApatxaArrayAdapter listaPersonasApatxaArrayAdapter;
     private TextView tituloPersonasListViewHeader;
 
     private Resources resources;
-    private ApatxaService apatxaService;
 
     private int SELECCIONAR_CONTACTOS_REQUEST_CODE = 1;
 
@@ -138,11 +135,10 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
 
     private void inicializarServicios() {
         resources = getResources();
-        apatxaService = new ApatxaService(this);
     }
 
     private void cargarElementosLayout() {
-        personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
+        ListView personasListView = (ListView) findViewById(R.id.listaPersonasApatxa);
         anadirCabeceraListaPersonas();
 
         listaPersonasApatxaArrayAdapter = new ListaPersonasApatxaArrayAdapter(this, R.layout.lista_personas_apatxa_row, personasApatxa);

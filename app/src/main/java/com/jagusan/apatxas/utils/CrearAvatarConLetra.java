@@ -40,7 +40,7 @@ public class CrearAvatarConLetra {
         Rect bounds = new Rect();
         paint.setTextSize(res.getDimensionPixelSize(R.dimen.apatxas_persona_avatar_letra_tamano));
         paint.getTextBounds(displayName.substring(0, 1).toUpperCase().toCharArray(), 0, 1, bounds);
-        canvas.drawText(displayName.substring(0, 1).toUpperCase().toCharArray(), 0, 1, 0 + width / 2, 0 + height / 2 + (bounds.bottom - bounds.top) / 2, paint);
+        canvas.drawText(displayName.substring(0, 1).toUpperCase().toCharArray(), 0, 1, width / 2, height / 2 + (bounds.bottom - bounds.top) / 2, paint);
 
         return bitmap;
     }

@@ -18,6 +18,6 @@
         android:fadingEdge="none"
         android:scrollbarStyle="insideInset"
         android:fastScrollEnabled="true"
-        android:scrollbars="vertical"></ListView>
+        android:scrollbars="vertical"/>
 
 </RelativeLayout>

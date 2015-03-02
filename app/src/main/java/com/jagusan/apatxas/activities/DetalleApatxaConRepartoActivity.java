@@ -92,9 +92,9 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity imple
 
     private void cargarInformacionReparto() {
         List<PersonaListadoReparto> listaPersonasReparto = apatxaService.getResultadoReparto(idApatxa);
-        listaPersonasRepartoApatxaArrayAdapter = new ListaPersonasRepartoApatxaArrayAdapter(this, R.layout.lista_personas_resultado_reparto_row,
-                listaPersonasReparto);
-        personasRepartoListView.setAdapter(listaPersonasRepartoApatxaArrayAdapter);
+
+        personasRepartoListView.setAdapter(new ListaPersonasRepartoApatxaArrayAdapter(this, R.layout.lista_personas_resultado_reparto_row, listaPersonasReparto));
+        listaPersonasRepartoApatxaArrayAdapter = (ListaPersonasRepartoApatxaArrayAdapter) ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getWrappedAdapter();
         actualizarTituloCabeceraListaReparto();
 
         modeCallback = new ModeCallback();
@@ -157,23 +157,19 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity imple
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ListaPersonasRepartoApatxaArrayAdapter adapter = (ListaPersonasRepartoApatxaArrayAdapter) ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getWrappedAdapter();
         int numHeaders = ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getHeadersCount();
-        boolean seleccionadoAnteriormente = adapter.getPersonasSeleccionadas().contains(adapter.getItem(position - numHeaders));
+        boolean seleccionadoAnteriormente = listaPersonasRepartoApatxaArrayAdapter.getPersonasSeleccionadas().contains(listaPersonasRepartoApatxaArrayAdapter.getItem(position - numHeaders));
         personasRepartoListView.setItemChecked(position, !seleccionadoAnteriormente);
     }
 
     private final class ModeCallback implements AbsListView.MultiChoiceModeListener {
 
-        ListaPersonasRepartoApatxaArrayAdapter adapter = (ListaPersonasRepartoApatxaArrayAdapter) ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getWrappedAdapter();
-
-
         @Override
         public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
             //ponemos -numHeaders porque tenemos header
             int numHeaders = ((HeaderViewListAdapter) personasRepartoListView.getAdapter()).getHeadersCount();
-            adapter.toggleSeleccion(position - numHeaders, checked);
-            mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, adapter.numeroPersonasSeleccionadas(), adapter.numeroPersonasSeleccionadas()));
+            listaPersonasRepartoApatxaArrayAdapter.toggleSeleccion(position - numHeaders, checked);
+            mode.setTitle(resources.getQuantityString(R.plurals.seleccionadas, listaPersonasRepartoApatxaArrayAdapter.numeroPersonasSeleccionadas(), listaPersonasRepartoApatxaArrayAdapter.numeroPersonasSeleccionadas()));
         }
 
         @Override
@@ -207,7 +203,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity imple
         }
 
         private void marcarPersonasEstadoReparto(ActionMode mode, boolean pagado) {
-            personaService.marcarPersonasEstadoReparto(adapter.getPersonasSeleccionadas(), pagado);
+            personaService.marcarPersonasEstadoReparto(listaPersonasRepartoApatxaArrayAdapter.getPersonasSeleccionadas(), pagado);
             cargarInformacionApatxa();
             String mensaje = apatxa.personasPendientesPagarCobrar == 0 ? getResources().getString(R.string.mensaje_confirmacion_pagos_actualizados_sin_pendientes) : getResources().getQuantityString(R.plurals.mensaje_confirmacion_pagos_actualizados, apatxa.personasPendientesPagarCobrar, apatxa.personasPendientesPagarCobrar);
             MensajesToast.mostrarMensaje(getApplicationContext(), mensaje);
@@ -216,7 +212,7 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity imple
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            adapter.resetearSeleccion();
+            listaPersonasRepartoApatxaArrayAdapter.resetearSeleccion();
         }
 
     }
