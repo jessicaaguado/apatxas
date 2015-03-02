@@ -41,7 +41,7 @@ public class ContactoService {
             String[] columnasPerfil = new String[]{ContactsContract.Profile.DISPLAY_NAME_PRIMARY, ContactsContract.Profile.PHOTO_THUMBNAIL_URI};
             Cursor perfilCursor = context.getContentResolver().query(ContactsContract.Profile.CONTENT_URI, columnasPerfil, null, null, null);
             perfilCursor.moveToFirst();
-            if (!perfilCursor.isAfterLast()){
+            if (!perfilCursor.isAfterLast()) {
                 yo.nombre = context.getString(R.string.yo_mayusculas_nombre, perfilCursor.getString(0));
                 yo.id = Long.MIN_VALUE;
                 yo.fotoURI = perfilCursor.getString(1);

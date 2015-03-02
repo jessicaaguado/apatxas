@@ -118,10 +118,10 @@ public class ListaContactosArrayAdapter extends ArrayAdapter<ContactoListado> im
     }
 
 
-    public void toggleCheckBox(int position){
-        if (contactosSeleccionados.contains(contactos.get(position))){
+    public void toggleCheckBox(int position) {
+        if (contactosSeleccionados.contains(contactos.get(position))) {
             contactosSeleccionados.remove(contactos.get(position));
-        }else{
+        } else {
             contactosSeleccionados.add(contactos.get(position));
         }
         notifyDataSetChanged();

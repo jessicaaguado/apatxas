@@ -149,7 +149,6 @@ public class NuevoApatxaPaso2Activity extends ApatxasActionBarActivity {
     }
 
 
-
     private void recuperarDatosPasoAnterior() {
         Intent intent = getIntent();
         tituloApatxa = intent.getStringExtra("titulo");

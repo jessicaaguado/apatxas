@@ -132,7 +132,7 @@
 
     <string name="cantidad_dinero">%1$.2f</string>
     <string name="cantidad_dinero_euros">%1$.2f €</string>
-   <string name="concepto">Kontzeptua</string>
+    <string name="concepto">Kontzeptua</string>
 
     <string name="importe">Zenbatekoa</string>
     <string name="nombre">Izena</string>

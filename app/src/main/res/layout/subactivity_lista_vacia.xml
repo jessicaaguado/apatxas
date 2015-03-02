@@ -41,6 +41,6 @@
         android:padding="@dimen/apatxas_padding_superior_extra"
         android:text="@string/anadir_elementos_mas_tarde"
         android:textAllCaps="false"
-        android:textColor="@color/apatxascolors_color"/>
+        android:textColor="@color/apatxascolors_color" />
 
 </RelativeLayout>

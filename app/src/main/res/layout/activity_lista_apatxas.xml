@@ -18,7 +18,7 @@
         android:layout_above="@+id/adViewListaApatxasActivity"
         android:layout_alignParentTop="true"
         android:divider="@color/apatxascolors_color_linea_divisoria_lista"
-        android:dividerHeight="1px"/>
+        android:dividerHeight="1px" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adViewListaApatxasActivity"
