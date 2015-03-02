@@ -32,7 +32,7 @@ public class ListaApatxasActivity extends ApatxasActionBarActivity {
         SettingsUtils.aplicarSettingsPropios(this);
 
         setContentView(R.layout.activity_lista_apatxas);
-        personalizarActionBar(R.string.app_name, MostrarTituloPantalla.LISTA_APATXAS);
+        personalizarActionBar(R.string.title_activity_lista_apatxas, MostrarTituloPantalla.LISTA_APATXAS);
         apatxaService = new ApatxaService(this);
 
         cargarElementosLayout();
