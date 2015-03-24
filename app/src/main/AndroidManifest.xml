@@ -40,6 +40,7 @@
         </activity>
         <activity
             android:name=".activities.NuevoApatxaPaso1Activity"
+            android:configChanges="screenSize|orientation"
             android:label="@string/title_activity_nuevo_apatxa_paso1"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden">
@@ -49,6 +50,7 @@
         </activity>
         <activity
             android:name=".activities.NuevoApatxaPaso2Activity"
+            android:configChanges="screenSize|orientation"
             android:label="@string/title_activity_nuevo_apatxa_paso2"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateAlwaysHidden">
@@ -58,6 +60,7 @@
         </activity>
         <activity
             android:name=".activities.NuevoApatxaPaso3Activity"
+            android:configChanges="screenSize|orientation"
             android:label="@string/title_activity_nuevo_apatxa_paso3"
             android:launchMode="singleTop">
             <meta-data
