@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.jagusan.apatxas.R;
@@ -59,7 +60,7 @@ public class ListaApatxasActivity extends ApatxasActionBarActivity {
     private void anadirAdMob() {
         AdView adView = (AdView) this.findViewById(R.id.adViewListaApatxasActivity);
         AdRequest adRequest = new AdRequest.Builder().build();
-        //addTestDevice("B97B1584C555ECA1C4B537F4A54D3E14")
+        //AdRequest adRequest = new AdRequest.Builder().addTestDevice("B97B1584C555ECA1C4B537F4A54D3E14").build();
         adView.loadAd(adRequest);
     }
 
