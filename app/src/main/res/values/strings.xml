@@ -20,6 +20,10 @@
     <string name="action_siguiente_abr">Sig.</string>
     <string name="action_pagado">Pagado</string>
     <string name="action_no_pagado">Pendiente</string>
+    <string name="action_ordernar_por_nombre">Por nombre</string>
+    <string name="action_ordernar_por_orden_creado">Por orden de creación</string>
+    <string name="action_ordenar">Ordenar</string>
+
     <!-- ACCIONES (FIN) -->
 
 
@@ -169,6 +173,7 @@
     <string name="debe">Debe</string>
     <string name="recibido">Recibido</string>
     <string name="recibe">Recibe</string>
+
 
 
 </resources>

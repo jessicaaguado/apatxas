@@ -20,6 +20,10 @@
     <string name="action_siguiente_abr">Jar.</string>
     <string name="action_pagado">Ordainduta</string>
     <string name="action_no_pagado">Ordaindu gabe</string>
+    <string name="action_ordernar_por_nombre">Izenagatik</string>
+    <string name="action_ordernar_por_orden_creado">Sartutako ordenagatik</string>
+    <string name="action_ordenar">Ordenatu</string>
+
     <!-- ACCIONES (FIN) -->
 
 

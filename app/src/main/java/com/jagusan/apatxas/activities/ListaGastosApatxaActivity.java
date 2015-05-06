@@ -81,6 +81,12 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
             case R.id.action_anadir_gasto:
                 continuarMostrandoAvisoSiNecesario(R.id.action_anadir_gasto, null);
                 return true;
+            case R.id.action_ordenar_por_nombre:
+                listaGastosApatxaArrayAdapter.reordenarPorNombre();
+                return true;
+            case R.id.action_ordenar_por_orden_entrada:
+                listaGastosApatxaArrayAdapter.reordenarPorOrdenEntrada();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -216,8 +222,8 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
         PersonaListado pagadoGasto = (PersonaListado) data.getSerializableExtra("pagadoPor");
-
-        Long idGasto = gastoService.crearGasto(conceptoGasto, totalGasto, idApatxa, pagadoGasto.id);
+        Long idPagador = (pagadoGasto != null) ? pagadoGasto.id : null;
+        Long idGasto = gastoService.crearGasto(conceptoGasto, totalGasto, idApatxa, idPagador);
         hayModificacionesEnGastos = true;
         GastoApatxaListado gastoListado = new GastoApatxaListado(conceptoGasto, totalGasto, pagadoGasto);
         gastoListado.id = idGasto;
@@ -228,16 +234,17 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
     private void actualizarGastoListaDeGastos(Intent data) {
         String conceptoGasto = data.getStringExtra("concepto");
         Double totalGasto = data.getDoubleExtra("total", 0);
-        PersonaListado pagadoGasto = (PersonaListado) data.getSerializableExtra("pagadoPor");
+        PersonaListado personaPagado = (PersonaListado) data.getSerializableExtra("pagadoPor");
         Integer posicionGastoActualizar = data.getIntExtra("posicionGastoEditar", -1);
 
         GastoApatxaListado gastoActualizado = listaGastosApatxaArrayAdapter.getItem(posicionGastoActualizar);
         gastoActualizado.concepto = conceptoGasto;
         gastoActualizado.total = totalGasto;
-        gastoActualizado.pagadoPor = pagadoGasto != null ? pagadoGasto.nombre : null;
-        gastoActualizado.idPagadoPor = pagadoGasto != null ? pagadoGasto.id : null;
+        gastoActualizado.pagadoPor = personaPagado != null ? personaPagado.nombre : null;
+        Long idPersona = personaPagado != null ? personaPagado.id : null;
+        gastoActualizado.idPagadoPor = idPersona;
 
-        gastoService.actualizarGasto(gastoActualizado.id, conceptoGasto, totalGasto, pagadoGasto.id);
+        gastoService.actualizarGasto(gastoActualizado.id, conceptoGasto, totalGasto, idPersona);
         hayModificacionesEnGastos = true;
         listaGastosApatxaArrayAdapter.actualizarGasto(posicionGastoActualizar, gastoActualizado);
         actualizarTituloCabeceraListaGastos();
