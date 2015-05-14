@@ -8,4 +8,19 @@
         android:title="@string/action_anadir_gasto"
         app:showAsAction="ifRoom" />
 
+    <item android:id="@+id/action_ordenar_gastos"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_menu_action_apatxas_ordenar"
+        android:title="@string/action_ordenar"
+        app:showAsAction="ifRoom" >
+        <!-- "file" submenu -->
+        <menu>
+            <item android:id="@+id/action_ordenar_por_nombre"
+                android:title="@string/action_ordernar_por_nombre" />
+            <item android:id="@+id/action_ordenar_por_orden_entrada"
+                android:title="@string/action_ordernar_por_orden_creado" />
+        </menu>
+    </item>
+
+
 </menu>

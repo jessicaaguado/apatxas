@@ -14,6 +14,8 @@ import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.utils.FormatearNumero;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaListado> {
@@ -100,6 +102,27 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
             gastos.remove(gastoEliminar);
         }
         resetearSeleccion();
+    }
+
+    public void reordenarPorNombre(){
+        Collections.sort(gastos, new GastosComparadorNombre() );
+        notifyDataSetChanged();
+    }
+
+    public void reordenarPorOrdenEntrada(){
+        Collections.sort(gastos, new GastosComparadorOrdenEntrada());
+        notifyDataSetChanged();
+    }
+
+    class GastosComparadorNombre implements Comparator<GastoApatxaListado> {
+        public int compare(GastoApatxaListado gasto1, GastoApatxaListado gasto2) {
+            return gasto1.concepto.compareTo(gasto2.concepto);
+        }
+    }
+    class GastosComparadorOrdenEntrada implements Comparator<GastoApatxaListado> {
+        public int compare(GastoApatxaListado gasto1, GastoApatxaListado gasto2) {
+            return gasto1.id.compareTo(gasto2.id);
+        }
     }
 
 
