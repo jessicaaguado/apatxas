@@ -62,7 +62,7 @@
     </plurals>
 
     <plurals name="titulo_cabecera_lista_reparto_detalle_apatxa">
-        <item quantity="one">Gastu %1$d banaketa: %2$.2f €</item>
+        <item quantity="one">Gastu %1$den banaketa: %2$.2f €</item>
         <item quantity="other">%1$d gastuen banaketa: %2$.2f €</item>
     </plurals>
 

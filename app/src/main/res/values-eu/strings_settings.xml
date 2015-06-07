@@ -4,8 +4,10 @@
     <string name="settings_apatxas_idioma">Hizkuntza</string>
     <string name="settings_apatxas_idioma_castellano">Gaztelania</string>
     <string name="settings_apatxas_idioma_euskera">Euskera</string>
+    <string name="settings_apatxas_idioma_ingles">Ingelesa</string>
     <string name="settings_apatxas_valor_idioma_castellano">es</string>
     <string name="settings_apatxas_valor_idioma_euskera">eu</string>
+    <string name="settings_apatxas_valor_idioma_ingles">en</string>
     <string name="settings_apatxas_valor_idioma_defecto">es</string>
 
 </resources>
