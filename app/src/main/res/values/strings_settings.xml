@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+    <!-- IDIOMAS -->
     <string name="settings_apatxas_idioma">Idioma</string>
     <string name="settings_apatxas_idioma_castellano">Castellano</string>
     <string name="settings_apatxas_idioma_euskera">Euskera</string>
@@ -10,4 +12,15 @@
     <string name="settings_apatxas_valor_idioma_ingles">en</string>
     <string name="settings_apatxas_valor_idioma_defecto">es</string>
 
+
+    <!-- MONEDAS -->
+    <string name="settings_apatxas_moneda">Moneda</string>
+    <string name="settings_apatxas_moneda_euro">\u20AC</string>
+    <string name="settings_apatxas_moneda_dolar_eeuu">\u24</string>
+    <string name="settings_apatxas_moneda_pound">\ua3</string>
+
+    <string name="settings_apatxas_valor_moneda_euro">EUR</string>
+    <string name="settings_apatxas_valor_moneda_dolar_eeuu">USD</string>
+    <string name="settings_apatxas_valor_moneda_pound">GBP</string>
+    <string name="settings_apatxas_valor_moneda_defecto">EUR</string>
 </resources>

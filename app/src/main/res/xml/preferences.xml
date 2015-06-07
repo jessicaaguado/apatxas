@@ -8,4 +8,12 @@
         android:summary="%s"
         android:title="@string/settings_apatxas_idioma" />
 
+    <ListPreference
+        android:defaultValue="@string/settings_apatxas_valor_moneda_defecto"
+        android:entries="@array/monedas"
+        android:entryValues="@array/monedasValores"
+        android:key="settings_apatxas_monedas"
+        android:summary="%s"
+        android:title="@string/settings_apatxas_moneda" />
+
 </PreferenceScreen>
