@@ -33,15 +33,15 @@
 
 
     <!-- ESTADOS APATXA -->
-    <string name="estado_apatxa_sin_repartir">Not divided</string>
-    <string name="estado_apatxa_sin_repartir_detalle">NOT DIVIDED</string>
+    <string name="estado_apatxa_sin_repartir">Not splitted</string>
+    <string name="estado_apatxa_sin_repartir_detalle">NOT SPLITTED</string>
     <string name="estado_apatxa_hecho">Done</string>
     <string name="estado_apatxa_hecho_detalle">DONE</string>
     <string name="estado_apatxa_pendiente">Pending</string>
 
     <plurals name="estado_apatxa_pendiente_detalle_numero_personas">
-        <item quantity="one">PENDING.\nLagun 1 falta da</item>
-        <item quantity="other">PENDING.\n%d lagun falta dira</item>
+        <item quantity="one">UNRESOLVED.\n1 friend is missing</item>
+        <item quantity="other">UNRESOLVEDS.\n%d friends are missing</item>
     </plurals>
     <!-- ESTADOS APATXA (FIN) -->
 
@@ -52,18 +52,18 @@
         <item quantity="other">%d friends</item>
     </plurals>
     <plurals name="titulo_cabecera_lista_gastos">
-        <item quantity="one">%1$d expense: %2$.2f €</item>
-        <item quantity="other">%1$d expenses: %2$.2f €</item>
+        <item quantity="one">%1$d expense: %3$s%2$s</item>
+        <item quantity="other">%1$d expenses: %3$s%2$s</item>
     </plurals>
 
     <plurals name="titulo_cabecera_lista_gastos_detalle_apatxa">
-        <item quantity="one">%1$d expense. Total: %2$.2f €</item>
-        <item quantity="other">%1$d expenses. Total: %2$.2f €</item>
+        <item quantity="one">%1$d expense. Total: %3$s%2$s</item>
+        <item quantity="other">%1$d expenses. Total: %3$s%2$s %3$s</item>
     </plurals>
 
     <plurals name="titulo_cabecera_lista_reparto_detalle_apatxa">
-        <item quantity="one">Distribution for %1$d expense: %2$.2f €</item>
-        <item quantity="other">Distribution for %1$d expenses: %2$.2f €</item>
+        <item quantity="one">Distribution for %1$d expense: %3$s%2$s</item>
+        <item quantity="other">Distribution for %1$d expenses: %3$s%2$s</item>
     </plurals>
 
     <string name="title_activity_lista_apatxas">Apatxa</string>
@@ -134,12 +134,11 @@
 
     <string name="anadir_elementos_mas_tarde">Add elements later</string>
 
-    <string name="cantidad_dinero">%1$.2f</string>
-    <string name="cantidad_dinero_euros">%1$.2f €</string>
+    <string name="cantidad_dinero_con_moneda">%2$s%1$s</string>
     <string name="concepto">Concept</string>
 
     <string name="importe">Price</string>
-    <string name="nombre">name</string>
+    <string name="nombre">Name</string>
 
     <plurals name="numero_personas_apatxa">
         <item quantity="one">1 friend</item>

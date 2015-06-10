@@ -56,7 +56,7 @@ public class ListaPersonasRepartoApatxaArrayAdapter extends ArrayAdapter<Persona
         gastoPersonaTextView.setText(FormatearNumero.aDescripcionRepartoDineroEurosEnFuncionEstado(context.getResources(), persona.cantidadPago, persona.repartoPagado));
 
         TextView gastoPersonaCantidadTextView = (TextView) convertView.findViewById(R.id.totalGastoRepartoCantidad);
-        gastoPersonaCantidadTextView.setText(FormatearNumero.aDineroEuros(context.getResources(), persona.cantidadPago));
+        gastoPersonaCantidadTextView.setText(FormatearNumero.aDineroConMoneda(context, persona.cantidadPago));
 
         if (persona.repartoPagado) {
             nombrePersonaTextView.setTypeface(null, Typeface.NORMAL);

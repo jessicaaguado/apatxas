@@ -50,7 +50,7 @@ public class ListaGastosApatxaArrayAdapter extends ArrayAdapter<GastoApatxaLista
         conceptoGastoTextView.setText(gasto.concepto);
         // total
         TextView totalGastoTextView = (TextView) convertView.findViewById(R.id.total);
-        totalGastoTextView.setText(FormatearNumero.aDineroEuros(context.getResources(), gasto.total));
+        totalGastoTextView.setText(FormatearNumero.aDineroConMoneda(context, gasto.total));
         // quien lo ha pagado
         TextView pagadorGastoTextView = (TextView) convertView.findViewById(R.id.pagadoPor);
         if (pagadorGastoTextView != null) {

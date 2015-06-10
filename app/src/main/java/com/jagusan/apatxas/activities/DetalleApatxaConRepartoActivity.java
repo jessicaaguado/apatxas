@@ -19,6 +19,8 @@ import com.jagusan.apatxas.logicaNegocio.servicios.PersonaService;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListadoReparto;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
+import com.jagusan.apatxas.utils.FormatearNumero;
+import com.jagusan.apatxas.utils.SettingsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +109,8 @@ public class DetalleApatxaConRepartoActivity extends DetalleApatxaActivity imple
 
     private void actualizarTituloCabeceraListaReparto() {
         List<GastoApatxaListado> gastosApatxa = apatxa.gastos;
-        String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_reparto_detalle_apatxa, gastosApatxa.size(), gastosApatxa.size(), CalcularSumaTotalGastos.calcular(gastosApatxa));
+        String gastoFormateado = FormatearNumero.aDinero(this,CalcularSumaTotalGastos.calcular(gastosApatxa));
+        String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_reparto_detalle_apatxa, gastosApatxa.size(), gastosApatxa.size(), gastoFormateado, SettingsUtils.getMoneda(this));
         tituloRepartoApatxaListViewHeader.setText(titulo);
     }
 
