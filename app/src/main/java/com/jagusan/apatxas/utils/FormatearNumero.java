@@ -7,6 +7,7 @@ import com.jagusan.apatxas.R;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 
 import static java.lang.Math.abs;
 
@@ -17,6 +18,13 @@ public class FormatearNumero {
         dineroFormat.setMaximumFractionDigits(2);
         dineroFormat.setMinimumFractionDigits(2);
         return dineroFormat.format(abs(cantidad));
+    }
+
+    public static Double dineroADouble(Context context, String dinero) throws ParseException {
+        NumberFormat dineroFormat = NumberFormat.getNumberInstance(SettingsUtils.getLocaleParaMoneda(context));
+        dineroFormat.setMaximumFractionDigits(2);
+        dineroFormat.setMinimumFractionDigits(2);
+        return dineroFormat.parse(dinero).doubleValue();
     }
 
     public static String aDineroConMoneda(Context context, Double cantidad) {
