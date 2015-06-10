@@ -22,6 +22,8 @@ import com.jagusan.apatxas.modelView.ApatxaDetalle;
 import com.jagusan.apatxas.modelView.GastoApatxaListado;
 import com.jagusan.apatxas.modelView.PersonaListado;
 import com.jagusan.apatxas.utils.CalcularSumaTotalGastos;
+import com.jagusan.apatxas.utils.FormatearNumero;
+import com.jagusan.apatxas.utils.SettingsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +130,8 @@ public class ListaGastosApatxaActivity extends ApatxasActionBarActivity {
 
     private void actualizarTituloCabeceraListaGastos() {
         int numGastos = listaGastos.size();
-        String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_gastos, numGastos, numGastos, CalcularSumaTotalGastos.calcular(listaGastos));
+        String gastoFormateado = FormatearNumero.aDinero(this, CalcularSumaTotalGastos.calcular(listaGastos));
+        String titulo = resources.getQuantityString(R.plurals.titulo_cabecera_lista_gastos, numGastos, numGastos, gastoFormateado, SettingsUtils.getMoneda(this));
         tituloGastosApatxaListViewHeader.setText(titulo);
     }
 

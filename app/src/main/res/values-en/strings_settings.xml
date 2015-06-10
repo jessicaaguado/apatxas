@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
-    <!-- IDIOMAS -->
-    <string name="settings_apatxas_idioma">Idioma</string>
-    <string name="settings_apatxas_idioma_castellano">Castellano</string>
-    <string name="settings_apatxas_idioma_euskera">Euskera</string>
-    <string name="settings_apatxas_idioma_ingles">Inglés</string>
+    <string name="settings_apatxas_idioma">Language</string>
+    <string name="settings_apatxas_idioma_castellano">Spanish</string>
+    <string name="settings_apatxas_idioma_euskera">Basque</string>
+    <string name="settings_apatxas_idioma_ingles">English</string>
     <string name="settings_apatxas_valor_idioma_castellano">es</string>
     <string name="settings_apatxas_valor_idioma_euskera">eu</string>
     <string name="settings_apatxas_valor_idioma_ingles">en</string>
@@ -14,7 +12,7 @@
 
 
     <!-- MONEDAS -->
-    <string name="settings_apatxas_moneda">Moneda</string>
+    <string name="settings_apatxas_moneda">Currency</string>
     <string name="settings_apatxas_moneda_euro">\u20AC</string>
     <string name="settings_apatxas_moneda_dolar_eeuu">\u24</string>
     <string name="settings_apatxas_moneda_pound">\ua3</string>

@@ -52,18 +52,18 @@
         <item quantity="other">%d personas</item>
     </plurals>
     <plurals name="titulo_cabecera_lista_gastos">
-        <item quantity="one">%1$d gasto: %2$.2f €</item>
-        <item quantity="other">%1$d gastos: %2$.2f €</item>
+        <item quantity="one">%1$d gasto: %2$s %3$s</item>
+        <item quantity="other">%1$d gastos: %2$s %3$s</item>
     </plurals>
 
     <plurals name="titulo_cabecera_lista_gastos_detalle_apatxa">
-        <item quantity="one">%1$d gasto. Total: %2$.2f €</item>
-        <item quantity="other">%1$d gastos. Total: %2$.2f €</item>
+        <item quantity="one">%1$d gasto. Total: %2$s %3$s</item>
+        <item quantity="other">%1$d gastos. Total: %2$s %3$s</item>
     </plurals>
 
     <plurals name="titulo_cabecera_lista_reparto_detalle_apatxa">
-        <item quantity="one">Reparto de %1$d gasto: %2$.2f €</item>
-        <item quantity="other">Reparto de %1$d gastos: %2$.2f €</item>
+        <item quantity="one">Reparto de %1$d gasto: %2$s %3$s</item>
+        <item quantity="other">Reparto de %1$d gastos: %2$s %3$s</item>
     </plurals>
 
     <string name="title_activity_lista_apatxas">Apatxa</string>
@@ -135,8 +135,7 @@
 
     <string name="anadir_elementos_mas_tarde">Añadir elementos más tarde</string>
 
-    <string name="cantidad_dinero">%1$.2f</string>
-    <string name="cantidad_dinero_euros">%1$.2f €</string>
+    <string name="cantidad_dinero_con_moneda">%1$s %2$s</string>
     <string name="concepto">Concepto</string>
 
     <string name="importe">Importe</string>
