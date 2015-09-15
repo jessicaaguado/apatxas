@@ -7,6 +7,8 @@
 
 
     -->
-    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar" />
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar" >
+        <item name="actionModeShareDrawable">@drawable/ic_menu_action_apatxas_compartir</item>
+    </style>
 
 </resources>

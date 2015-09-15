@@ -27,7 +27,8 @@
 
     <item
         android:id="@+id/action_compartir"
-        android:title="Share"
+        android:icon="@drawable/ic_menu_action_apatxas_compartir"
+        android:title="@string/action_compartir"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
         app:showAsAction="always"
         tools:ignore="AppCompatResource" />

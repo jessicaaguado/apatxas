@@ -175,6 +175,7 @@
     <string name="email_titulo_gastos">Gastuak</string>
     <string name="email_no_paga_nadie">inork ez du ordaintzen</string>
     <string name="email_titulo_reparto">Banaketa</string>
+    <string name="action_compartir">Partekatu</string>
 
 
 </resources>

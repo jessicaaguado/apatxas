@@ -12,6 +12,8 @@
         <item name="colorAccent">@color/apatxascolors_color_destacado</item>
 
         <item name="android:actionModeBackground">@color/apatxascolors_color</item>
+
+
     </style>
 
     <!--
@@ -26,6 +28,8 @@
             backward-compatibility can go here.
 
         -->
+
+        <item name="actionModeShareDrawable">@drawable/ic_menu_action_apatxas_compartir</item>
     </style>
 
     <style name="boton_solo_icono">
