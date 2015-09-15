@@ -172,5 +172,9 @@
     <string name="recibido">Got paid</string>
     <string name="recibe">To get paid</string>
 
+    <string name="email_titulo_gastos">Expenses</string>
+    <string name="email_no_paga_nadie">no one pays</string>
+    <string name="email_titulo_reparto">Distribution</string>
+
 
 </resources>

@@ -25,4 +25,13 @@
         android:title="@string/action_editar"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_compartir"
+        android:title="Share"
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
+        app:showAsAction="always"
+        tools:ignore="AppCompatResource" />
+
+
+
 </menu>

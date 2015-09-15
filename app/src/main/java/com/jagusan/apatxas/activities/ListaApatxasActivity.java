@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.ShareActionProvider;
 
 
 import com.google.android.gms.ads.AdRequest;
@@ -27,6 +28,8 @@ public class ListaApatxasActivity extends ApatxasActionBarActivity {
 
     private ApatxaService apatxaService;
     private ListaApatxasArrayAdapter adapter;
+
+    //private ShareActionProvider shareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,24 @@ public class ListaApatxasActivity extends ApatxasActionBarActivity {
         getMenuInflater().inflate(R.menu.lista_apatxas, menu);
         return true;
     }
+
+    // Call to update the share intent
+    /*private void setShareIntent(Intent shareIntent) {
+        if (shareActionProvider != null) {
+            shareActionProvider.setShareIntent(shareIntent);
+        }
+    }
+
+    private Intent getDefaultShareIntent(){
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, "This is my text to send.");
+        sendIntent.setType("text/plain");
+        //startActivity(sendIntent);
+        return sendIntent;
+    }*/
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -115,9 +136,13 @@ public class ListaApatxasActivity extends ApatxasActionBarActivity {
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 this.mode = mode;
+
+
                 MenuInflater inflater = mode.getMenuInflater();
                 inflater.inflate(R.menu.context_menu_apatxas, menu);
-                return true;
+
+
+              return true;
             }
 
             @Override
@@ -134,6 +159,10 @@ public class ListaApatxasActivity extends ApatxasActionBarActivity {
                     case R.id.action_apatxa_borrar:
                         confirmarBorrarApatxas();
                         return true;
+                    //case R.id.action_compartir:
+                    //    shareActionProvider = (ShareActionProvider) item.getActionProvider();
+                    //    setShareIntent(getDefaultShareIntent());
+                    //    return true;
                     default:
                         return false;
                 }

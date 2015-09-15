@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_apatxa_borrar"
         android:icon="@drawable/ic_menu_action_apatxas_borrar"
         android:orderInCategory="2"
         android:title="@string/action_borrar" />
+
+
+    <!--item
+        android:id="@+id/action_compartir"
+        app:showAsAction="ifRoom"
+        android:title="Share"
+        android:actionProviderClass="android.widget.ShareActionProvider" /-->
 
 </menu>

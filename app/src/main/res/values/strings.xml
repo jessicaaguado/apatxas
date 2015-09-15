@@ -173,6 +173,9 @@
     <string name="recibido">Recibido</string>
     <string name="recibe">Recibe</string>
 
+    <string name="email_titulo_gastos">Gastos</string>
+    <string name="email_no_paga_nadie">no paga nadie</string>
+    <string name="email_titulo_reparto">Reparto</string>
 
 
 </resources>
