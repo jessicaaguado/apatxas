@@ -39,7 +39,7 @@ public class ListaApatxasActivity extends ApatxasActionBarActivity {
 
         cargarElementosLayout();
 
-        anadirAdMob();
+        //anadirAdMob();
     }
 
 
@@ -57,12 +57,12 @@ public class ListaApatxasActivity extends ApatxasActionBarActivity {
     }
 
 
-    private void anadirAdMob() {
-        AdView adView = (AdView) this.findViewById(R.id.adViewListaApatxasActivity);
-        AdRequest adRequest = new AdRequest.Builder().build();
+    //private void anadirAdMob() {
+    //    AdView adView = (AdView) this.findViewById(R.id.adViewListaApatxasActivity);
+    //    AdRequest adRequest = new AdRequest.Builder().build();
         //AdRequest adRequest = new AdRequest.Builder().addTestDevice("B97B1584C555ECA1C4B537F4A54D3E14").build();
-        adView.loadAd(adRequest);
-    }
+    //    adView.loadAd(adRequest);
+    //}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
