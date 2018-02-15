@@ -39,6 +39,10 @@ public class SettingsUtils {
         return Currency.getInstance(monedaCode).getSymbol(locale);
     }
 
+    public static Locale getLocale(Context context){
+        return context.getResources().getConfiguration().locale;
+    }
+
     public static Locale getLocaleParaMoneda(Context context){
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
